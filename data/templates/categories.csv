@@ -1,6 +1,1 @@
-External ID                       ,Parent Category,Name    ,Display Name        ,Complete Name       
-product.product_category_all      ,               ,All     ,All                 ,All                 
-product.cat_expense               ,All            ,Expenses,All / Expenses      ,All / Expenses      
-product.product_category_1        ,All            ,Saleable,All / Saleable      ,All / Saleable      
-point_of_sale.product_category_pos,All / Saleable ,PoS     ,All / Saleable / PoS,All / Saleable / PoS
-                                  
+External ID,Parent Category,Name,Display Name,Complete Name
