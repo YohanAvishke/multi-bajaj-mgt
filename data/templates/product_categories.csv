@@ -1,6 +1,6 @@
-ID,External ID                       ,Created by,Parent Category,Name    ,Display Name        ,Complete Name       ,Costing Method
-1 ,product.product_category_all      ,OdooBot   ,               ,All     ,All                 ,All                 ,Standard Price
-3 ,product.cat_expense               ,OdooBot   ,All            ,Expenses,All / Expenses      ,All / Expenses      ,Standard Price
-2 ,product.product_category_1        ,OdooBot   ,All            ,Saleable,All / Saleable      ,All / Saleable      ,Standard Price
-4 ,point_of_sale.product_category_pos,OdooBot   ,All / Saleable ,PoS     ,All / Saleable / PoS,All / Saleable / PoS,Standard Price
-  
+External ID                       ,Parent Category,Name    ,Display Name        ,Complete Name       
+product.product_category_all      ,               ,All     ,All                 ,All                 
+product.cat_expense               ,All            ,Expenses,All / Expenses      ,All / Expenses      
+product.product_category_1        ,All            ,Saleable,All / Saleable      ,All / Saleable      
+point_of_sale.product_category_pos,All / Saleable ,PoS     ,All / Saleable / PoS,All / Saleable / PoS
+                                  
