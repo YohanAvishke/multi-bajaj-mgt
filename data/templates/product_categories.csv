@@ -1,7 +1,6 @@
-External ID,Name             ,Parent Category/External ID 
-a1         ,Expenses         ,product.product_category_all
-a2         ,Other Products   ,product.product_category_all
-a3         ,Sellable Products,product.product_category_all
-a4         ,Tables           ,a1                          
-a5         ,Seating furniture,a2                          
-           
+ID,External ID                       ,Created by,Parent Category,Name    ,Display Name        ,Complete Name       ,Costing Method
+1 ,product.product_category_all      ,OdooBot   ,               ,All     ,All                 ,All                 ,Standard Price
+3 ,product.cat_expense               ,OdooBot   ,All            ,Expenses,All / Expenses      ,All / Expenses      ,Standard Price
+2 ,product.product_category_1        ,OdooBot   ,All            ,Saleable,All / Saleable      ,All / Saleable      ,Standard Price
+4 ,point_of_sale.product_category_pos,OdooBot   ,All / Saleable ,PoS     ,All / Saleable / PoS,All / Saleable / PoS,Standard Price
+  
