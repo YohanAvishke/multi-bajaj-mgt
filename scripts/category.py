@@ -5,21 +5,21 @@ filePath = '/Users/yohanavishke/Documents/Projects/YohanAvishke/multi-bajaj-pos/
 
 
 def get_raw_category_data():
-    with open(f'{filePath}inventory/categories.json') as jsonFile:
+    with open(f'{filePath}data files/categories.json') as jsonFile:
         return json.load(jsonFile)
 
 
 def get_template():
-    with open(f'{filePath}templates/product_categories.csv') as csv_file:
+    with open(f'{filePath}templates/categories.csv') as csv_file:
         csv_template = csv.reader(csv_file, delimiter=',')
         for row in csv_template:
             return row
 
 
-def enrich_category():
+def enrich_categories():
     raw_categories = get_raw_category_data()
 
-    with open(f'{filePath}inventory/categories.csv', mode='w') as csvFile:
+    with open(f'{filePath}data files/categories.csv', mode='w') as csvFile:
         csv_writer = csv.writer(csvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(get_template())
         for raw_category in raw_categories:
@@ -30,4 +30,4 @@ def enrich_category():
                  f'All / Saleable / PoS / {description}'])
 
 
-enrich_category()
+enrich_categories()
