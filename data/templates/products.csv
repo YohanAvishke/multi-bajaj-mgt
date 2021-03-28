@@ -1,9 +1,8 @@
-External ID                                              ,Internal Reference,Name           ,Barcode      ,Description,Product Category    ,Product Type    ,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold
-point_of_sale.desk_organizer_product_template            ,FURN_0001         ,Desk Organizer ,2300001000008,           ,All / Saleable      ,Storable Product,0.0 ,5.1        ,                ,True            ,True       
-point_of_sale.product_product_consumable_product_template,DISC              ,Discount       ,             ,           ,All / Saleable / PoS,Consumable      ,0.0 ,0.0        ,                ,                ,True       
-point_of_sale.monitor_stand_product_template             ,FURN_0006         ,Monitor Stand  ,             ,           ,All / Saleable      ,Storable Product,0.0 ,3.19       ,True            ,True            ,True       
-point_of_sale.small_shelf_product_template               ,FURN_0008         ,Small Shelf    ,             ,           ,All / Saleable      ,Storable Product,0.0 ,2.83       ,True            ,True            ,True       
-point_of_sale.product_product_tip_product_template       ,TIPS              ,Tips           ,             ,           ,All / Saleable / PoS,Consumable      ,0.0 ,1.0        ,                ,True            ,True       
-point_of_sale.wall_shelf_product_template                ,FURN_0009         ,Wall Shelf Unit,2100002000003,           ,All / Saleable      ,Storable Product,0.0 ,1.98       ,True            ,True            ,True       
-point_of_sale.whiteboard_pen_product_template            ,CONS_0001         ,Whiteboard Pen ,             ,           ,All / Saleable      ,Consumable      ,0.0 ,1.2        ,True            ,True            ,True       
-                                                         
+External ID,Internal Reference,Name,Barcode,Description,Product Category/External ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold
+point_of_sale.desk_organizer_product_template,FURN_0001,Desk Organizer,2300001000008,,product.product_category_1,Storable Product,0.0,5.1,,True,True
+point_of_sale.product_product_consumable_product_template,DISC,Discount,,,point_of_sale.product_category_pos,Consumable,0.0,0.0,,,True
+point_of_sale.monitor_stand_product_template,FURN_0006,Monitor Stand,,,product.product_category_1,Storable Product,0.0,3.19,True,True,True
+point_of_sale.small_shelf_product_template,FURN_0008,Small Shelf,,,product.product_category_1,Storable Product,0.0,2.83,True,True,True
+point_of_sale.product_product_tip_product_template,TIPS,Tips,,,point_of_sale.product_category_pos,Consumable,0.0,1.0,,True,True
+point_of_sale.wall_shelf_product_template,FURN_0009,Wall Shelf Unit,2100002000003,,product.product_category_1,Storable Product,0.0,1.98,True,True,True
+point_of_sale.whiteboard_pen_product_template,CONS_0001,Whiteboard Pen,,,product.product_category_1,Consumable,0.0,1.2,True,True,True
