@@ -61,7 +61,7 @@ def convert_to_json():
                 exit(2)
 
             desc = desc.replace('\n', '').replace('\r', '')
-            row['PART_DESC'] = desc.replace('\u00a0', ' ').replace('\u201c', '').replace('\u201d', '')\
+            row['PART_DESC'] = desc.replace('\u00a0', ' ').replace('\u201c', '').replace('\u201d', '') \
                 .replace('\u00bf', '-').replace('\u00d8', '0')
 
             price = int(price.replace(',', ''))
@@ -70,6 +70,7 @@ def convert_to_json():
             json.dump(row, json_file)
             json_file.write(',\n')
     json_file.write(']')
+
 
 def test():
     with open(f'{filePath}data files/product/product-categories') as f:
@@ -128,6 +129,7 @@ def generate_csv():
             print(json_product)
 
 
-convert_to_json()
+test()
+# convert_to_json()
 # enrich_products()
 # generate_csv()
