@@ -1,9 +1,0 @@
-Internal Reference,Name           ,Barcode      ,Description,Product Category    ,Product Type    ,Cost,Sales Price,Available in POS,Can be Sold
-FURN_0001         ,Desk Organizer ,2300001000008,           ,All / Saleable      ,Storable Product,0.0 ,5.1        ,                ,True       
-DISC              ,Discount       ,             ,           ,All / Saleable / PoS,Consumable      ,0.0 ,0.0        ,                ,True       
-FURN_0006         ,Monitor Stand  ,             ,           ,All / Saleable      ,Storable Product,0.0 ,3.19       ,True            ,True       
-FURN_0008         ,Small Shelf    ,             ,           ,All / Saleable      ,Storable Product,0.0 ,2.83       ,True            ,True       
-TIPS              ,Tips           ,             ,           ,All / Saleable / PoS,Consumable      ,0.0 ,1.0        ,                ,True       
-FURN_0009         ,Wall Shelf Unit,2100002000003,           ,All / Saleable      ,Storable Product,0.0 ,1.98       ,True            ,True       
-CONS_0001         ,Whiteboard Pen ,             ,           ,All / Saleable      ,Consumable      ,0.0 ,1.2        ,True            ,True       
-                  
