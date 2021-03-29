@@ -78,6 +78,7 @@ def convert_to_csv():
                 [f'point_of_sale.{json_product["PART_NO"]}', f'{json_product["PART_NO"]}',
                  f'{json_product["PART_DESC"]}', f'{json_product["PART_NO"]}',
                  f'{json_product["PART_DESC"]}', f'{json_product["CATEGORY"]}',
+                 f'pos_category.{(json_product["PR CODE"]).lower()}',
                  'Storable Product', f'{json_product["SELLING PRICE"]}', f'{json_product["SELLING PRICE"]}',
                  True, True, True
                  ])
@@ -129,5 +130,5 @@ def validate_data():
 #  been called before)
 # reformat_data()
 # add_categories()
-# convert_to_csv()
+convert_to_csv()
 # validate_data()
