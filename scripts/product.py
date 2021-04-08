@@ -37,13 +37,36 @@ def reformat_data():
         for product_category in product_categories:
             if product_price['PART_NO'] == product_category['Part Code']:
                 desc = product_category['Product Description'].replace('\n', '').replace('\r', '').replace('\t', '')
-                product_price['PART_DESC'] = desc
+                product_price['PART_DESC'] = desc.title()
                 print(product_price)
                 break
 
     json_file = open(f'{filePath}data files/product/product-prices.json', 'w')
     json.dump(product_prices, json_file)
 
+
+# def update_prices():
+#     """
+#     Update product_prices from product_categories' description and price as those can contain non-formatted strings
+#     """
+#     with open(f'{filePath}data files/product/product-categories.json') as f:
+#         product_categories = json.load(f)
+#     with open(f'{filePath}data files/product/product-prices.json') as f:
+#         product_prices = json.load(f)
+#
+#     for product_price in product_prices:
+#         product_price['SELLING PRICE'] = float(product_price['SELLING PRICE'].replace(',', ''))
+#
+#         for product_category in product_categories:
+#             if product_price['PART_NO'] == product_category['Part Code']:
+#                 desc = product_category['Product Description'].replace('\n', '').replace('\r', '').replace('\t', '')
+#                 product_price['PART_DESC'] = desc
+#                 print(product_price)
+#                 break
+#
+#     json_file = open(f'{filePath}data files/product/product-prices.json', 'w')
+#     json.dump(product_prices, json_file)
+#
 
 def add_categories():
     """
@@ -128,7 +151,7 @@ def validate_data():
 # convert_to_json()
 # TODO: remove last comma from last object for next cmd to work in product_prices.json(Only if convert_to_json() has
 #  been called before)
-# reformat_data()
+reformat_data()
 # add_categories()
-convert_to_csv()
+# convert_to_csv()
 # validate_data()
