@@ -151,7 +151,7 @@ def validate_data():
 # convert_to_json()
 # TODO: remove last comma from last object for next cmd to work in product_prices.json(Only if convert_to_json() has
 #  been called before)
-reformat_data()
+# reformat_data()
 # add_categories()
 # convert_to_csv()
-# validate_data()
+validate_data()
