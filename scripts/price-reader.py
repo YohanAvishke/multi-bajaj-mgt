@@ -29,23 +29,3 @@ for number in numbers:
 	response = requests.request("POST", url, headers=headers, data=payload)
 
 	print(json.loads(response.text)['DATA']['dblSellingPrice'])
-
-
-
-# curl 'https://erp.dpg.lk/PADEALER/PADLRItemInquiry/Inquire' \
-#   -H 'authority: erp.dpg.lk' \
-#   -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
-#   -H 'accept: */*' \
-#   -H 'x-requested-with: XMLHttpRequest' \
-#   -H 'sec-ch-ua-mobile: ?0' \
-#   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36' \
-#   -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
-#   -H 'origin: https://erp.dpg.lk' \
-#   -H 'sec-fetch-site: same-origin' \
-#   -H 'sec-fetch-mode: cors' \
-#   -H 'sec-fetch-dest: empty' \
-#   -H 'referer: https://erp.dpg.lk/Application/Home/PADEALER' \
-#   -H 'accept-language: en-US,en;q=0.9' \
-#   -H 'cookie: .AspNetCore.Session=CfDJ8GOndye%2Bf05JhuhX8EajvZbH94vjbEK5H8ZCwsuxHh68%2FYwV2%2FKi0dA%2FTmz3dpt6VzyaBNMAoElmRT%2BbnkqHMMPgyXYkG%2BhzTi0OSIeGceu9%2FaWZD5ddF%2FHzwLMx6hE04wmLMKSMNJUXh6U8XXB9Sz5qO9YawixjrG6n7R9XKt1V; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8GOndye-f05JhuhX8EajvZb8OXIKsLSsbSTWzYD3WNvO3OvX_Xuyl6YJ46d5VqtV4JUPfuTAIdPCeSmCK1QIhBC03-G_aOGFkfP4fKjw9FnGeSKESkSAi061F_kVE2IJ_xWtLiAXFV3qIJ9Std1WEKM' \
-#   --data-raw 'strPartNo_PAItemInq=AP201130&strFuncType=INVENTORYDATA&strPADealerCode_PAItemInq=AC2011063676&STR_FORM_ID=00602&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011' \
-#   --compressed
