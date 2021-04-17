@@ -1,6 +1,4 @@
-import csv
-import json
-from DataReader import *
+from scripts.DataReader import *
 
 # csvfile = open('../data/inventory/price_list_10-02-2021..csv', 'r')
 # jsonfile = open('../data/inventory/price_list_10-02-2021.json', 'w')
