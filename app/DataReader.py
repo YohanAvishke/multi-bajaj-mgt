@@ -11,5 +11,6 @@ def csv_to_json(file_path, field_names):
         if idx != 0:
             catalogue.append(row)
     catalogue = json.dumps(catalogue, indent=4)
+    catalogue = json.loads(catalogue)
 
     return catalogue
