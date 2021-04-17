@@ -19,14 +19,10 @@ headers = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8H8TYQJVgJRGttyTw7gWFEZoDWDrYJsPTYLKqZdcoYdyYhG3ggsoMRkYnL7V1g5pLuXUNpLdOeaUW%2B'
-              'LAIHd0Mrvle4KtcFHJ0nGqyZZnOCzkUmX6obnOebX30RNKAj%2FkJH%2BMQ8%2FRZKmkxhoPrFIG9pB%2FcpmD5jNd8qRZMe4IsxYh; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8H8TYQJVgJRGttyTw7gWFEawVVW-1-ZcXNH31kg-kamO9B4yfGVKSI5EoxMByzV1'
-              'CoJk8oA0Qp0mCkNsTqWsvRJtpTyagST5kjTPd5icsGtdPabpCxdvOnAGunsuP6OON-nDcPMTAuqmmNg8NfNS0k0'
+    'cookie': '.AspNetCore.Session=CfDJ8H8TYQJVgJRGttyTw7gWFEZoDWDrYJsPTYLKqZdcoYdyYhG3ggsoMRkYnL7V1g5pLuXUNpLdOeaUW%2BLAIHd0Mrvle4KtcFHJ0nGqyZZnOCzkUmX6obnOebX30RNKAj%2FkJH%2BMQ8%2FRZKmkxhoPrFIG9pB%2FcpmD5jNd8qRZMe4IsxYh; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8H8TYQJVgJRGttyTw7gWFEawVVW-1-ZcXNH31kg-kamO9B4yfGVKSI5EoxMByzV1CoJk8oA0Qp0mCkNsTqWsvRJtpTyagST5kjTPd5icsGtdPabpCxdvOnAGunsuP6OON-nDcPMTAuqmmNg8NfNS0k0'
 }
 
-numbers = [
-]
+numbers = []
 
 for number in numbers:
     payload = f'strPartNo_PAItemInq={number}&strFuncType=INVENTORYDATA&strPADealerCode_PAItemInq=AC2011063676&STR_' \
@@ -42,5 +38,3 @@ for number in numbers:
             print(f'{number} - Not Found.')
     else:
         print(f'{number} - Not Found.')
-
-    time.sleep(5)
