@@ -22,7 +22,38 @@ headers = {
     'cookie': '.AspNetCore.Session=CfDJ8H8TYQJVgJRGttyTw7gWFEZoDWDrYJsPTYLKqZdcoYdyYhG3ggsoMRkYnL7V1g5pLuXUNpLdOeaUW%2BLAIHd0Mrvle4KtcFHJ0nGqyZZnOCzkUmX6obnOebX30RNKAj%2FkJH%2BMQ8%2FRZKmkxhoPrFIG9pB%2FcpmD5jNd8qRZMe4IsxYh; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8H8TYQJVgJRGttyTw7gWFEawVVW-1-ZcXNH31kg-kamO9B4yfGVKSI5EoxMByzV1CoJk8oA0Qp0mCkNsTqWsvRJtpTyagST5kjTPd5icsGtdPabpCxdvOnAGunsuP6OON-nDcPMTAuqmmNg8NfNS0k0'
 }
 
-numbers = []
+numbers = [
+    'JK122002',
+    'Y-Flash Armature',
+    'JD551206',
+    '39100006',
+    'DK101503',
+    'Y-Pulsar Kick Padel',
+    'Y-CT-100 gear Pedal',
+    'Y-Discover Brake Cable',
+    'Y-2S Petrol Cap',
+    'Y-ARC-Brake Washer [R]',
+    'Y-ARC-Brake Rake Washer [F]',
+    'GF201009',
+    'YPA13001',
+    'DT511261',
+    'DJ121064',
+    'Y-DU191005 Clamp',
+    ' DJ121064',
+    'Y-Varroc Brush Set',
+    '36JZ0007',
+    'DJ201132',
+    'AA101814',
+    '22191096',
+    '24101056',
+    '24131046',
+    '24191182',
+    '36DK0015',
+    'AA111107',
+    'AN101152',
+    'DP101107',
+    'JE511230',
+]
 
 for number in numbers:
     payload = f'strPartNo_PAItemInq={number}&strFuncType=INVENTORYDATA&strPADealerCode_PAItemInq=AC2011063676&STR_' \
