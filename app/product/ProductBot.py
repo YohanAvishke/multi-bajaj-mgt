@@ -12,7 +12,6 @@ def format_full_products_file():
         products = json.load(file)
 
         for idx, product in enumerate(products):
-            product.pop('Part Category', None)
             product.pop('Status', None)
             formatted_description = product['Product Description'].replace('\n', '').replace('\r', '').replace('\t', '')
             product['Product Description'] = f"{product['Part Code']} | [{formatted_description}]"
@@ -20,6 +19,9 @@ def format_full_products_file():
 
     with open(PRODUCTS_FINAL_PATH, "w") as file:
         json.dump(products, file)
+
+def update_categories():
+    print()
 
 
 def find_missing_products(source_path, comparer_path):
