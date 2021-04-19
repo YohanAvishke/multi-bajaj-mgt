@@ -1,24 +1,48 @@
-from app.Utils import *
+import csv
+import json
+
+PRODUCTS_FULL_PATH = "../../data/product/products(full).json"
+PRODUCTS_FINAL_PATH = "../../data/product/products(final).json"
+PRODUCTS_MULTI_PATH = "../../data/product/products(multi).csv"
+PRODUCTS_PRICE_PATH = "../../data/product/products(price).csv"
 
 
+def format_full_products_file():
+    with open(PRODUCTS_FULL_PATH) as file:
+        products = json.load(file)
+
+        for idx, product in enumerate(products):
+            product.pop('Part Category', None)
+            product.pop('Status', None)
+            formatted_description = product['Product Description'].replace('\n', '').replace('\r', '').replace('\t', '')
+            product['Product Description'] = f"{product['Part Code']} | [{formatted_description}]"
+            print(idx)
+
+    with open(PRODUCTS_FINAL_PATH, "w") as file:
+        json.dump(products, file)
 
 
+def find_missing_products(source_path, comparer_path):
+    with open(source_path, 'r') as source_file, open(comparer_path, 'r') as comparer_file:
+        source_reader = list(csv.DictReader(source_file))
+        comparer_reader = list(csv.DictReader(comparer_file))
+
+        for source in source_reader:
+            source_part_number = source['Part Number']
+            source_note = source["Notes"]
+
+            if source_note == "":
+                is_missing = True
+
+                for comparer in comparer_reader:
+                    if source_part_number == comparer['PART_NO']:
+                        is_missing = False
+                if is_missing:
+                    print(f"Missing {source_part_number}")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+format_full_products_file()
+# find_missing_products(PRODUCTS_MULTI_PATH, PRODUCTS_PRICE_PATH)
 
 # FILE_PATH = '../../data/product/catalogue/shop-catalogue.csv'
 # FIELD_NAMES = ('Part Number', 'Quantity', 'Unit Price', 'Notes')
@@ -141,6 +165,6 @@ from app.Utils import *
 
 
 # update_prices()
-convert_to_csv()
+# convert_to_csv()
 # format_data()
 # missing_products()
