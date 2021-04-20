@@ -1,10 +1,13 @@
 import csv
 import json
 
+CATEGORIES_ERP_PATH = "../../data/category/categories(erp).json"
 PRODUCTS_FULL_PATH = "../../data/product/products(full).json"
 PRODUCTS_FINAL_PATH = "../../data/product/products(final).json"
 PRODUCTS_MULTI_PATH = "../../data/product/products(multi).csv"
+PRODUCTS_ODOO_PATH = "../../data/product/products(odoo).csv"
 PRODUCTS_PRICE_PATH = "../../data/product/products(price).csv"
+INVENTORY_ODOO_PATH = "../../data/product/inventory(odoo).csv"
 
 
 def format_full_products_file():
@@ -20,12 +23,42 @@ def format_full_products_file():
     with open(PRODUCTS_FINAL_PATH, "w") as file:
         json.dump(products, file)
 
-def update_categories():
-    print()
+
+def enrich_final_products():
+    with open(CATEGORIES_ERP_PATH) as erp_categories_file:
+        categories = json.load(erp_categories_file)
+    with open(PRODUCTS_MULTI_PATH, 'r') as prices_file:
+        prices = list(csv.DictReader(prices_file))
+    with open(PRODUCTS_FINAL_PATH) as products_file:
+        products = json.load(products_file)
+
+    for product in products:
+        product_category_id = product["Part Category"]
+        product_code = product["Part Code"]
+        price_exists = False
+
+        for category in categories:
+            if product_category_id == category["Category Code"]:
+                product["Part Category"] = category["Description"]
+                break
+
+        for priced_product in prices:
+            if product_code == priced_product["Part Number"]:
+                price = priced_product["Price"]
+                if price != "":
+                    product["Price"] = int(price)
+                price_exists = True
+                break
+        if not price_exists:
+            product["Price"] = 0
+            print(product_code)
+
+    with open(PRODUCTS_FINAL_PATH, "w") as file:
+        json.dump(products, file)
 
 
 def find_missing_products(source_path, comparer_path):
-    with open(source_path, 'r') as source_file, open(comparer_path, 'r') as comparer_file:
+    with open(source_path, "r") as source_file, open(comparer_path, "r") as comparer_file:
         source_reader = list(csv.DictReader(source_file))
         comparer_reader = list(csv.DictReader(comparer_file))
 
@@ -43,7 +76,34 @@ def find_missing_products(source_path, comparer_path):
                     print(f"Missing {source_part_number}")
 
 
-format_full_products_file()
+def update_quantity():
+    with open(INVENTORY_ODOO_PATH, "r") as odoo_file, open(PRODUCTS_MULTI_PATH, "r") as multi_file:
+        odoo_products = list(csv.DictReader(odoo_file))
+        multi_products = list(csv.DictReader(multi_file))
+
+    for idx, multi_product in enumerate(multi_products):
+        multi_part_number = multi_product["Part Number"]
+
+        if multi_product["Notes"] == "":
+            for odoo_product in odoo_products:
+                if multi_part_number == odoo_product["Product/Internal Reference"]:
+                    odoo_product["Counted Quantity"] = multi_product["Quantity"]
+                    print(idx)
+                    break
+
+    with open(PRODUCTS_ODOO_PATH, mode='w') as csvFile:
+        field_names = ("External ID","Product/External ID","Product/Internal Reference","Counted Quantity")
+        csv_writer = csv.DictWriter(csvFile, fieldnames=field_names, delimiter=',', quotechar='"',
+                                    quoting=csv.QUOTE_MINIMAL)
+
+        csv_writer.writeheader()
+        for product in odoo_products:
+            csv_writer.writerow(product)
+
+
+update_quantity()
+# enrich_final_products()
+# format_full_products_file()
 # find_missing_products(PRODUCTS_MULTI_PATH, PRODUCTS_PRICE_PATH)
 
 # FILE_PATH = '../../data/product/catalogue/shop-catalogue.csv'
@@ -119,35 +179,6 @@ format_full_products_file()
 #                     is_found = True
 #             if not is_found:
 #                 print(shop_product)
-
-
-# def update_prices():
-#     shop_reader = open('../../data/product/catalogue/shop-catalogue(sorted).csv', 'r')
-#     odoo_reader = open('../../data/product.template.csv', 'r')
-#     odoo_write = open('../../data/product/catalogue/odoo-catalogue(priced).csv', 'w')
-
-#     headers = ('Part Number', 'Quantity', 'Unit Price', 'Notes')
-#     shop_catalogue = list(csv.DictReader(shop_reader, headers))
-#     headers = ('External ID', 'Internal Reference', 'Sales Price', 'Cost')
-#     odoo_catalogue = list(csv.DictReader(odoo_reader, headers))
-
-#     for idx, shop_product in enumerate(shop_catalogue):
-#         part_number = shop_product['Part Number']
-#         if shop_product['Notes'] == '':
-#             for odoo_product in odoo_catalogue:
-#                 if part_number == odoo_product['Internal Reference']:
-#                     odoo_product['Sales Price'] = shop_product['Unit Price']
-#                     odoo_product['Cost'] = shop_product['Unit Price']
-#                     # print(idx)
-
-#     # print(odoo_catalogue)
-#     with open(f'../../data/odoo-catalogue(priced).json', 'w') as f:
-#         json.dump(odoo_catalogue, f)
-
-#     # with open(f'../../data/product/catalogue/odoo-catalogue(priced).csv', mode='w') as csvFile:
-#     #     csv_writer = csv.writer(csvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-#     #     for odoo_product in odoo_catalogue:
-#     #         csv_writer.writerow(odoo_product)
 
 
 # def convert_to_csv():
