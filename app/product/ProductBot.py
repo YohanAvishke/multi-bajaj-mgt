@@ -7,7 +7,7 @@ PRODUCTS_FINAL_PATH = "../../data/product/products(final).json"
 PRODUCTS_MULTI_PATH = "../../data/product/products(multi).csv"
 PRODUCTS_ODOO_PATH = "../../data/product/products(odoo).csv"
 PRODUCTS_PRICE_PATH = "../../data/product/products(price).csv"
-INVENTORY_ODOO_PATH = "../../data/product/inventory(odoo).csv"
+INVENTORY_ODOO_PATH = "../../data/product/adjustments/stock.inventory.line.csv"
 
 
 def format_full_products_file():
@@ -87,7 +87,7 @@ def update_quantity():
         if multi_product["Notes"] == "":
             for odoo_product in odoo_products:
                 if multi_part_number == odoo_product["Product/Internal Reference"]:
-                    odoo_product["Counted Quantity"] = multi_product["Quantity"]
+                    odoo_product["Counted Quantity"] += multi_product["Quantity"]
                     print(idx)
                     break
 
@@ -101,7 +101,40 @@ def update_quantity():
             csv_writer.writerow(product)
 
 
-update_quantity()
+def inventory_adjustment(adjustment_file_path):
+    adjusted_products = []
+    with open(INVENTORY_ODOO_PATH, "r") as inventory_file, open(adjustment_file_path, "r") as adj_file:
+        inventory_products = list(csv.DictReader(inventory_file))
+        adj_products = list(csv.DictReader(adj_file))
+
+    for idx, adj in enumerate(adj_products):
+        adj_exists = False
+        adj_part_number = adj["Part Number"]
+
+        for inventory_product in inventory_products:
+            if adj_part_number == inventory_product["Product/Internal Reference"]:
+                inventory_quantity = float(inventory_product["Counted Quantity"])
+                adjusted_quantity = float(adj["Chnaged Quantity"])
+                inventory_product["Counted Quantity"] = inventory_quantity + adjusted_quantity
+                adjusted_products.append(inventory_product)
+                adj_exists = True
+                break
+
+        if not adj_exists:
+            print(f"Missing {adj_part_number}")
+
+    with open(PRODUCTS_ODOO_PATH, mode='w') as csvFile:
+        field_names = ("External ID","Product/External ID","Product/Internal Reference","Counted Quantity")
+        csv_writer = csv.DictWriter(csvFile, fieldnames=field_names, delimiter=',', quotechar='"',
+                                    quoting=csv.QUOTE_MINIMAL)
+
+        csv_writer.writeheader()
+        for product in adjusted_products:
+            csv_writer.writerow(product)
+
+
+inventory_adjustment("../../data/product/adjustments/adjustment-21-04-21.csv")
+# update_quantity()
 # enrich_final_products()
 # format_full_products_file()
 # find_missing_products(PRODUCTS_MULTI_PATH, PRODUCTS_PRICE_PATH)
