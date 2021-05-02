@@ -1,0 +1,107 @@
+Internal Reference,Name,Description,Product Category/External ID,Point of Sale Category/External ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold
+6305(NACHi),NACHi 6305 Bearing,NACHi 6305 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,650,650,True,True,True
+6305ZZE(NACHi),NACHi 6305ZZE Bearing,NACHi 6305ZZE Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,1150,1150,True,True,True
+6004(NACHi),NACHi 6004 Bearing,NACHi 6004 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,550,550,True,True,True
+6204(NACHi),NACHi 6204 Bearing,NACHi 6204 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,520,520,True,True,True
+6304(NACHi),NACHi 6304 Bearing,NACHi 6304 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,550,550,True,True,True
+6302(NACHi),NACHi 6302 Bearing,NACHi 6302 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,480,480,True,True,True
+6301(NACHi),NACHi 6301 Bearing,NACHi 6301 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,450,450,True,True,True
+63|22X(NACHi),NACHi 63 | 22X Bearing,NACHi 63 | 22X Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,950,950,True,True,True
+6203(NACHi),NACHi 6203 Bearing,NACHi 6203 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,430,430,True,True,True
+6003(NACHi),NACHi 6003 Bearing,NACHi 6003 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,450,450,True,True,True
+6002(NACHi),NACHi 6002 Bearing,NACHi 6002 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,430,430,True,True,True
+6201(NACHi),NACHi 6201 Bearing,NACHi 6201 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,420,420,True,True,True
+6001(NACHi),NACHi 6001 Bearing,NACHi 6001 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,420,420,True,True,True
+6000(NACHi),NACHi 6000 Bearing,NACHi 6000 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,390,390,True,True,True
+6300(NACHi),NACHi 6300 Bearing,NACHi 6300 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,440,440,True,True,True
+6200(NACHi),NACHi 6200 Bearing,NACHi 6200 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,440,440,True,True,True
+6202(NACHi),NACHi 6202 Bearing,NACHi 6202 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,450,450,True,True,True
+63|28(NACHi),NACHi 63 | 28 Bearing,NACHi 63 | 28 Bearing,point_of_sale.00028,__export__.pos_category_12_af2fc6fb,Storable Product,1250,1250,True,True,True
+SAAA111081(SA),SA Bracket Assembly - Intermediate,SA Bracket Assembly - Intermediate,point_of_sale.00040,__export__.pos_category_10_919622a7,Storable Product,600,600,True,True,True
+SADD191125(SA),SA Cable Comp Starter,SA Cable Comp Starter,point_of_sale.00054,__export__.pos_category_10_919622a7,Storable Product,240,240,True,True,True
+SAFA141015(SA),SA Cap Assly,SA Cap Assly,point_of_sale.00059,__export__.pos_category_10_919622a7,Storable Product,100,100,True,True,True
+SA24140112(SA),SA Cap Assly,SA Cap Assly,point_of_sale.00059,__export__.pos_category_10_919622a7,Storable Product,100,100,True,True,True
+SAVNAA111085A(SA),SA Carbon Kit STMS - 3W 4S - EE02,SA Carbon Kit STMS - 3W 4S - EE02,point_of_sale.00044,__export__.pos_category_10_919622a7,Storable Product,550,550,True,True,True
+SA24100805(SA),SA Clutch Driving Plate - 3P,SA Clutch Driving Plate - 3P,point_of_sale.00079,__export__.pos_category_10_919622a7,Storable Product,600,600,True,True,True
+SABA132171(SA),SA Coupling,SA Coupling,point_of_sale.00149,__export__.pos_category_10_919622a7,Storable Product,1200,1200,True,True,True
+SAAE101015(SA),SA Driven Plate,SA Driven Plate,point_of_sale.00149,__export__.pos_category_10_919622a7,Storable Product,250,250,True,True,True
+GKAE1001(SA),SA Gasket - Bore [5P] - 3W / RE,SA Gasket - Bore [5P] - 3W / RE,point_of_sale.00105,__export__.pos_category_10_919622a7,Storable Product,30,30,True,True,True
+GKAE1002(SA),SA Gasket - Exhaust,SA Gasket - Exhaust,point_of_sale.00105,__export__.pos_category_10_919622a7,Storable Product,30,30,True,True,True
+SAAA111095(SA),SA Gear Shaft Unit(Extend Casting),SA Gear Shaft Unit(Extend Casting),point_of_sale.00275,__export__.pos_category_10_919622a7,Storable Product,1800,1800,True,True,True
+SAAL241285(SA),SA Packing Shield  And W Shield,SA Packing Shield  And W Shield,point_of_sale.00167,__export__.pos_category_10_919622a7,Storable Product,450,450,True,True,True
+GK36AE00(SA),SA Set - Gasket [5P] - 3W / RE,SA Set - Gasket [5P] - 3W / RE,point_of_sale.00167,__export__.pos_category_10_919622a7,Storable Product,160,160,True,True,True
+SAAA171006(SA),SA Silent Bush - Trailing Arm,SA Silent Bush - Trailing Arm,point_of_sale.00169,__export__.pos_category_10_919622a7,Storable Product,300,300,True,True,True
+SA06101007(SA),SA Starter Gear,SA Starter Gear,point_of_sale.00027,__export__.pos_category_10_919622a7,Storable Product,400,400,True,True,True
+AE101006(YL),YL Engine Gear,YL Engine Gear,point_of_sale.00167,__export__.pos_category_11_9f8532a8,Storable Product,1250,1250,True,True,True
+52AB0098(YL),YL Assembly Mud. Asly FR. ED COATD,YL Assembly Mud. Asly FR. ED COATD,point_of_sale.00048,__export__.pos_category_11_9f8532a8,Storable Product,2350,2350,True,True,True
+DU101190(YL),YL Assembly Rocker Arm Roller,YL Assembly Rocker Arm Roller,point_of_sale.00207,__export__.pos_category_11_9f8532a8,Storable Product,1600,1600,True,True,True
+AZ621019(YL),YL Assembly Starting Handle,YL Assembly Starting Handle,point_of_sale.00181,__export__.pos_category_11_9f8532a8,Storable Product,1650,1650,True,True,True
+24161149(YL),YL Bush Bronz,YL Bush Bronz,point_of_sale.00048,__export__.pos_category_11_9f8532a8,Storable Product,400,400,True,True,True
+DS191013(YL),YL Cable - Choke,YL Cable - Choke,point_of_sale.00054,__export__.pos_category_11_9f8532a8,Storable Product,380,380,True,True,True
+JA531011(YL),YL Cam Chain (92 Links),YL Cam Chain (92 Links),point_of_sale.00055,__export__.pos_category_11_9f8532a8,Storable Product,1300,1300,True,True,True
+DS109905(YL),YL Cam Chain (94 Links),YL Cam Chain (94 Links),point_of_sale.00067,__export__.pos_category_11_9f8532a8,Storable Product,1350,1350,True,True,True
+DS101036(YL),YL Cam-chain :-24 - 94L,YL Cam-chain :-24 - 94L,point_of_sale.00055,__export__.pos_category_11_9f8532a8,Storable Product,1100,1100,True,True,True
+AE101014(YL),YL Clutch Assy,YL Clutch Assy,point_of_sale.00079,__export__.pos_category_11_9f8532a8,Storable Product,3900,3900,True,True,True
+AE101016(YL),YL Clutch Driving Plate (5P),YL Clutch Driving Plate (5P),point_of_sale.00079,__export__.pos_category_11_9f8532a8,Storable Product,750,750,True,True,True
+DH171013(YL),YL Collar - Swing Arm,YL Collar - Swing Arm,point_of_sale.00083,__export__.pos_category_11_9f8532a8,Storable Product,350,350,True,True,True
+BA132171(YL),YL Flange (SAT. HSG),YL Flange (SAT. HSG),point_of_sale.00149,__export__.pos_category_11_9f8532a8,Storable Product,1200,1200,True,True,True
+AA161215(YL),YL Dashboard Plastic Refl,YL Dashboard Plastic Refl,point_of_sale.00264,__export__.pos_category_11_9f8532a8,Storable Product,1980,1980,True,True,True
+52244040(YL),YL ED Coated FR Mudguard - RE 205,YL ED Coated FR Mudguard - RE 205,point_of_sale.00243,__export__.pos_category_11_9f8532a8,Storable Product,2450,2450,True,True,True
+BB121029(YL),YL Flap Air Intake,YL Flap Air Intake,point_of_sale.00150,__export__.pos_category_11_9f8532a8,Storable Product,100,100,True,True,True
+35101059(YL),YL Flat Cross-5P,YL Flat Cross-5P,point_of_sale.00128,__export__.pos_category_11_9f8532a8,Storable Product,1000,1000,True,True,True
+AA201185(YL),YL Fuse Box 3W RE 4S-UG,YL Fuse Box 3W RE 4S-UG,point_of_sale.00165,__export__.pos_category_11_9f8532a8,Storable Product,1050,1050,True,True,True
+AN101012(YL),YL Gasket - Head,YL Gasket - Head,point_of_sale.00167,__export__.pos_category_11_9f8532a8,Storable Product,600,600,True,True,True
+AN101328(YL),YL Gear Reverse Control,YL Gear Reverse Control,point_of_sale.00169,__export__.pos_category_11_9f8532a8,Storable Product,400,400,True,True,True
+22171007(YL),YL Grease Seal [ R / Hub ],YL Grease Seal [ R / Hub ],point_of_sale.00260,__export__.pos_category_11_9f8532a8,Storable Product,100,100,True,True,True
+24171024(YL),YL Grease Seal [ R / Hub ],YL Grease Seal [ R / Hub ],point_of_sale.00260,__export__.pos_category_11_9f8532a8,Storable Product,130,130,True,True,True
+AA101565(YL),YL Guide Chain,YL Guide Chain,point_of_sale.00180,__export__.pos_category_11_9f8532a8,Storable Product,400,400,True,True,True
+AN101166(YL),YL Guide Chain,YL Guide Chain,point_of_sale.00180,__export__.pos_category_11_9f8532a8,Storable Product,200,200,True,True,True
+AA101162(YL),YL Head Gasket,YL Head Gasket,point_of_sale.00167,__export__.pos_category_11_9f8532a8,Storable Product,221,221,True,True,True
+DH101484(YL),YL Holder Clutch,YL Holder Clutch,point_of_sale.00079,__export__.pos_category_11_9f8532a8,Storable Product,350,350,True,True,True
+DX101054(YL),YL Housing Complete Clutch,YL Housing Complete Clutch,point_of_sale.00198,__export__.pos_category_11_9f8532a8,Storable Product,4000,4000,True,True,True
+AB171003(YL),YL Hub - Front Wheel,YL Hub - Front Wheel,point_of_sale.00199,__export__.pos_category_11_9f8532a8,Storable Product,4800,4800,True,True,True
+AA111091(YL),YL Igniter DC(Digital)With Starter Interlok,YL Igniter DC(Digital)With Starter Interlok,point_of_sale.00200,__export__.pos_category_11_9f8532a8,Storable Product,2500,2500,True,True,True
+DJ191023(YL),YL Kit - Major : Master Cylinder [ ETS ],YL Kit - Major : Master Cylinder [ ETS ],point_of_sale.00041,__export__.pos_category_11_9f8532a8,Storable Product,850,850,True,True,True
+36AA4032(YL),YL Kit Connecting Rod 4S FL Kit,YL Kit Connecting Rod 4S FL Kit,point_of_sale.00304,__export__.pos_category_11_9f8532a8,Storable Product,2850,2850,True,True,True
+36DH4041(YL),YL Kit Plate Friction Discover 135,YL Kit Plate Friction Discover 135,point_of_sale.00079,__export__.pos_category_11_9f8532a8,Storable Product,1700,1700,True,True,True
+24101056(YL),YL Multiple Gear Pin,YL Multiple Gear Pin,point_of_sale.00268,__export__.pos_category_11_9f8532a8,Storable Product,850,850,True,True,True
+AA201041(YL),YL Neutral  Switch,YL Neutral  Switch,point_of_sale.00371,__export__.pos_category_11_9f8532a8,Storable Product,220,220,True,True,True
+AA101624(YL),YL Pipe Oil Cool,YL Pipe Oil Cool,point_of_sale.00270,__export__.pos_category_11_9f8532a8,Storable Product,2500,2500,True,True,True
+AN101308(YL),YL Pipe Oil Hot,YL Pipe Oil Hot,point_of_sale.00270,__export__.pos_category_11_9f8532a8,Storable Product,2000,2000,True,True,True
+AL201012(YL),YL Relay Head Light,YL Relay Head Light,point_of_sale.00152,__export__.pos_category_11_9f8532a8,Storable Product,280,280,True,True,True
+AZ161000(YL),YL Reverse Lever,YL Reverse Lever,point_of_sale.00215,__export__.pos_category_11_9f8532a8,Storable Product,2750,2750,True,True,True
+AA171006(YL),YL Silent Bush - Trailing Arm,YL Silent Bush - Trailing Arm,point_of_sale.00048,__export__.pos_category_11_9f8532a8,Storable Product,220,220,True,True,True
+DH111012(YL),YL Sleeve Spark Plug,YL Sleeve Spark Plug,point_of_sale.00335,__export__.pos_category_11_9f8532a8,Storable Product,700,700,True,True,True
+06101213(YL),YL Spacer,YL Spacer,point_of_sale.00339,__export__.pos_category_11_9f8532a8,Storable Product,120,120,True,True,True
+AA101364(YL),YL Spring - Clutch,YL Spring - Clutch,point_of_sale.00347,__export__.pos_category_11_9f8532a8,Storable Product,50,50,True,True,True
+06101007(YL),YL Starter Gear,YL Starter Gear,point_of_sale.00207,__export__.pos_category_11_9f8532a8,Storable Product,1000,1000,True,True,True
+24101177(YL),YL Starting Handle,YL Starting Handle,point_of_sale.00181,__export__.pos_category_11_9f8532a8,Storable Product,1350,1350,True,True,True
+AZ351002(YL),YL Stator Assembly,YL Stator Assembly,point_of_sale.00422,__export__.pos_category_11_9f8532a8,Storable Product,4250,4250,True,True,True
+06100702(YL),YL Stem,YL Stem,point_of_sale.00227,__export__.pos_category_11_9f8532a8,Storable Product,350,350,True,True,True
+AA111031(YL),YL Switch Reverse,YL Switch Reverse,point_of_sale.00371,__export__.pos_category_11_9f8532a8,Storable Product,470,470,True,True,True
+JA541019(YL),YL Mesh Filter Oil Pump,YL Mesh Filter Oil Pump,point_of_sale.00141,__export__.pos_category_11_9f8532a8,Storable Product,400,400,True,True,True
+CD101008(YL),YL Cyl. Block Piston[5P],YL Cyl. Block Piston[5P],point_of_sale.00109,__export__.pos_category_11_9f8532a8,Storable Product,6750,6750,True,True,True
+DS101336(YL),YL Shaft Arm Rocker Exhaust,YL Shaft Arm Rocker Exhaust,point_of_sale.00325,__export__.pos_category_11_9f8532a8,Storable Product,150,150,True,True,True
+24191019(YL),YL Spring,YL Spring,point_of_sale.00347,__export__.pos_category_11_9f8532a8,Storable Product,100,100,True,True,True
+36311014(YL),YL Oil Seal Kit [4s],YL Oil Seal Kit [4s],point_of_sale.00001,__export__.pos_category_11_9f8532a8,Storable Product,350,350,True,True,True
+36DK0005(YL),YL Kit Valve Repair Pulsar UgIII,YL Kit Valve Repair Pulsar UgIII,point_of_sale.00396,__export__.pos_category_11_9f8532a8,Storable Product,450,450,True,True,True
+36DU1504(YL),YL Front Hub Bushing Kit - Ct 100,YL Front Hub Bushing Kit - Ct 100,point_of_sale.00048,__export__.pos_category_11_9f8532a8,Storable Product,160,160,True,True,True
+36JA0002(YL),YL Kit Valve Kit Xcd,YL Kit Valve Kit Xcd,point_of_sale.00396,__export__.pos_category_11_9f8532a8,Storable Product,1800,1800,True,True,True
+36JZ0003(YL),YL Kit Drive & Driven Disco H,YL Kit Drive & Driven Disco H,point_of_sale.00208,__export__.pos_category_11_9f8532a8,Storable Product,4100,4100,True,True,True
+39105315(YL),YL Nut,YL Nut,point_of_sale.00251,__export__.pos_category_11_9f8532a8,Storable Product,100,100,True,True,True
+39193815(YL),YL Nut,YL Nut,point_of_sale.00251,__export__.pos_category_11_9f8532a8,Storable Product,100,100,True,True,True
+39214124(YL),YL Nylon Washer,YL Nylon Washer,point_of_sale.00399,__export__.pos_category_11_9f8532a8,Storable Product,30,30,True,True,True
+52Jl0066(YL),YL Fender Front Wth Guide N Flap N BLK Decal,YL Fender Front Wth Guide N Flap N BLK Decal,point_of_sale.00139,__export__.pos_category_11_9f8532a8,Storable Product,4200,4200,True,True,True
+AA101013(YL),YL Block Gasket,YL Block Gasket,point_of_sale.00167,__export__.pos_category_11_9f8532a8,Storable Product,180,180,True,True,True
+AA101392(YL),YL Multiple Gear Shaft,YL Multiple Gear Shaft,point_of_sale.00325,__export__.pos_category_11_9f8532a8,Storable Product,1700,1700,True,True,True
+PA151014(YL),YL Hand Grip RH,YL Hand Grip RH,point_of_sale.00176,__export__.pos_category_11_9f8532a8,Storable Product,380,380,True,True,True
+DG141019(YL),YL Damper,YL Damper,point_of_sale.00111,__export__.pos_category_11_9f8532a8,Storable Product,100,100,True,True,True
+DH181022(YL),YL Weight - Handlebar,YL Weight - Handlebar,point_of_sale.00181,__export__.pos_category_11_9f8532a8,Storable Product,450,450,True,True,True
+DJ151077(YL),YL Rim - Alloy Wheel [ 1.60 * 17 ] Black Color-Front,YL Rim - Alloy Wheel [ 1.60 * 17 ] Black Color-Front,point_of_sale.00404,__export__.pos_category_11_9f8532a8,Storable Product,18430,18430,True,True,True
+DJ201035(YL),YL Cable Assembly (Clutch Switch) / DJ201110,YL Cable Assembly (Clutch Switch) / DJ201110,point_of_sale.00371,__export__.pos_category_11_9f8532a8,Storable Product,400,400,True,True,True
+DL191014(YL),YL Stud - Lever Handle,YL Stud - Lever Handle,point_of_sale.00364,__export__.pos_category_11_9f8532a8,Storable Product,130,130,True,True,True
+DM191009(YL),YL Speedometer Assly Without Fuel Guage,YL Speedometer Assly Without Fuel Guage,point_of_sale.00343,__export__.pos_category_11_9f8532a8,Storable Product,5500,5500,True,True,True
+DS101335(YL),YL Shaft Arm Rocker Intake,YL Shaft Arm Rocker Intake,point_of_sale.00325,__export__.pos_category_11_9f8532a8,Storable Product,150,150,True,True,True
+DS181045(YL),YL Bracket - Fairing :- Top,YL Bracket - Fairing :- Top,point_of_sale.00040,__export__.pos_category_11_9f8532a8,Storable Product,400,400,True,True,True
+AA171027(YL),YL Fork Assy 3W FL,YL Fork Assy 3W FL,point_of_sale.00154,__export__.pos_category_11_9f8532a8,Storable Product,13500,13500,True,True,True
+AN101033(YL),YL Engine Magnet Side Housing,YL Engine Magnet Side Housing,point_of_sale.00099,__export__.pos_category_11_9f8532a8,Storable Product,15000,15000,True,True,True
