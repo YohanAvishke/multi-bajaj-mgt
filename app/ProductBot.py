@@ -134,7 +134,7 @@ def inventory_adjustment(adjustment_file_path):
             csv_writer.writerow(product)
 
 
-inventory_adjustment("../data/product/adjustments/adjustment-21-05-02.csv")
+inventory_adjustment("../data/product/adjustments/adjustment-21-05-01.csv")
 # update_quantity()
 # enrich_final_products()
 # format_full_products_file()
