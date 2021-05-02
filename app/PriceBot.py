@@ -2,6 +2,7 @@ import logging
 import threading
 import requests
 import csv
+import json
 import time
 
 PRODUCT_PATH = "../data/product/price-update-list.csv"
@@ -28,31 +29,35 @@ def scrap_prices():
 	    'sec-fetch-dest': 'empty',
 	    'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
 	    'accept-language': 'en-US,en;q=0.9',
-	    'cookie': '.AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vHjNs2C2TTMszoi12z%2FTbuUts5QZfhQrtCOXHuOPBCHMPelg5Di5Mmkiq0shyn7XtDVTYeQIDwOjRhOHcguzyMr7NWR0je3lmZ%2B2wq4cNtzcA3AILi58Cg%2B7dEa8kzCKZZXRIJXv3oMovXVyzq87EwE; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vFrliv6_JH_DRd-QA4_mqcCKxaopTA-aF3lVkTXH3nyczAvdvMJaug0hRJxw_RNFmnW1nl9SE1IF_dmghugj3OTnj_3Q8mHEH5YQcZMyaKSsUkv2eplYGhkPGnXNgeqZck'
+	    'cookie': '.AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vFI9s%2F8wmJ643e2fNePr7we7AemM0wbkub3WyXT2IYsn3sIOP%2F02eKCF8toZlaCtGxu%2FV9Yop4w9B90m%2BpCaUBQ2vt4zBZwljqEqMx7Otspc8QL%2FixZTN5Y1v4hkztinn0PCzQ8bwr3wLI8tMPW4g8h; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHKrxQ5gC2_4GrCt0RQDQmTVay0r_yc8Vsp1Pqx4kmdA1Cv6mpPE3SsC6NZZ96XZvoj4iRafCp2Nz_RJDrDUYG5oUKZckaDPTuVIJI0d2otNskc_muerV7Rb7O5Hy7aRb8'
 	}
 
 	with open(PRODUCT_PATH, "r") as product_file:
 		products = list(csv.DictReader(product_file))
 
-	chunks = split_list(products, CHUNK_SIZE)
-	for idx, chunk in enumerate(chunks):
-		if idx == READ_STATE:
-			updatable_list = chunk
+	# chunks = split_list(products, CHUNK_SIZE)
+	# for idx, chunk in enumerate(chunks):
+	# 	if idx == READ_STATE:
+	# 		updatable_list = chunk
 	logging.info(f"Starting params - State: {READ_STATE}, chunk_size: {CHUNK_SIZE}, chunks: {len(products)//CHUNK_SIZE}, left-over: {len(products)%3}")
 
-	for product in updatable_list:
-		payload = f"strPartNo_PAItemInq={product['Internal ref']}&strFuncType=INVENTORYDATA&strPADealerCode_PAItemInq=AC2011063676&STR_" \
+	for product in products:
+		# print(product['Internal ref'])
+		number = product['Internal ref']
+		payload = f"strPartNo_PAItemInq={number}&strFuncType=INVENTORYDATA&strPADealerCode_PAItemInq=AC2011063676&STR_" \
 				"FORM_ID=00602&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
-		# response = requests.request("POST", URL, headers=HEADERS, data=payload)
+		response = requests.request("POST", URL, headers=HEADERS, data=payload)
 
-		# if response.status_code == 200:
-  #       	data = json.loads(response.text)["DATA"]
-	 #        if 'dblSellingPrice' in data:
-	 #            print(data["dblSellingPrice"])
-	 #        else:
-	 #            print(f'{number} - Not Found.')
-	 #    else:
-	 #        print(f'{number} - Not Found.')
+		if response.status_code == 200:
+			data = json.loads(response.text)["DATA"]
+
+			if 'dblSellingPrice' in data:
+				print(f"{product['Internal ref']} : {data['dblSellingPrice']}")
+			else:
+				print(f'{number} - Not Found.')
+		else:
+			print(f'{number} - Not Found.')
+		time.sleep(5)
 
 
 def split_list(l, n):

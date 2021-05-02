@@ -5,9 +5,9 @@ CATEGORIES_ERP_PATH = "../../data/category/categories(erp).json"
 PRODUCTS_FULL_PATH = "../../data/product/products(full).json"
 PRODUCTS_FINAL_PATH = "../../data/product/products(final).json"
 PRODUCTS_MULTI_PATH = "../data/product/products(multi).csv"
-PRODUCTS_ODOO_PATH = "../../data/product/products(odoo).csv"
+PRODUCTS_ODOO_PATH = "../data/product/products(odoo).csv"
 PRODUCTS_PRICE_PATH = "../data/product/products(price).csv"
-INVENTORY_ODOO_PATH = "../../data/product/adjustments/stock.inventory.line.csv"
+INVENTORY_ODOO_PATH = "../data/product/adjustments/stock.inventory.line.csv"
 
 
 def format_full_products_file():
@@ -114,8 +114,9 @@ def inventory_adjustment(adjustment_file_path):
         for inventory_product in inventory_products:
             if adj_part_number == inventory_product["Product/Internal Reference"]:
                 inventory_quantity = float(inventory_product["Counted Quantity"])
-                adjusted_quantity = float(adj["Chnaged Quantity"])
+                adjusted_quantity = float(adj["Quantity"])
                 inventory_product["Counted Quantity"] = inventory_quantity + adjusted_quantity
+
                 adjusted_products.append(inventory_product)
                 adj_exists = True
                 break
@@ -124,7 +125,7 @@ def inventory_adjustment(adjustment_file_path):
             print(f"Missing {adj_part_number}")
 
     with open(PRODUCTS_ODOO_PATH, mode='w') as csvFile:
-        field_names = ("External ID","Product/External ID","Product/Internal Reference","Counted Quantity")
+        field_names = ("ID","Product/ID","Product/Internal Reference","Counted Quantity")
         csv_writer = csv.DictWriter(csvFile, fieldnames=field_names, delimiter=',', quotechar='"',
                                     quoting=csv.QUOTE_MINIMAL)
 
@@ -133,11 +134,11 @@ def inventory_adjustment(adjustment_file_path):
             csv_writer.writerow(product)
 
 
-# inventory_adjustment("../../data/product/adjustments/adjustment-21-04-21.csv")
+inventory_adjustment("../data/product/adjustments/adjustment-21-04-30.csv")
 # update_quantity()
 # enrich_final_products()
 # format_full_products_file()
-find_missing_products(PRODUCTS_MULTI_PATH, PRODUCTS_PRICE_PATH)
+# find_missing_products(PRODUCTS_MULTI_PATH, PRODUCTS_PRICE_PATH)
 
 # FILE_PATH = '../../data/product/catalogue/shop-catalogue.csv'
 # FIELD_NAMES = ('Part Number', 'Quantity', 'Unit Price', 'Notes')
