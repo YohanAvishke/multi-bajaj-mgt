@@ -3,13 +3,168 @@
         "Heads": [
             {
                 "Head": "PRIBDM20210429",
-                "isAdjusted": false
+                "isAdjusted": true
             },
             {
                 "Head": "PRIBDM20210430",
-                "isAdjusted": false
+                "isAdjusted": true
             }
         ],
-        "Numbers": []
+        "Numbers": [
+            {
+                "GRN No": "DGRN2021050600990",
+                "Invoice No": "PRIBDM2021042905612",
+                "Order No": "",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 560520.0
+            },
+            {
+                "GRN No": "DGRN2021050600991",
+                "Invoice No": "PRIBDM2021042905635",
+                "Order No": "PADC2021042427152",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 714080.0
+            },
+            {
+                "GRN No": "DGRN2021050600992",
+                "Invoice No": "PRIBDM2021042905636",
+                "Order No": "959BTM20210406004",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 148312.0
+            },
+            {
+                "GRN No": "DGRN2021050600993",
+                "Invoice No": "PRIBDM2021043006639",
+                "Order No": "PADC2021042226747",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 69560.0
+            },
+            {
+                "GRN No": "DGRN2021050600994",
+                "Invoice No": "PRIBDM2021043006640",
+                "Order No": "PADC2021042327005",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 393561.0
+            },
+            {
+                "GRN No": "DGRN2021050600995",
+                "Invoice No": "PRIBDM2021043006641",
+                "Order No": "PADC2021042326977",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 415920.0
+            },
+            {
+                "GRN No": "DGRN2021050600996",
+                "Invoice No": "PRIBDM2021043006642",
+                "Order No": "PADC2021042326971",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 72640.0
+            },
+            {
+                "GRN No": "DGRN2021050600997",
+                "Invoice No": "PRIBDM2021043006643",
+                "Order No": "PADC2021042326986",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 340352.0
+            },
+            {
+                "GRN No": "DGRN2021050600998",
+                "Invoice No": "PRIBDM2021043006644",
+                "Order No": "PAAD2021012903273",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 180664.0
+            },
+            {
+                "GRN No": "DGRN2021050600999",
+                "Invoice No": "PRIBDM2021043006645",
+                "Order No": "959BTM20210406001",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 162224.0
+            },
+            {
+                "GRN No": "DGRN2021050601000",
+                "Invoice No": "PRIBDM2021043006646",
+                "Order No": "PAAD2021020903377",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 130392.0
+            },
+            {
+                "GRN No": "DGRN2021050601001",
+                "Invoice No": "PRIBDM2021043006647",
+                "Order No": "PAAD2021021203413",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 63792.0
+            },
+            {
+                "GRN No": "DGRN2021050601002",
+                "Invoice No": "PRIBDM2021043006648",
+                "Order No": "PAAD2021022503517",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 44840.0
+            },
+            {
+                "GRN No": "DGRN2021050601003",
+                "Invoice No": "PRIBDM2021043006649",
+                "Order No": "PAAD2021020203313",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 33048.0
+            },
+            {
+                "GRN No": "DGRN2021050601004",
+                "Invoice No": "PRIBDM2021043006650",
+                "Order No": "PAAD2021021603441",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 41344.0
+            },
+            {
+                "GRN No": "DGRN2021050601005",
+                "Invoice No": "PRIBDM2021043006651",
+                "Order No": "PAAD2021022503513",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 47992.0
+            },
+            {
+                "GRN No": "DGRN2021050601006",
+                "Invoice No": "PRIBDM2021043006652",
+                "Order No": "959BTM20210406002",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 73168.0
+            },
+            {
+                "GRN No": "DGRN2021050601007",
+                "Invoice No": "PRIBDM2021043006653",
+                "Order No": "959BTM20210406003",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 470408.0
+            },
+            {
+                "GRN No": "DGRN2021050601008",
+                "Invoice No": "PRIBDM2021043006654",
+                "Order No": "PADC2021042126360",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 86480.0
+            },
+            {
+                "GRN No": "DGRN2021050601009",
+                "Invoice No": "PRIBDM2021043006655",
+                "Order No": "PADC2021042126354",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 290096.0
+            },
+            {
+                "GRN No": "DGRN2021050601010",
+                "Invoice No": "PRIBDM2021043006656",
+                "Order No": "PADC2021042126355",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 125584.0
+            },
+            {
+                "GRN No": "DGRN2021050601011",
+                "Invoice No": "PRIBDM2021043006657",
+                "Order No": "PADC2021042226720",
+                "STR_DEALER_CODE": "AC2011063676",
+                "Total GRN Value": 387544.0
+            }
+        ]
     }
 }

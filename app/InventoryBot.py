@@ -4,8 +4,7 @@ import requests
 
 INVOICE_PATH = "../data/inventory/invoices.json"
 
-GRN_URL = "https://erp.dpg.lk/Help/GetHelp"
-
+URL = "https://erp.dpg.lk/Help/GetHelp"
 HEADERS = {
   'authority': 'erp.dpg.lk',
   'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
@@ -27,9 +26,9 @@ HEADERS = {
 def get_invoices():
 	with open(INVOICE_PATH, "r") as invoice_file:
 		invoice_reader = json.load(invoice_file)
-	invoices = invoice_reader["Invoice"]
+	invoice = invoice_reader["Invoice"]
 
-	for invoice_head in invoices["Heads"]:
+	for invoice_head in invoice["Heads"]:
 		if not invoice_head["isAdjusted"]:
 			head = invoice_head["Head"]
 
@@ -39,11 +38,17 @@ def get_invoices():
 				"strSEARCH_FIELD_NAME=STR_GRN_NO&strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&strORDERBY=STR_GRN_NO&" \
 				"strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D" \
 				"&strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&strSchema="
+			response = requests.request("POST", URL, headers=HEADERS, data=payload)
+			numbers = json.loads(response.text)
 
-			response = requests.request("POST", GRN_URL, headers=HEADERS, data=payload)
-			print(response.text)
-			break
+			for number in numbers:
+				invoice["Numbers"].append(number)
 
+			invoice_head["isAdjusted"] = True
+
+	with open(INVOICE_PATH, "w") as invoice_file:
+		json.dump(invoice_reader, invoice_file)
+				
 
 get_invoices()
 
