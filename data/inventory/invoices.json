@@ -1,0 +1,15 @@
+{
+    "Invoice": {
+        "Heads": [
+            {
+                "Head": "PRIBDM20210429",
+                "isAdjusted": false
+            },
+            {
+                "Head": "PRIBDM20210430",
+                "isAdjusted": false
+            }
+        ],
+        "Numbers": []
+    }
+}
