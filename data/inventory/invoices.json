@@ -1,37 +1,10 @@
 {
     "Invoice": {
         "Heads": [
-            {
-                "Head": "PRIBDM20210429",
-                "isAdjusted": true
-            },
-            {
-                "Head": "PRIBDM20210430",
-                "isAdjusted": true
-            }
+            "PRIBDM20210429",
+            "PRIBDM20210430"
         ],
         "Numbers": [
-            {
-                "GRN No": "DGRN2021050600990",
-                "Invoice No": "PRIBDM2021042905612",
-                "Order No": "",
-                "STR_DEALER_CODE": "AC2011063676",
-                "Total GRN Value": 560520.0
-            },
-            {
-                "GRN No": "DGRN2021050600991",
-                "Invoice No": "PRIBDM2021042905635",
-                "Order No": "PADC2021042427152",
-                "STR_DEALER_CODE": "AC2011063676",
-                "Total GRN Value": 714080.0
-            },
-            {
-                "GRN No": "DGRN2021050600992",
-                "Invoice No": "PRIBDM2021042905636",
-                "Order No": "959BTM20210406004",
-                "STR_DEALER_CODE": "AC2011063676",
-                "Total GRN Value": 148312.0
-            },
             {
                 "GRN No": "DGRN2021050600993",
                 "Invoice No": "PRIBDM2021043006639",

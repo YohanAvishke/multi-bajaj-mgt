@@ -28,23 +28,18 @@ def get_invoices():
 		invoice_reader = json.load(invoice_file)
 	invoice = invoice_reader["Invoice"]
 
-	for invoice_head in invoice["Heads"]:
-		if not invoice_head["isAdjusted"]:
-			head = invoice_head["Head"]
+	for head in invoice["Heads"]:
 
-			payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00605&" \
-				"strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&strHIDEN_FIELD_INDEX=%2C0&" \
-				f"strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&strSearch={head}&strSEARCH_TEXT=&" \
-				"strSEARCH_FIELD_NAME=STR_GRN_NO&strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&strORDERBY=STR_GRN_NO&" \
-				"strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D" \
-				"&strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&strSchema="
-			response = requests.request("POST", URL, headers=HEADERS, data=payload)
-			numbers = json.loads(response.text)
+		payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00605&" \
+			"strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&strHIDEN_FIELD_INDEX=%2C0&" \
+			f"strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&strSearch={head}&strSEARCH_TEXT=&" \
+			"strSEARCH_FIELD_NAME=STR_GRN_NO&strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&strORDERBY=STR_GRN_NO&" \
+			"strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D" \
+			"&strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&strSchema="
+		response = requests.request("POST", URL, headers=HEADERS, data=payload)
+		numbers = json.loads(response.text)
 
-			for number in numbers:
-				invoice["Numbers"].append(number)
-
-			invoice_head["isAdjusted"] = True
+		invoice["Numbers"] = numbers
 
 	with open(INVOICE_PATH, "w") as invoice_file:
 		json.dump(invoice_reader, invoice_file)
