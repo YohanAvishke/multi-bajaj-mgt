@@ -24,7 +24,7 @@ HEADERS = {
 }
 
 
-def get_grn():
+def get_invoices():
 	with open(INVOICE_PATH, "r") as invoice_file:
 		invoice_reader = json.load(invoice_file)
 	invoices = invoice_reader["Invoice"]
@@ -45,5 +45,5 @@ def get_grn():
 			break
 
 
-get_grn()
+get_invoices()
 
