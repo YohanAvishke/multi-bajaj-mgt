@@ -45,5 +45,11 @@ def get_invoices():
 		json.dump(invoice_reader, invoice_file)
 				
 
+def get_products():
+	with open(INVOICE_PATH, "r") as invoice_file:
+		invoice_reader = json.load(invoice_file)
+		
+
+
 get_invoices()
 
