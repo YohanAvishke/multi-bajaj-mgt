@@ -1,7 +1,6 @@
 import logging
 import requests
 import pandas
-import numpy
 import json
 import time
 
@@ -44,7 +43,7 @@ def scrap_prices():
     product_reader = pandas.read_csv(PRODUCT_PATH)
 
     for idx, product in product_reader.iterrows():
-        if "Bajaj" in product["Point of Sale Category"] and numpy.isnan(product["Updated Cost"]):
+        if "Bajaj" in product["Point of Sale Category"] and pandas.isnull(product["Updated Cost"]):
             product_number = product['Internal Reference']
 
             payload = f"strPartNo_PAItemInq={product_number}&strFuncType=INVENTORYDATA&" \
