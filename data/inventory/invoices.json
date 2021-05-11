@@ -6,24 +6,218 @@
         "GRN": "DGRN2021050600990"
       },
       {
-        "Invoice": "PRIBDM2021043007297",
-        "GRN": "DGRN2021051001012"
-      },
-      {
-        "Invoice": "PRIBDM2021043007319",
-        "GRN": "DGRN2021051001013"
-      },
-      {
-        "Invoice": "PRIBDM2021043007947"
-      },
-      {
         "Invoice": "PRIBDM2021043008128"
-      },
-      {
-        "Invoice": "PRIBDM2021043008267"
       }
     ],
-    "GRN Numbers": [],
-    "Products": []
+    "Products": [
+      {
+        "STR_PART_CODE": "36AN0010",
+        "STR_DESC": "CYLINDER BLOCK AND PISTON (3W RE)",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "001",
+        "BIN_CODE": "200",
+        "SUBBIN_CODE": "300",
+        "INT_QUANTITY": 15,
+        "INT_UNIT_COST": 9690.0,
+        "INT_TOTAL_PART_COST": 145350.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_CODE": "AA101446",
+        "STR_DESC": "BLOCK-CYLINDER & PISTON ASSEMBLY:SPARE",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "001",
+        "BIN_CODE": "200",
+        "SUBBIN_CODE": "200",
+        "INT_QUANTITY": 25,
+        "INT_UNIT_COST": 7980.0,
+        "INT_TOTAL_PART_COST": 199500.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_CODE": "AA121150",
+        "STR_DESC": "ELEMENT AIR FILTER",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "001",
+        "BIN_CODE": "200",
+        "SUBBIN_CODE": "100",
+        "INT_QUANTITY": 10,
+        "INT_UNIT_COST": 2050.0,
+        "INT_TOTAL_PART_COST": 20500.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_CODE": "AB181017",
+        "STR_DESC": "STEL BAL/NYLN CAG UP",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "000",
+        "BIN_CODE": "400",
+        "SUBBIN_CODE": "400",
+        "INT_QUANTITY": 1,
+        "INT_UNIT_COST": 110.0,
+        "INT_TOTAL_PART_COST": 110.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_CODE": "AN101123",
+        "STR_DESC": "PISTON ASSY WITH BLOCK-SPARES",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "001",
+        "BIN_CODE": "200",
+        "SUBBIN_CODE": "300",
+        "INT_QUANTITY": 2,
+        "INT_UNIT_COST": 8250.0,
+        "INT_TOTAL_PART_COST": 16500.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_CODE": "AN101190",
+        "STR_DESC": "FILTER ASSEMBLY - OIL",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "000",
+        "BIN_CODE": "300",
+        "SUBBIN_CODE": "400",
+        "INT_QUANTITY": 3,
+        "INT_UNIT_COST": 720.0,
+        "INT_TOTAL_PART_COST": 2160.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_CODE": "JN521001",
+        "STR_DESC": "BLOCK/PISTON ASSEMBLY ( SPARE ) DISCOVER BLACK 135",
+        "WAREHOUSE_CODE": "000",
+        "LOCATION_CODE": "000",
+        "RACK_CODE": "001",
+        "BIN_CODE": "200",
+        "SUBBIN_CODE": "200",
+        "INT_QUANTITY": 20,
+        "INT_UNIT_COST": 8820.0,
+        "INT_TOTAL_PART_COST": 176400.0,
+        "STR_SERIAL_BASE": "N"
+      },
+      {
+        "STR_PART_NO": "36JA0002",
+        "STR_DESC": "KIT VALVE KIT XCD",
+        "INT_QUATITY": 10.0,
+        "INT_UNIT_PRICE": 1672.0,
+        "INT_TOTAL_VALUE": 16720.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000002003003"
+      },
+      {
+        "STR_PART_NO": "36PA0004",
+        "STR_DESC": "KIT VALVE",
+        "INT_QUATITY": 15.0,
+        "INT_UNIT_PRICE": 1608.0,
+        "INT_TOTAL_VALUE": 24120.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000002003003"
+      },
+      {
+        "STR_PART_NO": "DH101016",
+        "STR_DESC": "GASKET - CYLINDER",
+        "INT_QUATITY": 50.0,
+        "INT_UNIT_PRICE": 168.0,
+        "INT_TOTAL_VALUE": 8400.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007002001"
+      },
+      {
+        "STR_PART_NO": "DH101680",
+        "STR_DESC": "GASKET CYLINDER HEAD",
+        "INT_QUATITY": 20.0,
+        "INT_UNIT_PRICE": 704.0,
+        "INT_TOTAL_VALUE": 14080.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007002001"
+      },
+      {
+        "STR_PART_NO": "DH121093",
+        "STR_DESC": "NEEDLE ASSEMBLY",
+        "INT_QUATITY": 2.0,
+        "INT_UNIT_PRICE": 920.0,
+        "INT_TOTAL_VALUE": 1840.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000001001003"
+      },
+      {
+        "STR_PART_NO": "DZ101075",
+        "STR_DESC": "CAMSHAFT ASSEMBLY",
+        "INT_QUATITY": 6.0,
+        "INT_UNIT_PRICE": 2608.0,
+        "INT_TOTAL_VALUE": 15648.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000001005001"
+      },
+      {
+        "STR_PART_NO": "JA541011",
+        "STR_DESC": "NEEDLE ROLLER BEARING HK1212",
+        "INT_QUATITY": 20.0,
+        "INT_UNIT_PRICE": 304.0,
+        "INT_TOTAL_VALUE": 6080.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000003006001"
+      },
+      {
+        "STR_PART_NO": "JA541205",
+        "STR_DESC": "GASKET MAGNETO COVER",
+        "INT_QUATITY": 50.0,
+        "INT_UNIT_PRICE": 224.0,
+        "INT_TOTAL_VALUE": 11200.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007002003"
+      },
+      {
+        "STR_PART_NO": "JA581006",
+        "STR_DESC": "ELEMENT AIR FILTER",
+        "INT_QUATITY": 20.0,
+        "INT_UNIT_PRICE": 344.0,
+        "INT_TOTAL_VALUE": 6880.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007005004"
+      },
+      {
+        "STR_PART_NO": "JB581005",
+        "STR_DESC": "ELEMENT AIR FILTER",
+        "INT_QUATITY": 10.0,
+        "INT_UNIT_PRICE": 536.0,
+        "INT_TOTAL_VALUE": 5360.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007005004"
+      },
+      {
+        "STR_PART_NO": "JD231600",
+        "STR_DESC": "MIRROR ASSLY LH",
+        "INT_QUATITY": 10.0,
+        "INT_UNIT_PRICE": 1000.0,
+        "INT_TOTAL_VALUE": 10000.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007001002"
+      },
+      {
+        "STR_PART_NO": "JE531001",
+        "STR_DESC": "BALL BEARING-22X56X16  SKF",
+        "INT_QUATITY": 10.0,
+        "INT_UNIT_PRICE": 1384.0,
+        "INT_TOTAL_VALUE": 13840.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000013001004"
+      },
+      {
+        "STR_PART_NO": "JZ231601",
+        "STR_DESC": "MIRROR ASSEMBLY RH",
+        "INT_QUATITY": 5.0,
+        "INT_UNIT_PRICE": 1208.0,
+        "INT_TOTAL_VALUE": 6040.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007001001"
+      }
+    ]
   }
 }

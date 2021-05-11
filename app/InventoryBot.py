@@ -34,8 +34,12 @@ HEADERS = {
 
 # -*- Functions -*-
 def get_grn_for_invoice():
-    """
-    Use before getting Products
+    # -*- coding: utf-8 -*-
+    """ Before
+    Add the Invoice numbers to ['Invoice']['Numbers']['Invoice']
+
+    ``` After
+    Call get_products_from_invoices()
     """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
@@ -71,6 +75,13 @@ def get_grn_for_invoice():
 
 
 def get_products_from_invoices():
+    # -*- coding: utf-8 -*-
+    """ Before
+    get_grn_for_invoice() should be called before
+
+    ''' After Call
+    Part Numbers are located at ['Invoice']['Products']
+    """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     invoice = invoice_reader["Invoice"]
@@ -87,14 +98,21 @@ def get_products_from_invoices():
         response = requests.request("POST", URL_PRODUCTS, headers=HEADERS, data=payload)
 
         if response:
-            product_details = json.loads(response.text)
+            product_details = json.loads(response.text)["DATA"]
+
+            if product_details == "NO DATA FOUND":
+                print(f"Invoice Number: {number} is Invalid !!!")
+            else:
+                product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in number \
+                    else product_details["dtGRNDetails"]
+
+                for product_detail in product_details:
+                    invoice["Products"].append(product_detail)
         else:
             print('An error has occurred.')
 
-        break
-
-    # with open(INVOICE_PATH, "w") as invoice_file:
-    #     json.dump(invoice_reader, invoice_file)
+    with open(INVOICE_PATH, "w") as invoice_file:
+        json.dump(invoice_reader, invoice_file)
 
 
 def json_to_csv():
