@@ -2,13 +2,14 @@ import csv
 import json
 import requests
 
+# -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_JSON_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.json"
 ADJUSTMENT_CSV_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
-
-URL_INVOICE = "https://erp.dpg.lk/Help/GetHelp"
-URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
-
+# -*- Request URLs -*-
+URL_PRODUCTS_FROM_INVOICE = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
+URL = "https://erp.dpg.lk/Help/GetHelp"
+# -*- Request Headers -*-
 HEADERS = {
     'authority': 'erp.dpg.lk',
     'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
@@ -31,21 +32,54 @@ HEADERS = {
 }
 
 
-def get_invoices():
+# -*- Functions -*-
+def get_grn_for_invoice():
+    """
+    Use before getting Products
+    """
+
+    with open(INVOICE_PATH, "r") as invoice_file:
+        invoice_reader = json.load(invoice_file)
+    invoice = invoice_reader["Invoice"]
+    
+    for number in invoice["Numbers"]:
+        invoice_number = number["Invoice"]
+
+        payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00605&strFIELD_NAME=%2CSTR_DEALER_CODE" \
+                  "%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&strHIDEN_FIELD_INDEX=%2C0&" \
+                  "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
+                  f"strSearch={invoice_number}&strSEARCH_TEXT=&strSEARCH_FIELD_NAME=STR_GRN_NO&" \
+                  "strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&strORDERBY=STR_GRN_NO&" \
+                  "strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D&" \
+                  "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&" \
+                  "strSchema="
+        response = requests.request("POST", URL, headers=HEADERS, data=payload)
+
+        if response:
+            invoice_details = json.loads(response.text)
+
+            if invoice_details == "NO DATA FOUND":
+                print(f"Invoice Number: {invoice_number} is Invalid !!!")
+            elif len(invoice_details) > 1:
+                print(f"Invoice Number: {invoice_number} is too Vague !!!")
+            else:
+                number["GRN"] = invoice_details[0]["GRN No"]
+        else:
+            print('An error has occurred.')
+
+    with open(INVOICE_PATH, "w") as invoice_file:
+        json.dump(invoice_reader, invoice_file)
+
+
+def get_products_from_invoices():
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     invoice = invoice_reader["Invoice"]
 
     for head in invoice["Heads"]:
-        payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00605&" \
-                  "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2" \
-                  "CINT_TOTAL_GRN_VALUE&strHIDEN_FIELD_INDEX=%2C0&strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder" \
-                  f"+No%2CInvoice+No%2CTotal+GRN+Value&strSearch={head}&strSEARCH_TEXT=&" \
-                  "strSEARCH_FIELD_NAME=STR_GRN_NO&strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&" \
-                  "strORDERBY=STR_GRN_NO&strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'" \
-                  "AC2011063676'%22%5D%5D&strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
-                  "strTITEL=&strAll_DATA=true&strSchema="
-        response = requests.request("POST", URL_INVOICE, headers=HEADERS, data=payload)
+        payload = f"strMode=INVOICE&strInvoiceNo=PRIBDM2021043008256&strPADealerCode=AC2011063676&" \
+                  "STR_FORM_ID=00605&STR_FUNCTION_ID=CR&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
+        response = requests.request("POST", URL_PRODUCTS_FROM_INVOICE, headers=HEADERS, data=payload)
         numbers = json.loads(response.text)
 
         invoice["Numbers"] = numbers
@@ -97,6 +131,8 @@ def json_to_csv():
                                  "Counted Quantity": float(product_count)})
 
 
+# -*- Function Calls -*-
 # get_invoices()
 # get_products()
-json_to_csv()
+# json_to_csv()
+get_grn_for_invoice()
