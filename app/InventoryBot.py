@@ -130,10 +130,11 @@ def get_products_from_invoices():
 
 def json_to_csv():
     # -*- coding: utf-8 -*-
-    """ Warnings for Usage
+    """ Before
+    get_products_from_invoices() should be called before
 
-    Only for manually farmed invoiced products
-    To used should copy the JSON products directly to a Adjustment file
+    ''' After Call
+    Part Numbers with the quantities will be in the `ADJUSTMENT_PATH`
     """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
@@ -156,6 +157,13 @@ def json_to_csv():
 
 
 def inventory_adjustment():
+    # -*- coding: utf-8 -*-
+    """ Before
+    json_to_csv() should be called before to get the adjustment file
+
+    After Call
+    Final file to upload will be available at `ADJUSTMENT_PATH`
+    """
     products = []
 
     with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_PATH, "r") as adjustment_file:
