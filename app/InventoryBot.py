@@ -3,8 +3,8 @@ import json
 import requests
 
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_JSON_PATH = "../data/inventory/adjusments/adjustment-21:04:29,30.json"
-ADJUSTMENT_CSV_PATH = "../data/inventory/adjusments/adjustment-21:04:29,30.csv"
+ADJUSTMENT_JSON_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.json"
+ADJUSTMENT_CSV_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
 
 URL_INVOICE = "https://erp.dpg.lk/Help/GetHelp"
 URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
@@ -74,8 +74,22 @@ def get_products():
 
 
 def json_to_csv():
-    with open(ADJUSTMENT_JSON_PATH, "r") as adj_file:
-        adj_reader = json.load(adj_file)
+    with open(ADJUSTMENT_JSON_PATH, "r") as adj_json_file:
+        adj_reader = json.load(adj_json_file)
+
+    with open(ADJUSTMENT_CSV_PATH, "w") as adj_csv_file:
+        field_names = ("Product/Internal Reference", "Counted Quantity")
+        adj_writer = csv.DictWriter(adj_csv_file, fieldnames=field_names, delimiter=',', quotechar='"',
+                                    quoting=csv.QUOTE_MINIMAL)
+        adj_writer.writeheader()
+
+        for product in adj_reader:
+            product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
+            product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
+
+            adj_writer.writerow({"Product/Internal Reference": product_number, "Counted Quantity": product_count})
+
 
 # get_invoices()
 # get_products()
+json_to_csv()
