@@ -50,7 +50,12 @@ def scrap_prices():
             payload = f"strPartNo_PAItemInq={product_number}&strFuncType=INVENTORYDATA&" \
                       "strPADealerCode_PAItemInq=AC2011063676&STR_FORM_ID=00602&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&" \
                       "STR_INSTANT=DLR&STR_APP_ID=00011"
-            response = requests.request("POST", URL, headers=HEADERS, data=payload)
+
+            try:
+                response = requests.request("POST", URL, headers=HEADERS, data=payload)
+            except requests.exceptions.ConnectionError as e:
+                logging.error(e)
+                break
 
             if response:
                 product_data = json.loads(response.text)["DATA"]
@@ -59,7 +64,7 @@ def scrap_prices():
                     price = float(product_data["dblSellingPrice"])
 
                     product_reader.loc[idx, "Updated Sale Price"] = product_reader.loc[idx, "Updated Cost"] = price
-                    logging.info(f"{product_number} : {price}")
+                    logging.info(f"{idx + 1} - Product Number: {product_number}, Price: {price}")
                 else:
                     product_reader.loc[idx, "Updated Sale Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
