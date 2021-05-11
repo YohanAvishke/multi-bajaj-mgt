@@ -4,8 +4,7 @@ import requests
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_JSON_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.json"
-ADJUSTMENT_CSV_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
+ADJUSTMENT_CSV_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30-new.csv"
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
 URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
