@@ -7,8 +7,8 @@ INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_JSON_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.json"
 ADJUSTMENT_CSV_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
 # -*- Request URLs -*-
-URL_PRODUCTS_FROM_INVOICE = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
 URL = "https://erp.dpg.lk/Help/GetHelp"
+URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
 # -*- Request Headers -*-
 HEADERS = {
     'authority': 'erp.dpg.lk',
@@ -75,35 +75,26 @@ def get_products_from_invoices():
         invoice_reader = json.load(invoice_file)
     invoice = invoice_reader["Invoice"]
 
-    for head in invoice["Heads"]:
-        payload = f"strMode=INVOICE&strInvoiceNo=PRIBDM2021043008256&strPADealerCode=AC2011063676&" \
-                  "STR_FORM_ID=00605&STR_FUNCTION_ID=CR&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
-        response = requests.request("POST", URL_PRODUCTS_FROM_INVOICE, headers=HEADERS, data=payload)
-        numbers = json.loads(response.text)
-
-        invoice["Numbers"] = numbers
-
-    with open(INVOICE_PATH, "w") as invoice_file:
-        json.dump(invoice_reader, invoice_file)
-
-
-def get_products():
-    with open(INVOICE_PATH, "r") as invoice_file:
-        invoice_reader = json.load(invoice_file)
-    invoice = invoice_reader["Invoice"]
-
     for number in invoice["Numbers"]:
-        grn_number = number["GRN No"]
-        invoice_number = number["Invoice No"]
+        invoice_number = number["Invoice"]
+        grn_number = number["GRN"] if "GRN" in number else None
 
-        payload = "strMode=GRN&" \
-                  f"strGRNno={grn_number}&strInvoiceNo={invoice_number}&" \
-                  "strPADealerCode=AC2011063676&STR_FORM_ID=00605&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&" \
-                  "STR_INSTANT=DLR&STR_APP_ID=00011"
+        payload_mid = f"&strInvoiceNo={invoice_number}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
+        payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
+            if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
+        payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
+
         response = requests.request("POST", URL_PRODUCTS, headers=HEADERS, data=payload)
 
-        print(response.text)
+        if response:
+            product_details = json.loads(response.text)
+        else:
+            print('An error has occurred.')
+
         break
+
+    # with open(INVOICE_PATH, "w") as invoice_file:
+    #     json.dump(invoice_reader, invoice_file)
 
 
 def json_to_csv():
@@ -134,4 +125,5 @@ def json_to_csv():
 # get_invoices()
 # get_products()
 # json_to_csv()
-get_grn_for_invoice()
+# get_grn_for_invoice()
+get_products_from_invoices()
