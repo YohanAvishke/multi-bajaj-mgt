@@ -122,8 +122,9 @@ def json_to_csv():
     Only for manually farmed invoiced products
     To used should copy the JSON products directly to a Adjustment file
     """
-    with open(ADJUSTMENT_JSON_PATH, "r") as adj_json_file:
-        adj_reader = json.load(adj_json_file)
+    with open(INVOICE_PATH, "r") as invoice_file:
+        invoice_reader = json.load(invoice_file)
+    products = invoice_reader["Invoice"]["Products"]
 
     with open(ADJUSTMENT_CSV_PATH, "w") as adj_csv_file:
         field_names = ("Product/Internal Reference", "Counted Quantity")
@@ -131,17 +132,16 @@ def json_to_csv():
                                     quoting=csv.QUOTE_MINIMAL)
         adj_writer.writeheader()
 
-        for product in adj_reader:
+        for product in products:
             product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
             product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
 
             adj_writer.writerow({"Product/Internal Reference": product_number,
                                  "Counted Quantity": float(product_count)})
 
-
 # -*- Function Calls -*-
 # get_invoices()
 # get_products()
-# json_to_csv()
 # get_grn_for_invoice()
-get_products_from_invoices()
+# get_products_from_invoices()
+# json_to_csv()
