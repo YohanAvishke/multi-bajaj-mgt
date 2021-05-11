@@ -74,6 +74,12 @@ def get_products():
 
 
 def json_to_csv():
+    # -*- coding: utf-8 -*-
+    """ Warnings for Usage
+
+    Only for manually farmed invoiced products
+    To used should copy the JSON products directly to a Adjustment file
+    """
     with open(ADJUSTMENT_JSON_PATH, "r") as adj_json_file:
         adj_reader = json.load(adj_json_file)
 
