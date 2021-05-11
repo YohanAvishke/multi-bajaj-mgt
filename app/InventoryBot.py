@@ -87,7 +87,8 @@ def json_to_csv():
             product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
             product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
 
-            adj_writer.writerow({"Product/Internal Reference": product_number, "Counted Quantity": product_count})
+            adj_writer.writerow({"Product/Internal Reference": product_number,
+                                 "Counted Quantity": float(product_count)})
 
 
 # get_invoices()
