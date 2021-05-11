@@ -37,11 +37,10 @@ def get_grn_for_invoice():
     """
     Use before getting Products
     """
-
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     invoice = invoice_reader["Invoice"]
-    
+
     for number in invoice["Numbers"]:
         invoice_number = number["Invoice"]
 
