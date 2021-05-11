@@ -92,7 +92,7 @@ def update_quantity():
                     break
 
     with open(PRODUCTS_ODOO_PATH, mode='w') as csvFile:
-        field_names = ("External ID","Product/External ID","Product/Internal Reference","Counted Quantity")
+        field_names = ("External ID", "Product/External ID", "Product/Internal Reference", "Counted Quantity")
         csv_writer = csv.DictWriter(csvFile, fieldnames=field_names, delimiter=',', quotechar='"',
                                     quoting=csv.QUOTE_MINIMAL)
 
@@ -100,41 +100,6 @@ def update_quantity():
         for product in odoo_products:
             csv_writer.writerow(product)
 
-
-def inventory_adjustment(adjustment_file_path):
-    adjusted_products = []
-    with open(INVENTORY_ODOO_PATH, "r") as inventory_file, open(adjustment_file_path, "r") as adj_file:
-        inventory_products = list(csv.DictReader(inventory_file))
-        adj_products = list(csv.DictReader(adj_file))
-
-    for idx, adj in enumerate(adj_products):
-        adj_exists = False
-        adj_part_number = adj["Part Number"]
-
-        for inventory_product in inventory_products:
-            if adj_part_number == inventory_product["Product/Internal Reference"]:
-                inventory_quantity = float(inventory_product["Counted Quantity"])
-                adjusted_quantity = float(adj["Quantity"])
-                inventory_product["Counted Quantity"] = inventory_quantity + adjusted_quantity
-
-                adjusted_products.append(inventory_product)
-                adj_exists = True
-                break
-
-        if not adj_exists:
-            print(f"Missing {adj_part_number}")
-
-    with open(PRODUCTS_ODOO_PATH, mode='w') as csvFile:
-        field_names = ("ID","Product/ID","Product/Internal Reference","Counted Quantity")
-        csv_writer = csv.DictWriter(csvFile, fieldnames=field_names, delimiter=',', quotechar='"',
-                                    quoting=csv.QUOTE_MINIMAL)
-
-        csv_writer.writeheader()
-        for product in adjusted_products:
-            csv_writer.writerow(product)
-
-
-inventory_adjustment("../data/product/adjustments/adjustment-21-05-01.csv")
 # update_quantity()
 # enrich_final_products()
 # format_full_products_file()

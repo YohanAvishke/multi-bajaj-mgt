@@ -6,6 +6,7 @@ import logging
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
+INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -154,7 +155,45 @@ def json_to_csv():
     logging.info("Product data modeling done.")
 
 
+def inventory_adjustment():
+    products = []
+
+    with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_PATH, "r") as adjustment_file:
+        inventory_reader = list(csv.DictReader(inventory_file))
+        adjustment_reader = list(csv.DictReader(adjustment_file))
+
+    for adjustment_product in adjustment_reader:
+        exists = False
+        adjustment_number = adjustment_product["Product/Internal Reference"]
+        adjustment_quantity = float(adjustment_product["Counted Quantity"])
+
+        for inventory_product in inventory_reader:
+            inventory_number = inventory_product["Product/Internal Reference"]
+            inventory_quantity = float(inventory_product["Counted Quantity"])
+
+            if adjustment_number == inventory_number:
+                exists = True
+                inventory_product["Counted Quantity"] = inventory_quantity + adjustment_quantity
+                products.append(inventory_product)
+                break
+
+        if not exists:
+            logging.warning(f"Product Number: {adjustment_number} is Invalid !!!")
+
+    with open(ADJUSTMENT_PATH, mode='w') as adjustment_file:
+        field_names = ("ID", "Product/ID", "Product/Internal Reference", "Counted Quantity")
+        adjustment_writer = csv.DictWriter(adjustment_file, fieldnames=field_names, delimiter=',', quotechar='"',
+                                           quoting=csv.QUOTE_MINIMAL)
+        adjustment_writer.writeheader()
+
+        for product in products:
+            adjustment_writer.writerow(product)
+
+    logging.info("Inventory Adjustment done.")
+
+
 # -*- Function Calls -*-
-get_grn_for_invoice()
-get_products_from_invoices()
-json_to_csv()
+# get_grn_for_invoice()
+# get_products_from_invoices()
+# json_to_csv()
+# inventory_adjustment()
