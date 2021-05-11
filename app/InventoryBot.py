@@ -1,13 +1,16 @@
 import csv
 import json
 import requests
+import logging
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_CSV_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30-new.csv"
+ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
+
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
 URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
+
 # -*- Request Headers -*-
 HEADERS = {
     'authority': 'erp.dpg.lk',
@@ -29,6 +32,11 @@ HEADERS = {
               'Ob0cz; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKb'
               'nurde3xlktWSsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw'
 }
+
+# -*- Main function -*-
+if __name__ == "__main__":
+    logging_format = "%(asctime)s: %(message)s"
+    logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
 
 
 # -*- Functions -*-
@@ -61,16 +69,18 @@ def get_grn_for_invoice():
             invoice_details = json.loads(response.text)
 
             if invoice_details == "NO DATA FOUND":
-                print(f"Invoice Number: {invoice_number} is Invalid !!!")
+                logging.info(f"Invoice Number: {invoice_number} is Invalid !!!")
             elif len(invoice_details) > 1:
-                print(f"Invoice Number: {invoice_number} is too Vague !!!")
+                logging.info(f"Invoice Number: {invoice_number} is too Vague !!!")
             else:
                 number["GRN"] = invoice_details[0]["GRN No"]
         else:
-            print('An error has occurred.')
+            logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
+
+    logging.info("Invoice data scrapping done.")
 
 
 def get_products_from_invoices():
@@ -101,7 +111,7 @@ def get_products_from_invoices():
             product_details = json.loads(response.text)["DATA"]
 
             if product_details == "NO DATA FOUND":
-                print(f"Invoice Number: {number} is Invalid !!!")
+                logging.warning(f"Invoice Number: {number} is Invalid !!!")
             else:
                 product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in number \
                     else product_details["dtGRNDetails"]
@@ -109,10 +119,12 @@ def get_products_from_invoices():
                 for product_detail in product_details:
                     invoice["Products"].append(product_detail)
         else:
-            print('An error has occurred.')
+            logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
+
+    logging.info("Product data scrapping done.")
 
 
 def json_to_csv():
@@ -126,7 +138,7 @@ def json_to_csv():
         invoice_reader = json.load(invoice_file)
     products = invoice_reader["Invoice"]["Products"]
 
-    with open(ADJUSTMENT_CSV_PATH, "w") as adj_csv_file:
+    with open(ADJUSTMENT_PATH, "w") as adj_csv_file:
         field_names = ("Product/Internal Reference", "Counted Quantity")
         adj_writer = csv.DictWriter(adj_csv_file, fieldnames=field_names, delimiter=',', quotechar='"',
                                     quoting=csv.QUOTE_MINIMAL)
@@ -139,8 +151,10 @@ def json_to_csv():
             adj_writer.writerow({"Product/Internal Reference": product_number,
                                  "Counted Quantity": float(product_count)})
 
+    logging.info("Product data modeling done.")
+
 
 # -*- Function Calls -*-
-# get_grn_for_invoice()
-# get_products_from_invoices()
-# json_to_csv()
+get_grn_for_invoice()
+get_products_from_invoices()
+json_to_csv()
