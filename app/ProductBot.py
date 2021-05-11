@@ -1,5 +1,6 @@
 import csv
 import json
+import requests
 
 CATEGORIES_ERP_PATH = "../../data/category/categories(erp).json"
 PRODUCTS_FULL_PATH = "../../data/product/products(full).json"
@@ -100,103 +101,56 @@ def update_quantity():
         for product in odoo_products:
             csv_writer.writerow(product)
 
-# update_quantity()
-# enrich_final_products()
-# format_full_products_file()
-# find_missing_products(PRODUCTS_MULTI_PATH, PRODUCTS_PRICE_PATH)
 
-# FILE_PATH = '../../data/product/catalogue/shop-catalogue.csv'
-# FIELD_NAMES = ('Part Number', 'Quantity', 'Unit Price', 'Notes')
+def scrap_categories():
+    url = "https://erp.dpg.lk/Help/EnterPress"
 
+    headers = {
+        'authority': 'erp.dpg.lk',
+        'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
+        'accept': 'application/json, text/javascript, */*; q=0.01',
+        'x-requested-with': 'XMLHttpRequest',
+        'sec-ch-ua-mobile': '?0',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/90.0.4430.93 Safari/537.36',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'origin': 'https://erp.dpg.lk',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
+        'accept-language': 'en-US,en;q=0.9',
+        'cookie': '.AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vFI9s%2F8wmJ643e2fNePr7we7AemM0wbkub3WyXT2IYsn3sIO'
+                  'P%2F02eKCF8toZlaCtGxu%2FV9Yop4w9B90m%2BpCaUBQ2vt4zBZwljqEqMx7Otspc8QL%2FixZTN5Y1v4hkztinn0PCzQ8bwr'
+                  '3wLI8tMPW4g8h; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHKrxQ5gC2_4GrCt0RQDQm'
+                  'TVay0r_yc8Vsp1Pqx4kmdA1Cv6mpPE3SsC6NZZ96XZvoj4iRafCp2Nz_RJDrDUYG5oUKZckaDPTuVIJI0d2otNskc_muerV7Rb'
+                  '7O5Hy7aRb8'
+    }
 
-# def format_data():
-#     finalised_products = []
-#     unidentified_products = {'NOT FOUND': [], 'NO DATA': [], 'ZERO QUANTITY': []}
-#     third_party_products = {
-#         'YELLOW LABEL': [], 'SA': [], 'PAL': [], 'MILEX': [], 'MINDA': [], 'SD': [], 'BOSCH': [], 'MB': [], 'NACHi': [],
-#         'JCM': [], 'NCL': [], 'Lumax': [], 'MacRo': [], 'Varroc': [], 'Flash': [], 'Champion': [], 'GLUE': [],
-#         'ORIGINAL': [], 'LOCAL': [], 'UNKNOWN': []
-#     }
+    products = []
 
-#     catalogue = csv_to_json(FILE_PATH, FIELD_NAMES)
+    for number in products:
+        payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00596&strHELP_TITEL=Part+Details&" \
+                  "arrFIELD_NAME%5B%5D=STR_PART_NO&arrFIELD_NAME%5B%5D=STR_DESC&arrFIELD_NAME%5B%5D=STR_CAT_CODE&" \
+                  "arrFIELD_NAME%5B%5D=STR_SERIAL_STATUS&arrFIELD_NAME%5B%5D=STR_PROD_HIER_CODE&" \
+                  "arrFIELD_NAME%5B%5D=INT_MOQ&arrHIDEN_FIELD_INDEX%5B%5D=2&arrHIDEN_FIELD_INDEX%5B%5D=3" \
+                  "&arrHIDEN_FIELD_INDEX%5B%5D=4&arrHIDEN_FIELD_INDEX%5B%5D=5&arrDISPLAY_NAME%5B%5D=Part+Code&" \
+                  "arrDISPLAY_NAME%5B%5D=Description&arrDISPLAY_NAME%5B%5D=Part+cat&" \
+                  "arrDISPLAY_NAME%5B%5D=Serial+Base&arrDISPLAY_NAME%5B%5D=Pro+Hier+Code&" \
+                  "arrDISPLAY_NAME%5B%5D=MOQ+Value&strORDERBY%5B%5D=STR_PART_NO&arrSEARCH_TEXT%5B%5D=STR_PART_NO&" \
+                  f"arrSEARCH_TEXT%5B%5D={number}&strOTHER_WHERE_CONDITION%5B0%5D%5B%5D=STR_PROD_HIER_CODE&" \
+                  "strOTHER_WHERE_CONDITION%5B0%5D%5B%5D=IN&" \
+                  "strOTHER_WHERE_CONDITION%5B0%5D%5B%5D=('BAJ'%2C'KTM')&strLIMIT=50&strARCHIVE=TRUE&" \
+                  "strAPI_URL=api%2FModules%2FPADealer%2FPADLROrder%2FPartList&" \
+                  "strCallbackFunction=fncbPADealerOrder_CallBack()&strSchema="
 
-#     for idx, product in enumerate(catalogue):
-#         note = product['Notes']
-#         if note in ('NOT FOUND', 'NO DATA', 'ZERO QUANTITY'):
-#             unidentified_products[note].append(product)
-#         elif note in ('YELLOW LABEL', 'SA', 'PAL', 'MILEX', 'MINDA', 'SD', 'BOSCH', 'MB', 'NACHi', 'JCM', 'NCL',
-#                       'Lumax', 'MacRo', 'Varroc', 'Flash', 'Champion', 'GLUE', 'ORIGINAL', 'LOCAL', 'UNKNOWN'):
-#             product['Part Number'] = product['Part Number'].split("Y-")[-1]
-#             third_party_products[note].append(product)
-#         else:
-#             finalised_products.append(product)
+        response = requests.request("POST", url, headers=headers, data=payload)
 
-#     catalogue = {
-#         'Finalised': finalised_products,
-#         'Unidentified': unidentified_products,
-#         'Third Party': third_party_products
-#     }
-
-#     data_file = open('../../data/product/catalogue/shop-catalogue(sorted).csv', 'w')
-#     csv_writer = csv.writer(data_file)
-#     csv_writer.writerow(FIELD_NAMES)
-#     for catalogue_type in catalogue:
-#         catalogues = catalogue[catalogue_type]
-#         if catalogue_type == 'Finalised':
-#             for product in catalogues:
-#                 csv_writer.writerow([
-#                     product['Part Number'], product['Quantity'], product['Unit Price'], product['Notes']
-#                 ])
-#         else:
-#             for note in catalogues:
-#                 products = catalogues[note]
-#                 for product in products:
-#                     csv_writer.writerow([
-#                         product['Part Number'], product['Quantity'], product['Unit Price'], product['Notes']
-#                     ])
-#     data_file.close()
-
-
-# def missing_products():
-#     """
-#     Detect duplicates in the final csv files
-#     """
-#     shop_reader = open('../../data/product/catalogue/shop-catalogue(sorted).csv', 'r')
-#     odoo_reader = open('../../data/product/catalogue/odoo-catalogue.csv', 'r')
-
-#     headers = ('Part Number', 'Quantity', 'Unit Price', 'Notes')
-#     shop_catalogue = list(csv.DictReader(shop_reader, headers))
-#     headers = ('Internal Reference', 'Display Name')
-#     odoo_catalogue = list(csv.DictReader(odoo_reader, headers))
-
-#     for shop_product in shop_catalogue:
-#         is_found = False
-#         part_number = shop_product['Part Number']
-#         if shop_product['Notes'] == '':
-#             for odoo_product in odoo_catalogue:
-#                 if part_number == odoo_product['Internal Reference']:
-#                     is_found = True
-#             if not is_found:
-#                 print(shop_product)
-
-
-# def convert_to_csv():
-#     with open(f'../../data/odoo-catalogue(priced).json') as f:
-#         json_products = json.load(f)
-
-#     with open(f'../../data/odoo-catalogue(priced).csv', mode='w') as csvFile:
-#         csv_writer = csv.writer(csvFile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-#         # csv_writer.writerow(get_template())
-
-#         for json_product in json_products:
-#             csv_writer.writerow(
-#                 [f'{json_product["External ID"]}', f'{json_product["Internal Reference"]}', f'{json_product["Sales Price"]}',
-#                  f'{json_product["Cost"]}'
-#                  ])
-#             print(json_product)
-
-
-# update_prices()
-# convert_to_csv()
-# format_data()
-# missing_products()
+        if response.status_code == 200:
+            data = json.loads(response.text)[0]
+            if 'Part cat' in data:
+                print(f"{number} : {data['Part cat']}")
+            else:
+                print(f'{number} - Not Found.')
+        else:
+            print(f'{number} - Not Found.')
