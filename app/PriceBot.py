@@ -60,13 +60,13 @@ def scrap_prices():
             if response:
                 product_data = json.loads(response.text)["DATA"]
 
-                if 'dblSellingPrice' in product_data:
+                if 'dblSellingPrice' in product_data and product_data["dblSellingPrice"]:
                     price = float(product_data["dblSellingPrice"])
 
-                    product_reader.loc[idx, "Updated Sale Price"] = product_reader.loc[idx, "Updated Cost"] = price
+                    product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = price
                     logging.info(f"{idx + 1} - Product Number: {product_number}, Price: {price}")
                 else:
-                    product_reader.loc[idx, "Updated Sale Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
+                    product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
 
                 product_reader.to_csv(PRODUCT_PATH, index=False)
