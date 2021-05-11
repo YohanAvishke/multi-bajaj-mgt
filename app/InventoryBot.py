@@ -139,8 +139,6 @@ def json_to_csv():
                                  "Counted Quantity": float(product_count)})
 
 # -*- Function Calls -*-
-# get_invoices()
-# get_products()
 # get_grn_for_invoice()
 # get_products_from_invoices()
 # json_to_csv()
