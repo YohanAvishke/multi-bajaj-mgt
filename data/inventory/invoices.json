@@ -120,6 +120,24 @@
         "STR_WAREHOUSE_HIER": "000000002003003"
       },
       {
+        "STR_PART_NO": "JE531001",
+        "STR_DESC": "BALL BEARING-22X56X16  SKF",
+        "INT_QUATITY": 10.0,
+        "INT_UNIT_PRICE": 1384.0,
+        "INT_TOTAL_VALUE": 13840.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000013001004"
+      },
+      {
+        "STR_PART_NO": "JZ231601",
+        "STR_DESC": "MIRROR ASSEMBLY RH",
+        "INT_QUATITY": 5.0,
+        "INT_UNIT_PRICE": 1208.0,
+        "INT_TOTAL_VALUE": 6040.0,
+        "STR_SERIAL_STATUS": "N",
+        "STR_WAREHOUSE_HIER": "000000007001001"
+      },
+      {
         "STR_PART_NO": "DH101016",
         "STR_DESC": "GASKET - CYLINDER",
         "INT_QUATITY": 50.0,
@@ -199,24 +217,6 @@
         "INT_TOTAL_VALUE": 10000.0,
         "STR_SERIAL_STATUS": "N",
         "STR_WAREHOUSE_HIER": "000000007001002"
-      },
-      {
-        "STR_PART_NO": "JE531001",
-        "STR_DESC": "BALL BEARING-22X56X16  SKF",
-        "INT_QUATITY": 10.0,
-        "INT_UNIT_PRICE": 1384.0,
-        "INT_TOTAL_VALUE": 13840.0,
-        "STR_SERIAL_STATUS": "N",
-        "STR_WAREHOUSE_HIER": "000000013001004"
-      },
-      {
-        "STR_PART_NO": "JZ231601",
-        "STR_DESC": "MIRROR ASSEMBLY RH",
-        "INT_QUATITY": 5.0,
-        "INT_UNIT_PRICE": 1208.0,
-        "INT_TOTAL_VALUE": 6040.0,
-        "STR_SERIAL_STATUS": "N",
-        "STR_WAREHOUSE_HIER": "000000007001001"
       }
     ]
   }

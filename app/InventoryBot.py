@@ -84,6 +84,7 @@ def get_products_from_invoices():
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     invoice = invoice_reader["Invoice"]
+    invoice["Products"] = []
 
     for number in invoice["Numbers"]:
         invoice_number = number["Invoice"]
@@ -137,6 +138,7 @@ def json_to_csv():
 
             adj_writer.writerow({"Product/Internal Reference": product_number,
                                  "Counted Quantity": float(product_count)})
+
 
 # -*- Function Calls -*-
 # get_grn_for_invoice()
