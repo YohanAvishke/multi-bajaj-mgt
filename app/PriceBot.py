@@ -35,7 +35,7 @@ HEADERS = {
 
 # -*- Main function -*-
 if __name__ == "__main__":
-    logging_format = "%(asctime)s: %(levelname)s- %(message)s"
+    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
 
 
