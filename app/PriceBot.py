@@ -58,10 +58,10 @@ def scrap_prices():
                 if 'dblSellingPrice' in product_data:
                     price = float(product_data["dblSellingPrice"])
 
-                    product_reader.loc[i, "Updated Sale Price"] = product_reader.loc[i, "Updated Cost"] = price
+                    product_reader.loc[idx, "Updated Sale Price"] = product_reader.loc[idx, "Updated Cost"] = price
                     logging.info(f"{product_number} : {price}")
                 else:
-                    product_reader.loc[i, "Updated Sale Price"] = product_reader.loc[i, "Updated Cost"] = "-"
+                    product_reader.loc[idx, "Updated Sale Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
 
                 product_reader.to_csv(PRODUCT_PATH, index=False)
