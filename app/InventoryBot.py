@@ -3,8 +3,13 @@ import json
 import requests
 
 INVOICE_PATH = "../data/inventory/invoices.json"
+ADJUSTMENT_JSON_PATH = "../data/inventory/adjusments/adjustment-21:04:29,30.json"
+ADJUSTMENT_CSV_PATH = "../data/inventory/adjusments/adjustment-21:04:29,30.csv"
 
-URL = "https://erp.dpg.lk/Help/GetHelp"
+
+URL_INVOICE = "https://erp.dpg.lk/Help/GetHelp"
+URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
+
 HEADERS = {
   'authority': 'erp.dpg.lk',
   'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
@@ -29,27 +34,42 @@ def get_invoices():
 	invoice = invoice_reader["Invoice"]
 
 	for head in invoice["Heads"]:
-
 		payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00605&" \
 			"strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&strHIDEN_FIELD_INDEX=%2C0&" \
 			f"strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&strSearch={head}&strSEARCH_TEXT=&" \
 			"strSEARCH_FIELD_NAME=STR_GRN_NO&strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&strORDERBY=STR_GRN_NO&" \
 			"strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D" \
 			"&strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&strSchema="
-		response = requests.request("POST", URL, headers=HEADERS, data=payload)
+		response = requests.request("POST", URL_INVOICE, headers=HEADERS, data=payload)
 		numbers = json.loads(response.text)
 
 		invoice["Numbers"] = numbers
 
 	with open(INVOICE_PATH, "w") as invoice_file:
 		json.dump(invoice_reader, invoice_file)
-				
 
+				
 def get_products():
 	with open(INVOICE_PATH, "r") as invoice_file:
 		invoice_reader = json.load(invoice_file)
-		
+	invoice = invoice_reader["Invoice"]
+
+	for number in invoice["Numbers"]:
+		grn_number = number["GRN No"]
+		invoice_number = number["Invoice No"]
+
+		payload = "strMode=GRN&" \
+			f"strGRNno={grn_number}&strInvoiceNo={invoice_number}&" \
+			"strPADealerCode=AC2011063676&STR_FORM_ID=00605&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
+		response = requests.request("POST", URL_PRODUCTS, headers=HEADERS, data=payload)
+
+		print(response.text)
+		break
+
+def json_to_csv():
+	with open(ADJUSTMENT_JSON_PATH, "r") as adj_file:
+		adj_reader = json.load(adj_file)
 
 
-get_invoices()
-
+# get_invoices()
+# get_products()
