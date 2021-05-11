@@ -1,6 +1,7 @@
 import logging
 import requests
-import csv
+import pandas
+import numpy
 import json
 import time
 
@@ -40,29 +41,35 @@ if __name__ == "__main__":
 
 # -*- Function -*-
 def scrap_prices():
-    with open(PRODUCT_PATH, "r") as product_file:
-        product_reader = list(csv.DictReader(product_file))
+    product_reader = pandas.read_csv(PRODUCT_PATH)
 
-    for product in product_reader:
-        number = product['Internal Reference']
-        category = product['Point of Sale Category']
+    for idx, product in product_reader.iterrows():
+        if "Bajaj" in product["Point of Sale Category"] and numpy.isnan(product["Updated Cost"]):
+            product_number = product['Internal Reference']
 
-        if "Bajaj" in category:
-            payload = f"strPartNo_PAItemInq={number}&strFuncType=INVENTORYDATA&" \
+            payload = f"strPartNo_PAItemInq={product_number}&strFuncType=INVENTORYDATA&" \
                       "strPADealerCode_PAItemInq=AC2011063676&STR_FORM_ID=00602&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&" \
                       "STR_INSTANT=DLR&STR_APP_ID=00011"
             response = requests.request("POST", URL, headers=HEADERS, data=payload)
 
             if response:
                 product_data = json.loads(response.text)["DATA"]
+
                 if 'dblSellingPrice' in product_data:
-                    logging.info(f"{product['Internal ref']} : {product_data['dblSellingPrice']}")
+                    price = float(product_data["dblSellingPrice"])
+
+                    product_reader.loc[i, "Updated Sale Price"] = product_reader.loc[i, "Updated Cost"] = price
+                    logging.info(f"{product_number} : {price}")
                 else:
-                    logging.warning(f"Product Number: {number} is Invalid !!!")
+                    product_reader.loc[i, "Updated Sale Price"] = product_reader.loc[i, "Updated Cost"] = "-"
+                    logging.warning(f"Product Number: {product_number} is Invalid !!!")
+
+                product_reader.to_csv(PRODUCT_PATH, index=False)
+
             else:
                 logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \n'
                               f'For reason: {response.reason}')
-
+                break
             time.sleep(5)
 
 
