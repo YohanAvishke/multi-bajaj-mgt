@@ -15,18 +15,18 @@ URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
 # -*- Request Headers -*-
 HEADERS = {
     "authority": "erp.dpg.lk",
-    "sec-ch-ua": '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
-    "accept": "application/json, text/javascript, */*; q=0.01",
-    'x-requested-with': 'XMLHttpRequest',
-    'sec-ch-ua-mobile': '?0',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/90.0.4430.93 Safari/537.36',
-    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'origin': 'https://erp.dpg.lk',
-    'sec-fetch-site': 'same-origin',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-dest': 'empty',
-    'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
+    "sec-ch-ua": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
+    "accept": "*/*",
+    "x-requested-with": "XMLHttpRequest",
+    "sec-ch-ua-mobile": "?0",
+    "user-agent": "Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/90.0.4430.72 Mobile Safari/537.36",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "origin": "https://erp.dpg.lk",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-dest": "empty",
+    "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
     "cookie": ".AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6kozam"
               "doMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sNOb0cz; ."
@@ -203,5 +203,5 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
 # inventory_adjustment()

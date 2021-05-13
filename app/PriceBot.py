@@ -12,24 +12,24 @@ URL = "https://erp.dpg.lk/PADEALER/PADLRItemInquiry/Inquire"
 
 # -*- Request Headers -*-
 HEADERS = {
-    'authority': 'erp.dpg.lk',
-    'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-    'accept': '*/*',
-    'x-requested-with': 'XMLHttpRequest',
-    'sec-ch-ua-mobile': '?0',
-    'user-agent': 'Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/90.0.4430.72 Mobile Safari/537.36',
-    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'origin': 'https://erp.dpg.lk',
-    'sec-fetch-site': 'same-origin',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-dest': 'empty',
-    'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
-    'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6'
-              'kozamdoMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sN'
-              'Ob0cz; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKb'
-              'nurde3xlktWSsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw'
+    "authority": "erp.dpg.lk",
+    "sec-ch-ua": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
+    "accept": "*/*",
+    "x-requested-with": "XMLHttpRequest",
+    "sec-ch-ua-mobile": "?0",
+    "user-agent": "Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/90.0.4430.72 Mobile Safari/537.36",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "origin": "https://erp.dpg.lk",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-dest": "empty",
+    "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
+    "accept-language": "en-US,en;q=0.9",
+    "cookie": ".AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6kozam"
+              "doMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sNOb0cz; ."
+              "AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKbnurde3xlktW"
+              "SsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw"
 }
 
 # -*- Main function -*-
@@ -76,6 +76,5 @@ def scrap_prices():
                 break
             time.sleep(5)
 
-
 # -*- Function Calls -*-
-scrap_prices()
+# scrap_prices()
