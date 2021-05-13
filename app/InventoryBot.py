@@ -5,7 +5,7 @@ import logging
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:04:29,30.csv"
+ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:12.csv"
 INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
 
 # -*- Request URLs -*-
@@ -14,9 +14,9 @@ URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
 
 # -*- Request Headers -*-
 HEADERS = {
-    'authority': 'erp.dpg.lk',
-    'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
-    'accept': 'application/json, text/javascript, */*; q=0.01',
+    "authority": "erp.dpg.lk",
+    "sec-ch-ua": '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
+    "accept": "application/json, text/javascript, */*; q=0.01",
     'x-requested-with': 'XMLHttpRequest',
     'sec-ch-ua-mobile': '?0',
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -27,11 +27,11 @@ HEADERS = {
     'sec-fetch-mode': 'cors',
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
-    'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6'
-              'kozamdoMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sN'
-              'Ob0cz; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKb'
-              'nurde3xlktWSsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw'
+    "accept-language": "en-US,en;q=0.9",
+    "cookie": ".AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6kozam"
+              "doMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sNOb0cz; ."
+              "AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKbnurde3xlktW"
+              "SsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw"
 }
 
 # -*- Main function -*-
@@ -203,5 +203,5 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-# json_to_csv()
+json_to_csv()
 # inventory_adjustment()
