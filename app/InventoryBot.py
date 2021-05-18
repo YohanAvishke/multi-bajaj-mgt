@@ -6,7 +6,7 @@ import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:12-new.csv"
+ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:18.csv"
 INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
 
 # -*- Request URLs -*-
@@ -211,5 +211,5 @@ def inventory_adjustment():
 # get_grn_for_invoice()
 # get_products_from_invoices()
 json_to_csv()
-# merge_duplicates()
-# inventory_adjustment()
+merge_duplicates()
+inventory_adjustment()
