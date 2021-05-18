@@ -2,10 +2,11 @@ import csv
 import json
 import requests
 import logging
+import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:12.csv"
+ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:12-new.csv"
 INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
 
 # -*- Request URLs -*-
@@ -28,10 +29,8 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6kozam"
-              "doMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sNOb0cz; ."
-              "AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKbnurde3xlktW"
-              "SsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw"
+    "cookie": ".AspNetCore.Session=CfDJ8GocJQ9OP09IpVQeLLXSxcYZs8%2F1D5Z9oidQOvcjvwxY2ui1WavPUypGOO1acPJWb0ZIKTitoBIF"
+              "m2JpZcSt9jqeBTiOe6ERQDecoNhv7Y54t1vJb8caJ5yrVr68k5V4JHpOtGF61SQRcUZ2sHMNjhPMVDpNGfPZV5IOM%2BHns9oP"
 }
 
 # -*- Main function -*-
@@ -153,7 +152,16 @@ def json_to_csv():
             adj_writer.writerow({"Product/Internal Reference": product_number,
                                  "Counted Quantity": float(product_count)})
 
+    merge_duplicates()
     logging.info("Product data modeling done.")
+
+
+def merge_duplicates():
+    df = pandas.read_csv(ADJUSTMENT_PATH, header=0)
+    df["Counted Quantity"] = df.groupby(["Product/Internal Reference"])["Counted Quantity"].transform('sum')
+    df.drop_duplicates(subset=["Product/Internal Reference"], inplace=True, keep="last")
+    print(df)
+    df.to_csv(ADJUSTMENT_PATH, index=False)
 
 
 def inventory_adjustment():
@@ -203,5 +211,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-# json_to_csv()
+json_to_csv()
+# merge_duplicates()
 # inventory_adjustment()
