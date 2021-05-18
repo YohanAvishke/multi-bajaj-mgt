@@ -160,7 +160,6 @@ def merge_duplicates():
     df = pandas.read_csv(ADJUSTMENT_PATH, header=0)
     df["Counted Quantity"] = df.groupby(["Product/Internal Reference"])["Counted Quantity"].transform('sum')
     df.drop_duplicates(subset=["Product/Internal Reference"], inplace=True, keep="last")
-    print(df)
     df.to_csv(ADJUSTMENT_PATH, index=False)
 
 
