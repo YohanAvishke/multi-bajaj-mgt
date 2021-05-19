@@ -5,7 +5,7 @@ import json
 import time
 
 # -*- File Paths -*-
-PRODUCT_PATH = "../data/product/product.price.csv"
+PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/PADEALER/PADLRItemInquiry/Inquire"
@@ -26,22 +26,21 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8GocJQ9OP09IpVQeLLXSxcbUDQHZT%2F%2Ffy49MbynwtHp%2BNdShxwbOHGlUbvlFHyzt1Te%2F"
-              "sew4n%2B3caRe2xuPk5gro7L7QPRQY%2F79esBeLug%2BABm3XEYPsyIRJ9pgo7VoDkxbayoj7VKFMYRbytOHvaUtTmzPMLI2p%2"
-              "BIc4vHti8IL0; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8GocJQ9OP09IpVQeLLXSxcaqF1vwV7O1_aXIilySduqGkL"
-              "f1AvALruRrIJJUE9EsRVER7xkYfENOJg1mihpkC5P97XflLltnJu6ajao_fS-jAw--Os870u6OR1otQsYevzDS4rRhu0uK45ENX3"
-              "2ROOw"
-}
+    "cookie": ".AspNetCore.Session=CfDJ8GocJQ9OP09IpVQeLLXSxcbUDQHZT%2F%2Ffy49MbynwtHp%2BNdShxwbOHGlUbvlFHyzt1Te%2Fsew"
+              "4n%2B3caRe2xuPk5gro7L7QPRQY%2F79esBeLug%2BABm3XEYPsyIRJ9pgo7VoDkxbayoj7VKFMYRbytOHvaUtTmzPMLI2p%2BIc4vH"
+              "ti8IL0; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8GocJQ9OP09IpVQeLLXSxcaqF1vwV7O1_aXIilySduqGkLf1AvALruR"
+              "rIJJUE9EsRVER7xkYfENOJg1mihpkC5P97XflLltnJu6ajao_fS-jAw--Os870u6OR1otQsYevzDS4rRhu0uK45ENX32ROOw"
+    }
 
 # -*- Main function -*-
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
-    logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
+    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
 
 
 # -*- Function -*-
 def scrap_prices():
-    product_reader = pandas.read_csv(PRODUCT_PATH)
+    product_reader = pandas.read_csv(PRODUCT_PRICE_PATH)
 
     for idx, product in product_reader.iterrows():
         if "Bajaj" in product["Point of Sale Category"] and pandas.isnull(product["Updated Cost"]):
@@ -52,7 +51,7 @@ def scrap_prices():
                       "STR_INSTANT=DLR&STR_APP_ID=00011"
 
             try:
-                response = requests.request("POST", URL, headers=HEADERS, data=payload)
+                response = requests.request("POST", URL, headers = HEADERS, data = payload)
             except requests.exceptions.ConnectionError as e:
                 logging.error(e)
                 break
@@ -69,13 +68,18 @@ def scrap_prices():
                     product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
 
-                product_reader.to_csv(PRODUCT_PATH, index=False)
+                product_reader.to_csv(PRODUCT_PRICE_PATH, index = False)
 
             else:
                 logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \n'
                               f'For reason: {response.reason}')
                 break
             time.sleep(5)
+
+
+def get_price_fluctuations():
+    price_reader = pandas.read_csv(PRODUCT_PRICE_PATH, header = 0)
+    a = price_reader[["Sales Price"]].eq(price_reader["Updated Sales Price"], axis = 0).assign(no = True)
 
 
 # -*- Function Calls -*-
