@@ -31,12 +31,12 @@ HEADERS = {
     "accept-language": "en-US,en;q=0.9",
     "cookie": ".AspNetCore.Session=CfDJ8GocJQ9OP09IpVQeLLXSxcYZs8%2F1D5Z9oidQOvcjvwxY2ui1WavPUypGOO1acPJWb0ZIKTitoBIF"
               "m2JpZcSt9jqeBTiOe6ERQDecoNhv7Y54t1vJb8caJ5yrVr68k5V4JHpOtGF61SQRcUZ2sHMNjhPMVDpNGfPZV5IOM%2BHns9oP"
-}
+    }
 
 # -*- Main function -*-
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
-    logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
+    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
 
 
 # -*- Functions -*-
@@ -63,7 +63,7 @@ def get_grn_for_invoice():
                   "strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D&" \
                   "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&" \
                   "strSchema="
-        response = requests.request("POST", URL, headers=HEADERS, data=payload)
+        response = requests.request("POST", URL, headers = HEADERS, data = payload)
 
         if response:
             invoice_details = json.loads(response.text)
@@ -105,7 +105,7 @@ def get_products_from_invoices():
             if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
         payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
 
-        response = requests.request("POST", URL_PRODUCTS, headers=HEADERS, data=payload)
+        response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
 
         if response:
             product_details = json.loads(response.text)["DATA"]
@@ -141,8 +141,8 @@ def json_to_csv():
 
     with open(ADJUSTMENT_PATH, "w") as adj_csv_file:
         field_names = ("Product/Internal Reference", "Counted Quantity")
-        adj_writer = csv.DictWriter(adj_csv_file, fieldnames=field_names, delimiter=',', quotechar='"',
-                                    quoting=csv.QUOTE_MINIMAL)
+        adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
+                                    quoting = csv.QUOTE_MINIMAL)
         adj_writer.writeheader()
 
         for product in products:
@@ -157,10 +157,13 @@ def json_to_csv():
 
 
 def merge_duplicates():
-    df = pandas.read_csv(ADJUSTMENT_PATH, header=0)
-    df["Counted Quantity"] = df.groupby(["Product/Internal Reference"])["Counted Quantity"].transform('sum')
-    df.drop_duplicates(subset=["Product/Internal Reference"], inplace=True, keep="last")
-    df.to_csv(ADJUSTMENT_PATH, index=False)
+    adjustment_reader = pandas.read_csv(ADJUSTMENT_PATH, header = 0)
+
+    adjustment_reader["Counted Quantity"] = adjustment_reader.groupby(
+        ["Product/Internal Reference"])["Counted Quantity"].transform('sum')
+    adjustment_reader.drop_duplicates(subset = ["Product/Internal Reference"], inplace = True, keep = "last")
+
+    adjustment_reader.to_csv(ADJUSTMENT_PATH, index = False)
 
 
 def inventory_adjustment():
@@ -195,10 +198,10 @@ def inventory_adjustment():
         if not exists:
             logging.warning(f"Product Number: {adjustment_number} is Invalid !!!")
 
-    with open(ADJUSTMENT_PATH, mode='w') as adjustment_file:
+    with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
         field_names = ("ID", "Product/ID", "Product/Internal Reference", "Counted Quantity")
-        adjustment_writer = csv.DictWriter(adjustment_file, fieldnames=field_names, delimiter=',', quotechar='"',
-                                           quoting=csv.QUOTE_MINIMAL)
+        adjustment_writer = csv.DictWriter(adjustment_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
+                                           quoting = csv.QUOTE_MINIMAL)
         adjustment_writer.writeheader()
 
         for product in products:
