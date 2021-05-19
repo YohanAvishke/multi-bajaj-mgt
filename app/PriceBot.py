@@ -26,10 +26,11 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8N8gIs%2FXx8JIrXltjeQ28vGUovewhiCGa7dBuOOJEHlraIPQTMUBK7cCBgs%2ByZUcbHVSJ6kozam"
-              "doMdGQogLFEX7NUdaFd8TKnQdHMkE7LjNuEwMTCHizHN2yzUB5wz8N9raKnEPvYPx5xRsjlWM%2BySf2yupM3k7kxtv7sNOb0cz; ."
-              "AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8N8gIs_Xx8JIrXltjeQ28vHnbaej-dcUfNA-e_pAj5cHEKQI3eKbnurde3xlktW"
-              "SsMzzMjv3MYTvLXIV2HxB7g0xmG_P7wDzQ0iRsQnkJw43kvDjwv-qGjKzDvKq_cmnD8x_n_P-g43sm9BR2n_dKaw"
+    "cookie": ".AspNetCore.Session=CfDJ8GocJQ9OP09IpVQeLLXSxcbUDQHZT%2F%2Ffy49MbynwtHp%2BNdShxwbOHGlUbvlFHyzt1Te%2F"
+              "sew4n%2B3caRe2xuPk5gro7L7QPRQY%2F79esBeLug%2BABm3XEYPsyIRJ9pgo7VoDkxbayoj7VKFMYRbytOHvaUtTmzPMLI2p%2"
+              "BIc4vHti8IL0; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8GocJQ9OP09IpVQeLLXSxcaqF1vwV7O1_aXIilySduqGkL"
+              "f1AvALruRrIJJUE9EsRVER7xkYfENOJg1mihpkC5P97XflLltnJu6ajao_fS-jAw--Os870u6OR1otQsYevzDS4rRhu0uK45ENX3"
+              "2ROOw"
 }
 
 # -*- Main function -*-
@@ -76,5 +77,6 @@ def scrap_prices():
                 break
             time.sleep(5)
 
+
 # -*- Function Calls -*-
-# scrap_prices()
+scrap_prices()
