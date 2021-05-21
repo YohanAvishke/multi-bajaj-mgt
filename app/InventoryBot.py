@@ -6,7 +6,7 @@ import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:18.csv"
+ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-21:05:18-part:02.csv"
 INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
 
 # -*- Request URLs -*-
@@ -29,8 +29,10 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8GocJQ9OP09IpVQeLLXSxcYZs8%2F1D5Z9oidQOvcjvwxY2ui1WavPUypGOO1acPJWb0ZIKTitoBIF"
-              "m2JpZcSt9jqeBTiOe6ERQDecoNhv7Y54t1vJb8caJ5yrVr68k5V4JHpOtGF61SQRcUZ2sHMNjhPMVDpNGfPZV5IOM%2BHns9oP"
+    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbgUqtgFWpPE7hASUA8l8fD8xDCH%2Fd%2FU6RyEYReGhF0dEaPy9oMP2Q"
+              "8LDo3SKZUtmUgvZGCNVzlRV1Jsjh9XqbkD9yOhvlnrmluWDsiKnvxpTLmlF9BF94zDyiCiZIAKdLEPnaGfRgNNdXgLjM5h0WsZ; .A"
+              "spNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8O7tzHAS999FkdCocqmfJbiwAMU0475uwALr5HYAvC4iNYVWzCV_sUDGeASWKSJ"
+              "lKrcgCTNcMuNAkdgq_GZr5z7R0XKGMbtAnmLP1izUVj34QFptUlAEqWZouvRKDZP-tWY7P1w2uP8YODqyI_KHS2g"
     }
 
 # -*- Main function -*-
@@ -157,6 +159,10 @@ def json_to_csv():
 
 
 def merge_duplicates():
+    # -*- coding: utf-8 -*-
+    """
+    Add the sum of the duplicate products
+    """
     adjustment_reader = pandas.read_csv(ADJUSTMENT_PATH, header = 0)
 
     adjustment_reader["Counted Quantity"] = adjustment_reader.groupby(
@@ -164,6 +170,7 @@ def merge_duplicates():
     adjustment_reader.drop_duplicates(subset = ["Product/Internal Reference"], inplace = True, keep = "last")
 
     adjustment_reader.to_csv(ADJUSTMENT_PATH, index = False)
+    logging.info("Product duplicate merging done.")
 
 
 def inventory_adjustment():
@@ -213,6 +220,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
 merge_duplicates()
-inventory_adjustment()
+# inventory_adjustment()
