@@ -2,8 +2,8 @@ import csv
 
 HEADERS = ("Barcode Nomenclature", "Rules/Rule Name", "Rules/Type", "Rules/Alias", "Rules/Barcode Pattern",
            "Rules/Sequence")
-BARCODE_NOMENCLATURE_PATH = "../data/product/barcode-nomenclature.csv"
-INVENTORY_ODOO_PATH = "../data/product/adjustments/stock.inventory.line.csv"
+BARCODE_NOMENCLATURE_PATH = "../data/product/product.barcode.csv"
+INVENTORY_ODOO_PATH = "../data/product/product.inventory.csv"
 
 
 def setup_barcodes():
@@ -16,7 +16,7 @@ def setup_barcodes():
         barcode_writer.writeheader()
 
         for idx, product in enumerate(inventory):
-            product_number = product["Product/Internal Reference"]
+            product_number = product["Internal Reference"]
             if idx == 0:
                 barcode_writer.writerow(
                     {"Barcode Nomenclature": "DPMC barcodes", "Rules/Rule Name": product_number, "Rules/Type": "Alias",
