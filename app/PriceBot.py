@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
 # -*- Function -*-
 def scrap_prices():
-    product_reader = pandas.read_csv(PRODUCT_PRICE_PATH)
+    product_reader = pandas.read_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH)
 
     for idx, product in product_reader.iterrows():
         if "Bajaj" in product["Point of Sale Category"] and pandas.isnull(product["Updated Cost"]):
@@ -67,7 +67,7 @@ def scrap_prices():
                     product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
 
-                product_reader.to_csv(PRODUCT_PRICE_PATH, index = False)
+                product_reader.to_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, index = False)
 
             else:
                 logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \n'
@@ -89,5 +89,5 @@ def get_price_fluctuations():
 
 
 # -*- Function Calls -*-
-# scrap_prices()
-sort_products_by_price()
+scrap_prices()
+#sort_products_by_price()
