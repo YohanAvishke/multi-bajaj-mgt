@@ -6,6 +6,7 @@ import time
 
 # -*- File Paths -*-
 PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
+PRODUCT_EMPTY_STOCK_PRICE_PATH = "../data/product/product.price-empty-stock.csv"
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/PADEALER/PADLRItemInquiry/Inquire"
@@ -26,10 +27,7 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbgUqtgFWpPE7hASUA8l8fD8xDCH%2Fd%2FU6RyEYReGhF0dEaPy9oMP2Q"
-              "8LDo3SKZUtmUgvZGCNVzlRV1Jsjh9XqbkD9yOhvlnrmluWDsiKnvxpTLmlF9BF94zDyiCiZIAKdLEPnaGfRgNNdXgLjM5h0WsZ; .A"
-              "spNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8O7tzHAS999FkdCocqmfJbiwAMU0475uwALr5HYAvC4iNYVWzCV_sUDGeASWKSJ"
-              "lKrcgCTNcMuNAkdgq_GZr5z7R0XKGMbtAnmLP1izUVj34QFptUlAEqWZouvRKDZP-tWY7P1w2uP8YODqyI_KHS2g"
+    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbgUqtgFWpPE7hASUA8l8fD8xDCH%2Fd%2FU6RyEYReGhF0dEaPy9oMP2Q8LDo3SKZUtmUgvZGCNVzlRV1Jsjh9XqbkD9yOhvlnrmluWDsiKnvxpTLmlF9BF94zDyiCiZIAKdLEPnaGfRgNNdXgLjM5h0WsZ"
     }
 
 # -*- Main function -*-
@@ -77,10 +75,18 @@ def scrap_prices():
             time.sleep(5)
 
 
+def sort_products_by_price():
+    df = pandas.read_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, header = 0)
+    sorted_df = df.sort_values(by = "Sales Price", ascending = False)
+
+    sorted_df.to_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, index = False)
+
+
 def get_price_fluctuations():
     price_reader = pandas.read_csv(PRODUCT_PRICE_PATH, header = 0)
     a = price_reader[["Sales Price"]].eq(price_reader["Updated Sales Price"], axis = 0).assign(no = True)
 
 
 # -*- Function Calls -*-
-scrap_prices()
+# scrap_prices()
+sort_products_by_price()
