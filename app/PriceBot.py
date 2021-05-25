@@ -27,8 +27,7 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbgUqtgFWpPE7hASUA8l8fD8xDCH%2Fd%2FU6RyEYReGhF0dEaPy9oMP2"
-              "Q8LDo3SKZUtmUgvZGCNVzlRV1Jsjh9XqbkD9yOhvlnrmluWDsiKnvxpTLmlF9BF94zDyiCiZIAKdLEPnaGfRgNNdXgLjM5h0WsZ"
+    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbjRlQmlskEZBGhl2O0sCERGtzjuiUmmR9iuBKDBkiJKtyCUsDKrF2pinlJFPomvbK3mw33vYwZoBV0sZ1heTW1%2BNkUq6KEkkZB2kTLcBO5zfUZQ6KnBHL6tzI0FeETks%2BwWJrGw17Mk93qma9ZPP5AJ"
     }
 
 # -*- Main function -*-
