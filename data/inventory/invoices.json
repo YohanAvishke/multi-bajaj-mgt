@@ -1,6 +1,143 @@
 {
   "Invoice": {
     "Numbers": [],
-    "Products": []
+    "Products": [
+      {
+        "STR_PART_NO": "DJ181087",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "DD121181",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "03100338",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "36DH4050",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "DH101050",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "36JZ0074",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "JD511008",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "JD521002",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "DD111018",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "36AA4055",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "36BA4039",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "AA101143",
+        "INT_QUATITY": -5
+      },
+      {
+        "STR_PART_NO": "59200012",
+        "INT_QUATITY": -4
+      },
+      {
+        "STR_PART_NO": "24191100",
+        "INT_QUATITY": -4
+      },
+      {
+        "STR_PART_NO": "DF101055",
+        "INT_QUATITY": -4
+      },
+      {
+        "STR_PART_NO": "24191101",
+        "INT_QUATITY": -3
+      },
+      {
+        "STR_PART_NO": "BA132141",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "BA132141",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "39103519",
+        "INT_QUATITY": -4
+      },
+      {
+        "STR_PART_NO": "24171066",
+        "INT_QUATITY": -10
+      },
+      {
+        "STR_PART_NO": "AA131004",
+        "INT_QUATITY": -6
+      },
+      {
+        "STR_PART_NO": "AA121006",
+        "INT_QUATITY": -6
+      },
+      {
+        "STR_PART_NO": "36AA4042",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "36AA4050",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "36AB4015",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "36152203",
+        "INT_QUATITY": -6
+      },
+      {
+        "STR_PART_NO": "AE101016K",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "AA101073",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "AA191085",
+        "INT_QUATITY": -2
+      },
+      {
+        "STR_PART_NO": "AF201036",
+        "INT_QUATITY": -1
+      },
+      {
+        "STR_PART_NO": "AN101012",
+        "INT_QUATITY": -3
+      },
+      {
+        "STR_PART_NO": "AA111147",
+        "INT_QUATITY": -4
+      },
+      {
+        "STR_PART_NO": "AA121010",
+        "INT_QUATITY": -10
+      },
+      {
+        "STR_PART_NO": "AA111058",
+        "INT_QUATITY": -10
+      }
+    ]
   }
 }
