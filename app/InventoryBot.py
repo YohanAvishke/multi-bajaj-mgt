@@ -218,7 +218,7 @@ def inventory_adjustment():
                 products.append({
                     "name": adjustment_invoice,
                     "Include Exhausted Products": is_exhausted_included,
-                    "line_ids/product_id/id": inventory_product["ID"],
+                    "line_ids/product_id/id": inventory_product["Product/Product/External ID"],
                     "line_ids/location_id/id": "stock.stock_location_stock",
                     "line_ids/product_qty": inventory_quantity + adjustment_quantity,
                     })
@@ -243,6 +243,5 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-# json_to_csv()
-# merge_duplicates()
-# inventory_adjustment()
+json_to_csv()
+inventory_adjustment()
