@@ -8,7 +8,7 @@ import pandas
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
-INVENTORY_PATH = "../data/inventory/product.inventory.line.csv"
+INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -210,15 +210,15 @@ def inventory_adjustment():
         previous_adjustment_invoice = adjustment_product["name"]
 
         for inventory_product in inventory_reader:
-            inventory_number = inventory_product["Product/Internal Reference"]
+            inventory_number = inventory_product["Internal Reference"]
             inventory_quantity = float(inventory_product["Quantity On Hand"])
 
             if adjustment_number == inventory_number:
                 exists = True
                 products.append({
-                    "name": f"Invoice Number - {adjustment_invoice}",
+                    "name": adjustment_invoice,
                     "Include Exhausted Products": is_exhausted_included,
-                    "line_ids/product_id/id": inventory_product["Product/ID"],
+                    "line_ids/product_id/id": inventory_product["ID"],
                     "line_ids/location_id/id": "stock.stock_location_stock",
                     "line_ids/product_qty": inventory_quantity + adjustment_quantity,
                     })
