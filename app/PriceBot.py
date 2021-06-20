@@ -27,7 +27,7 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbjRlQmlskEZBGhl2O0sCERGtzjuiUmmR9iuBKDBkiJKtyCUsDKrF2pinlJFPomvbK3mw33vYwZoBV0sZ1heTW1%2BNkUq6KEkkZB2kTLcBO5zfUZQ6KnBHL6tzI0FeETks%2BwWJrGw17Mk93qma9ZPP5AJ"
+    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM%2FU7Qz6UpuTHfNhBbo7XQdke9XTDzk3kEYCZVrSma2RQHsu8wp9Jk16cixHxuFAz8WqbVhx3yQU2E2%2B1N48XXDmibRMWhVI7XWIWUbmzCku3g7h50uE6h50MQSU6BFXIy0H41%2BGrcjqtUByUcVbkMdqWHzmB; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8EFsLt37AbNMlnXZM_U7Qz6Xs4G4NFDO0KbM75EmpMPvdvf3HGsanEGbppclB5CtNVTrtq4--NxG-OLZsnPDtYPaVp_LiilPriuIEf4_jJW2o_WQUB-Qo-_hIRUIHuRKmAZo2oGBttwn0fOTiW3TbH8"
     }
 
 # -*- Main function -*-
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
 # -*- Function -*-
 def scrap_prices():
-    product_reader = pandas.read_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH)
+    product_reader = pandas.read_csv(PRODUCT_PRICE_PATH)
 
     for idx, product in product_reader.iterrows():
         if "Bajaj" in product["Point of Sale Category"] and pandas.isnull(product["Updated Cost"]):
@@ -66,7 +66,7 @@ def scrap_prices():
                     product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = "-"
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
 
-                product_reader.to_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, index = False)
+                product_reader.to_csv(PRODUCT_PRICE_PATH, index = False)
 
             else:
                 logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \n'
