@@ -214,14 +214,19 @@ def inventory_adjustment():
             inventory_quantity = float(inventory_product["Quantity On Hand"])
 
             if adjustment_number == inventory_number:
+                finalised_quantity = inventory_quantity + adjustment_quantity
+                if finalised_quantity > 0:
+                    products.append({
+                        "name": adjustment_invoice,
+                        "Include Exhausted Products": is_exhausted_included,
+                        "line_ids/product_id/id": inventory_product["Product/Product/External ID"],
+                        "line_ids/location_id/id": "stock.stock_location_stock",
+                        "line_ids/product_qty": finalised_quantity,
+                        })
+                else:
+                    logging.warning(f"Product Number: {adjustment_number} has Negative Qty!!! "
+                                    f"Difference: {adjustment_quantity}. Finalised Qty: {finalised_quantity}.")
                 exists = True
-                products.append({
-                    "name": adjustment_invoice,
-                    "Include Exhausted Products": is_exhausted_included,
-                    "line_ids/product_id/id": inventory_product["Product/Product/External ID"],
-                    "line_ids/location_id/id": "stock.stock_location_stock",
-                    "line_ids/product_qty": inventory_quantity + adjustment_quantity,
-                    })
                 break
 
         if not exists:
