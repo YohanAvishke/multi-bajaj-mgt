@@ -1,0 +1,3 @@
+Accounting Date,name,Include Exhausted Products,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+2021-06-11,Imported Test 01,True,__export__.product_product_15715_5440f108,stock.stock_location_stock,107
+,,,__export__.product_product_14243_470851c1,stock.stock_location_stock,536
