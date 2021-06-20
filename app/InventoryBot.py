@@ -1,3 +1,4 @@
+from datetime import date
 import csv
 import json
 import requests
@@ -6,7 +7,7 @@ import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = "../data/inventory/adjustments/adjustment-quarantine-sales-2021:06:10.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
 
 # -*- Request URLs -*-
@@ -29,10 +30,12 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8O7tzHAS999FkdCocqmfJbgUqtgFWpPE7hASUA8l8fD8xDCH%2Fd%2FU6RyEYReGhF0dEaPy9oMP2Q"
-              "8LDo3SKZUtmUgvZGCNVzlRV1Jsjh9XqbkD9yOhvlnrmluWDsiKnvxpTLmlF9BF94zDyiCiZIAKdLEPnaGfRgNNdXgLjM5h0WsZ; "
-              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8O7tzHAS999FkdCocqmfJbiwAMU0475uwALr5HYAvC4iNYVWzCV_sUDGeASWKS"
-              "JlKrcgCTNcMuNAkdgq_GZr5z7R0XKGMbtAnmLP1izUVj34QFptUlAEqWZouvRKDZP-tWY7P1w2uP8YODqyI_KHS2g"
+    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM"
+              "%2FU7Qz6UpuTHfNhBbo7XQdke9XTDzk3kEYCZVrSma2RQHsu8wp9Jk16cixHxuFAz8WqbVhx3yQU2E2"
+              "%2B1N48XXDmibRMWhVI7XWIWUbmzCku3g7h50uE6h50MQSU6BFXIy0H41%2BGrcjqtUByUcVbkMdqWHzmB; "
+              ".AspNetCore.Antiforgery.mEZFPqlrlZ8"
+              "=CfDJ8EFsLt37AbNMlnXZM_U7Qz6Xs4G4NFDO0KbM75EmpMPvdvf3HGsanEGbppclB5CtNVTrtq4--NxG"
+              "-OLZsnPDtYPaVp_LiilPriuIEf4_jJW2o_WQUB-Qo-_hIRUIHuRKmAZo2oGBttwn0fOTiW3TbH8"
     }
 
 # -*- Main function -*-
@@ -71,7 +74,7 @@ def get_grn_for_invoice():
             invoice_details = json.loads(response.text)
 
             if invoice_details == "NO DATA FOUND":
-                logging.info(f"Invoice Number: {invoice_number} is Invalid !!!")
+                logging.info(f"Invoice Number: {invoice_number} has no data !!!")
             elif len(invoice_details) > 1:
                 logging.info(f"Invoice Number: {invoice_number} is too Vague !!!")
             else:
@@ -96,32 +99,34 @@ def get_products_from_invoices():
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     invoice = invoice_reader["Invoice"]
-    invoice["Products"] = []
 
     for number in invoice["Numbers"]:
         invoice_number = number["Invoice"]
-        grn_number = number["GRN"] if "GRN" in number else None
+        if "Sales" not in invoice_number:
+            grn_number = number["GRN"] if "GRN" in number else None
+            number["Products"] = []
 
-        payload_mid = f"&strInvoiceNo={invoice_number}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
-        payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
-            if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
-        payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
+            payload_mid = f"&strInvoiceNo={invoice_number}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
+            payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
+                if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
+            payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
 
-        response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
+            response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
 
-        if response:
-            product_details = json.loads(response.text)["DATA"]
+            if response:
+                product_details = json.loads(response.text)["DATA"]
 
-            if product_details == "NO DATA FOUND":
-                logging.warning(f"Invoice Number: {number} is Invalid !!!")
+                if product_details == "NO DATA FOUND":
+                    logging.warning(f"Invoice Number: {number} is Invalid !!!")
+                else:
+                    product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in number \
+                        else product_details["dtGRNDetails"]
+
+                    for product_detail in product_details:
+                        number["Products"].append(product_detail)
             else:
-                product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in number \
-                    else product_details["dtGRNDetails"]
-
-                for product_detail in product_details:
-                    invoice["Products"].append(product_detail)
-        else:
-            logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
+                logging.error(
+                    f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
@@ -139,20 +144,24 @@ def json_to_csv():
     """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
-    products = invoice_reader["Invoice"]["Products"]
+    invoices = invoice_reader["Invoice"]["Numbers"]
 
     with open(ADJUSTMENT_PATH, "w") as adj_csv_file:
-        field_names = ("Product/Internal Reference", "Counted Quantity")
+        field_names = ("name", "Product/Internal Reference", "Counted Quantity")
         adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
                                     quoting = csv.QUOTE_MINIMAL)
         adj_writer.writeheader()
 
-        for product in products:
-            product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
-            product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
+        for invoice in invoices:
+            invoice_reference = invoice["Invoice"]
 
-            adj_writer.writerow({"Product/Internal Reference": product_number,
-                                 "Counted Quantity": float(product_count)})
+            for idx, product in enumerate(invoice["Products"]):
+                product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
+                product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
+
+                adj_writer.writerow({"name": invoice_reference,
+                                     "Product/Internal Reference": product_number,
+                                     "Counted Quantity": float(product_count)})
 
     merge_duplicates()
     logging.info("Product data modeling done.")
@@ -182,6 +191,7 @@ def inventory_adjustment():
     Final file to upload will be available at `ADJUSTMENT_PATH`
     """
     products = []
+    previous_adjustment_invoice = None
 
     with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_PATH, "r") as adjustment_file:
         inventory_reader = list(csv.DictReader(inventory_file))
@@ -189,24 +199,37 @@ def inventory_adjustment():
 
     for adjustment_product in adjustment_reader:
         exists = False
+        adjustment_invoice = adjustment_product["name"]
+        is_exhausted_included = True
         adjustment_number = adjustment_product["Product/Internal Reference"]
         adjustment_quantity = float(adjustment_product["Counted Quantity"])
 
+        if adjustment_invoice == previous_adjustment_invoice:
+            adjustment_invoice = None
+            is_exhausted_included = None
+        previous_adjustment_invoice = adjustment_product["name"]
+
         for inventory_product in inventory_reader:
             inventory_number = inventory_product["Product/Internal Reference"]
-            inventory_quantity = float(inventory_product["Counted Quantity"])
+            inventory_quantity = float(inventory_product["Quantity On Hand"])
 
             if adjustment_number == inventory_number:
                 exists = True
-                inventory_product["Counted Quantity"] = inventory_quantity + adjustment_quantity
-                products.append(inventory_product)
+                products.append({
+                    "name": f"Invoice Number - {adjustment_invoice}",
+                    "Include Exhausted Products": is_exhausted_included,
+                    "line_ids/product_id/id": inventory_product["Product/ID"],
+                    "line_ids/location_id/id": "stock.stock_location_stock",
+                    "line_ids/product_qty": inventory_quantity + adjustment_quantity,
+                    })
                 break
 
         if not exists:
             logging.warning(f"Product Number: {adjustment_number} is Invalid !!!")
 
     with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
-        field_names = ("ID", "Product/ID", "Product/Internal Reference", "Counted Quantity")
+        field_names = ("name", "Include Exhausted Products", "line_ids/product_id/id", "line_ids/location_id/id",
+                       "line_ids/product_qty")
         adjustment_writer = csv.DictWriter(adjustment_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
                                            quoting = csv.QUOTE_MINIMAL)
         adjustment_writer.writeheader()
@@ -220,6 +243,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
 # merge_duplicates()
-inventory_adjustment()
+# inventory_adjustment()
