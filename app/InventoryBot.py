@@ -8,7 +8,7 @@ import pandas
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
-INVENTORY_PATH = "../data/inventory/stock.inventory.line.csv"
+INVENTORY_PATH = "../data/inventory/product.inventory.line.csv"
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
