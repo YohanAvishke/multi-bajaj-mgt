@@ -204,7 +204,7 @@ def inventory_adjustment():
         adjustment_number = adjustment_product["Product/Internal Reference"]
         adjustment_quantity = float(adjustment_product["Counted Quantity"])
 
-        if adjustment_invoice == previous_adjustment_invoice:
+        if previous_adjustment_invoice and adjustment_invoice == previous_adjustment_invoice:
             adjustment_invoice = None
             is_exhausted_included = None
         previous_adjustment_invoice = adjustment_product["name"]
@@ -231,6 +231,8 @@ def inventory_adjustment():
 
         if not exists:
             logging.warning(f"Product Number: {adjustment_number} is Invalid !!!")
+            # To skip the condition `adjustment_invoice == previous_adjustment_invoice`
+            previous_adjustment_invoice = None
 
     with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
         field_names = ("name", "Include Exhausted Products", "line_ids/product_id/id", "line_ids/location_id/id",
