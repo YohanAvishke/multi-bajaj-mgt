@@ -219,7 +219,7 @@ def inventory_adjustment():
                     products.append({
                         "name": adjustment_invoice,
                         "Include Exhausted Products": is_exhausted_included,
-                        "line_ids/product_id/id": inventory_product["Product/Product/External ID"],
+                        "line_ids/product_id/id": inventory_product["Product/Product/ID"],
                         "line_ids/location_id/id": "stock.stock_location_stock",
                         "line_ids/product_qty": finalised_quantity,
                         })
