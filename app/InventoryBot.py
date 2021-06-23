@@ -213,8 +213,14 @@ def inventory_adjustment():
             inventory_quantity = float(inventory_product["Quantity On Hand"])
 
             if adjustment_number == inventory_number:
+                exists = True
                 finalised_quantity = inventory_quantity + adjustment_quantity
-                # TODO issue if `adjustment_quantity > 0` but `finalised_quantity < 0`
+
+                if inventory_quantity < 0:
+                    logging.warning(f"Inventory initially negative: {adjustment_number}.\n"
+                                    f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}.")
+                    break
+
                 if finalised_quantity >= 0:
                     products.append({
                         "name": adjustment_invoice,
@@ -227,9 +233,9 @@ def inventory_adjustment():
                     # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
                     previous_adjustment_invoice = adjustment_product["name"]
                 else:
-                    logging.warning(f"Product Number: {adjustment_number} has Negative Qty!!! "
-                                    f"Difference: {adjustment_quantity}. Finalised Qty: {finalised_quantity}.")
-                exists = True
+                    logging.warning(f"Inventory finally negative: {adjustment_number}.\n"
+                                    f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
+                                    f"Qty: {finalised_quantity}.")
                 break
 
         if not exists:
