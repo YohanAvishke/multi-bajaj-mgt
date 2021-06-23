@@ -244,7 +244,7 @@ def inventory_adjustment():
             invalid_products.append(adjustment_product)
 
     for product in invalid_products:
-        logging.warning(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
+        logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
     with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
         field_names = (
