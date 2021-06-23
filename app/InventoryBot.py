@@ -191,6 +191,7 @@ def inventory_adjustment():
     Final file to upload will be available at `ADJUSTMENT_PATH`
     """
     products = []
+    invalid_products = []
     previous_adjustment_invoice = None
 
     with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_PATH, "r") as adjustment_file:
@@ -217,8 +218,9 @@ def inventory_adjustment():
                 finalised_quantity = inventory_quantity + adjustment_quantity
 
                 if inventory_quantity < 0:
-                    logging.warning(f"Inventory initially negative: {adjustment_number}.\n"
-                                    f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}.")
+                    logging.warning(f"Inventory initial qty is negative: {adjustment_number}."
+                                    f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity} . Finalised "
+                                    f"qty: {finalised_quantity}.")
                     break
 
                 if finalised_quantity >= 0:
@@ -233,14 +235,16 @@ def inventory_adjustment():
                     # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
                     previous_adjustment_invoice = adjustment_product["name"]
                 else:
-                    logging.warning(f"Inventory finally negative: {adjustment_number}.\n"
+                    logging.warning(f"Inventory final qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
-                                    f"Qty: {finalised_quantity}.")
+                                    f"qty: {finalised_quantity}.")
                 break
 
         if not exists:
-            # TODO instead of logging one by one. Collect all to an array and log at once
-            logging.warning(f"Product Number: {adjustment_number} is Invalid !!!")
+            invalid_products.append(adjustment_product)
+
+    for product in invalid_products:
+        logging.warning(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
     with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
         field_names = (
