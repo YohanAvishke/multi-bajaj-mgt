@@ -218,6 +218,7 @@ def inventory_adjustment():
                 # TODO issue if `adjustment_quantity > 0` but `finalised_quantity < 0`
                 if finalised_quantity >= 0:
                     products.append({
+                        "reference": inventory_number,
                         "name": adjustment_invoice,
                         "Include Exhausted Products": is_exhausted_included,
                         "line_ids/product_id/id": inventory_product["Product/Product/ID"],
@@ -237,8 +238,9 @@ def inventory_adjustment():
             previous_adjustment_invoice = None
 
     with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
-        field_names = ("name", "Include Exhausted Products", "line_ids/product_id/id", "line_ids/location_id/id",
-                       "line_ids/product_qty")
+        field_names = (
+            "reference", "name", "Include Exhausted Products", "line_ids/product_id/id", "line_ids/location_id/id",
+            "line_ids/product_qty")
         adjustment_writer = csv.DictWriter(adjustment_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
                                            quoting = csv.QUOTE_MINIMAL)
         adjustment_writer.writeheader()
