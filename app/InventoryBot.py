@@ -215,7 +215,8 @@ def inventory_adjustment():
 
             if adjustment_number == inventory_number:
                 finalised_quantity = inventory_quantity + adjustment_quantity
-                if finalised_quantity > 0:
+                # TODO issue if `adjustment_quantity > 0` but `finalised_quantity < 0`
+                if finalised_quantity >= 0:
                     products.append({
                         "name": adjustment_invoice,
                         "Include Exhausted Products": is_exhausted_included,
@@ -230,6 +231,7 @@ def inventory_adjustment():
                 break
 
         if not exists:
+            # TODO instead of logging one by one. Collect all to an array and log at once
             logging.warning(f"Product Number: {adjustment_number} is Invalid !!!")
             # To skip the condition `adjustment_invoice == previous_adjustment_invoice`
             previous_adjustment_invoice = None
