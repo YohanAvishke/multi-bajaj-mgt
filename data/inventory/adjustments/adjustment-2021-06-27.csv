@@ -1,0 +1,30 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales 2021/06/24,True,DL181080,__export__.product_product_16326_2ba4348d,stock.stock_location_stock,109.0
+,,03100335,__export__.product_product_37561_01143331,stock.stock_location_stock,34.0
+,,JZ161207,__export__.product_product_32007_64632c71,stock.stock_location_stock,32.0
+,,DS101036,__export__.product_product_16613_fd429184,stock.stock_location_stock,627.0
+,,DH101557,__export__.product_product_14908_01b8c387,stock.stock_location_stock,29.0
+,,36DH4041,__export__.product_product_11519_71ca9b92,stock.stock_location_stock,14.0
+,,DJ191083,__export__.product_product_15778_319c342d,stock.stock_location_stock,18.0
+,,JZ401012,__export__.product_product_32140_cddda7ca,stock.stock_location_stock,5.0
+,,AF201036,__export__.product_product_46951_c231835c,stock.stock_location_stock,92.0
+,,DS111035,__export__.product_product_16727_adac18b9,stock.stock_location_stock,6.0
+,,DH121093,__export__.product_product_15056_33c87146,stock.stock_location_stock,17.0
+,,AA101472,__export__.product_product_38983_f7e823a8,stock.stock_location_stock,363.0
+,,36AA4025,__export__.product_product_38456_85771566,stock.stock_location_stock,24.0
+,,AN101186,__export__.product_product_47166_589beacb,stock.stock_location_stock,33.0
+,,JZ161203,__export__.product_product_32005_152850b1,stock.stock_location_stock,8.0
+,,JA351610,__export__.product_product_18155_bbdb1d09,stock.stock_location_stock,4.0
+,,JA351609,__export__.product_product_18154_a62db45c,stock.stock_location_stock,19.0
+,,DH111034,__export__.product_product_15020_1a12903d,stock.stock_location_stock,38.0
+,,AA101598,__export__.product_product_39016_87c85ca4,stock.stock_location_stock,24.0
+,,AA101392,__export__.product_product_38967_4aadccb9,stock.stock_location_stock,20.0
+,,DK201078,__export__.product_product_16271_40b761df,stock.stock_location_stock,3.0
+,,BA191051,__export__.product_product_47467_b3f709ee,stock.stock_location_stock,2.0
+,,AN101257,__export__.product_product_47179_5e14f7b5,stock.stock_location_stock,2.0
+,,AA101875,__export__.product_product_39085_1ce53a71,stock.stock_location_stock,4.0
+,,31101018,__export__.product_product_38390_d72ffe43,stock.stock_location_stock,5.0
+,,AA161190,__export__.product_product_39313_2a5e0a74,stock.stock_location_stock,1.0
+,,DU101060,__export__.product_product_17261_42c89692,stock.stock_location_stock,2.0
+,,24131032,__export__.product_product_38008_6c94e8ea,stock.stock_location_stock,5.0
+
