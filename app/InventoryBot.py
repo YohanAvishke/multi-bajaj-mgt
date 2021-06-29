@@ -161,8 +161,6 @@ def json_to_csv():
                 adj_writer.writerow({"name": invoice_reference,
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
-
-    merge_duplicates()
     logging.info("Product data modeling done.")
 
 
@@ -220,23 +218,23 @@ def inventory_adjustment():
                     logging.warning(f"Inventory initial qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity} . Finalised "
                                     f"qty: {finalised_quantity}.")
-                    break
 
-                if finalised_quantity >= 0:
-                    products.append({
-                        "name": adjustment_invoice,
-                        "Include Exhausted Products": is_exhausted_included,
-                        "reference": inventory_number,
-                        "line_ids/product_id/id": inventory_product["Product/Product/ID"],
-                        "line_ids/location_id/id": "stock.stock_location_stock",
-                        "line_ids/product_qty": finalised_quantity,
-                        })
-                    # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
-                    previous_adjustment_invoice = adjustment_product["name"]
-                else:
+                if finalised_quantity < 0:
                     logging.warning(f"Inventory final qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
                                     f"qty: {finalised_quantity}.")
+
+                products.append({
+                    "name": adjustment_invoice,
+                    "Include Exhausted Products": is_exhausted_included,
+                    "reference": inventory_number,
+                    "line_ids/product_id/id": inventory_product["Product/Product/ID"],
+                    "line_ids/location_id/id": "stock.stock_location_stock",
+                    "line_ids/product_qty": finalised_quantity,
+                    })
+                # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
+                previous_adjustment_invoice = adjustment_product["name"]
+
                 break
 
         if not exists:
@@ -262,5 +260,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
+# merge_duplicates()
 # inventory_adjustment()
