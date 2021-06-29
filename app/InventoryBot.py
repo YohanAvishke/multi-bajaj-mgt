@@ -30,12 +30,11 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM"
-              "%2FU7Qz6UpuTHfNhBbo7XQdke9XTDzk3kEYCZVrSma2RQHsu8wp9Jk16cixHxuFAz8WqbVhx3yQU2E2"
-              "%2B1N48XXDmibRMWhVI7XWIWUbmzCku3g7h50uE6h50MQSU6BFXIy0H41%2BGrcjqtUByUcVbkMdqWHzmB; "
-              ".AspNetCore.Antiforgery.mEZFPqlrlZ8"
-              "=CfDJ8EFsLt37AbNMlnXZM_U7Qz6Xs4G4NFDO0KbM75EmpMPvdvf3HGsanEGbppclB5CtNVTrtq4--NxG"
-              "-OLZsnPDtYPaVp_LiilPriuIEf4_jJW2o_WQUB-Qo-_hIRUIHuRKmAZo2oGBttwn0fOTiW3TbH8"
+    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM%2FU7Qz6VNA%2FeMCXZyROwpE2Q6lUGNrfa7Zve"
+              "%2BSaWnmIkC4uAs7qoZ1qQvzpkDLmfXVLxhfxuy9hUjfOuqN00VsOAz7UFH70Cg%2BN496Kc8OSZBtIPCe1%2B"
+              "%2BoCCyDvs9PsHRBOtHnKKoixr7XAXcW7ywH11DJGp; "
+              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8EFsLt37AbNMlnXZM_U7Qz4oj32Dh1ympnbyYB_ccXfy8BH"
+              "-E0o0VWmL9nf23ChAPgdLoXMjCjLzmA9O7vGDiGXqnZdJcRMxURDz1HSYH7wuf6B2LVkmSX2XKjwL7hPNiVIk3TrON3Xedt9fsHWaPzo"
     }
 
 # -*- Main function -*-
@@ -264,4 +263,4 @@ def inventory_adjustment():
 # get_grn_for_invoice()
 # get_products_from_invoices()
 json_to_csv()
-inventory_adjustment()
+# inventory_adjustment()
