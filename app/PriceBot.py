@@ -76,7 +76,7 @@ def scrap_prices():
                 logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \n'
                               f'For reason: {response.reason}')
                 break
-            time.sleep(5)
+            # time.sleep(2)
 
 
 def sort_products_by_price():
