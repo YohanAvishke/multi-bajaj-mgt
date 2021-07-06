@@ -2,13 +2,233 @@
   "Invoice": {
     "Numbers": [
       {
-        "Invoice": "Sales 2021/06/25,26,28",
-        "Products": []
-      },
-      {
-        "Invoice": "PRIRSQ2021052804008",
-        "Products": [],
-        "GRN": "DGRN2021062501048"
+        "Invoice": "Sales 2021/06/30 and 2021/07/01,02,03",
+        "Products": [
+          {
+            "STR_PART_NO": "24151059",
+            "INT_QUATITY": 2
+          },
+          {
+            "STR_PART_NO": "BA191051",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "DD201170",
+            "INT_QUATITY": 2
+          },
+          {
+            "STR_PART_NO": "DH101125",
+            "INT_QUATITY": 5
+          },
+          {
+            "STR_PART_NO": "DH111034",
+            "INT_QUATITY": -1
+          },
+          {
+            "STR_PART_NO": "JA531011",
+            "INT_QUATITY": -2
+          },
+          {
+            "STR_PART_NO": "DH101373",
+            "INT_QUATITY": -6
+          },
+          {
+            "STR_PART_NO": "36JE0014",
+            "INT_QUATITY": -1
+          },
+          {
+            "STR_PART_NO": "AA121150",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "05101018",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "6203(NACHi)",
+            "INT_QUATITY": 4
+          },
+          {
+            "STR_PART_NO": "DJ191023",
+            "INT_QUATITY": -21
+          },
+          {
+            "STR_PART_NO": "36DJ4005",
+            "INT_QUATITY": -5
+          },
+          {
+            "STR_PART_NO": "JN73013B",
+            "INT_QUATITY": -1
+          },
+          {
+            "STR_PART_NO": "DD101407",
+            "INT_QUATITY": 2
+          },
+          {
+            "STR_PART_NO": "24151097",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "JZ161207",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "36AA4028",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AA111153",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "39128321",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AP111023",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "CL201023",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AF191007",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "31151060",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "PF351025",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AN101257",
+            "INT_QUATITY": 2
+          },
+          {
+            "STR_PART_NO": "AB151074",
+            "INT_QUATITY": 3
+          },
+          {
+            "STR_PART_NO": " DD101407",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AA111107",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AZ161212",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "36AA4018",
+            "INT_QUATITY": 36
+          },
+          {
+            "STR_PART_NO": "36DD4002",
+            "INT_QUATITY": 50
+          },
+          {
+            "STR_PART_NO": "6305(NACHi)",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "24151171",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AA181028",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "AL181028",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "36AA4041",
+            "INT_QUATITY": -2
+          },
+          {
+            "STR_PART_NO": "500702NAE",
+            "INT_QUATITY": -1
+          },
+          {
+            "STR_PART_NO": "24151097",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "24151171",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "24171024",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "22171007",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "6204(NACHi)",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "59200012",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "24191075",
+            "INT_QUATITY": 2
+          },
+          {
+            "STR_PART_NO": "36DS1002",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "6203(NACHi)",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "500702NAE",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "DH101680",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "24151097",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "39240320",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "DH111034",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "DD181176",
+            "INT_QUATITY": 1
+          },
+          {
+            "STR_PART_NO": "52JZ0950",
+            "INT_QUATITY": -1
+          },
+          {
+            "STR_PART_NO": "03100338(YL)",
+            "INT_QUATITY": -1
+          },
+          {
+            "STR_PART_NO": "52AA4035(YL)",
+            "INT_QUATITY": -1
+          }
+        ]
       }
     ]
   }

@@ -7,7 +7,8 @@ import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
+# ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-2021-07-04.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -30,11 +31,11 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM%2FU7Qz6VNA%2FeMCXZyROwpE2Q6lUGNrfa7Zve"
-              "%2BSaWnmIkC4uAs7qoZ1qQvzpkDLmfXVLxhfxuy9hUjfOuqN00VsOAz7UFH70Cg%2BN496Kc8OSZBtIPCe1%2B"
-              "%2BoCCyDvs9PsHRBOtHnKKoixr7XAXcW7ywH11DJGp; "
-              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8EFsLt37AbNMlnXZM_U7Qz4oj32Dh1ympnbyYB_ccXfy8BH"
-              "-E0o0VWmL9nf23ChAPgdLoXMjCjLzmA9O7vGDiGXqnZdJcRMxURDz1HSYH7wuf6B2LVkmSX2XKjwL7hPNiVIk3TrON3Xedt9fsHWaPzo"
+    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM%2FU7Qz69gt%2F4nQydqjail6QGkSb"
+              "%2F5AklqBhrSvwL9vCBw5sszq6EEDPOksNDXPqsj1HUWc2t"
+              "%2FvcMRclDED1nTTenAiCHMKPf8pSFpRT8PqVYeNz1RuNdpNVKT57wIjjjWKtVrF4QXE0MYmosljRWcUnOfa87; "
+              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8EFsLt37AbNMlnXZM_U7Qz5N8Ku7BOHhuevn6q_lF2DCLO3Ixcp3C"
+              "-JV7qhDUmtTPo-nGxyxDaEsvEhCezdJn-YWVHCSoP1wLJ3Sc4lIh_OLkgKTCWluvBNDsCzVlt0NrlxqIYp3UbAqCnUjpb9ejX8"
     }
 
 # -*- Main function -*-
@@ -196,11 +197,12 @@ def inventory_adjustment():
         adjustment_reader = list(csv.DictReader(adjustment_file))
 
     for adjustment_product in adjustment_reader:
-        exists = False
         adjustment_invoice = adjustment_product["name"]
         is_exhausted_included = True
+
         adjustment_number = adjustment_product["Product/Internal Reference"]
         adjustment_quantity = float(adjustment_product["Counted Quantity"])
+        exists = False
 
         if adjustment_invoice == previous_adjustment_invoice:
             adjustment_invoice = None
@@ -218,8 +220,7 @@ def inventory_adjustment():
                     logging.warning(f"Inventory initial qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity} . Finalised "
                                     f"qty: {finalised_quantity}.")
-
-                if finalised_quantity < 0:
+                elif finalised_quantity < 0:
                     logging.warning(f"Inventory final qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
                                     f"qty: {finalised_quantity}.")
@@ -262,4 +263,4 @@ def inventory_adjustment():
 # get_products_from_invoices()
 # json_to_csv()
 # merge_duplicates()
-# inventory_adjustment()
+inventory_adjustment()
