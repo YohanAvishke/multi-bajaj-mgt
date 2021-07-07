@@ -1,0 +1,144 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+DPMC: PRIBDM2021063005408,True,16121138,__export__.product_product_37650_87d095b4,stock.stock_location_stock,5.0
+,,24151097,__export__.product_product_38078_8d43425f,stock.stock_location_stock,16.0
+,,36DH4030,__export__.product_product_11511_7ac7302e,stock.stock_location_stock,51.0
+,,36DH4174,__export__.product_product_11568_f4df1e35,stock.stock_location_stock,10.0
+,,36DK0036,__export__.product_product_11654_f7247dc2,stock.stock_location_stock,5.0
+,,36DK0072,__export__.product_product_11674_5f499e8c,stock.stock_location_stock,6.0
+,,36PA0002,__export__.product_product_12378_d2add5a9,stock.stock_location_stock,59.0
+,,39262921,__export__.product_product_12836_413bc739,stock.stock_location_stock,57.0
+,,52210040,__export__.product_product_38800_6693b5b9,stock.stock_location_stock,10.0
+,,AN111009,__export__.product_product_47218_f7ed0051,stock.stock_location_stock,5.0
+,,CS101128,__export__.product_product_14117_b12ede13,stock.stock_location_stock,211.0
+,,DD101407,__export__.product_product_14194_6858f886,stock.stock_location_stock,16.0
+,,DD121013,__export__.product_product_14222_0e4fd623,stock.stock_location_stock,50.0
+,,DF161416,__export__.product_product_14486_4e11c5ba,stock.stock_location_stock,100.0
+,,DG101498,__export__.product_product_14582_42e790df,stock.stock_location_stock,249.0
+,,DJ151037,__export__.product_product_15583_b78a9704,stock.stock_location_stock,22.0
+,,DJ191023,__export__.product_product_15749_c19a10fa,stock.stock_location_stock,25.0
+,,DJ201035,__export__.product_product_15790_daa8308d,stock.stock_location_stock,14.0
+,,DS101134,__export__.product_product_16655_d02a42af,stock.stock_location_stock,4.0
+,,DX101046,__export__.product_product_17614_8c25533a,stock.stock_location_stock,6.0
+,,JE511204,__export__.product_product_19007_e85e68a8,stock.stock_location_stock,25.0
+,,JG541074,__export__.product_product_22806_33710e45,stock.stock_location_stock,5.0
+,,JN551416,__export__.product_product_23898_38948355,stock.stock_location_stock,5.0
+,,AA111051,__export__.product_product_39138_6618b875,stock.stock_location_stock,8.0
+,,DK151074,__export__.product_product_16110_05c74a83,stock.stock_location_stock,3.0
+,,YPA13002,__export__.product_product_37446_38e7d475,stock.stock_location_stock,5.0
+,,AA141004,__export__.product_product_39264_210b3fc3,stock.stock_location_stock,40.0
+DPMC: PRIBDM2021063005215,True,DS101319,__export__.product_product_16698_51e74b4f,stock.stock_location_stock,16.0
+,,JL402412,__export__.product_product_23640_40a92900,stock.stock_location_stock,1.0
+DPMC: PRIBDM2021063005407,True,22171007,__export__.product_product_37763_f58fcc70,stock.stock_location_stock,62.0
+,,24100314,__export__.product_product_37797_d4698ad9,stock.stock_location_stock,33.0
+,,24101114,__export__.product_product_37822_a4ad1f0e,stock.stock_location_stock,26.0
+,,24160924,__export__.product_product_38145_6819662c,stock.stock_location_stock,55.0
+,,24191075,__export__.product_product_38257_598ab629,stock.stock_location_stock,23.0
+,,24191182,__export__.product_product_38277_b94f4406,stock.stock_location_stock,14.0
+,,30151105,__export__.product_product_11238_926c2a15,stock.stock_location_stock,65.0
+,,31151060,__export__.product_product_11385_a84e059b,stock.stock_location_stock,76.0
+,,36314001K,__export__.product_product_11464_669bfc40,stock.stock_location_stock,30.0
+,,36AF0008,__export__.product_product_38502_2efacad8,stock.stock_location_stock,22.0
+,,36AF0009,__export__.product_product_38503_4acbd9fa,stock.stock_location_stock,20.0
+,,36BF0002,__export__.product_product_47907_c573872a,stock.stock_location_stock,4.0
+,,36DD4002,__export__.product_product_11474_3b9de8b0,stock.stock_location_stock,85.0
+,,36JE0005,__export__.product_product_11892_8a61f1aa,stock.stock_location_stock,6.0
+,,AA101013,__export__.product_product_38864_2845f219,stock.stock_location_stock,92.0
+,,AA101033,__export__.product_product_38868_10850e70,stock.stock_location_stock,9.0
+,,AA101735,__export__.product_product_39042_2b7f00ec,stock.stock_location_stock,5.0
+,,AA111117,__export__.product_product_39165_208bca75,stock.stock_location_stock,21.0
+,,AA191073,__export__.product_product_39379_1a345bf3,stock.stock_location_stock,23.0
+,,AN101033,__export__.product_product_47130_9b7a94ae,stock.stock_location_stock,6.0
+,,BA191051,__export__.product_product_47467_b3f709ee,stock.stock_location_stock,15.0
+,,DD101062,__export__.product_product_14162_b7ff8a80,stock.stock_location_stock,10.0
+,,DJ191008,__export__.product_product_15738_7a9503ee,stock.stock_location_stock,21.0
+,,DK101063,__export__.product_product_15898_16baff19,stock.stock_location_stock,7.0
+,,DK111011,__export__.product_product_16030_0a5ae033,stock.stock_location_stock,15.0
+,,DK73032V,__export__.product_product_16305_f49d1da6,stock.stock_location_stock,2.0
+,,DS101275,__export__.product_product_16688_081e627a,stock.stock_location_stock,15.0
+,,DU101185,__export__.product_product_17280_50591bc3,stock.stock_location_stock,28.0
+,,DZ191004,__export__.product_product_17745_f3f8c809,stock.stock_location_stock,6.0
+,,JA521001,__export__.product_product_18185_c6095013,stock.stock_location_stock,30.0
+,,JD511207,__export__.product_product_18890_844fb5f3,stock.stock_location_stock,38.0
+,,JE511204,__export__.product_product_19007_e85e68a8,stock.stock_location_stock,25.0
+,,JZ161202,__export__.product_product_32004_6301667d,stock.stock_location_stock,10.0
+,,KPBB6301,__export__.product_product_32483_66e8235b,stock.stock_location_stock,18.0
+,,KPBB6302,__export__.product_product_32484_c0e8ea7a,stock.stock_location_stock,6.0
+,,AA111051,__export__.product_product_39138_6618b875,stock.stock_location_stock,3.0
+,,JZ231600,__export__.product_product_32096_9cc1c8ae,stock.stock_location_stock,10.0
+,,DU151031,__export__.product_product_17359_9d779bd6,stock.stock_location_stock,9.0
+,,36BF0001,__export__.product_product_47906_43f69e52,stock.stock_location_stock,4.0
+,,DX101030,__export__.product_product_17611_c833a2bd,stock.stock_location_stock,10.0
+DPMC: PRIBDM2021063004557,True,36DH4030,__export__.product_product_11511_7ac7302e,stock.stock_location_stock,21.0
+,,36JE0003,__export__.product_product_11890_917c9c76,stock.stock_location_stock,35.0
+,,DK201003,__export__.product_product_16251_9d2c4ada,stock.stock_location_stock,5.0
+DPMC: PRIBDM2021062903791,True,36JU0002,__export__.product_product_12145_66239ef4,stock.stock_location_stock,3.0
+,,52DH1523,__export__.product_product_12945_146c3b5f,stock.stock_location_stock,5.0
+,,52DH1525,__export__.product_product_12946_7396a6bf,stock.stock_location_stock,6.0
+,,DH102201,__export__.product_product_14987_da454263,stock.stock_location_stock,21.0
+,,DU191041,__export__.product_product_17447_e8a47742,stock.stock_location_stock,20.0
+,,JL231203,__export__.product_product_23542_70f66cad,stock.stock_location_stock,3.0
+,,DS181083,__export__.product_product_16875_5b36b948,stock.stock_location_stock,2.0
+,,JB122007,__export__.product_product_18330_ebbc7ba9,stock.stock_location_stock,1.0
+,,DU151009,__export__.product_product_17351_56a2c0db,stock.stock_location_stock,1.0
+,,JF561205,__export__.product_product_22546_e73d8d4f,stock.stock_location_stock,5.0
+,,52JL0982,__export__.product_product_13459_ae2b426a,stock.stock_location_stock,2.0
+DPMC: PRIBDM2021063004565,True,24130105,__export__.product_product_37990_1e110c71,stock.stock_location_stock,82.0
+,,36BF0002,__export__.product_product_47907_c573872a,stock.stock_location_stock,2.0
+,,36BF0001,__export__.product_product_47906_43f69e52,stock.stock_location_stock,2.0
+DPMC: PRIBDM2021063004566,True,DS181083,__export__.product_product_16875_5b36b948,stock.stock_location_stock,6.0
+DPMC: PRIBDM2021063004583,True,DJ161221,__export__.product_product_15653_f4d8243f,stock.stock_location_stock,10.0
+,,DM191005,__export__.product_product_16397_4e1b26f7,stock.stock_location_stock,11.0
+,,DU151009,__export__.product_product_17351_56a2c0db,stock.stock_location_stock,5.0
+DPMC: PRIBDM2021063005239,True,24191075,__export__.product_product_38257_598ab629,stock.stock_location_stock,23.0
+,,AN101257,__export__.product_product_47179_5e14f7b5,stock.stock_location_stock,29.0
+,,AZ161212,__export__.product_product_47310_57bdb048,stock.stock_location_stock,9.0
+,,DJ221003,__export__.product_product_15867_6e3ddc1a,stock.stock_location_stock,11.0
+,,DJ221004,__export__.product_product_15868_758a6db7,stock.stock_location_stock,10.0
+,,56JF395Y,__export__.product_product_13844_32f8ebc8,stock.stock_location_stock,1.0
+,,JF161009,__export__.product_product_50167_08b3013d,stock.stock_location_stock,2.0
+DPMC: PRIBDM2021063004551,True,DH102201,__export__.product_product_14987_da454263,stock.stock_location_stock,21.0
+DPMC: PRIBDM2021062903809,True,01100342K,__export__.product_product_37515_dbde506e,stock.stock_location_stock,50.0
+,,22171007,__export__.product_product_37763_f58fcc70,stock.stock_location_stock,112.0
+,,24100308,__export__.product_product_37796_e24a507d,stock.stock_location_stock,16.0
+,,24130105,__export__.product_product_37990_1e110c71,stock.stock_location_stock,112.0
+,,35101059,__export__.product_product_38403_7d3e54e9,stock.stock_location_stock,19.0
+,,39121420,__export__.product_product_38682_dd3fbe1b,stock.stock_location_stock,39.0
+,,39193120,__export__.product_product_38766_b65fe418,stock.stock_location_stock,26.0
+,,AA101499,__export__.product_product_38993_4dda982b,stock.stock_location_stock,95.0
+,,AA101512,__export__.product_product_38994_bab18a1b,stock.stock_location_stock,72.0
+,,AA101708,__export__.product_product_39038_6094943f,stock.stock_location_stock,40.0
+,,AA111107,__export__.product_product_39164_bf239bed,stock.stock_location_stock,16.0
+,,AA131002,__export__.product_product_39250_c6ccb6cd,stock.stock_location_stock,11.0
+,,AN101257,__export__.product_product_47179_5e14f7b5,stock.stock_location_stock,25.0
+,,AZ161212,__export__.product_product_47310_57bdb048,stock.stock_location_stock,10.0
+DPMC: PRIBDM2021063004831,True,36JE0003,__export__.product_product_11890_917c9c76,stock.stock_location_stock,105.0
+,,36JE0005,__export__.product_product_11892_8a61f1aa,stock.stock_location_stock,10.0
+,,39240320,__export__.product_product_12787_61902238,stock.stock_location_stock,43.0
+,,AA101593,__export__.product_product_39012_7fd7e7ae,stock.stock_location_stock,15.0
+,,AA111082,__export__.product_product_39151_5b84aed5,stock.stock_location_stock,11.0
+,,AN101257,__export__.product_product_47179_5e14f7b5,stock.stock_location_stock,50.0
+,,BH184000,__export__.product_product_47657_2fa25916,stock.stock_location_stock,11.0
+,,DH101680,__export__.product_product_14931_858b8efc,stock.stock_location_stock,35.0
+,,DH101795,__export__.product_product_47687_4cece32a,stock.stock_location_stock,52.0
+,,DJ101012,__export__.product_product_15456_68091ab0,stock.stock_location_stock,36.0
+,,DK151094,__export__.product_product_16120_432a826f,stock.stock_location_stock,16.0
+,,DS101096,__export__.product_product_16638_8ddb947e,stock.stock_location_stock,52.0
+,,DU101278,__export__.product_product_17298_419b95c5,stock.stock_location_stock,17.0
+,,JA541021,__export__.product_product_18207_d06614be,stock.stock_location_stock,28.0
+,,YPA26006,__export__.product_product_37469_bf021231,stock.stock_location_stock,6.0
+,,DH102053,__export__.product_product_14968_66a14d62,stock.stock_location_stock,6.0
+,,AA231239,__export__.product_product_46766_d457a267,stock.stock_location_stock,5.0
+DPMC: PRIBDM2021062903818,True,24131032,__export__.product_product_38008_6c94e8ea,stock.stock_location_stock,58.0
+,,36JK0031,__export__.product_product_12023_4c887899,stock.stock_location_stock,6.0
+,,52DU0289,__export__.product_product_13153_9b23302c,stock.stock_location_stock,12.0
+,,52JZ0926,__export__.product_product_13602_ca3e5541,stock.stock_location_stock,7.0
+,,52JZ0927,__export__.product_product_13603_b57b0b11,stock.stock_location_stock,9.0
+,,AN101328,__export__.product_product_47191_139f95a3,stock.stock_location_stock,9.0
+,,DH101877,__export__.product_product_14958_496d2e37,stock.stock_location_stock,39.0
+,,DJ151067,__export__.product_product_15597_76cd39f1,stock.stock_location_stock,3.0
+,,DK181019,__export__.product_product_16198_9663a3a2,stock.stock_location_stock,61.0
+,,DL181010,__export__.product_product_16323_bf43c0a5,stock.stock_location_stock,96.0
+,,DS101096,__export__.product_product_16638_8ddb947e,stock.stock_location_stock,100.0
+,,DS101277,__export__.product_product_16690_9cb03956,stock.stock_location_stock,10.0
+,,DZ181004,__export__.product_product_17738_6d9947a5,stock.stock_location_stock,9.0
+,,JN122000,__export__.product_product_23826_5922f6f8,stock.stock_location_stock,7.0
