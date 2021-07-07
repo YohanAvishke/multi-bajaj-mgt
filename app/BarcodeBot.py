@@ -3,7 +3,7 @@ import logging
 
 # -*- File Paths -*-
 BARCODE_NOMENCLATURE_PATH = "../data/product/product.barcode.csv"
-INVENTORY_ODOO_PATH = "../data/inventory/product.inventory.csv"
+INVENTORY_ODOO_PATH = "../data/inventory/product.bajaj.inventory.csv"
 
 # -*- Main function -*-
 if __name__ == "__main__":
