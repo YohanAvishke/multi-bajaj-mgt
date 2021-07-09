@@ -2,7 +2,6 @@ import logging
 import requests
 import pandas
 import json
-import time
 
 # -*- File Paths -*-
 PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
