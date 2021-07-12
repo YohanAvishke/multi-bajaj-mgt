@@ -7,7 +7,7 @@ import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.2.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
