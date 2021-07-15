@@ -14,34 +14,35 @@ INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 URL = "https://erp.dpg.lk/Help/GetHelp"
 URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
 
-# -*- Request Headers -*-
 HEADERS = {
-    "authority": "erp.dpg.lk",
-    "sec-ch-ua": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    "accept": "*/*",
-    "x-requested-with": "XMLHttpRequest",
-    "sec-ch-ua-mobile": "?0",
-    "user-agent": "Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) "
-                  "Chrome/90.0.4430.72 Mobile Safari/537.36",
-    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-    "origin": "https://erp.dpg.lk",
-    "sec-fetch-site": "same-origin",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-dest": "empty",
-    "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
-    "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8JddFXf%2BYTNGr3%2FmRSRGhG6BrWigXN%2FZgcYBU4e3vNa6G2YA5oHMf"
-              "%2B7eI6bS6fKbvZ6eRmApn0z5bNnJjINdYyKLKN9g124iXUa7SYUzOuR8U1VgiTVBn%2FybiCrazuyW82G3WKhkDRGaG%2FA23hnPT"
-              "%2F4ncWXbhXU8wHAkxwkzvynU; "
-              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8JddFXf"
-              "-YTNGr3_mRSRGhG4YDvnWK_h1prGGRVrHCQVPg9W6CUevo3hU5ARSyRMb-suYh"
-              "-UGb841iCvOaynbU2JrkrwEmOcU3fKLRYvF2Lb48wiBQlRvQDSkCCoZyLytqUSOFFPbrJyLaimYd0ZiITM"
+    'authority': 'erp.dpg.lk',
+    'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
+    'accept': 'application/json, text/javascript, */*; q=0.01',
+    'x-requested-with': 'XMLHttpRequest',
+    'sec-ch-ua-mobile': '?0',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/91.0.4472.114 Safari/537.36',
+    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'origin': 'https://erp.dpg.lk',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-dest': 'empty',
+    'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
+    'accept-language': 'en-US,en;q=0.9',
+    'cookie': '.AspNetCore.Session=CfDJ8JddFXf%2BYTNGr3%2FmRSRGhG6BrWigXN%2FZgcYBU4e3vNa6G2YA5oHMf'
+              '%2B7eI6bS6fKbvZ6eRmApn0z5bNnJjINdYyKLKN9g124iXUa7SYUzOuR8U1VgiTVBn%2FybiCrazuyW82G3WKhkDRGaG%2FA23hnPT'
+              '%2F4ncWXbhXU8wHAkxwkzvynU; '
+              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8JddFXf'
+              '-YTNGr3_mRSRGhG4YDvnWK_h1prGGRVrHCQVPg9W6CUevo3hU5ARSyRMb-suYh'
+              '-UGb841iCvOaynbU2JrkrwEmOcU3fKLRYvF2Lb48wiBQlRvQDSkCCoZyLytqUSOFFPbrJyLaimYd0ZiITM',
+    'dnt': '1',
+    'sec-gpc': '1'
     }
 
 # -*- Main function -*-
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
-    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
+    logging.basicConfig(format = logging_format, level = logging.DEBUG, datefmt = "%H:%M:%S")
 
 
 # -*- Functions -*-
@@ -58,36 +59,45 @@ def get_grn_for_invoice():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
-        number = number["Invoice"]
+        col_name = None
+        invoice_id = None
+
+        if "Invoice" in number:
+            invoice_id = number["Invoice"]
+            col_name = "STR_INVOICE_NO"
+        elif "Order" in number:
+            invoice_id = number["Order"]
+            col_name = "STR_ORDER_NO"
 
         payload = "strInstance=DLR&" \
                   "strPremises=KGL&" \
                   "strAppID=00011&" \
                   "strFORMID=00605&" \
-                  "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&" \
+                  "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO" \
+                  "%2CINT_TOTAL_GRN_VALUE&" \
                   "strHIDEN_FIELD_INDEX=%2C0&" \
                   "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
-                  f"strSearch={number}&" \
+                  f"strSearch={invoice_id}&" \
                   f"strSEARCH_TEXT=&" \
                   f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
-                  "strColName=STR_INVOICE_NO&" \
-                  "strLIMIT=50&" \
-                  "strARCHIVE=TRUE&" \
-                  "strORDERBY=STR_GRN_NO&" \
-                  "strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D&" \
-                  "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
-                  "strTITEL=&" \
-                  "strAll_DATA=true&" \
-                  "strSchema="
+                  f"strColName={col_name}&" \
+                  f"strLIMIT=0&" \
+                  f"strARCHIVE=TRUE&" \
+                  f"strORDERBY=STR_GRN_NO&" \
+                  f"strOTHER_WHERE_CONDITION=&" \
+                  f"strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
+                  f"strTITEL=&" \
+                  f"strAll_DATA=true" \
+                  f"&strSchema="
         response = requests.request("POST", URL, headers = HEADERS, data = payload)
 
         if response:
             invoice_details = json.loads(response.text)
 
             if invoice_details == "NO DATA FOUND":
-                logging.info(f"Invoice Number: {number} has no data !!!")
+                logging.info(f"Invoice Number: {invoice_id} has no data !!!")
             elif len(invoice_details) > 1:
-                logging.info(f"Invoice Number: {number} is too Vague !!!")
+                logging.info(f"Invoice Number: {invoice_id} is too Vague !!!")
             else:
                 number["GRN"] = invoice_details[0]["GRN No"]
         else:
@@ -117,18 +127,10 @@ def get_products_from_invoices():
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
-            payload_mid = f"strInvoiceNo={invoice_number}&" \
-                          "strPADealerCode=AC2011063676&STR_FORM_ID=00605"
-            payload = "strMode=GRN&" \
-                      f"strGRNno={grn_number}&" \
-                      f"{payload_mid}&" \
-                      "STR_FUNCTION_ID=IQ" if grn_number else "strMode=INVOICE&" \
-                                                              f"{payload_mid}&" \
-                                                              "STR_FUNCTION_ID=CR"
-            payload = f"{payload}&" \
-                      "STR_PREMIS=KGL&" \
-                      "STR_INSTANT=DLR&" \
-                      "STR_APP_ID=00011"
+            payload_mid = f"&strInvoiceNo={invoice_number}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
+            payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
+                if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
+            payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
 
             response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
 
@@ -278,7 +280,7 @@ def inventory_adjustment():
 
 
 # -*- Function Calls -*-
-# get_grn_for_invoice()
+get_grn_for_invoice()
 # get_products_from_invoices()
 # json_to_csv()
 # merge_duplicates()
