@@ -30,11 +30,12 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": ".AspNetCore.Session=CfDJ8EFsLt37AbNMlnXZM%2FU7Qz69gt%2F4nQydqjail6QGkSb"
-              "%2F5AklqBhrSvwL9vCBw5sszq6EEDPOksNDXPqsj1HUWc2t"
-              "%2FvcMRclDED1nTTenAiCHMKPf8pSFpRT8PqVYeNz1RuNdpNVKT57wIjjjWKtVrF4QXE0MYmosljRWcUnOfa87; "
-              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8EFsLt37AbNMlnXZM_U7Qz5N8Ku7BOHhuevn6q_lF2DCLO3Ixcp3C"
-              "-JV7qhDUmtTPo-nGxyxDaEsvEhCezdJn-YWVHCSoP1wLJ3Sc4lIh_OLkgKTCWluvBNDsCzVlt0NrlxqIYp3UbAqCnUjpb9ejX8"
+    "cookie": ".AspNetCore.Session=CfDJ8JddFXf%2BYTNGr3%2FmRSRGhG6BrWigXN%2FZgcYBU4e3vNa6G2YA5oHMf"
+              "%2B7eI6bS6fKbvZ6eRmApn0z5bNnJjINdYyKLKN9g124iXUa7SYUzOuR8U1VgiTVBn%2FybiCrazuyW82G3WKhkDRGaG%2FA23hnPT"
+              "%2F4ncWXbhXU8wHAkxwkzvynU; "
+              ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8JddFXf"
+              "-YTNGr3_mRSRGhG4YDvnWK_h1prGGRVrHCQVPg9W6CUevo3hU5ARSyRMb-suYh"
+              "-UGb841iCvOaynbU2JrkrwEmOcU3fKLRYvF2Lb48wiBQlRvQDSkCCoZyLytqUSOFFPbrJyLaimYd0ZiITM"
     }
 
 # -*- Main function -*-
@@ -57,15 +58,26 @@ def get_grn_for_invoice():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
-        invoice_number = number["Invoice"]
+        number = number["Invoice"]
 
-        payload = "strInstance=DLR&strPremises=KGL&strAppID=00011&strFORMID=00605&strFIELD_NAME=%2CSTR_DEALER_CODE" \
-                  "%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&strHIDEN_FIELD_INDEX=%2C0&" \
+        payload = "strInstance=DLR&" \
+                  "strPremises=KGL&" \
+                  "strAppID=00011&" \
+                  "strFORMID=00605&" \
+                  "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&" \
+                  "strHIDEN_FIELD_INDEX=%2C0&" \
                   "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
-                  f"strSearch={invoice_number}&strSEARCH_TEXT=&strSEARCH_FIELD_NAME=STR_GRN_NO&" \
-                  "strColName=STR_INVOICE_NO&strLIMIT=50&strARCHIVE=TRUE&strORDERBY=STR_GRN_NO&" \
+                  f"strSearch={number}&" \
+                  f"strSEARCH_TEXT=&" \
+                  f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
+                  "strColName=STR_INVOICE_NO&" \
+                  "strLIMIT=50&" \
+                  "strARCHIVE=TRUE&" \
+                  "strORDERBY=STR_GRN_NO&" \
                   "strOTHER_WHERE_CONDITION=%5B%5B%22STR_DEALER_CODE+%22%2C%22%3D%22%2C%22'AC2011063676'%22%5D%5D&" \
-                  "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&strTITEL=&strAll_DATA=true&" \
+                  "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
+                  "strTITEL=&" \
+                  "strAll_DATA=true&" \
                   "strSchema="
         response = requests.request("POST", URL, headers = HEADERS, data = payload)
 
@@ -73,9 +85,9 @@ def get_grn_for_invoice():
             invoice_details = json.loads(response.text)
 
             if invoice_details == "NO DATA FOUND":
-                logging.info(f"Invoice Number: {invoice_number} has no data !!!")
+                logging.info(f"Invoice Number: {number} has no data !!!")
             elif len(invoice_details) > 1:
-                logging.info(f"Invoice Number: {invoice_number} is too Vague !!!")
+                logging.info(f"Invoice Number: {number} is too Vague !!!")
             else:
                 number["GRN"] = invoice_details[0]["GRN No"]
         else:
@@ -260,6 +272,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
-merge_duplicates()
-inventory_adjustment()
+# json_to_csv()
+# merge_duplicates()
+# inventory_adjustment()
