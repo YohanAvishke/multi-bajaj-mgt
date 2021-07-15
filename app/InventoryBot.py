@@ -117,10 +117,18 @@ def get_products_from_invoices():
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
-            payload_mid = f"&strInvoiceNo={invoice_number}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
-            payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
-                if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
-            payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
+            payload_mid = f"strInvoiceNo={invoice_number}&" \
+                          "strPADealerCode=AC2011063676&STR_FORM_ID=00605"
+            payload = "strMode=GRN&" \
+                      f"strGRNno={grn_number}&" \
+                      f"{payload_mid}&" \
+                      "STR_FUNCTION_ID=IQ" if grn_number else "strMode=INVOICE&" \
+                                                              f"{payload_mid}&" \
+                                                              "STR_FUNCTION_ID=CR"
+            payload = f"{payload}&" \
+                      "STR_PREMIS=KGL&" \
+                      "STR_INSTANT=DLR&" \
+                      "STR_APP_ID=00011"
 
             response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
 
