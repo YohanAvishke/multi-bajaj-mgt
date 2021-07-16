@@ -13,6 +13,7 @@ INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
 URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
+ULR_ADVANCED = "https://erp.dpg.lk/Help/GetHelpForAdvanceSearch"
 
 HEADERS = {
     'authority': 'erp.dpg.lk',
@@ -59,54 +60,99 @@ def get_grn_for_invoice():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
-        col_name = None
-        invoice_id = None
+        invoice_id = number["ID"]
 
-        if "Invoice" in number:
-            invoice_id = number["Invoice"]
-            col_name = "STR_INVOICE_NO"
-        elif "Order" in number:
-            invoice_id = number["Order"]
-            col_name = "STR_ORDER_NO"
+        if "Sales" and "Missing" not in invoice_id:
+            col_name = None
+            id_type = number["Type"]
 
-        payload = "strInstance=DLR&" \
-                  "strPremises=KGL&" \
-                  "strAppID=00011&" \
-                  "strFORMID=00605&" \
-                  "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO" \
-                  "%2CINT_TOTAL_GRN_VALUE&" \
-                  "strHIDEN_FIELD_INDEX=%2C0&" \
-                  "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
-                  f"strSearch={invoice_id}&" \
-                  f"strSEARCH_TEXT=&" \
-                  f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
-                  f"strColName={col_name}&" \
-                  f"strLIMIT=0&" \
-                  f"strARCHIVE=TRUE&" \
-                  f"strORDERBY=STR_GRN_NO&" \
-                  f"strOTHER_WHERE_CONDITION=&" \
-                  f"strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
-                  f"strTITEL=&" \
-                  f"strAll_DATA=true" \
-                  f"&strSchema="
-        response = requests.request("POST", URL, headers = HEADERS, data = payload)
+            if "Invoice" in id_type:
+                col_name = "STR_INVOICE_NO"
+            elif "Order" in id_type:
+                col_name = "STR_ORDER_NO"
 
-        if response:
-            invoice_details = json.loads(response.text)
+            payload = "strInstance=DLR&" \
+                      "strPremises=KGL&" \
+                      "strAppID=00011&" \
+                      "strFORMID=00605&" \
+                      "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO" \
+                      "%2CINT_TOTAL_GRN_VALUE&" \
+                      "strHIDEN_FIELD_INDEX=%2C0&" \
+                      "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
+                      f"strSearch={invoice_id}&" \
+                      f"strSEARCH_TEXT=&" \
+                      f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
+                      f"strColName={col_name}&" \
+                      f"strLIMIT=0&" \
+                      f"strARCHIVE=TRUE&" \
+                      f"strORDERBY=STR_GRN_NO&" \
+                      f"strOTHER_WHERE_CONDITION=&" \
+                      f"strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
+                      f"strTITEL=&" \
+                      f"strAll_DATA=true" \
+                      f"&strSchema="
+            response = requests.request("POST", URL, headers = HEADERS, data = payload)
 
-            if invoice_details == "NO DATA FOUND":
-                logging.info(f"Invoice Number: {invoice_id} has no data !!!")
-            elif len(invoice_details) > 1:
-                logging.info(f"Invoice Number: {invoice_id} is too Vague !!!")
+            if response:
+                invoice_details = json.loads(response.text)
+
+                if invoice_details == "NO DATA FOUND":
+                    logging.info(f"Invoice Number: {invoice_id} has no data !!!")
+                elif len(invoice_details) > 1:
+                    logging.info(f"Invoice Number: {invoice_id} is too Vague !!!")
+                else:
+                    number["GRN"] = invoice_details[0]["GRN No"]
+                    if "Order" in id_type:
+                        number["id"] = invoice_details[0]["Invoice No"]
             else:
-                number["GRN"] = invoice_details[0]["GRN No"]
-        else:
-            logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
+                logging.error(
+                    f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
+        elif "Missing" in invoice_id:
+            get_missing_invoice_id(number)
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
 
     logging.info("Invoice data scrapping done.")
+
+
+def get_missing_invoice_id(details):
+    payload = "strInstance=DLR&" \
+              "strPremises=KGL&" \
+              "strAppID=00011&" \
+              "strFORMID=00605&" \
+              "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&" \
+              "strHIDEN_FIELD_INDEX=%2C0&" \
+              "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
+              f"strSearch={details['GRN search code']}&" \
+              "strSEARCH_TEXT=&" \
+              "strSEARCH_FIELD_NAME=STR_GRN_NO&" \
+              "strColName=STR_GRN_NO&" \
+              "strLIMIT=0&" \
+              "strARCHIVE=TRUE&" \
+              "strORDERBY=STR_GRN_NO&" \
+              f"strOTHER_WHERE_CONDITION=+(+INT_TOTAL_GRN_VALUE%3D+'{details['GRN total']}'++)&" \
+              "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
+              "strTITEL=&" \
+              "strAll_DATA=true&" \
+              "strSchema="
+
+    response = requests.request("POST", ULR_ADVANCED, headers = HEADERS, data = payload)
+    invoice_details = json.loads(response.text)
+
+    if invoice_details == "NO DATA FOUND":
+        logging.warning(
+            f"Missing data retreival failed for search code: {details['GRN search code']} and value "
+            f"{details['GRN total']}")
+    else:
+        if len(invoice_details) == 1:
+            details["ID"] = invoice_details[0]["Invoice No"]
+            details["GRN"] = invoice_details[0]["GRN No"]
+        else:
+            details["Retrieved Data"] = invoice_details
+            logging.warning(
+                f"Missing data has multiple records. Details: {details['GRN search code']} and value "
+                f"{details['GRN total']}")
 
 
 def get_products_from_invoices():
@@ -122,12 +168,12 @@ def get_products_from_invoices():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
-        invoice_number = number["Invoice"]
-        if "Sales" not in invoice_number:
+        invoice_id = number["ID"]
+        if "Sales" and "Missing" not in invoice_id:
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
-            payload_mid = f"&strInvoiceNo={invoice_number}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
+            payload_mid = f"&strInvoiceNo={invoice_id}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
             payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
                 if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
             payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
@@ -148,6 +194,8 @@ def get_products_from_invoices():
             else:
                 logging.error(
                     f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
+        elif "Missing" in invoice_id:
+            logging.warning("Invoice with missing identifiers are still present.")
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
