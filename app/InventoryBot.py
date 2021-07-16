@@ -62,7 +62,7 @@ def get_grn_for_invoice():
     for number in invoice["Numbers"]:
         invoice_id = number["ID"]
 
-        if "Sales" and "Missing" not in invoice_id:
+        if "Sales" not in invoice_id and "Missing" not in invoice_id:
             col_name = None
             id_type = number["Type"]
 
@@ -103,7 +103,7 @@ def get_grn_for_invoice():
                 else:
                     number["GRN"] = invoice_details[0]["GRN No"]
                     if "Order" in id_type:
-                        number["id"] = invoice_details[0]["Invoice No"]
+                        number["ID"] = invoice_details[0]["Invoice No"]
             else:
                 logging.error(
                     f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
@@ -170,7 +170,7 @@ def get_products_from_invoices():
 
     for number in invoice["Numbers"]:
         invoice_id = number["ID"]
-        if "Sales" and "Missing" not in invoice_id:
+        if "Sales" not in invoice_id and "Missing" not in invoice_id:
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
@@ -223,7 +223,7 @@ def json_to_csv():
         adj_writer.writeheader()
 
         for invoice in invoices:
-            invoice_reference = invoice["Invoice"]
+            invoice_reference = invoice["ID"]
 
             for idx, product in enumerate(invoice["Products"]):
                 product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
@@ -329,8 +329,8 @@ def inventory_adjustment():
 
 
 # -*- Function Calls -*-
-get_grn_for_invoice()
+# get_grn_for_invoice()
 # get_products_from_invoices()
 # json_to_csv()
-# merge_duplicates()
+merge_duplicates()
 # inventory_adjustment()
