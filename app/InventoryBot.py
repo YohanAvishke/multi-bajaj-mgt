@@ -117,6 +117,7 @@ def get_grn_for_invoice():
 
 
 def get_missing_invoice_id(details):
+    # -*- coding: utf-8 -*-
     payload = "strInstance=DLR&" \
               "strPremises=KGL&" \
               "strAppID=00011&" \
