@@ -15,6 +15,7 @@ URL = "https://erp.dpg.lk/Help/GetHelp"
 URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
 ULR_ADVANCED = "https://erp.dpg.lk/Help/GetHelpForAdvanceSearch"
 
+# -*- Constants -*-
 HEADERS = {
     'authority': 'erp.dpg.lk',
     'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
