@@ -333,5 +333,5 @@ def inventory_adjustment():
 # get_grn_for_invoice()
 # get_products_from_invoices()
 # json_to_csv()
-merge_duplicates()
+# merge_duplicates()
 # inventory_adjustment()
