@@ -31,12 +31,10 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8JddFXf%2BYTNGr3%2FmRSRGhG6BrWigXN%2FZgcYBU4e3vNa6G2YA5oHMf'
-              '%2B7eI6bS6fKbvZ6eRmApn0z5bNnJjINdYyKLKN9g124iXUa7SYUzOuR8U1VgiTVBn%2FybiCrazuyW82G3WKhkDRGaG%2FA23hnPT'
-              '%2F4ncWXbhXU8wHAkxwkzvynU; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8JddFXf'
-              '-YTNGr3_mRSRGhG4YDvnWK_h1prGGRVrHCQVPg9W6CUevo3hU5ARSyRMb-suYh'
-              '-UGb841iCvOaynbU2JrkrwEmOcU3fKLRYvF2Lb48wiBQlRvQDSkCCoZyLytqUSOFFPbrJyLaimYd0ZiITM',
+    'cookie': '.AspNetCore.Session=CfDJ8Io68i6vaMFGlNS%2BZXozy9xoBK8YDuEGmGds4xOg6FwVYdMk9yXuXrdkK9aUqGb0LL7DkFR35Kx'
+              'F7zW8DnApCoHOC8kcaaPIWg28G8t8IQCwcnvRSsmexIT4HJiNkdkFcNDz957JY8ZiOK2FU5wZ5lFdQFHjim92idd8%2FgEXWsuF; '
+              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Io68i6vaMFGlNS-ZXozy9wD8y2XjT49MYnZXStB33S58mdNfMmOsMxol9voZ'
+              'J-F9JD2cS9nuIGlIyYGDZmmIPWPICXSDTsg8RcFEAi8__LfvyMHVuiRzP6mp7m3yQHJ8kVDf8A0nbCkgYoHp56PTl8',
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -61,12 +59,11 @@ def get_grn_for_invoice():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
+        col_name = None
         invoice_id = number["ID"]
+        id_type = number["Type"]
 
-        if "Sales" not in invoice_id and "Missing" not in invoice_id:
-            col_name = None
-            id_type = number["Type"]
-
+        if "Other" not in id_type:
             if "Invoice" in id_type:
                 col_name = "STR_INVOICE_NO"
             elif "Order" in id_type:
@@ -171,7 +168,9 @@ def get_products_from_invoices():
 
     for number in invoice["Numbers"]:
         invoice_id = number["ID"]
-        if "Sales" not in invoice_id and "Missing" not in invoice_id:
+        id_type = number["Type"]
+
+        if "Other" not in id_type:
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
@@ -332,6 +331,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-# json_to_csv()
+json_to_csv()
 # merge_duplicates()
 inventory_adjustment()
