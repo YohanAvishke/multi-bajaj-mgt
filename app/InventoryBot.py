@@ -331,6 +331,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
 # merge_duplicates()
 inventory_adjustment()
