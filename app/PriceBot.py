@@ -26,12 +26,10 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    'cookie': '.AspNetCore.Session=CfDJ8JddFXf%2BYTNGr3%2FmRSRGhG6BrWigXN%2FZgcYBU4e3vNa6G2YA5oHMf'
-              '%2B7eI6bS6fKbvZ6eRmApn0z5bNnJjINdYyKLKN9g124iXUa7SYUzOuR8U1VgiTVBn%2FybiCrazuyW82G3WKhkDRGaG%2FA23hnPT'
-              '%2F4ncWXbhXU8wHAkxwkzvynU; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8JddFXf'
-              '-YTNGr3_mRSRGhG4YDvnWK_h1prGGRVrHCQVPg9W6CUevo3hU5ARSyRMb-suYh'
-              '-UGb841iCvOaynbU2JrkrwEmOcU3fKLRYvF2Lb48wiBQlRvQDSkCCoZyLytqUSOFFPbrJyLaimYd0ZiITM'
+    'cookie': '.AspNetCore.Session=CfDJ8Io68i6vaMFGlNS%2BZXozy9xoBK8YDuEGmGds4xOg6FwVYdMk9yXuXrdkK9aUqGb0LL7DkFR35Kx'
+              'F7zW8DnApCoHOC8kcaaPIWg28G8t8IQCwcnvRSsmexIT4HJiNkdkFcNDz957JY8ZiOK2FU5wZ5lFdQFHjim92idd8%2FgEXWsuF; '
+              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Io68i6vaMFGlNS-ZXozy9wD8y2XjT49MYnZXStB33S58mdNfMmOsMxol9voZ'
+              'J-F9JD2cS9nuIGlIyYGDZmmIPWPICXSDTsg8RcFEAi8__LfvyMHVuiRzP6mp7m3yQHJ8kVDf8A0nbCkgYoHp56PTl8',
     }
 
 # -*- Main function -*-
