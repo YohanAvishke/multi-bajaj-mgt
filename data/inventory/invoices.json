@@ -2,207 +2,249 @@
   "Invoice": {
     "Numbers": [
       {
-        "ID": "Sales of 2021/07/19,20,21",
+        "ID": "Indian Bajaj (Lucas) - 1350  07/24",
         "Type": "Other",
         "Products": [
           {
-            "STR_PART_NO": "AL201017",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "39264715",
+            "STR_PART_NO": "C1B1394421LU-12XL2.5L-C4B1",
             "INT_QUATITY": 10
           },
           {
-            "STR_PART_NO": "24131009",
-            "INT_QUATITY": 1
+            "STR_PART_NO": "C1L0341890LU-12XL5B3L0",
+            "INT_QUATITY": 10
           },
           {
-            "STR_PART_NO": "AN111015",
+            "STR_PART_NO": "C1G0244511LU-12XL7B-B3G0",
+            "INT_QUATITY": 3
+          },
+          {
+            "STR_PART_NO": "C1F0230983LU-12XL9B4F0",
             "INT_QUATITY": 2
-          },
-          {
-            "STR_PART_NO": "JD181211",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "JW232601",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "36JD4104",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "36DU1205",
-            "INT_QUATITY": -5
-          },
-          {
-            "STR_PART_NO": "DH101154",
-            "INT_QUATITY": -20
-          },
-          {
-            "STR_PART_NO": "24130105",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "39215220",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "JL561401",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "DL181080",
-            "INT_QUATITY": 2
-          },
-          {
-            "STR_PART_NO": "DF221037",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "DF221007",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "24171118",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "BA137173",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "30151105",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "DJ191059",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "36DU4017",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "31151060",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "AA191091",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "16121138",
-            "INT_QUATITY": -1
-          },
-          {
-            "STR_PART_NO": "AY141200",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "31151024",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "AA101570",
-            "INT_QUATITY": 5
-          },
-          {
-            "STR_PART_NO": "DU181031",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "LCF00001",
-            "INT_QUATITY": 6
-          },
-          {
-            "STR_PART_NO": "DH101016",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "DH101680",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "DU181032",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "DZ191014",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "52PA0532",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "AA102094",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "36BA4002",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "36BA4002",
-            "INT_QUATITY": 2
-          },
-          {
-            "STR_PART_NO": "AA101210",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "AA111085",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "31101033",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "36DJ4104",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "DJ191023",
-            "INT_QUATITY": 1
-          },
-          {
-            "STR_PART_NO": "52DZ0046",
-            "INT_QUATITY": 1
           }
         ]
       },
       {
-        "ID": "Deepthi Inventory - INV00002279",
+        "ID": "Nishan Automobile Inv - CB2001367  07/24",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "EI0181(VARROC)",
+            "INT_QUATITY": 3
+          }
+        ]
+      },
+      {
+        "ID": "Deepthi Motors Inv - INV00002280 07/24",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "36JN0015",
+            "INT_QUATITY": 5
+          }
+        ]
+      },
+      {
+        "ID": "SA Products Lanka Inv - MS60759 07/24",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "VN01100339(SA)",
+            "INT_QUATITY": 20
+          },
+          {
+            "STR_PART_NO": "GK36AE00(SA)",
+            "INT_QUATITY": 30
+          },
+          {
+            "STR_PART_NO": "SA06101007(SA)",
+            "INT_QUATITY": 20
+          },
+          {
+            "STR_PART_NO": "SAFA141015(SA)",
+            "INT_QUATITY": 25
+          },
+          {
+            "STR_PART_NO": "SA24171118(SA)",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "SA22151106(SA)",
+            "INT_QUATITY": 5
+          },
+          {
+            "STR_PART_NO": "SAAA191012(SA)",
+            "INT_QUATITY": 20
+          },
+          {
+            "STR_PART_NO": "SA24231499(SA)",
+            "INT_QUATITY": 5
+          }
+        ]
+      },
+      {
+        "ID": "Deepthi Motors Inv - INV00002281 07/26",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "AA101666",
+            "INT_QUATITY": 5
+          }
+        ]
+      },
+      {
+        "ID": "Deepthi Motors Inv - INV00002284 07/27",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "36JZ0002",
+            "INT_QUATITY": 2
+          },
+          {
+            "STR_PART_NO": "39201719",
+            "INT_QUATITY": 60
+          }
+        ]
+      },
+      {
+        "ID": "Deepthi Motors Inv - INV00002296 07/28",
         "Type": "Other",
         "Products": [
           {
             "STR_PART_NO": "JZ511016",
-            "INT_QUATITY": 10
+            "INT_QUATITY": 20
           }
         ]
       },
       {
-        "ID": "Nishan Inventory - CB2001339",
+        "ID": "Deepthi Motors Inv - INV00002297 07/28",
         "Type": "Other",
         "Products": [
           {
-            "STR_PART_NO": "24231699(YL)",
-            "INT_QUATITY": 3
+            "STR_PART_NO": "AA101598",
+            "INT_QUATITY": 2
+          }
+        ]
+      },
+      {
+        "ID": "Deepthi Motors Inv - DLRINV2021072803821 07/28",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "CMU24191078",
+            "INT_QUATITY": 10
           },
           {
-            "STR_PART_NO": "EI004081(VARROC)",
+            "STR_PART_NO": "CMUAA191026",
+            "INT_QUATITY": 10
+          },
+          {
+            "STR_PART_NO": "CMUAA191064",
+            "INT_QUATITY": 12
+          },
+          {
+            "STR_PART_NO": "CMUAA191069",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUAA191077",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUAA191085",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUBA191050",
+            "INT_QUATITY": 10
+          },
+          {
+            "STR_PART_NO": "CMUBA191051",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUBA191052",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUDJ191015",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUDS191001",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUDS191054",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUDU191006",
+            "INT_QUATITY": 0
+          },
+          {
+            "STR_PART_NO": "CMUJD161200",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUJD161201",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "CMUJZ161203",
+            "INT_QUATITY": 6
+          }
+        ]
+      },
+      {
+        "ID": "Nishan Automobile Inv - CB2001428  07/28",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "24101177(YL)",
             "INT_QUATITY": 5
           },
           {
-            "STR_PART_NO": "EI0501(POWER)",
+            "STR_PART_NO": "AA101328(YL)",
+            "INT_QUATITY": 10
+          },
+          {
+            "STR_PART_NO": "AZ621019(YL)",
+            "INT_QUATITY": 3
+          },
+          {
+            "STR_PART_NO": "BP00215(NIKAL)",
+            "INT_QUATITY": 6
+          },
+          {
+            "STR_PART_NO": "BP0901(CLAMP)",
+            "INT_QUATITY": 3
+          },
+          {
+            "STR_PART_NO": "BP0902(CLAMP)",
+            "INT_QUATITY": 3
+          }
+        ]
+      },
+      {
+        "ID": "Nishan Automobile Inv - CB2001436  07/28",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "24171136(YL)",
             "INT_QUATITY": 4
           },
           {
-            "STR_PART_NO": "RJ04041(ENDURANCE)",
+            "STR_PART_NO": "AB171003(YL)",
+            "INT_QUATITY": 2
+          }
+        ]
+      },
+      {
+        "ID": "Deepthi Motors Inv - INV00002301 07/30",
+        "Type": "Other",
+        "Products": [
+          {
+            "STR_PART_NO": "36DH4041",
             "INT_QUATITY": 10
           }
         ]

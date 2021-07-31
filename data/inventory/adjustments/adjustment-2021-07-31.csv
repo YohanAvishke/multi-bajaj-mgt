@@ -1,0 +1,45 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Indian Bajaj (Lucas) - 1350,True,C1B1394421LU-12XL2.5L-C4B1,__export__.product_product_49980_f2fd11d2,stock.stock_location_stock,8.0
+,,C1L0341890LU-12XL5B3L0,__export__.product_product_49981_8de20d8a,stock.stock_location_stock,14.0
+,,C1G0244511LU-12XL7B-B3G0,__export__.product_product_50027_8f4f083c,stock.stock_location_stock,2.0
+,,C1F0230983LU-12XL9B4F0,__export__.product_product_50028_5b48a741,stock.stock_location_stock,1.0
+Nishan Automobile Inv - CB2001367,True,EI0181(VARROC),__export__.product_product_50198_87407d34,stock.stock_location_stock,3.0
+Deepthi Motors Inv - INV00002280,True,36JN0015,__export__.product_product_12127_f3dc9740,stock.stock_location_stock,5.0
+SA Products Lanka Inv - MS60759,True,VN01100339(SA),__export__.product_product_50195_5cb58785,stock.stock_location_stock,20.0
+,,GK36AE00(SA),__export__.product_product_49893_45cd1244,stock.stock_location_stock,42.0
+,,SA06101007(SA),__export__.product_product_49895_16699a18,stock.stock_location_stock,54.0
+,,SAFA141015(SA),__export__.product_product_49883_a1464b36,stock.stock_location_stock,44.0
+,,SA24171118(SA),__export__.product_product_50141_f926e089,stock.stock_location_stock,6.0
+,,SA22151106(SA),__export__.product_product_50196_7149f562,stock.stock_location_stock,5.0
+,,SAAA191012(SA),__export__.product_product_50025_89ac95c7,stock.stock_location_stock,20.0
+,,SA24231499(SA),__export__.product_product_50197_73657211,stock.stock_location_stock,5.0
+Deepthi Motors Inv - INV00002281,True,AA101666,__export__.product_product_39029_16dbb117,stock.stock_location_stock,2.0
+Deepthi Motors Inv - INV00002284,True,36JZ0002,__export__.product_product_12252_aa9afabd,stock.stock_location_stock,1.0
+,,39201719,__export__.product_product_12732_708a75a8,stock.stock_location_stock,2
+Deepthi Motors Inv - INV00002296,True,JZ511016,__export__.product_product_32186_251cbe2d,stock.stock_location_stock,15.0
+Deepthi Motors Inv - INV00002297,True,AA101598,__export__.product_product_39016_87c85ca4,stock.stock_location_stock,0.0
+Deepthi Motors Inv - DLRINV2021072803821,True,CMU24191078,__export__.product_product_50219_9b397ec5,stock.stock_location_stock,10.0
+,,CMUAA191026,__export__.product_product_50220_8becc1a5,stock.stock_location_stock,10.0
+,,CMUAA191064,__export__.product_product_50221_d706f23b,stock.stock_location_stock,12.0
+,,CMUAA191069,__export__.product_product_50222_c33543bf,stock.stock_location_stock,6.0
+,,CMUAA191077,__export__.product_product_50223_2ff96224,stock.stock_location_stock,6.0
+,,CMUAA191085,__export__.product_product_50224_18c2b4b2,stock.stock_location_stock,6.0
+,,CMUBA191050,__export__.product_product_50225_3d1c8427,stock.stock_location_stock,10.0
+,,CMUBA191051,__export__.product_product_50226_fa3e0f3a,stock.stock_location_stock,6.0
+,,CMUBA191052,__export__.product_product_50227_c41b8b24,stock.stock_location_stock,6.0
+,,CMUDJ191015,__export__.product_product_50228_2415798e,stock.stock_location_stock,6.0
+,,CMUDS191001,__export__.product_product_50229_7594b7e4,stock.stock_location_stock,6.0
+,,CMUDS191054,__export__.product_product_50230_338c3cb3,stock.stock_location_stock,6.0
+,,CMUDU191006,__export__.product_product_50231_f81278ce,stock.stock_location_stock,0.0
+,,CMUJD161200,__export__.product_product_50232_e8691e07,stock.stock_location_stock,6.0
+,,CMUJD161201,__export__.product_product_50233_148e7cbf,stock.stock_location_stock,6.0
+,,CMUJZ161203,__export__.product_product_50234_efad7bb5,stock.stock_location_stock,6.0
+Nishan Automobile Inv - CB2001428,True,24101177(YL),__export__.product_product_49939_26f97cfb,stock.stock_location_stock,10.0
+,,AA101328(YL),__export__.product_product_50199_3f08ae09,stock.stock_location_stock,10.0
+,,AZ621019(YL),__export__.product_product_49899_de59d3e6,stock.stock_location_stock,4.0
+,,BP00215(NIKAL),__export__.product_product_50202_c2f59c77,stock.stock_location_stock,6.0
+,,BP0901(CLAMP),__export__.product_product_50200_4c0f6522,stock.stock_location_stock,3.0
+,,BP0902(CLAMP),__export__.product_product_50201_c0ce7f90,stock.stock_location_stock,3.0
+Nishan Automobile Inv - CB2001436,True,24171136(YL),__export__.product_product_50136_9ee2e84e,stock.stock_location_stock,5.0
+,,AB171003(YL),__export__.product_product_49923_98dce898,stock.stock_location_stock,2.0
+Deepthi Motors Inv - INV00002301,True,36DH4041,__export__.product_product_11519_71ca9b92,stock.stock_location_stock,6.0
