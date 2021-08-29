@@ -7,7 +7,7 @@ import pandas
 
 # -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.2.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -31,11 +31,12 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8DRqtPu%2Be5FAgn%2BoZH10nKaxMi32BYoqJsUnBd%2F22%2FjS9Nt1M4'
-              '%2BmGzIakx7xwbUpfrJ8t92%2Bh4dzPGYW%2FWqY2bTg9KmqrlatAnv2aIJfHsSv0TOj6AAPv5oskDK4VzvcAL%2FM'
-              '%2BNBbYiLfj8NtaElcyJHJCgMn6X4VQ44sW8jye3Al; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8DRqtPu-e5FAgn-oZH10nKbOovYUTQOE_WjC-iv9KSo3AmE8cn1c0'
-              '-wHIuhyQGCCfBjxT2RL2heeAVP_7-b6ECjHicA7gvnz632KBADvgGyXEGej_aUvwz96cRF3bd_WSgnTfDN88ONAoUfdClUCrI8',
+    'cookie': '.AspNetCore.Session=CfDJ8MGYd0Bw3dFKsLTOCeZ3oxPhisnOFR5z3oLvQjskG5PhwRaoIg8YrNdDm'
+              '%2FTraeJuDGKDjxwZGabfV1WHJ%2BRjgY5UmxQaG'
+              '%2FWQyCUGEb63SARqnaMTbn6QLzFsPcF6Ud54jTq4BPNSUmhNFtoXq6YiClKq3SgOYF1DO7Rc2oakAeyS; '
+              '.AspNetCore.Antiforgery.mEZFPqlrlZ8'
+              '=CfDJ8MGYd0Bw3dFKsLTOCeZ3oxMZBRFyEdaOvGgFCe3DhE3Ky7NH7cTaGEtNGTKQirOHu06OdXawW7w3NgBL4CwKHdb_IcHL2_'
+              'hC_ukI9AMcThauaJ2m2ym2e8jLzn5NFiiaYrvzOrM1vAKhmGXVnNhgzjw',
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -333,5 +334,5 @@ def inventory_adjustment():
 # get_grn_for_invoice()
 # get_products_from_invoices()
 json_to_csv()
-merge_duplicates()
+# merge_duplicates()
 inventory_adjustment()
