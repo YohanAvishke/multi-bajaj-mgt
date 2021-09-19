@@ -26,11 +26,9 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    'cookie': '.AspNetCore.Session=CfDJ8IZaSW4NiQFBjcUYf7vHo%2BVVeITVjRla%2B%2BLVCQfe34qcYXRgv9P7FSF3KtYfOEZHdkg'
-              '%2BDysp8sfG4b9TjCP%2BFMYElu2ObPZJReZkX15DScoiAbHrZuL'
-              '%2BIfCL4mj0hUYtiAVvSBYdDdnwLHZpzScsf8GBGgp35uQlWihAA93U4bKN; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8IZaSW4NiQFBjcUYf7vHo'
-              '-WzO2BBbxDCjjuqPwcsYbKNWdMtLQC5RdyantvE4ZVTXQAuqKrZHo0ySvD5W5iYO9nPhiMDxeHNnA7LtsrhKBmULRgn3N3LnRWsDgfGmtYBzt30cLBj6BrvL5ZNF5viXV8',
+    'cookie':
+        '.AspNetCore.Session'
+        '=CfDJ8Kni6SCm82FNnaxek0dcFoQowZqAboDUA9QXwZrNzIzNXrEBh5XWR6SHCMsapggoStdajY7Vj863s1fShXtZnw1jjB5bvI4ySWupVGmDNGKgam6xO1AqoR%2FExONkc7uedAR6x8eTtMGXbXYT5S%2BDNJcTD5D1gkaB2V%2FX25KAW%2FU%2B; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Kni6SCm82FNnaxek0dcFoQwG0743sXKK3Kf1yJHETtNEuUJm23e-bE4wndTQsvwN1GVPB7Kf6OxtMuOLUKS1fxJ1FPi9DuCXEPh77qqWWyivhZ3TLAQ9HKbhQysToBKXOT0vaUVuS-nE4EZ5Lirzws',
     }
 
 # -*- Main function -*-
@@ -65,9 +63,27 @@ def scrap_prices():
 
                     product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = price
                     logging.info(f"{idx + 1} - Product Number: {product_number}, Price: {price}")
+
+                    # if product_reader.loc[idx, "Updated Sales Price"] > price:
+                    #     product_reader('', index = idx, columns = "Updated Sales Price").style.applymap(
+                    #         "color: green")
+                    #     product_reader('', index = idx, columns = "Updated Cost").style.applymap(
+                    #         "color: green")
+                    # else:
+                    #     product_reader('', index = idx, columns = "Updated Sales Price").style.applymap(
+                    #         "color: red")
+                    #     product_reader('', index = idx, columns = "Updated Cost").style.applymap(
+                    #         "color: red")
+
                 else:
                     product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Sales Price"]
                     product_reader.loc[idx, "Updated Cost"] = product_reader.loc[idx, "Cost"]
+
+                    # product_reader('', index = idx, columns = "Updated Sales Price").style.applymap(
+                    #     "color: yellow")
+                    # product_reader('', index = idx, columns = "Updated Cost").style.applymap(
+                    #     "color: yellow")
+
                     logging.warning(f"Product Number: {product_number} is Invalid !!!")
 
                 product_reader.to_csv(PRODUCT_PRICE_PATH, index = False)

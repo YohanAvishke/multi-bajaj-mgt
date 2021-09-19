@@ -4,8 +4,8 @@ import json
 import requests
 import logging
 import pandas
+import app.clients.erpClient as erpClient
 
-# -*- File Paths -*-
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
@@ -31,12 +31,11 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8MGYd0Bw3dFKsLTOCeZ3oxPhisnOFR5z3oLvQjskG5PhwRaoIg8YrNdDm'
-              '%2FTraeJuDGKDjxwZGabfV1WHJ%2BRjgY5UmxQaG'
-              '%2FWQyCUGEb63SARqnaMTbn6QLzFsPcF6Ud54jTq4BPNSUmhNFtoXq6YiClKq3SgOYF1DO7Rc2oakAeyS; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8'
-              '=CfDJ8MGYd0Bw3dFKsLTOCeZ3oxMZBRFyEdaOvGgFCe3DhE3Ky7NH7cTaGEtNGTKQirOHu06OdXawW7w3NgBL4CwKHdb_IcHL2_'
-              'hC_ukI9AMcThauaJ2m2ym2e8jLzn5NFiiaYrvzOrM1vAKhmGXVnNhgzjw',
+    'cookie': ".AspNetCore.Session=CfDJ8Kni6SCm82FNnaxek0dcFoQowZqAboDUA9QXwZrNzIzNXrEBh5XWR6SHCMsapggoStdajY7Vj863s1f"
+              "ShXtZnw1jjB5bvI4ySWupVGmDNGKgam6xO1AqoR%2FExONkc7uedAR6x8eTtMGXbXYT5S%2BDNJcTD5D1gkaB2V%2FX25KAW%2FU"
+              "%2B;"
+              " .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Kni6SCm82FNnaxek0dcFoQwG0743sXKK3Kf1yJHETtNEuUJm23e-bE4wndTQs"
+              "vwN1GVPB7Kf6OxtMuOLUKS1fxJ1FPi9DuCXEPh77qqWWyivhZ3TLAQ9HKbhQysToBKXOT0vaUVuS-nE4EZ5Lirzws",
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -70,6 +69,22 @@ def get_grn_for_invoice():
                 col_name = "STR_INVOICE_NO"
             elif "Order" in id_type:
                 col_name = "STR_ORDER_NO"
+            elif "Mobile" in id_type:
+                data = erpClient.filter_from_mobile_number(invoice_id)
+
+                if len(data) != 1:
+                    number["Type"] = "Missing"
+                    continue
+                else:
+                    data = data[0]
+                    if data["Invoice No"] is not "":
+                        number["ID"] = data["Invoice No"]
+                        number["Type"] = "Invoice"
+                        col_name = "STR_INVOICE_NO"
+                    elif data["Order No"] is not "":
+                        number["ID"] = data["Order No"]
+                        number["Type"] = "Order"
+                        col_name = "STR_ORDER_NO"
 
             payload = "strInstance=DLR&" \
                       "strPremises=KGL&" \
@@ -104,6 +119,7 @@ def get_grn_for_invoice():
                     number["GRN"] = invoice_details[0]["GRN No"]
                     if "Order" in id_type:
                         number["ID"] = invoice_details[0]["Invoice No"]
+                        number["Type"] = "Invoice"
             else:
                 logging.error(
                     f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
@@ -333,6 +349,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
 # merge_duplicates()
-inventory_adjustment()
+# inventory_adjustment()
