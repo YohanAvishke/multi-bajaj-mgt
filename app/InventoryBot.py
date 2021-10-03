@@ -31,10 +31,10 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': ".AspNetCore.Session=CfDJ8Kni6SCm82FNnaxek0dcFoQowZqAboDUA9QXwZrNzIzNXrEBh5XWR6SHCMsapggoStdajY7Vj863s1"
-              "fShXtZnw1jjB5bvI4ySWupVGmDNGKgam6xO1AqoR%2FExONkc7uedAR6x8eTtMGXbXYT5S%2BDNJcTD5D1gkaB2V%2FX25KAW%2FU%"
-              "2B; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Kni6SCm82FNnaxek0dcFoQwG0743sXKK3Kf1yJHETtNEuUJm23e-bE4wnd"
-              "TQsvwN1GVPB7Kf6OxtMuOLUKS1fxJ1FPi9DuCXEPh77qqWWyivhZ3TLAQ9HKbhQysToBKXOT0vaUVuS-nE4EZ5Lirzws",
+    'cookie': ".AspNetCore.Session=CfDJ8BFyB2J0OatFhSfPvTR1B%2FDnLNpahrD7di8msWtWr1O7stbidw8vf2peegQTxdi3zsI1LIZGduGXHp"
+              "ufTgEaysazIiKA98SD915VVFagFK4QJc9L9zzGgTr9krjSHlfcogrmT5%2Bh1YWXjPP275pYcV1WZEpwTofEknkDZ3ZDyuZN; .AspNe"
+              "tCore.Antiforgery.mEZFPqlrlZ8=CfDJ8BFyB2J0OatFhSfPvTR1B_Aed2c5VqAlimQ2KIsjw8I43omWiohwWFvLPsoQDVDNTBHSLc"
+              "yP4i7JYlWG6XxB7-WMoRBQeuFnvOQayD8z7WYClXMTmJYXyA59duS7AbJ3D9-VDdrWbafZD7B-QHSf1F4",
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -116,13 +116,17 @@ def get_grn_for_invoice():
 
                 if invoice_details == "NO DATA FOUND":
                     logging.warning(f"Invoice Number: {adj_ref} has no data !!!")
+                    continue
+                elif type(invoice_details) is str:
+                    invoice_details = json.loads(invoice_details)
                 elif len(invoice_details) > 1:
                     logging.warning(f"Invoice Number: {adj_ref} is too Vague !!!")
-                else:
-                    number["GRN"] = invoice_details[0]["GRN No"]
-                    if "Order" in adj_type:
-                        number["ID"] = invoice_details[0]["Invoice No"]
-                        number["Type"] = "DPMC/Invoice"
+                    continue
+
+                number["GRN"] = invoice_details[0]["GRN No"]
+                if "Order" in adj_type:
+                    number["ID"] = invoice_details[0]["Invoice No"]
+                    number["Type"] = "DPMC/Invoice"
             else:
                 logging.error(
                     f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
@@ -192,11 +196,11 @@ def get_products_from_invoices():
             if "Missing" in adj_type:
                 logging.warning("Invoice with missing identifiers are still present.")
                 continue
-            adj_id = number["ID"]
+            adj_ref = number["ID"]
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
-            payload_mid = f"&strInvoiceNo={adj_id}&" \
+            payload_mid = f"&strInvoiceNo={adj_ref}&" \
                           "strPADealerCode=AC2011063676&" \
                           "STR_FORM_ID=00605"
             payload = "strMode=GRN&" \
@@ -241,7 +245,7 @@ def json_to_csv():
     """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
-    invoices = invoice_reader["Invoice"]["Numbers"]
+    adjustments = invoice_reader["Invoice"]["Numbers"]
 
     with open(ADJUSTMENT_PATH, "w") as adj_csv_file:
         field_names = ("name", "Product/Internal Reference", "Counted Quantity")
@@ -249,14 +253,18 @@ def json_to_csv():
                                     quoting = csv.QUOTE_MINIMAL)
         adj_writer.writeheader()
 
-        for invoice in invoices:
-            invoice_reference = invoice["ID"]
-
-            for idx, product in enumerate(invoice["Products"]):
+        for adjustment in adjustments:
+            adj_ref = None
+            for product in adjustment["Products"]:
                 product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
                 product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
 
-                adj_writer.writerow({"name": invoice_reference,
+                if "Sales" in adjustment["Type"]:
+                    adj_ref = f"Sales of {product['DATE']}" if product['DATE'] != "" else adj_ref
+                else:
+                    adj_ref = adjustment["ID"]
+
+                adj_writer.writerow({"name": adj_ref,
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
     logging.info("Product data modeling done.")
@@ -267,16 +275,9 @@ def merge_duplicates():
     """
     Add the sum of the duplicate products
     """
-    df = pandas.read_csv(ADJUSTMENT_PATH).rename(
-        columns = {
-            "name": "adj_id",
-            "Product/Internal Reference": "product_id",
-            "Counted Quantity": "qty"
-            })
-
-    df["qty"] = df.groupby(["adj_id", "product_id"])["qty"].transform('sum')
-    df.drop_duplicates(["adj_id", "product_id"], inplace = True, keep = "last")
-
+    df = pandas.read_csv(ADJUSTMENT_PATH)
+    df["Counted Quantity"] = df.groupby(["name", "Product/Internal Reference"])["Counted Quantity"].transform('sum')
+    df.drop_duplicates(["name", "Product/Internal Reference"], inplace = True, keep = "last")
     df.to_csv(ADJUSTMENT_PATH, index = False)
     logging.info("Adjustment's duplicate products have been merged")
 
@@ -364,4 +365,4 @@ def inventory_adjustment():
 # get_products_from_invoices()
 # json_to_csv()
 # merge_duplicates()
-# inventory_adjustment()
+inventory_adjustment()
