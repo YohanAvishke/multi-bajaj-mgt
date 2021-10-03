@@ -7,7 +7,7 @@ import pandas
 import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.test.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -76,11 +76,11 @@ def get_grn_for_invoice():
                     continue
                 else:
                     data = data[0]
-                    if data["Invoice No"] is not "":
+                    if data["Invoice No"] != "":
                         number["ID"] = data["Invoice No"]
                         number["Type"] = "Invoice"
                         col_name = "STR_INVOICE_NO"
-                    elif data["Order No"] is not "":
+                    elif data["Order No"] != "":
                         number["ID"] = data["Order No"]
                         number["Type"] = "Order"
                         col_name = "STR_ORDER_NO"
@@ -257,14 +257,18 @@ def merge_duplicates():
     """
     Add the sum of the duplicate products
     """
-    adjustment_reader = pandas.read_csv(ADJUSTMENT_PATH, header = 0)
+    df = pandas.read_csv(ADJUSTMENT_PATH).rename(
+        columns = {
+            "name": "adj_id",
+            "Product/Internal Reference": "product_id",
+            "Counted Quantity": "qty"
+            })
 
-    adjustment_reader["Counted Quantity"] = adjustment_reader.groupby(
-        ["Product/Internal Reference"])["Counted Quantity"].transform('sum')
-    adjustment_reader.drop_duplicates(subset = ["Product/Internal Reference"], inplace = True, keep = "last")
+    df["qty"] = df.groupby(["adj_id", "product_id"])["qty"].transform('sum')
+    df.drop_duplicates(["adj_id", "product_id"], inplace = True, keep = "last")
 
-    adjustment_reader.to_csv(ADJUSTMENT_PATH, index = False)
-    logging.info("Product duplicate merging done.")
+    df.to_csv(ADJUSTMENT_PATH, index = False)
+    logging.info("Adjustment's duplicate products have been merged")
 
 
 def inventory_adjustment():
@@ -349,5 +353,5 @@ def inventory_adjustment():
 # get_grn_for_invoice()
 # get_products_from_invoices()
 json_to_csv()
-# merge_duplicates()
-inventory_adjustment()
+merge_duplicates()
+# inventory_adjustment()
