@@ -7,7 +7,7 @@ import pandas
 import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.test.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -60,29 +60,33 @@ def get_grn_for_invoice():
 
     for number in invoice["Numbers"]:
         col_name = None
-        id_type = number["Type"]
+        adj_type = number["Type"]
 
-        if "Other" not in id_type and "Missing" not in id_type:
-            invoice_id = number["ID"]
-            if "Invoice" in id_type:
+        if "DPMC" in adj_type:
+            if "Missing" in adj_type:
+                get_missing_invoice_id(number)
+                continue
+
+            adj_ref = number["ID"]
+            if "Invoice" in adj_type:
                 col_name = "STR_INVOICE_NO"
-            elif "Order" in id_type:
+            elif "Order" in adj_type:
                 col_name = "STR_ORDER_NO"
-            elif "Mobile" in id_type:
-                data = erpClient.filter_from_mobile_number(invoice_id)
+            elif "Mobile" in adj_type:
+                data = erpClient.filter_from_mobile_number(adj_ref)
 
                 if len(data) != 1:
-                    number["Type"] = "Missing"
+                    number["Type"] = "DPMC/Missing"
                     continue
                 else:
                     data = data[0]
                     if data["Invoice No"] != "":
                         number["ID"] = data["Invoice No"]
-                        number["Type"] = "Invoice"
+                        number["Type"] = "DPMC/Invoice"
                         col_name = "STR_INVOICE_NO"
                     elif data["Order No"] != "":
                         number["ID"] = data["Order No"]
-                        number["Type"] = "Order"
+                        number["Type"] = "DPMC/Order"
                         col_name = "STR_ORDER_NO"
 
             payload = "strInstance=DLR&" \
@@ -93,7 +97,7 @@ def get_grn_for_invoice():
                       "%2CINT_TOTAL_GRN_VALUE&" \
                       "strHIDEN_FIELD_INDEX=%2C0&" \
                       "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
-                      f"strSearch={invoice_id}&" \
+                      f"strSearch={adj_ref}&" \
                       f"strSEARCH_TEXT=&" \
                       f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
                       f"strColName={col_name}&" \
@@ -111,19 +115,17 @@ def get_grn_for_invoice():
                 invoice_details = json.loads(response.text)
 
                 if invoice_details == "NO DATA FOUND":
-                    logging.info(f"Invoice Number: {invoice_id} has no data !!!")
+                    logging.warning(f"Invoice Number: {adj_ref} has no data !!!")
                 elif len(invoice_details) > 1:
-                    logging.info(f"Invoice Number: {invoice_id} is too Vague !!!")
+                    logging.warning(f"Invoice Number: {adj_ref} is too Vague !!!")
                 else:
                     number["GRN"] = invoice_details[0]["GRN No"]
-                    if "Order" in id_type:
+                    if "Order" in adj_type:
                         number["ID"] = invoice_details[0]["Invoice No"]
-                        number["Type"] = "Invoice"
+                        number["Type"] = "DPMC/Invoice"
             else:
                 logging.error(
                     f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
-        elif "Missing" in id_type:
-            get_missing_invoice_id(number)
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
@@ -184,17 +186,28 @@ def get_products_from_invoices():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
-        id_type = number["Type"]
+        adj_type = number["Type"]
 
-        if "Other" not in id_type and "Missing" not in id_type:
-            invoice_id = number["ID"]
+        if "DPMC" in adj_type:
+            if "Missing" in adj_type:
+                logging.warning("Invoice with missing identifiers are still present.")
+                continue
+            adj_id = number["ID"]
             grn_number = number["GRN"] if "GRN" in number else None
             number["Products"] = []
 
-            payload_mid = f"&strInvoiceNo={invoice_id}&strPADealerCode=AC2011063676&STR_FORM_ID=00605"
-            payload = f"strMode=GRN&strGRNno={grn_number + payload_mid}&STR_FUNCTION_ID=IQ" \
-                if grn_number else f"strMode=INVOICE{payload_mid}&STR_FUNCTION_ID=CR"
-            payload = f"{payload}&STR_PREMIS=KGL&STR_INSTANT=DLR&STR_APP_ID=00011"
+            payload_mid = f"&strInvoiceNo={adj_id}&" \
+                          "strPADealerCode=AC2011063676&" \
+                          "STR_FORM_ID=00605"
+            payload = "strMode=GRN&" \
+                      f"strGRNno={grn_number + payload_mid}&" \
+                      "STR_FUNCTION_ID=IQ" \
+                if grn_number else f"strMode=INVOICE{payload_mid}&" \
+                                   "STR_FUNCTION_ID=CR"
+            payload = f"{payload}&" \
+                      "STR_PREMIS=KGL&" \
+                      "STR_INSTANT=DLR&" \
+                      "STR_APP_ID=00011"
 
             response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
 
@@ -212,12 +225,9 @@ def get_products_from_invoices():
             else:
                 logging.error(
                     f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
-        elif "Missing" in id_type:
-            logging.warning("Invoice with missing identifiers are still present.")
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
-
     logging.info("Product data scrapping done.")
 
 
@@ -352,6 +362,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
-merge_duplicates()
+# json_to_csv()
+# merge_duplicates()
 # inventory_adjustment()
