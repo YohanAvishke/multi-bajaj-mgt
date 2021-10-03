@@ -3,44 +3,6 @@
     "Numbers": [
       {
         "Type": "Other",
-        "ID": "Nishan Invoice CB2002029",
-        "Products": [
-          {
-            "STR_PART_NO": "24101054",
-            "INT_QUANTITY": 1
-          },
-          {
-            "STR_PART_NO": "24101557",
-            "INT_QUANTITY": 1
-          },
-          {
-            "STR_PART_NO": "24191019",
-            "INT_QUANTITY": 20
-          },
-          {
-            "STR_PART_NO": "36AA4116",
-            "INT_QUANTITY": 1
-          },
-          {
-            "STR_PART_NO": "AA121135",
-            "INT_QUANTITY": 2
-          },
-          {
-            "STR_PART_NO": "AB151054",
-            "INT_QUANTITY": 10
-          },
-          {
-            "STR_PART_NO": "BG113803",
-            "INT_QUANTITY": 3
-          },
-          {
-            "STR_PART_NO": "DS101134",
-            "INT_QUANTITY": 3
-          }
-        ]
-      },
-      {
-        "Type": "Other",
         "ID": "Nishan Invoice CB2002036",
         "Products": [
           {
