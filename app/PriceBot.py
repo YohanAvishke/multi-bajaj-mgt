@@ -1,6 +1,7 @@
 import logging
+import time
 import requests
-import pandas
+import pandas as pd
 import json
 
 # -*- File Paths -*-
@@ -26,10 +27,11 @@ HEADERS = {
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
-    'cookie': ".AspNetCore.Session=CfDJ8Kni6SCm82FNnaxek0dcFoQowZqAboDUA9QXwZrNzIzNXrEBh5XWR6SHCMsapggoStdajY7Vj863s1"
-              "fShXtZnw1jjB5bvI4ySWupVGmDNGKgam6xO1AqoR%2FExONkc7uedAR6x8eTtMGXbXYT5S%2BDNJcTD5D1gkaB2V%2FX25KAW%2FU%"
-              "2B; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Kni6SCm82FNnaxek0dcFoQwG0743sXKK3Kf1yJHETtNEuUJm23e-bE4wnd"
-              "TQsvwN1GVPB7Kf6OxtMuOLUKS1fxJ1FPi9DuCXEPh77qqWWyivhZ3TLAQ9HKbhQysToBKXOT0vaUVuS-nE4EZ5Lirzws",
+    "cookie":
+        ".AspNetCore.Session=CfDJ8F7s6REuYFZIsNuD9aawFJd0QT1ORwqJyRMo4lBLl79P4umw3Sq2rpXjvvitfRswsMJIzwF0ZcK9Om35qnV"
+        "%2FfBw5LDrdh%2BkTBktSgJ%2BUjDaRUhbuZocJUxVcVpVbqQCyUR2jvLb0YdMSRJeAyY8ZlE8bT0TbjNZYXw7SefM551pT; "
+        ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8F7s6REuYFZIsNuD9aawFJdEm5fZ3dBNDW7lsrzL0HlEFYV_R8FkDLxgMFhVvX"
+        "-IYst2oUTyV1Mdh1_0Tw2B6Jk4coPiVLk84ggvqWIgATtdtmw6jcmHwvTO1Qs5Is9X137iSiH6zHazwLoMcGWcWi8",
     }
 
 # -*- Main function -*-
@@ -37,19 +39,29 @@ if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
 
+    pd.set_option("display.expand_frame_repr", False)
+    pd.set_option("display.max_rows", 25)
+
 
 # -*- Function -*-
-def scrap_prices():
-    product_reader = pandas.read_csv(PRODUCT_PRICE_PATH)
+def fetch_prices():
+    df = pd.read_csv(PRODUCT_PRICE_PATH)
 
-    for idx, product in product_reader.iterrows():
-        if "Bajaj" in product["Point of Sale Category"] and pandas.isnull(product["Updated Cost"]):
-            product_number = product['Internal Reference']
+    if "Updated Sales Price" not in df.columns:
+        df["Updated Sales Price"] = df["Updated Cost"] = df["Status"] = None
+        df.to_csv(PRODUCT_PRICE_PATH, index = False)
 
-            payload = f"strPartNo_PAItemInq={product_number}&strFuncType=INVENTORYDATA&" \
-                      "strPADealerCode_PAItemInq=AC2011063676&STR_FORM_ID=00602&STR_FUNCTION_ID=IQ&STR_PREMIS=KGL&" \
-                      "STR_INSTANT=DLR&STR_APP_ID=00011"
-
+    for idx, row in df.iterrows():
+        if "Bajaj" in row["Point of Sale Category"] and pd.isnull(row["Updated Cost"]):
+            product_number = row["Internal Reference"]
+            payload = f"strPartNo_PAItemInq={product_number}&" \
+                      "strFuncType=INVENTORYDATA&" \
+                      "strPADealerCode_PAItemInq=AC2011063676&" \
+                      "STR_FORM_ID=00602&" \
+                      "STR_FUNCTION_ID=IQ&" \
+                      "STR_PREMIS=KGL&" \
+                      "STR_INSTANT=DLR&" \
+                      "STR_APP_ID=00011"
             try:
                 response = requests.request("POST", URL, headers = HEADERS, data = payload)
             except requests.exceptions.ConnectionError as e:
@@ -58,56 +70,44 @@ def scrap_prices():
 
             if response:
                 product_data = json.loads(response.text)["DATA"]
-
-                if 'dblSellingPrice' in product_data and product_data["dblSellingPrice"]:
+                if "dblSellingPrice" in product_data and product_data["dblSellingPrice"]:
                     price = float(product_data["dblSellingPrice"])
+                    df.loc[idx, "Updated Sales Price"] = df.loc[idx, "Updated Cost"] = price
 
-                    product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Updated Cost"] = price
+                    if float(row["Sales Price"]) > price:
+                        df.loc[idx, "Status"] = "down"
+                    elif float(row["Sales Price"]) < price:
+                        df.loc[idx, "Status"] = "up"
+                    else:
+                        df.loc[idx, "Status"] = "equal"
+
                     logging.info(f"{idx + 1} - Product Number: {product_number}, Price: {price}")
-
-                    # if product_reader.loc[idx, "Updated Sales Price"] > price:
-                    #     product_reader('', index = idx, columns = "Updated Sales Price").style.applymap(
-                    #         "color: green")
-                    #     product_reader('', index = idx, columns = "Updated Cost").style.applymap(
-                    #         "color: green")
-                    # else:
-                    #     product_reader('', index = idx, columns = "Updated Sales Price").style.applymap(
-                    #         "color: red")
-                    #     product_reader('', index = idx, columns = "Updated Cost").style.applymap(
-                    #         "color: red")
-
                 else:
-                    product_reader.loc[idx, "Updated Sales Price"] = product_reader.loc[idx, "Sales Price"]
-                    product_reader.loc[idx, "Updated Cost"] = product_reader.loc[idx, "Cost"]
+                    df.loc[idx, "Updated Sales Price"] = df.loc[idx, "Sales Price"]
+                    df.loc[idx, "Updated Cost"] = df.loc[idx, "Cost"]
+                    df.loc[idx, "Status"] = "none"
 
-                    # product_reader('', index = idx, columns = "Updated Sales Price").style.applymap(
-                    #     "color: yellow")
-                    # product_reader('', index = idx, columns = "Updated Cost").style.applymap(
-                    #     "color: yellow")
+                    logging.warning(f"{idx + 1} - Product Number: {product_number} is Invalid !!!")
 
-                    logging.warning(f"Product Number: {product_number} is Invalid !!!")
-
-                product_reader.to_csv(PRODUCT_PRICE_PATH, index = False)
-
+                df.to_csv(PRODUCT_PRICE_PATH, index = False)
             else:
-                logging.error(f'An error has occurred !!! \nStatus: {response.status_code} \n'
-                              f'For reason: {response.reason}')
+                logging.error(f"An error has occurred with the request !!! \n"
+                              f"Status: {response.status_code} ,For reason: {response.reason}")
                 break
-            # time.sleep(2)
+            time.sleep(5)
 
 
 def sort_products_by_price():
-    df = pandas.read_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, header = 0)
+    df = pd.read_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, header = 0)
     sorted_df = df.sort_values(by = "Sales Price", ascending = False)
-
     sorted_df.to_csv(PRODUCT_EMPTY_STOCK_PRICE_PATH, index = False)
 
 
 def get_price_fluctuations():
-    price_reader = pandas.read_csv(PRODUCT_PRICE_PATH, header = 0)
+    price_reader = pd.read_csv(PRODUCT_PRICE_PATH, header = 0)
     a = price_reader[["Sales Price"]].eq(price_reader["Updated Sales Price"], axis = 0).assign(no = True)
 
 
 # -*- Function Calls -*-
-scrap_prices()
+fetch_prices()
 # sort_products_by_price()
