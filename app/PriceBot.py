@@ -28,10 +28,11 @@ HEADERS = {
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
     "cookie":
-        ".AspNetCore.Session=CfDJ8F7s6REuYFZIsNuD9aawFJd0QT1ORwqJyRMo4lBLl79P4umw3Sq2rpXjvvitfRswsMJIzwF0ZcK9Om35qnV"
-        "%2FfBw5LDrdh%2BkTBktSgJ%2BUjDaRUhbuZocJUxVcVpVbqQCyUR2jvLb0YdMSRJeAyY8ZlE8bT0TbjNZYXw7SefM551pT; "
-        ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8F7s6REuYFZIsNuD9aawFJdEm5fZ3dBNDW7lsrzL0HlEFYV_R8FkDLxgMFhVvX"
-        "-IYst2oUTyV1Mdh1_0Tw2B6Jk4coPiVLk84ggvqWIgATtdtmw6jcmHwvTO1Qs5Is9X137iSiH6zHazwLoMcGWcWi8",
+        ".AspNetCore.Session=CfDJ8IMWdyFsZ7VKoXi3HXRBsGu9nf10FDFQI4XKIa6Jbrj1dRY4pQgFVcpdjvuroGLofXG3zlCdqWxdT8VVah"
+        "%2F0i0X%2BNnlj%2FKfg8E38MUdrEK88PW7dRtOWJ8pJalKKqd0MTGlGbiCfXSUf66P%2BJPiD4hochYFJ0Tw6CT9tj%2FKDrmYx; "
+        ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8IMWdyFsZ7VKoXi3HXRBsGthdNV8n"
+        "-ofEAQ4qmoHB3d_60TwgNGPuGMPgzGGpJa_OuaCOq0yv9jPDwjmrQwj0BG7QxVW_a2XMyNf0SxDZ1R4p5YgDIskgDeR"
+        "-pXnLkmB6FhpYe1SG3vMjcvQ1XSSIFI",
     }
 
 # -*- Main function -*-
@@ -94,7 +95,7 @@ def fetch_prices():
                 logging.error(f"An error has occurred with the request !!! \n"
                               f"Status: {response.status_code} ,For reason: {response.reason}")
                 break
-            time.sleep(5)
+            # time.sleep(5)
 
 
 def sort_products_by_price():
