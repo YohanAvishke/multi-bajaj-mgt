@@ -1,5 +1,6 @@
 import csv
 import logging
+from datetime import date
 
 # -*- File Paths -*-
 BARCODE_NOMENCLATURE_PATH = "../data/product/product.barcode.csv"
@@ -26,7 +27,7 @@ def setup_barcodes():
             product_number = product["Internal Reference"]
             if idx == 0:
                 barcode_writer.writerow(
-                    {"Barcode Nomenclature": "DPMC Nomenclature", "Rules/Rule Name": product_number,
+                    {"Barcode Nomenclature": f"DPMC Nomenclature - {date.today()}", "Rules/Rule Name": product_number,
                      "Rules/Type": "Alias", "Rules/Alias": product_number,
                      "Rules/Barcode Pattern": f"{product_number}-{{N}}", "Rules/Sequence": "1"})
                 continue
