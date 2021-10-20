@@ -6,8 +6,9 @@ import logging
 import pandas
 import app.clients.erpClient as erpClient
 
-INVOICE_PATH = "/Users/yohanavishke/Library/Application Support/JetBrains/PyCharm2021.2/scratches/scratch_1.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
+INVOICE_PATH = "../data/inventory/invoices.json"
+# ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-2021-10-20.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -365,8 +366,8 @@ def inventory_adjustment():
 
 
 # -*- Function Calls -*-
-get_grn_for_invoice()
-get_products_from_invoices()
+# get_grn_for_invoice()
+# get_products_from_invoices()
 # json_to_csv()
-# merge_duplicates()
-# inventory_adjustment()
+merge_duplicates()
+inventory_adjustment()
