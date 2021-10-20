@@ -6,7 +6,7 @@ import logging
 import pandas
 import app.clients.erpClient as erpClient
 
-INVOICE_PATH = "../data/inventory/invoices.json"
+INVOICE_PATH = "/Users/yohanavishke/Library/Application Support/JetBrains/PyCharm2021.2/scratches/scratch_1.json"
 ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
@@ -58,7 +58,6 @@ def get_grn_for_invoice():
     invoice = invoice_reader["Invoice"]
 
     for number in invoice["Numbers"]:
-        col_name = None
         adj_type = number["Type"]
 
         if "DPMC" in adj_type:

@@ -48,7 +48,7 @@ def filter_from_mobile_number(mobile_number):
               "strAll_DATA=true&" \
               "strSchema="
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
-    return json.loads(response.text)
+    return json.loads(json.loads(response.text))
 
 
 def filter_from_order_number(order_number):
