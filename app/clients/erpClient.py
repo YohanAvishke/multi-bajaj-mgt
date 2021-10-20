@@ -18,10 +18,10 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8Kni6SCm82FNnaxek0dcFoQowZqAboDUA9QXwZrNzIzNXrEBh5XWR6SHCMsapggoStdajY7Vj863s1'
-              'fShXtZnw1jjB5bvI4ySWupVGmDNGKgam6xO1AqoR%2FExONkc7uedAR6x8eTtMGXbXYT5S%2BDNJcTD5D1gkaB2V%2FX25KAW%2FU%'
-              '2B; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Kni6SCm82FNnaxek0dcFoQwG0743sXKK3Kf1yJHETtNEuUJm23e-bE4wn'
-              'dTQsvwN1GVPB7Kf6OxtMuOLUKS1fxJ1FPi9DuCXEPh77qqWWyivhZ3TLAQ9HKbhQysToBKXOT0vaUVuS-nE4EZ5Lirzws',
+    'cookie': '.AspNetCore.Session=CfDJ8AqUc1%2BelxFKotnODEC%2B3611jA6TXdJA0%2Fu%2FcZoAb7WG77TXgYttOkg75trceEPQyQUMHeF'
+              'XOA0PcQ6vsS2BkxN2RVJfuv5E5uDy0ayss0L73NPPfXyXsd89RC5R6jwwoh2M7mzo7SRsK28x5D1owD77qd9gYmgS19vjlpVoKaNf; '
+              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8AqUc1-elxFKotnODEC-362X7lZLT-8l_8fv4GWwwze7A-llY4R9EEf4nS1F4VU'
+              'hXAiLgUbqCDl_wjtBOjY57yzwU1HTCIu_CMrD3nGCEU0VmuXXmezRR69D3mApBllSEv7d4DhO-N0WWsnniaY42X4',
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -49,3 +49,30 @@ def filter_from_mobile_number(mobile_number):
               "strSchema="
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
     return json.loads(response.text)
+
+
+def filter_from_order_number(order_number):
+    payload = {
+        'strInstance': 'DLR',
+        'strPremises': 'KGL',
+        'strAppID': '00011',
+        'strFORMID': '00605',
+        'strFIELD_NAME': ',DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO',
+        'strHIDEN_FIELD_INDEX': '',
+        'strDISPLAY_NAME': ',Order No,Invoice No,Mobile Invoice No',
+        'strSearch': '',
+        'strSEARCH_TEXT': f'{order_number}',
+        'strSEARCH_FIELD_NAME': 'STR_DLR_ORD_NO',
+        'strColName': '',
+        'strLIMIT': '50',
+        'strARCHIVE': 'TRUE',
+        'strORDERBY': 'STR_DLR_ORD_NO',
+        'strOTHER_WHERE_CONDITION': '',
+        'strAPI_URL': 'api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo',
+        'strTITEL': '',
+        'strAll_DATA': 'true',
+        'strSchema': ''
+        }
+    response = requests.request("POST", URL, headers = HEADERS, data = payload)
+    # 2 fucking strings
+    return json.loads(json.loads(response.text))

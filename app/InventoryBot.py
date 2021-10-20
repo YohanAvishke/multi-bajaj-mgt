@@ -32,11 +32,8 @@ HEADERS = {
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
     'cookie':
-        ".AspNetCore.Session=CfDJ8IMWdyFsZ7VKoXi3HXRBsGu9nf10FDFQI4XKIa6Jbrj1dRY4pQgFVcpdjvuroGLofXG3zlCdqWxdT8VVah"
-        "%2F0i0X%2BNnlj%2FKfg8E38MUdrEK88PW7dRtOWJ8pJalKKqd0MTGlGbiCfXSUf66P%2BJPiD4hochYFJ0Tw6CT9tj%2FKDrmYx; "
-        ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8IMWdyFsZ7VKoXi3HXRBsGthdNV8n"
-        "-ofEAQ4qmoHB3d_60TwgNGPuGMPgzGGpJa_OuaCOq0yv9jPDwjmrQwj0BG7QxVW_a2XMyNf0SxDZ1R4p5YgDIskgDeR"
-        "-pXnLkmB6FhpYe1SG3vMjcvQ1XSSIFI",
+        ".AspNetCore.Session=CfDJ8AqUc1%2BelxFKotnODEC%2B3611jA6TXdJA0%2Fu"
+        "%2FcZoAb7WG77TXgYttOkg75trceEPQyQUMHeFXOA0PcQ6vsS2BkxN2RVJfuv5E5uDy0ayss0L73NPPfXyXsd89RC5R6jwwoh2M7mzo7SRsK28x5D1owD77qd9gYmgS19vjlpVoKaNf; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8AqUc1-elxFKotnODEC-362X7lZLT-8l_8fv4GWwwze7A-llY4R9EEf4nS1F4VUhXAiLgUbqCDl_wjtBOjY57yzwU1HTCIu_CMrD3nGCEU0VmuXXmezRR69D3mApBllSEv7d4DhO-N0WWsnniaY42X4",
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -72,13 +69,15 @@ def get_grn_for_invoice():
             adj_ref = number["ID"]
             if "Invoice" in adj_type:
                 col_name = "STR_INVOICE_NO"
-            elif "Order" in adj_type:
-                col_name = "STR_ORDER_NO"
-            elif "Mobile" in adj_type:
-                data = erpClient.filter_from_mobile_number(adj_ref)
+            else:
+                if "Order" in adj_type:
+                    data = erpClient.filter_from_order_number(adj_ref)
+                else:
+                    data = erpClient.filter_from_mobile_number(adj_ref)
 
                 if len(data) != 1:
                     number["Type"] = "DPMC/Missing"
+                    logging.warning(f"get_grn_for_invoice filtering failed for {adj_ref}\n {data}")
                     continue
                 else:
                     data = data[0]
@@ -90,6 +89,10 @@ def get_grn_for_invoice():
                         number["ID"] = data["Order No"]
                         number["Type"] = "DPMC/Order"
                         col_name = "STR_ORDER_NO"
+                    else:
+                        number["Type"] = "DPMC/Missing"
+                        logging.warning(f"get_grn_for_invoice filtered data invalid for {adj_ref}\n {data}")
+                        continue
 
             payload = "strInstance=DLR&" \
                       "strPremises=KGL&" \
@@ -363,8 +366,8 @@ def inventory_adjustment():
 
 
 # -*- Function Calls -*-
-# get_grn_for_invoice()
-# get_products_from_invoices()
+get_grn_for_invoice()
+get_products_from_invoices()
 # json_to_csv()
 # merge_duplicates()
-inventory_adjustment()
+# inventory_adjustment()
