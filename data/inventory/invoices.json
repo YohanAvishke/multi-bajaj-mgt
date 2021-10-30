@@ -3,775 +3,277 @@
     "Numbers": [
       {
         "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105319",
+        "ID": "PRIBDM2021102908334",
         "Products": [
           {
-            "STR_PART_NO": "24151171",
-            "STR_DESC": "KIT SHOE BRAKE",
-            "INT_QUATITY": 60.0,
-            "INT_UNIT_PRICE": 784.0,
-            "INT_TOTAL_VALUE": 47040.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009004001"
-          },
-          {
-            "STR_PART_NO": "30151105",
-            "STR_DESC": "BRAKE SHOE ASSY",
-            "INT_QUATITY": 50.0,
-            "INT_UNIT_PRICE": 656.0,
-            "INT_TOTAL_VALUE": 32800.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001007007"
-          },
-          {
-            "STR_PART_NO": "DJ151071",
-            "STR_DESC": "SET - DISC PAD [ ETS ]",
-            "INT_QUATITY": 25.0,
-            "INT_UNIT_PRICE": 712.0,
-            "INT_TOTAL_VALUE": 17800.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000013002008"
-          },
-          {
-            "STR_PART_NO": "DK151085",
-            "STR_DESC": "PAD BRAKE REAR SET",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1384.0,
-            "INT_TOTAL_VALUE": 6920.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000013002008"
-          },
-          {
-            "STR_PART_NO": "31151060",
-            "STR_DESC": "SHOE-BRAKE",
-            "INT_QUATITY": 50.0,
-            "INT_UNIT_PRICE": 616.0,
-            "INT_TOTAL_VALUE": 30800.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001007007"
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105320",
-        "Products": [
-          {
-            "STR_PART_NO": "15161069",
-            "STR_DESC": "PLUG CAP",
-            "INT_QUATITY": 200.0,
-            "INT_UNIT_PRICE": 40.0,
-            "INT_TOTAL_VALUE": 8000.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001004009"
-          },
-          {
-            "STR_PART_NO": "36JD0004",
-            "STR_DESC": "KIT VACCUM PISTON PULSAR135 LS",
-            "INT_QUATITY": 6.0,
-            "INT_UNIT_PRICE": 2520.0,
-            "INT_TOTAL_VALUE": 15120.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001004010"
-          },
-          {
-            "STR_PART_NO": "DU101190",
-            "STR_DESC": "ASSEMBLY ROCKER ARM ROLLER",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 1928.0,
-            "INT_TOTAL_VALUE": 28920.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002001002"
-          },
-          {
-            "STR_PART_NO": "JK402411",
-            "STR_DESC": "SPEEDOMETER",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 6736.0,
-            "INT_TOTAL_VALUE": 6736.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001001005"
-          },
-          {
-            "STR_PART_NO": "39214124",
-            "STR_DESC": "NYLON WASHER",
-            "INT_QUATITY": 210.0,
-            "INT_UNIT_PRICE": 16.0,
-            "INT_TOTAL_VALUE": 3360.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000010002003"
-          },
-          {
-            "STR_PART_NO": "56JL023G",
-            "STR_DESC": "BLINKER BKT (JL113800) MOON LIGHT SILVER",
+            "STR_PART_NO": "36AA4119",
+            "STR_DESC": "CYLINDER HEAD ASSY_VALVE 4S 205 BS4",
             "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 1824.0,
-            "INT_TOTAL_VALUE": 3648.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000010002003"
-          },
-          {
-            "STR_PART_NO": "DD101325",
-            "STR_DESC": "CAP OIL FILTER",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 72.0,
-            "INT_TOTAL_VALUE": 1440.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001006007"
-          },
-          {
-            "STR_PART_NO": "DD181184",
-            "STR_DESC": "BRACKET - FORK LOWER",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 144.0,
-            "INT_TOTAL_VALUE": 2880.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009004003"
-          },
-          {
-            "STR_PART_NO": "DK101340",
-            "STR_DESC": "'O' RING (OIL COOLER PIPE)",
-            "INT_QUATITY": 30.0,
-            "INT_UNIT_PRICE": 40.0,
-            "INT_TOTAL_VALUE": 1200.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002001003"
-          },
-          {
-            "STR_PART_NO": "DK141015",
-            "STR_DESC": "TANK PAD (PULSAR 200 CC)",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 712.0,
-            "INT_TOTAL_VALUE": 3560.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000004001001"
-          },
-          {
-            "STR_PART_NO": "DT402009",
-            "STR_DESC": "REGULATOR WITH INBUILT CAPACITOR-K8",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 6752.0,
-            "INT_TOTAL_VALUE": 13504.0,
+            "INT_UNIT_PRICE": 17660.0,
+            "INT_TOTAL_VALUE": 35320.0,
             "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001006007"
+            "STR_WAREHOUSE_HIER": "000000011001006"
           },
           {
-            "STR_PART_NO": "DU101191",
-            "STR_DESC": "SHAFT ROCKER",
-            "INT_QUATITY": 25.0,
-            "INT_UNIT_PRICE": 120.0,
-            "INT_TOTAL_VALUE": 3000.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001006007"
-          },
-          {
-            "STR_PART_NO": "JF402404",
-            "STR_DESC": "SPEED SENSOR (K16B)",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1056.0,
-            "INT_TOTAL_VALUE": 5280.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "DD181192",
-            "STR_DESC": "BRACKET SIGNAL",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 296.0,
-            "INT_TOTAL_VALUE": 5920.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "JK181246",
-            "STR_DESC": "BRACKET ASSEMBLY FAIRING UPPER",
+            "STR_PART_NO": "36DJ4005",
+            "STR_DESC": "KIT CHAIN SPROCKET PULSAR DTSI (MODIF) (36DJ4009)",
             "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1040.0,
-            "INT_TOTAL_VALUE": 10400.0,
+            "INT_UNIT_PRICE": 4740.0,
+            "INT_TOTAL_VALUE": 47400.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006004007"
+          },
+          {
+            "STR_PART_NO": "36DU4017",
+            "STR_DESC": "KIT CHAIN SPROCKET",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 5070.0,
+            "INT_TOTAL_VALUE": 76050.0,
             "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": null
+            "STR_WAREHOUSE_HIER": "000000006004007"
           },
           {
-            "STR_PART_NO": "56JL335X",
-            "STR_DESC": "UPPER BRACKET STOIC BLACK",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 4600.0,
-            "INT_TOTAL_VALUE": 4600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "36JE0002",
-            "STR_DESC": "KIT PISTON RING SET SPRINT",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 1192.0,
-            "INT_TOTAL_VALUE": 17880.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "JB581278",
-            "STR_DESC": "CARBURETTOR ASLY PTE-16 DISCO-M",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 10432.0,
-            "INT_TOTAL_VALUE": 20864.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "DK151089",
-            "STR_DESC": "SEAL KIT",
-            "INT_QUATITY": 6.0,
-            "INT_UNIT_PRICE": 576.0,
-            "INT_TOTAL_VALUE": 3456.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "36JH0018",
-            "STR_DESC": "KIT CARB PLUNGER ASSLY",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 744.0,
-            "INT_TOTAL_VALUE": 744.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105321",
-        "Products": [
-          {
-            "STR_PART_NO": "24151060",
-            "STR_DESC": "CABLE ASSEMBLY - REAR :- RH - HAND BRAKE",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 696.0,
-            "INT_TOTAL_VALUE": 10440.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000006003006"
-          },
-          {
-            "STR_PART_NO": "36DU1205",
-            "STR_DESC": "KIT - CARBURETTOR FLOAT PIN",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 744.0,
-            "INT_TOTAL_VALUE": 11160.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001006003"
-          },
-          {
-            "STR_PART_NO": "DE151046",
-            "STR_DESC": "SCREW - BLEEDER [ KBX ]",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 144.0,
-            "INT_TOTAL_VALUE": 2880.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005009"
-          },
-          {
-            "STR_PART_NO": "DH101344",
-            "STR_DESC": "PLATE CLUTCH PRESSURE",
-            "INT_QUATITY": 25.0,
-            "INT_UNIT_PRICE": 904.0,
-            "INT_TOTAL_VALUE": 22600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009003001"
-          },
-          {
-            "STR_PART_NO": "DU101038",
-            "STR_DESC": "GEAR-SPUR:-KICK STARTER",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 1128.0,
-            "INT_TOTAL_VALUE": 16920.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000011004004"
-          },
-          {
-            "STR_PART_NO": "DM191002",
-            "STR_DESC": "CABLE - STARTER\r\n",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 544.0,
-            "INT_TOTAL_VALUE": 5440.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000006003005"
-          },
-          {
-            "STR_PART_NO": "DU201066",
-            "STR_DESC": "LENS-TAIL LIGHT",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 792.0,
-            "INT_TOTAL_VALUE": 3960.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009002003"
-          },
-          {
-            "STR_PART_NO": "PA113077",
-            "STR_DESC": "STEP RIDER RH",
-            "INT_QUATITY": 6.0,
-            "INT_UNIT_PRICE": 880.0,
-            "INT_TOTAL_VALUE": 5280.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000007004002"
-          },
-          {
-            "STR_PART_NO": "PA113075",
-            "STR_DESC": "STAY STEP MAIN LH",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1384.0,
-            "INT_TOTAL_VALUE": 6920.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000007004002"
-          },
-          {
-            "STR_PART_NO": "DS101319",
-            "STR_DESC": "CLUTCH CENTRE",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 1376.0,
-            "INT_TOTAL_VALUE": 20640.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009003002"
-          },
-          {
-            "STR_PART_NO": "JZ113068",
-            "STR_DESC": "ASSEMBLY PILLION STEP RH COMPLETE",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 856.0,
-            "INT_TOTAL_VALUE": 1712.0,
-            "STR_SERIAL_STATUS": null,
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "DT401024",
-            "STR_DESC": "BULB 12V H9 65W",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 1776.0,
-            "INT_TOTAL_VALUE": 3552.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105323",
-        "Products": [
-          {
-            "STR_PART_NO": "52DU0104",
-            "STR_DESC": "LEVER COMP. CHANGE SHAFT SUB ASSLY.",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1616.0,
-            "INT_TOTAL_VALUE": 16160.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001001004"
-          },
-          {
-            "STR_PART_NO": "DH161194",
-            "STR_DESC": "STOPPER - KICK",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 144.0,
-            "INT_TOTAL_VALUE": 2880.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000003007001"
-          },
-          {
-            "STR_PART_NO": "JZ121068",
-            "STR_DESC": "FORK ASSEMBLY FRONT-DISC",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 21592.0,
-            "INT_TOTAL_VALUE": 21592.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000022001001"
-          },
-          {
-            "STR_PART_NO": "JE621203",
-            "STR_DESC": "ASSEMBLY KICK LEVER K11",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 3544.0,
-            "INT_TOTAL_VALUE": 7088.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105324",
-        "Products": [
-          {
-            "STR_PART_NO": "DS101277",
-            "STR_DESC": "TENSIONER ASSEMBLY",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1184.0,
-            "INT_TOTAL_VALUE": 11840.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005008"
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105325",
-        "Products": [
-          {
-            "STR_PART_NO": "36AA4057",
-            "STR_DESC": "ASY W_SHIELD ED COAT- (52240601)",
+            "STR_PART_NO": "36JK0031",
+            "STR_DESC": "KIT BLOCK PISTON ASSLY BM125",
             "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 12112.0,
-            "INT_TOTAL_VALUE": 36336.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000025001001"
-          },
-          {
-            "STR_PART_NO": "36AA4058",
-            "STR_DESC": "WIND SHIELD REFL ED COATED (52240645)",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 17024.0,
-            "INT_TOTAL_VALUE": 51072.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000025001001"
-          },
-          {
-            "STR_PART_NO": "DU181107",
-            "STR_DESC": "HANDLE BAR",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 2384.0,
-            "INT_TOTAL_VALUE": 11920.0,
+            "INT_UNIT_PRICE": 15880.0,
+            "INT_TOTAL_VALUE": 47640.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000023001001"
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105326",
-        "Products": [
+            "STR_WAREHOUSE_HIER": "000000011002002"
+          },
           {
-            "STR_PART_NO": "36DJ4104",
-            "STR_DESC": "KIT MINOR CLAIPER",
-            "INT_QUATITY": 30.0,
-            "INT_UNIT_PRICE": 408.0,
-            "INT_TOTAL_VALUE": 12240.0,
-            "STR_SERIAL_STATUS": "I",
+            "STR_PART_NO": "36JL0009",
+            "STR_DESC": "KIT CHAIN SPROCKET-P200",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 14270.0,
+            "INT_TOTAL_VALUE": 28540.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006004006"
+          },
+          {
+            "STR_PART_NO": "AN101123",
+            "STR_DESC": "PISTON ASSY WITH BLOCK-SPARES",
+            "INT_QUATITY": 25.0,
+            "INT_UNIT_PRICE": 10240.0,
+            "INT_TOTAL_VALUE": 256000.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000012003001"
+          },
+          {
+            "STR_PART_NO": "DH101864",
+            "STR_DESC": "BLOCK PISTON ASSLY-SPARES- K1 BLACK",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 12280.0,
+            "INT_TOTAL_VALUE": 36840.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011002003"
+          },
+          {
+            "STR_PART_NO": "36JZ0007",
+            "STR_DESC": "KIT CHAIN SPROCKET",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 5370.0,
+            "INT_TOTAL_VALUE": 80550.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006004007"
+          },
+          {
+            "STR_PART_NO": "39219019",
+            "STR_DESC": "OIL SEAL [ GEAR SHAFT INNER ]",
+            "INT_QUATITY": 1.0,
+            "INT_UNIT_PRICE": 140.0,
+            "INT_TOTAL_VALUE": 140.0,
+            "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": "000000004006001"
           },
           {
-            "STR_PART_NO": "36JZ0121",
-            "STR_DESC": "KIT FRICTION PLATE-D106A",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 6040.0,
-            "INT_TOTAL_VALUE": 30200.0,
+            "STR_PART_NO": "AA101446",
+            "STR_DESC": "BLOCK-CYLINDER & PISTON ASSEMBLY:SPARE",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 8640.0,
+            "INT_TOTAL_VALUE": 172800.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001003004"
+            "STR_WAREHOUSE_HIER": "000000012002001"
           },
           {
-            "STR_PART_NO": "36PA0123",
-            "STR_DESC": "KIT CHAIN SPROCKET-D105A",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 4368.0,
-            "INT_TOTAL_VALUE": 21840.0,
+            "STR_PART_NO": "AA121006",
+            "STR_DESC": "OIL FILTER ELEMENT",
+            "INT_QUATITY": 14.0,
+            "INT_UNIT_PRICE": 260.0,
+            "INT_TOTAL_VALUE": 3640.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000006003008"
+            "STR_WAREHOUSE_HIER": "000000003005003"
           },
           {
-            "STR_PART_NO": "DH151079",
-            "STR_DESC": "REAR ALLOYWHEEL",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 22872.0,
-            "INT_TOTAL_VALUE": 22872.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009001003"
-          },
-          {
-            "STR_PART_NO": "DJ201246",
-            "STR_DESC": "SWITCH CLUTCH VB -TRANSIL DIODE",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 656.0,
-            "INT_TOTAL_VALUE": 1968.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001002005"
-          },
-          {
-            "STR_PART_NO": "DT511262",
-            "STR_DESC": "ASSEMBLY ROCKER ARM EXHAUST\r\n",
-            "INT_QUATITY": 6.0,
-            "INT_UNIT_PRICE": 3704.0,
-            "INT_TOTAL_VALUE": 22224.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002002002"
-          },
-          {
-            "STR_PART_NO": "JE551403",
-            "STR_DESC": "HUB CLUTCH FCC",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1568.0,
-            "INT_TOTAL_VALUE": 7840.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009003002"
-          },
-          {
-            "STR_PART_NO": "39100820",
-            "STR_DESC": "BEARING NEEDLE [BK1312]",
-            "INT_QUATITY": 25.0,
-            "INT_UNIT_PRICE": 264.0,
-            "INT_TOTAL_VALUE": 6600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000003006003"
-          },
-          {
-            "STR_PART_NO": "DJ191023",
-            "STR_DESC": "KIT - MAJOR : MASTER CYLINDER [ ETS ]",
-            "INT_QUATITY": 25.0,
-            "INT_UNIT_PRICE": 824.0,
-            "INT_TOTAL_VALUE": 20600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001002004"
-          },
-          {
-            "STR_PART_NO": "DG171018",
-            "STR_DESC": "BEARING - NEEDLE",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1152.0,
-            "INT_TOTAL_VALUE": 11520.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001002005"
-          },
-          {
-            "STR_PART_NO": "JL401006",
-            "STR_DESC": "INDICATOR ASSY FR RH",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1360.0,
-            "INT_TOTAL_VALUE": 6800.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000006005003"
-          },
-          {
-            "STR_PART_NO": "AZ351207",
-            "STR_DESC": "PLUG SPARK",
-            "INT_QUATITY": 50.0,
-            "INT_UNIT_PRICE": 448.0,
-            "INT_TOTAL_VALUE": 22400.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002001002"
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105322",
-        "Products": [
-          {
-            "STR_PART_NO": "36DS4020",
-            "STR_DESC": "KIT CHAIN CASE DISCOVER BLACK 125",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 5120.0,
-            "INT_TOTAL_VALUE": 5120.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000015002001"
-          },
-          {
-            "STR_PART_NO": "52DU0239",
-            "STR_DESC": "ASSEMBLY OHC (GRI-GRAY COLOUR)",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 384.0,
-            "INT_TOTAL_VALUE": 1152.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001004009"
-          },
-          {
-            "STR_PART_NO": "59200029",
-            "STR_DESC": "BALANCER LH BEARING 6204 (20*47*14)",
-            "INT_QUATITY": 6.0,
-            "INT_UNIT_PRICE": 760.0,
-            "INT_TOTAL_VALUE": 4560.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000013001003"
-          },
-          {
-            "STR_PART_NO": "DF151003",
-            "STR_DESC": "DRUM FRONT",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 5208.0,
-            "INT_TOTAL_VALUE": 5208.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009003007"
-          },
-          {
-            "STR_PART_NO": "DH161405",
-            "STR_DESC": "HOLDER STEP RH",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 5776.0,
-            "INT_TOTAL_VALUE": 17328.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000015003001"
-          },
-          {
-            "STR_PART_NO": "JF131800",
-            "STR_DESC": "DISC FRONT\r\nDISC",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 6896.0,
-            "INT_TOTAL_VALUE": 20688.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001002007"
-          },
-          {
-            "STR_PART_NO": "PF121101",
-            "STR_DESC": "TUBE INNER\r\n",
+            "STR_PART_NO": "AF201036",
+            "STR_DESC": "RR UNIT ( 4S)",
             "INT_QUATITY": 4.0,
-            "INT_UNIT_PRICE": 3336.0,
-            "INT_TOTAL_VALUE": 13344.0,
+            "INT_UNIT_PRICE": 5350.0,
+            "INT_TOTAL_VALUE": 21400.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000007003001"
-          },
-          {
-            "STR_PART_NO": "PD551433",
-            "STR_DESC": "CLUTCH  PLATE",
-            "INT_QUATITY": 40.0,
-            "INT_UNIT_PRICE": 312.0,
-            "INT_TOTAL_VALUE": 12480.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001003005"
-          },
-          {
-            "STR_PART_NO": "DU151009",
-            "STR_DESC": "DRUM REAR",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 6440.0,
-            "INT_TOTAL_VALUE": 12880.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000010002002"
-          },
-          {
-            "STR_PART_NO": "DU191048",
-            "STR_DESC": "CABLE THROTTLE\r\nCABLE THROTTLE",
-            "INT_QUATITY": 8.0,
-            "INT_UNIT_PRICE": 888.0,
-            "INT_TOTAL_VALUE": 7104.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001007001"
-          },
-          {
-            "STR_PART_NO": "JK231400",
-            "STR_DESC": "GRIP-FRAME",
-            "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 3488.0,
-            "INT_TOTAL_VALUE": 6976.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009001001"
-          },
-          {
-            "STR_PART_NO": "56JL3931",
-            "STR_DESC": "JL BELLY PAN RH SPARKLE BLACK",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 1896.0,
-            "INT_TOTAL_VALUE": 5688.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
-          },
-          {
-            "STR_PART_NO": "DF111020",
-            "STR_DESC": "STARTER ASSEMBLY:COUPLER+CAP FOR 'BOXER'",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 4936.0,
-            "INT_TOTAL_VALUE": 14808.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": null
+            "STR_WAREHOUSE_HIER": "000000003003004"
           }
         ]
       },
       {
         "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105327",
+        "ID": "PRIBDM2021102908335",
         "Products": [
           {
-            "STR_PART_NO": "36AA4025",
-            "STR_DESC": "CLUTCH PLATE SET-RE 4S",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 2160.0,
-            "INT_TOTAL_VALUE": 32400.0,
+            "STR_PART_NO": "24121118",
+            "STR_DESC": "CARBURETTOR COMP",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 6048.0,
+            "INT_TOTAL_VALUE": 12096.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000003005005"
+            "STR_WAREHOUSE_HIER": "000000003002002"
+          },
+          {
+            "STR_PART_NO": "AA101446",
+            "STR_DESC": "BLOCK-CYLINDER & PISTON ASSEMBLY:SPARE",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 6912.0,
+            "INT_TOTAL_VALUE": 20736.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000012002001"
+          },
+          {
+            "STR_PART_NO": "AA101569",
+            "STR_DESC": "CHAIN -TIMING",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 840.0,
+            "INT_TOTAL_VALUE": 2520.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000004005003"
+          },
+          {
+            "STR_PART_NO": "AA231255",
+            "STR_DESC": "GLASS GREEN WINDSHLD SINGLE PC",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 18712.0,
+            "INT_TOTAL_VALUE": 37424.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011004005"
+          },
+          {
+            "STR_PART_NO": "AN101123",
+            "STR_DESC": "PISTON ASSY WITH BLOCK-SPARES",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 8192.0,
+            "INT_TOTAL_VALUE": 24576.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000012003001"
+          }
+        ]
+      },
+      {
+        "Type": "DPMC/Invoice",
+        "ID": "PRIBDM2021102908336",
+        "Products": [
+          {
+            "STR_PART_NO": "36AA4119",
+            "STR_DESC": "CYLINDER HEAD ASSY_VALVE 4S 205 BS4",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 14128.0,
+            "INT_TOTAL_VALUE": 28256.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": "000000011001006"
           },
           {
             "STR_PART_NO": "36DD4008",
             "STR_DESC": "KIT PLATE CLUTCH  ( DD101480 )",
-            "INT_QUATITY": 25.0,
+            "INT_QUATITY": 30.0,
             "INT_UNIT_PRICE": 1460.0,
-            "INT_TOTAL_VALUE": 36500.0,
+            "INT_TOTAL_VALUE": 43800.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": "000000001003004"
           },
           {
-            "STR_PART_NO": "39253204",
-            "STR_DESC": "HEXAGON HEAD BOLT/FLANGE",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 160.0,
-            "INT_TOTAL_VALUE": 3200.0,
+            "STR_PART_NO": "39128321",
+            "STR_DESC": "O RING",
+            "INT_QUATITY": 30.0,
+            "INT_UNIT_PRICE": 136.0,
+            "INT_TOTAL_VALUE": 4080.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001003001"
+            "STR_WAREHOUSE_HIER": "000000002001002"
           },
           {
-            "STR_PART_NO": "52DZ0046",
-            "STR_DESC": "CHAIN ADJUSTER S/A RH (PLATINA ALLOY WH)",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 168.0,
-            "INT_TOTAL_VALUE": 2520.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002003002"
-          },
-          {
-            "STR_PART_NO": "52DZ0047",
-            "STR_DESC": "CHAIN ADJUSTER S/A LH(PLATINA ALLOY WH)",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 176.0,
-            "INT_TOTAL_VALUE": 2640.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002003002"
-          },
-          {
-            "STR_PART_NO": "AA101210",
-            "STR_DESC": "PLATE FRICTION",
-            "INT_QUATITY": 140.0,
-            "INT_UNIT_PRICE": 296.0,
-            "INT_TOTAL_VALUE": 41440.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000011003011"
-          },
-          {
-            "STR_PART_NO": "DH101344",
-            "STR_DESC": "PLATE CLUTCH PRESSURE",
-            "INT_QUATITY": 25.0,
-            "INT_UNIT_PRICE": 904.0,
-            "INT_TOTAL_VALUE": 22600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000009003001"
-          },
-          {
-            "STR_PART_NO": "DM181036",
-            "STR_DESC": "TUBE INNER COMPLETE - SUSPENSION",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 4464.0,
-            "INT_TOTAL_VALUE": 44640.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000007003001"
-          },
-          {
-            "STR_PART_NO": "DU101218",
-            "STR_DESC": "CYLINDER BLOCK AND PISTON ASSEMBLY",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 6376.0,
-            "INT_TOTAL_VALUE": 95640.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000011002007"
-          },
-          {
-            "STR_PART_NO": "AA101472",
+            "STR_PART_NO": "DH101098",
             "STR_DESC": "PLATE CLUTCH",
-            "INT_QUATITY": 180.0,
-            "INT_UNIT_PRICE": 172.0,
-            "INT_TOTAL_VALUE": 30960.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000011003011"
+            "INT_QUATITY": 50.0,
+            "INT_UNIT_PRICE": 256.0,
+            "INT_TOTAL_VALUE": 12800.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001003005"
+          },
+          {
+            "STR_PART_NO": "DK151073",
+            "STR_DESC": "KIT R/MASTER CYL/MAJOR",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 1608.0,
+            "INT_TOTAL_VALUE": 24120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001002004"
+          },
+          {
+            "STR_PART_NO": "DS101096",
+            "STR_DESC": "CAMSHAFT CAP",
+            "INT_QUATITY": 30.0,
+            "INT_UNIT_PRICE": 224.0,
+            "INT_TOTAL_VALUE": 6720.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000002002001"
+          }
+        ]
+      },
+      {
+        "Type": "DPMC/Invoice",
+        "ID": "PRIBDM2021102908337",
+        "Products": [
+          {
+            "STR_PART_NO": "36DS1201",
+            "STR_DESC": "KIT - VACCUM PISTON CARBURETTOR",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 2984.0,
+            "INT_TOTAL_VALUE": 29840.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004010"
+          },
+          {
+            "STR_PART_NO": "36DU1204",
+            "STR_DESC": "KIT - GASKET O'RING",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 232.0,
+            "INT_TOTAL_VALUE": 2320.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000002002001"
+          },
+          {
+            "STR_PART_NO": "39218919",
+            "STR_DESC": "OIL SEAL [ F / SPROCKET ]",
+            "INT_QUATITY": 50.0,
+            "INT_UNIT_PRICE": 184.0,
+            "INT_TOTAL_VALUE": 9200.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004002"
+          },
+          {
+            "STR_PART_NO": "DP171006",
+            "STR_DESC": "BUSHING-RUBBER",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 432.0,
+            "INT_TOTAL_VALUE": 8640.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001006008"
+          },
+          {
+            "STR_PART_NO": "52DH0169",
+            "STR_DESC": "OIL PUMP ASSLY",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 2408.0,
+            "INT_TOTAL_VALUE": 36120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001003002"
           },
           {
             "STR_PART_NO": "DH101154",
@@ -783,161 +285,218 @@
             "STR_WAREHOUSE_HIER": "000000007002004"
           },
           {
-            "STR_PART_NO": "DJ101216",
-            "STR_DESC": "TENSIONER ASSEMBLY DISCOVER BLACK",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1368.0,
-            "INT_TOTAL_VALUE": 13680.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005008"
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105328",
-        "Products": [
-          {
-            "STR_PART_NO": "30181023",
-            "STR_DESC": "CLIP",
-            "INT_QUATITY": 100.0,
-            "INT_UNIT_PRICE": 16.0,
-            "INT_TOTAL_VALUE": 1600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000010003002"
-          },
-          {
-            "STR_PART_NO": "30181029",
-            "STR_DESC": "RING O",
-            "INT_QUATITY": 50.0,
-            "INT_UNIT_PRICE": 52.0,
-            "INT_TOTAL_VALUE": 2600.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002001003"
-          },
-          {
-            "STR_PART_NO": "36DK0076",
-            "STR_DESC": "KIT STARTER CLUTCH ASSEMBLY DK101595",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 4440.0,
-            "INT_TOTAL_VALUE": 22200.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005008"
-          },
-          {
-            "STR_PART_NO": "36JZ0198",
-            "STR_DESC": "KIT FRICTION PLATE",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1992.0,
-            "INT_TOTAL_VALUE": 9960.0,
-            "STR_SERIAL_STATUS": null,
-            "STR_WAREHOUSE_HIER": "000000001003006"
-          },
-          {
-            "STR_PART_NO": "AA111093",
-            "STR_DESC": "ASSEMBLY FIXING BRACKET(EXTEND)",
-            "INT_QUATITY": 8.0,
-            "INT_UNIT_PRICE": 1264.0,
-            "INT_TOTAL_VALUE": 10112.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000003002004"
-          },
-          {
-            "STR_PART_NO": "DD101407",
-            "STR_DESC": "TENSIONER ASSEMBLY-CLINCH TYPE",
+            "STR_PART_NO": "DU181070",
+            "STR_DESC": "FLAP COWLING",
             "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 992.0,
-            "INT_TOTAL_VALUE": 14880.0,
+            "INT_UNIT_PRICE": 920.0,
+            "INT_TOTAL_VALUE": 13800.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005008"
+            "STR_WAREHOUSE_HIER": "000000015003002"
           },
           {
-            "STR_PART_NO": "DH101782",
-            "STR_DESC": "BODY COMP STARTER CLUTCH",
-            "INT_QUATITY": 8.0,
-            "INT_UNIT_PRICE": 3800.0,
-            "INT_TOTAL_VALUE": 30400.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005008"
-          },
-          {
-            "STR_PART_NO": "DU101210",
-            "STR_DESC": "CLUTCH COVER/GRAPHIC - (DU101013)",
-            "INT_QUATITY": 1.0,
-            "INT_UNIT_PRICE": 5520.0,
-            "INT_TOTAL_VALUE": 5520.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000011001005"
-          },
-          {
-            "STR_PART_NO": "JE351200",
-            "STR_DESC": "DC CDI UNIT",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 7464.0,
-            "INT_TOTAL_VALUE": 37320.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001002001"
-          },
-          {
-            "STR_PART_NO": "JL401002",
-            "STR_DESC": "LAMP TAIL ASSY",
-            "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 4304.0,
-            "INT_TOTAL_VALUE": 12912.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000004002002"
-          },
-          {
-            "STR_PART_NO": "JW351400",
-            "STR_DESC": "THERMAL SENSOR WITH ALUMINIUM GASKET",
-            "INT_QUATITY": 20.0,
-            "INT_UNIT_PRICE": 504.0,
-            "INT_TOTAL_VALUE": 10080.0,
+            "STR_PART_NO": "DU191003",
+            "STR_DESC": "GRIP ASSEMBLY - RIGHT HAND",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 600.0,
+            "INT_TOTAL_VALUE": 9000.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": "000000001007008"
           },
           {
-            "STR_PART_NO": "JD511201",
-            "STR_DESC": "INTAKE VALVE",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 928.0,
-            "INT_TOTAL_VALUE": 13920.0,
+            "STR_PART_NO": "JG601007",
+            "STR_DESC": "SPECIAL SHAFT SEAL RING (OIL)",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 640.0,
+            "INT_TOTAL_VALUE": 6400.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000002003003"
+            "STR_WAREHOUSE_HIER": "000000006004006"
           },
           {
-            "STR_PART_NO": "JD113036",
-            "STR_DESC": "HOLDER STEP RH",
+            "STR_PART_NO": "JZ151036",
+            "STR_DESC": "UNDER BRACKET ASSY",
             "INT_QUATITY": 3.0,
-            "INT_UNIT_PRICE": 5776.0,
-            "INT_TOTAL_VALUE": 17328.0,
+            "INT_UNIT_PRICE": 4576.0,
+            "INT_TOTAL_VALUE": 13728.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000009002003"
+          },
+          {
+            "STR_PART_NO": "DF121003",
+            "STR_DESC": "PUMP ASSY",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1248.0,
+            "INT_TOTAL_VALUE": 12480.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001003002"
+          },
+          {
+            "STR_PART_NO": "DS121022",
+            "STR_DESC": "CATRIDGE ASSEMBLY (AIR FILTER)",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 472.0,
+            "INT_TOTAL_VALUE": 2832.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011004003"
+          },
+          {
+            "STR_PART_NO": "DS151038",
+            "STR_DESC": "SPEEDOMETER GEAR 21T",
+            "INT_QUATITY": 200.0,
+            "INT_UNIT_PRICE": 128.0,
+            "INT_TOTAL_VALUE": 25600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000004005006"
+          },
+          {
+            "STR_PART_NO": "DS191041",
+            "STR_DESC": "SPEEDO METER PRICOL",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 2472.0,
+            "INT_TOTAL_VALUE": 7416.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001001002"
+          },
+          {
+            "STR_PART_NO": "DU101191",
+            "STR_DESC": "SHAFT ROCKER",
+            "INT_QUATITY": 30.0,
+            "INT_UNIT_PRICE": 120.0,
+            "INT_TOTAL_VALUE": 3600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001006007"
+          },
+          {
+            "STR_PART_NO": "DX101046",
+            "STR_DESC": "SHAFT TRANSMISSION OUTPUT",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 2368.0,
+            "INT_TOTAL_VALUE": 14208.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004001"
+          },
+          {
+            "STR_PART_NO": "DZ141040",
+            "STR_DESC": "FUEL COCK ASSLY. PLATINA (ECONOMICAL)",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 1264.0,
+            "INT_TOTAL_VALUE": 18960.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011002003"
+          },
+          {
+            "STR_PART_NO": "JB541224",
+            "STR_DESC": "GASKET COVER MAGNETO",
+            "INT_QUATITY": 30.0,
+            "INT_UNIT_PRICE": 232.0,
+            "INT_TOTAL_VALUE": 6960.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": "000000013001004"
+          },
+          {
+            "STR_PART_NO": "JE511208",
+            "STR_DESC": "VALVE INTAKE -K11",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 632.0,
+            "INT_TOTAL_VALUE": 6320.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000002001003"
+          },
+          {
+            "STR_PART_NO": "JE511209",
+            "STR_DESC": "VALVE EXHAUST -K11\r\n",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1024.0,
+            "INT_TOTAL_VALUE": 10240.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000005001002"
+          },
+          {
+            "STR_PART_NO": "JL402001",
+            "STR_DESC": "REGULATOR ASSY",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 4816.0,
+            "INT_TOTAL_VALUE": 14448.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001001005"
+          },
+          {
+            "STR_PART_NO": "JL541208",
+            "STR_DESC": "GASKET MAGNETO COVER",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 344.0,
+            "INT_TOTAL_VALUE": 3440.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000013001006"
+          },
+          {
+            "STR_PART_NO": "PA402440",
+            "STR_DESC": "SPEEDOMETER ASSEMBLY",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 6848.0,
+            "INT_TOTAL_VALUE": 13696.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": null
           },
           {
-            "STR_PART_NO": "JK181246",
-            "STR_DESC": "BRACKET ASSEMBLY FAIRING UPPER",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1040.0,
-            "INT_TOTAL_VALUE": 10400.0,
+            "STR_PART_NO": "DD70013N",
+            "STR_DESC": "CRANKCASE - L/H",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 12312.0,
+            "INT_TOTAL_VALUE": 24624.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "PF581045",
+            "STR_DESC": "ASSEMBLY CARTRIDGE B104D",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 568.0,
+            "INT_TOTAL_VALUE": 1704.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "YJL04004",
+            "STR_DESC": "MINOR\u00a0 KIT\u00a0 CALIPER\u00a0 FRONT",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 720.0,
+            "INT_TOTAL_VALUE": 1440.0,
             "STR_SERIAL_STATUS": "I",
             "STR_WAREHOUSE_HIER": null
           },
           {
-            "STR_PART_NO": "AA191070",
-            "STR_DESC": "CABLE COMPLETE CHOKE",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 1128.0,
-            "INT_TOTAL_VALUE": 16920.0,
+            "STR_PART_NO": "30181026",
+            "STR_DESC": "GASKET-FORK CEY.",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 44.0,
+            "INT_TOTAL_VALUE": 220.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": null
           },
           {
-            "STR_PART_NO": "JL233316",
-            "STR_DESC": "DECAL TANK 3D PULSAR-GREY",
-            "INT_QUATITY": 10.0,
-            "INT_UNIT_PRICE": 1544.0,
-            "INT_TOTAL_VALUE": 15440.0,
+            "STR_PART_NO": "JE571003",
+            "STR_DESC": "ASSEMBLY OIL PUMP BODY   K11\r\n",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 1488.0,
+            "INT_TOTAL_VALUE": 8928.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "JV511006",
+            "STR_DESC": "SHAFT ROCKER ARM",
+            "INT_QUATITY": 7.0,
+            "INT_UNIT_PRICE": 144.0,
+            "INT_TOTAL_VALUE": 1008.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "JL402003",
+            "STR_DESC": "REGULATOR ASSLY",
+            "INT_QUATITY": 1.0,
+            "INT_UNIT_PRICE": 7248.0,
+            "INT_TOTAL_VALUE": 7248.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": null
           }
@@ -945,121 +504,883 @@
       },
       {
         "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105329",
+        "ID": "PRIBDM2021102908339",
         "Products": [
           {
-            "STR_PART_NO": "31151021",
-            "STR_DESC": "SHOCK DAMPER",
-            "INT_QUATITY": 40.0,
-            "INT_UNIT_PRICE": 176.0,
-            "INT_TOTAL_VALUE": 7040.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001006001"
-          },
-          {
-            "STR_PART_NO": "36AN0010",
-            "STR_DESC": "CYLINDER BLOCK AND PISTON (3W RE)",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 8656.0,
-            "INT_TOTAL_VALUE": 129840.0,
+            "STR_PART_NO": "36DS4020",
+            "STR_DESC": "KIT CHAIN CASE DISCOVER BLACK 125",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 5120.0,
+            "INT_TOTAL_VALUE": 10240.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000012003001"
+            "STR_WAREHOUSE_HIER": "000000015002001"
           },
           {
-            "STR_PART_NO": "36DH4025",
-            "STR_DESC": "KIT DISC CLUTCH FRICTION E TYPE DIS135 (DH101499)",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 2152.0,
-            "INT_TOTAL_VALUE": 32280.0,
+            "STR_PART_NO": "36JZ0199",
+            "STR_DESC": "KIT CLUTCH PLATE",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 560.0,
+            "INT_TOTAL_VALUE": 3360.0,
+            "STR_SERIAL_STATUS": null,
+            "STR_WAREHOUSE_HIER": "000000001003006"
+          },
+          {
+            "STR_PART_NO": "52DH0117",
+            "STR_DESC": "LEVER - GEAR SHIFT",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 2240.0,
+            "INT_TOTAL_VALUE": 13440.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001003004"
+            "STR_WAREHOUSE_HIER": "000000001001004"
           },
           {
-            "STR_PART_NO": "AA101446",
-            "STR_DESC": "BLOCK-CYLINDER & PISTON ASSEMBLY:SPARE",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 6912.0,
-            "INT_TOTAL_VALUE": 34560.0,
+            "STR_PART_NO": "52DU0104",
+            "STR_DESC": "LEVER COMP. CHANGE SHAFT SUB ASSLY.",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 1616.0,
+            "INT_TOTAL_VALUE": 32320.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000012002001"
+            "STR_WAREHOUSE_HIER": "000000001001004"
           },
           {
-            "STR_PART_NO": "AN101123",
-            "STR_DESC": "PISTON ASSY WITH BLOCK-SPARES",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 8192.0,
-            "INT_TOTAL_VALUE": 40960.0,
+            "STR_PART_NO": "DH101117",
+            "STR_DESC": "SPROCKET-OUTPUT [15T]",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 784.0,
+            "INT_TOTAL_VALUE": 4704.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000012003001"
+            "STR_WAREHOUSE_HIER": "000000006005003"
           },
           {
-            "STR_PART_NO": "DK151094",
-            "STR_DESC": "COUPLING RUBBER",
-            "INT_QUATITY": 15.0,
-            "INT_UNIT_PRICE": 872.0,
-            "INT_TOTAL_VALUE": 13080.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001006001"
-          },
-          {
-            "STR_PART_NO": "JZ401013",
-            "STR_DESC": "HEADLAMP CONTROL UNIT (VE MODEL)",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1648.0,
-            "INT_TOTAL_VALUE": 8240.0,
-            "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000001005007"
-          }
-        ]
-      },
-      {
-        "Type": "DPMC/Invoice",
-        "ID": "PRIBDM2021102105330",
-        "Products": [
-          {
-            "STR_PART_NO": "30151105",
-            "STR_DESC": "BRAKE SHOE ASSY",
-            "INT_QUATITY": 30.0,
-            "INT_UNIT_PRICE": 656.0,
-            "INT_TOTAL_VALUE": 19680.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001007007"
-          },
-          {
-            "STR_PART_NO": "31151060",
-            "STR_DESC": "SHOE-BRAKE",
-            "INT_QUATITY": 30.0,
-            "INT_UNIT_PRICE": 616.0,
-            "INT_TOTAL_VALUE": 18480.0,
-            "STR_SERIAL_STATUS": "I",
-            "STR_WAREHOUSE_HIER": "000000001007007"
-          },
-          {
-            "STR_PART_NO": "DH101424",
-            "STR_DESC": "SPRING - TORSION :- BALANCER",
-            "INT_QUATITY": 30.0,
-            "INT_UNIT_PRICE": 56.0,
-            "INT_TOTAL_VALUE": 1680.0,
+            "STR_PART_NO": "DH101484",
+            "STR_DESC": "HOLDER CLUTCH",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 376.0,
+            "INT_TOTAL_VALUE": 3760.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": "000000001004009"
           },
           {
-            "STR_PART_NO": "DJ151075",
-            "STR_DESC": "KIT - MAJOR CALIPER [ ETS ]",
+            "STR_PART_NO": "DK151024",
+            "STR_DESC": "DISC REAR",
+            "INT_QUATITY": 1.0,
+            "INT_UNIT_PRICE": 5560.0,
+            "INT_TOTAL_VALUE": 5560.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001002007"
+          },
+          {
+            "STR_PART_NO": "DK161085",
+            "STR_DESC": "FENDER REAR",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 1344.0,
+            "INT_TOTAL_VALUE": 4032.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000017001001"
+          },
+          {
+            "STR_PART_NO": "DK181091",
+            "STR_DESC": "OUTER TUBE RH PC\r\n",
             "INT_QUATITY": 2.0,
-            "INT_UNIT_PRICE": 2408.0,
-            "INT_TOTAL_VALUE": 4816.0,
+            "INT_UNIT_PRICE": 6600.0,
+            "INT_TOTAL_VALUE": 13200.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000007003002"
+          },
+          {
+            "STR_PART_NO": "DK191012",
+            "STR_DESC": "LEVER BRAKE",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 1808.0,
+            "INT_TOTAL_VALUE": 3616.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006005003"
+          },
+          {
+            "STR_PART_NO": "DS101101",
+            "STR_DESC": "SHAFT - STARTER COUNTER",
+            "INT_QUATITY": 60.0,
+            "INT_UNIT_PRICE": 104.0,
+            "INT_TOTAL_VALUE": 6240.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001005005"
+          },
+          {
+            "STR_PART_NO": "DU101045",
+            "STR_DESC": "SHAFT - KICK",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1088.0,
+            "INT_TOTAL_VALUE": 10880.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004010"
+          },
+          {
+            "STR_PART_NO": "JG561200",
+            "STR_DESC": "LEVER GEAR SHIFT ASSY COMP.",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 1752.0,
+            "INT_TOTAL_VALUE": 5256.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001001004"
+          },
+          {
+            "STR_PART_NO": "JH161200",
+            "STR_DESC": "CABLE ACCELERATOR",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 824.0,
+            "INT_TOTAL_VALUE": 4944.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001007002"
+          },
+          {
+            "STR_PART_NO": "JN571001",
+            "STR_DESC": "CAP STRAINER (DISCOVER BLACK)",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 320.0,
+            "INT_TOTAL_VALUE": 4800.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001006004"
+          },
+          {
+            "STR_PART_NO": "JZ113015",
+            "STR_DESC": "HOLDER LH STEP",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 1104.0,
+            "INT_TOTAL_VALUE": 2208.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000007004002"
+          },
+          {
+            "STR_PART_NO": "52DU0929",
+            "STR_DESC": "COWLING EBONY BLACK WITH RED DKL CT100ES",
+            "INT_QUATITY": 4.0,
+            "INT_UNIT_PRICE": 2624.0,
+            "INT_TOTAL_VALUE": 10496.0,
+            "STR_SERIAL_STATUS": null,
+            "STR_WAREHOUSE_HIER": "000000021002001"
+          },
+          {
+            "STR_PART_NO": "DS161062",
+            "STR_DESC": "FENDER-REAR",
+            "INT_QUATITY": 4.0,
+            "INT_UNIT_PRICE": 1392.0,
+            "INT_TOTAL_VALUE": 5568.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000017001001"
+          },
+          {
+            "STR_PART_NO": "DU151010",
+            "STR_DESC": "COUPLING",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 1840.0,
+            "INT_TOTAL_VALUE": 27600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000013004004"
+          },
+          {
+            "STR_PART_NO": "DU221002",
+            "STR_DESC": "GUARD-SARI",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 4672.0,
+            "INT_TOTAL_VALUE": 28032.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000024001002"
+          },
+          {
+            "STR_PART_NO": "DV101048",
+            "STR_DESC": "SPROCKET OUTPUT (14T)",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1616.0,
+            "INT_TOTAL_VALUE": 16160.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000008002004"
+          },
+          {
+            "STR_PART_NO": "DZ221003",
+            "STR_DESC": "LEG GUARD",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 4112.0,
+            "INT_TOTAL_VALUE": 24672.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000023003001"
+          },
+          {
+            "STR_PART_NO": "JA621001",
+            "STR_DESC": "SHAFT KICK",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 1048.0,
+            "INT_TOTAL_VALUE": 5240.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004010"
+          },
+          {
+            "STR_PART_NO": "JB122007",
+            "STR_DESC": "SWING ARM ASSY",
+            "INT_QUATITY": 1.0,
+            "INT_UNIT_PRICE": 7960.0,
+            "INT_TOTAL_VALUE": 7960.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000009001004"
+          },
+          {
+            "STR_PART_NO": "JN73013C",
+            "STR_DESC": "FAIRING 135BLACK 3D DECAL BLACK WITH RED DECAL",
+            "INT_QUATITY": 12.0,
+            "INT_UNIT_PRICE": 5280.0,
+            "INT_TOTAL_VALUE": 63360.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000021002001"
+          },
+          {
+            "STR_PART_NO": "DJ151057",
+            "STR_DESC": "CASE METER GEAR ASSY -AL HSG",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 1496.0,
+            "INT_TOTAL_VALUE": 22440.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001001002"
+          },
+          {
+            "STR_PART_NO": "JZ181401",
+            "STR_DESC": "REAR FENDER REAR",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 1896.0,
+            "INT_TOTAL_VALUE": 9480.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000017001001"
+          },
+          {
+            "STR_PART_NO": "JZ571001",
+            "STR_DESC": "GEAR DRIVEN + SHAFT OIL PUMP",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 256.0,
+            "INT_TOTAL_VALUE": 2560.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001003006"
+          },
+          {
+            "STR_PART_NO": "DH161258",
+            "STR_DESC": "BRACE-FENDER",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 1384.0,
+            "INT_TOTAL_VALUE": 8304.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000009002007"
+          },
+          {
+            "STR_PART_NO": "DH74014M",
+            "STR_DESC": "FAIRING MIDNIGHT BLACK",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 3976.0,
+            "INT_TOTAL_VALUE": 19880.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000021002001"
+          },
+          {
+            "STR_PART_NO": "DJ171031",
+            "STR_DESC": "ASSEMBLY SWING ARM",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 8776.0,
+            "INT_TOTAL_VALUE": 26328.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000009001004"
+          },
+          {
+            "STR_PART_NO": "JA541018",
+            "STR_DESC": "GEAR DRIVEN + SHAFT OIL PUMP",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 360.0,
+            "INT_TOTAL_VALUE": 3600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011003007"
+          },
+          {
+            "STR_PART_NO": "JD181211",
+            "STR_DESC": "SPEEDO FLAP",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 1152.0,
+            "INT_TOTAL_VALUE": 2304.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000015003002"
+          },
+          {
+            "STR_PART_NO": "JD402402",
+            "STR_DESC": "SPEEDO TOP COVER & GASKET",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 920.0,
+            "INT_TOTAL_VALUE": 4600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003001001"
+          },
+          {
+            "STR_PART_NO": "JD551206",
+            "STR_DESC": "GEAR 3rd DRIVE",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1312.0,
+            "INT_TOTAL_VALUE": 13120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011004005"
+          },
+          {
+            "STR_PART_NO": "JD621001",
+            "STR_DESC": "SHAFT KICK",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1160.0,
+            "INT_TOTAL_VALUE": 11600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004010"
+          },
+          {
+            "STR_PART_NO": "52DH0548",
+            "STR_DESC": "TANK FLAP ASSY RH K1 UG4 MIDNIGHT BLACK",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 1624.0,
+            "INT_TOTAL_VALUE": 8120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "JZ131601",
+            "STR_DESC": "CASE METER ASSY - GEAR",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 2320.0,
+            "INT_TOTAL_VALUE": 11600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DK151027",
+            "STR_DESC": "DISC FRONT DIA 260",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 8000.0,
+            "INT_TOTAL_VALUE": 24000.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "JB551406",
+            "STR_DESC": "HOLDER",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 264.0,
+            "INT_TOTAL_VALUE": 2640.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DS101260",
+            "STR_DESC": "COVER COMPLETE - CENTRIFUGAL OIL FILTER",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 536.0,
+            "INT_TOTAL_VALUE": 5360.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "52JZ0018",
+            "STR_DESC": "COWLING(JZ74013C) ASLY E BLACK/RED DECAL",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 4608.0,
+            "INT_TOTAL_VALUE": 13824.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DK101150",
+            "STR_DESC": "CLUTCH FRICTION DISK-B",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 1304.0,
+            "INT_TOTAL_VALUE": 26080.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DH101113",
+            "STR_DESC": "GEAR 5TH DRIVEN",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 2480.0,
+            "INT_TOTAL_VALUE": 14880.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DJ73024M",
+            "STR_DESC": "FR FENDER MIDNIGHT BLACK",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 3944.0,
+            "INT_TOTAL_VALUE": 23664.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "JZ551205",
+            "STR_DESC": "BUSH 1 ST DRIVEN",
+            "INT_QUATITY": 14.0,
+            "INT_UNIT_PRICE": 216.0,
+            "INT_TOTAL_VALUE": 3024.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "YPF19008",
+            "STR_DESC": "TOP COVER WITH RING-PRICOL",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 832.0,
+            "INT_TOTAL_VALUE": 1664.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DU101083",
+            "STR_DESC": "CAM  DRUM CHANGE",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 112.0,
+            "INT_TOTAL_VALUE": 224.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "52JL1020",
+            "STR_DESC": "ASSLY FR. FENDER + WHITE DCAL K4 BSIV UG",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 5872.0,
+            "INT_TOTAL_VALUE": 11744.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "JA551007",
+            "STR_DESC": "BUSH 1ST DRIVEN",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 240.0,
+            "INT_TOTAL_VALUE": 1200.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DT181210",
+            "STR_DESC": "SEAT COWL CENTRAL TOP\r\n",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 440.0,
+            "INT_TOTAL_VALUE": 1320.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "DH101108",
+            "STR_DESC": "GEAR 3RD DRIVEN",
+            "INT_QUATITY": 1.0,
+            "INT_UNIT_PRICE": 1520.0,
+            "INT_TOTAL_VALUE": 1520.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          }
+        ]
+      },
+      {
+        "Type": "DPMC/Invoice",
+        "ID": "PRIBDM2021102908341",
+        "Products": [
+          {
+            "STR_PART_NO": "36DU4017",
+            "STR_DESC": "KIT CHAIN SPROCKET",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 4056.0,
+            "INT_TOTAL_VALUE": 60840.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": "000000006004007"
+          },
+          {
+            "STR_PART_NO": "36JN0007",
+            "STR_DESC": "KIT CH.SP.DISCOVER 135 DRUM BRAKE",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 4000.0,
+            "INT_TOTAL_VALUE": 60000.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006004007"
+          },
+          {
+            "STR_PART_NO": "36JN0015",
+            "STR_DESC": "KIT CHAIN SPROCKET DIS 135 (NEW)",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 5408.0,
+            "INT_TOTAL_VALUE": 81120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006004007"
+          },
+          {
+            "STR_PART_NO": "36PA0042",
+            "STR_DESC": "KIT CHAIN SPROCKET DISCO M FX",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 4128.0,
+            "INT_TOTAL_VALUE": 61920.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006003007"
+          }
+        ]
+      },
+      {
+        "Type": "DPMC/Invoice",
+        "ID": "PRIBDM2021102908343",
+        "Products": [
+          {
+            "STR_PART_NO": "22150240",
+            "STR_DESC": "RETURN SPRING",
+            "INT_QUATITY": 350.0,
+            "INT_UNIT_PRICE": 32.0,
+            "INT_TOTAL_VALUE": 11200.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003006002"
+          },
+          {
+            "STR_PART_NO": "24101203",
+            "STR_DESC": "DRIVEN DOG",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 824.0,
+            "INT_TOTAL_VALUE": 4120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003006004"
+          },
+          {
+            "STR_PART_NO": "24131009",
+            "STR_DESC": "BEVEL GEAR",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 1296.0,
+            "INT_TOTAL_VALUE": 19440.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000005003002"
+          },
+          {
+            "STR_PART_NO": "24160924",
+            "STR_DESC": "ENGINE BUSH",
+            "INT_QUATITY": 50.0,
+            "INT_UNIT_PRICE": 176.0,
+            "INT_TOTAL_VALUE": 8800.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003006002"
+          },
+          {
+            "STR_PART_NO": "24171118",
+            "STR_DESC": "AXLE ASSEMBLY REAR WHEEL",
+            "INT_QUATITY": 4.0,
+            "INT_UNIT_PRICE": 3688.0,
+            "INT_TOTAL_VALUE": 14752.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": "000000005006001"
+          },
+          {
+            "STR_PART_NO": "24181153",
+            "STR_DESC": "LOCK SET",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 4984.0,
+            "INT_TOTAL_VALUE": 9968.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003001005"
+          },
+          {
+            "STR_PART_NO": "36DH4030",
+            "STR_DESC": "KIT CHAIN GUIDE PULSAR-150",
+            "INT_QUATITY": 50.0,
+            "INT_UNIT_PRICE": 768.0,
+            "INT_TOTAL_VALUE": 38400.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000004004002"
+          },
+          {
+            "STR_PART_NO": "36DS1201",
+            "STR_DESC": "KIT - VACCUM PISTON CARBURETTOR",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 2984.0,
+            "INT_TOTAL_VALUE": 44760.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004010"
+          },
+          {
+            "STR_PART_NO": "36DS1502",
+            "STR_DESC": "KIT - SPEEDOMETER GEAR",
+            "INT_QUATITY": 30.0,
+            "INT_UNIT_PRICE": 304.0,
+            "INT_TOTAL_VALUE": 9120.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000004005002"
+          },
+          {
+            "STR_PART_NO": "36JD0021",
+            "STR_DESC": "KIT CYL BLOCK PISTON ASSY ( AL) XCD 125 (JA521014)",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 11224.0,
+            "INT_TOTAL_VALUE": 33672.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011002005"
+          },
+          {
+            "STR_PART_NO": "36JE0003",
+            "STR_DESC": "KIT CHAIN GUIDE SPRINT",
+            "INT_QUATITY": 50.0,
+            "INT_UNIT_PRICE": 760.0,
+            "INT_TOTAL_VALUE": 38000.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000004004002"
+          },
+          {
+            "STR_PART_NO": "36JE0012",
+            "STR_DESC": "KIT CYL BLK PST ASLY SPRINT",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 12640.0,
+            "INT_TOTAL_VALUE": 37920.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011002002"
+          },
+          {
+            "STR_PART_NO": "36JK0031",
+            "STR_DESC": "KIT BLOCK PISTON ASSLY BM125",
+            "INT_QUATITY": 3.0,
+            "INT_UNIT_PRICE": 12704.0,
+            "INT_TOTAL_VALUE": 38112.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011002002"
+          },
+          {
+            "STR_PART_NO": "AA101499",
+            "STR_DESC": "CONNECTING ROD KIT-RE 4S",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 2392.0,
+            "INT_TOTAL_VALUE": 35880.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000002003002"
+          },
+          {
+            "STR_PART_NO": "AA101736",
+            "STR_DESC": "SECTOR ASSY COMP.WITH LEVER",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1488.0,
+            "INT_TOTAL_VALUE": 14880.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000005002001"
+          },
+          {
+            "STR_PART_NO": "AM191005",
+            "STR_DESC": "CABLE INNER SPEEDO RE205D",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 280.0,
+            "INT_TOTAL_VALUE": 5600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000010004001"
+          },
+          {
+            "STR_PART_NO": "AN101190",
+            "STR_DESC": "FILTER ASSEMBLY - OIL",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 664.0,
+            "INT_TOTAL_VALUE": 6640.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003004003"
+          },
+          {
+            "STR_PART_NO": "DH101680",
+            "STR_DESC": "GASKET CYLINDER HEAD",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 704.0,
+            "INT_TOTAL_VALUE": 10560.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000007002001"
+          },
+          {
+            "STR_PART_NO": "DH101864",
+            "STR_DESC": "BLOCK PISTON ASSLY-SPARES- K1 BLACK",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 9824.0,
+            "INT_TOTAL_VALUE": 98240.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000011002003"
+          },
+          {
+            "STR_PART_NO": "DH111015",
+            "STR_DESC": "CAP-SPARK PLUG",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 392.0,
+            "INT_TOTAL_VALUE": 7840.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001004010"
+          },
+          {
+            "STR_PART_NO": "DJ161221",
+            "STR_DESC": "FENDER REAR-ADDITIONAL (PULSAR UG II)",
+            "INT_QUATITY": 6.0,
+            "INT_UNIT_PRICE": 1048.0,
+            "INT_TOTAL_VALUE": 6288.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000017001001"
+          },
+          {
+            "STR_PART_NO": "DS121012",
+            "STR_DESC": "INSULATOR - CARBURETOR",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 232.0,
+            "INT_TOTAL_VALUE": 2320.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000004001004"
+          },
+          {
+            "STR_PART_NO": "DU151010",
+            "STR_DESC": "COUPLING",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1840.0,
+            "INT_TOTAL_VALUE": 18400.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000013004004"
+          },
+          {
+            "STR_PART_NO": "DZ191014",
+            "STR_DESC": "CABLE - SPEEDOMETER WITHOUT BENT TUBE",
+            "INT_QUATITY": 15.0,
+            "INT_UNIT_PRICE": 656.0,
+            "INT_TOTAL_VALUE": 9840.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006003005"
+          },
+          {
+            "STR_PART_NO": "JG541230",
+            "STR_DESC": "CAP OIL FILLING",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 88.0,
+            "INT_TOTAL_VALUE": 880.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000001006007"
+          },
+          {
+            "STR_PART_NO": "JN122006",
+            "STR_DESC": "SWING ARM ASSY (JN UG)",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 7472.0,
+            "INT_TOTAL_VALUE": 14944.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000009001004"
+          },
+          {
+            "STR_PART_NO": "JN521001",
+            "STR_DESC": "BLOCK/PISTON ASSEMBLY ( SPARE ) DISCOVER BLACK 135",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 7560.0,
+            "INT_TOTAL_VALUE": 75600.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000012002001"
+          },
+          {
+            "STR_PART_NO": "31121029",
+            "STR_DESC": "FILTER ELEMENT-AIR",
+            "INT_QUATITY": 50.0,
+            "INT_UNIT_PRICE": 384.0,
+            "INT_TOTAL_VALUE": 19200.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000007004001"
+          },
+          {
+            "STR_PART_NO": "AN101104",
+            "STR_DESC": "SECTOR COMPLETE REVERSE CONTROL",
+            "INT_QUATITY": 25.0,
+            "INT_UNIT_PRICE": 1616.0,
+            "INT_TOTAL_VALUE": 40400.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003002002"
+          },
+          {
+            "STR_PART_NO": "DJ221004",
+            "STR_DESC": "REAR VIEW MIRROR RH",
+            "INT_QUATITY": 12.0,
+            "INT_UNIT_PRICE": 792.0,
+            "INT_TOTAL_VALUE": 9504.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": "000000007001002"
+          },
+          {
+            "STR_PART_NO": "DK151031",
+            "STR_DESC": "ASSEMBLY MASTER CYLINDER REAR",
+            "INT_QUATITY": 5.0,
+            "INT_UNIT_PRICE": 5264.0,
+            "INT_TOTAL_VALUE": 26320.0,
             "STR_SERIAL_STATUS": "N",
             "STR_WAREHOUSE_HIER": "000000001002004"
           },
           {
-            "STR_PART_NO": "JF181409",
-            "STR_DESC": "ASSEMBLY HUGGER REAR (K11)",
-            "INT_QUATITY": 5.0,
-            "INT_UNIT_PRICE": 1512.0,
-            "INT_TOTAL_VALUE": 7560.0,
+            "STR_PART_NO": "JA541211",
+            "STR_DESC": "CAP OIL FILLER",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 176.0,
+            "INT_TOTAL_VALUE": 3520.0,
             "STR_SERIAL_STATUS": "N",
-            "STR_WAREHOUSE_HIER": "000000017001001"
+            "STR_WAREHOUSE_HIER": "000000001006007"
+          },
+          {
+            "STR_PART_NO": "24231239",
+            "STR_DESC": "HOOD PIPE ASSY COMP",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 3104.0,
+            "INT_TOTAL_VALUE": 6208.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000018001001"
+          },
+          {
+            "STR_PART_NO": "36311028",
+            "STR_DESC": "VALVE KIT CALIBER",
+            "INT_QUATITY": 20.0,
+            "INT_UNIT_PRICE": 1624.0,
+            "INT_TOTAL_VALUE": 32480.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000002003003"
+          },
+          {
+            "STR_PART_NO": "36314001K",
+            "STR_DESC": "STEERING CONE KIT - CT / PLATINA 100",
+            "INT_QUATITY": 35.0,
+            "INT_UNIT_PRICE": 1064.0,
+            "INT_TOTAL_VALUE": 37240.0,
+            "STR_SERIAL_STATUS": "I",
+            "STR_WAREHOUSE_HIER": "000000002003003"
+          },
+          {
+            "STR_PART_NO": "AA191071",
+            "STR_DESC": "SPEEDOMETER CABLE COMPLETE",
+            "INT_QUATITY": 10.0,
+            "INT_UNIT_PRICE": 1128.0,
+            "INT_TOTAL_VALUE": 11280.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000006002006"
+          },
+          {
+            "STR_PART_NO": "CL201023",
+            "STR_DESC": "BULB - HEAD LAMP 12V-35/35W-HS1",
+            "INT_QUATITY": 30.0,
+            "INT_UNIT_PRICE": 448.0,
+            "INT_TOTAL_VALUE": 13440.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000003002003"
+          },
+          {
+            "STR_PART_NO": "LCF00001",
+            "STR_DESC": "NUT DOMED CAP M8X1.25XCL10",
+            "INT_QUATITY": 60.0,
+            "INT_UNIT_PRICE": 64.0,
+            "INT_TOTAL_VALUE": 3840.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": "000000002003001"
+          },
+          {
+            "STR_PART_NO": "AA161305",
+            "STR_DESC": "DASHBOARD PLASTIC (BEIGE)",
+            "INT_QUATITY": 2.0,
+            "INT_UNIT_PRICE": 4048.0,
+            "INT_TOTAL_VALUE": 8096.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
+          },
+          {
+            "STR_PART_NO": "AA121147",
+            "STR_DESC": "VALVE DUST EJECTOR",
+            "INT_QUATITY": 14.0,
+            "INT_UNIT_PRICE": 40.0,
+            "INT_TOTAL_VALUE": 560.0,
+            "STR_SERIAL_STATUS": "N",
+            "STR_WAREHOUSE_HIER": null
           }
         ]
       }
