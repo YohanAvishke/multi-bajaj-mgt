@@ -18,15 +18,39 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie': '.AspNetCore.Session=CfDJ8Nf%2BuJSs619Ej1a3tttZRKQjjdmyGrpZnx8%2FKLC'
-              '%2FcXTjbj3PQEnkzIR0jIwkKYIYwEnhUtrG2dFjxdzcMIn4BOE9%2F3ChFH0%2BV3xoRs5sMx7oTsKa0DkzqU'
-              '%2FxGKRuWgGXhlpLvnyFyepdC2aA5o40jy5JDtC6xqJF3fj%2BN5S0P6TE; '
-              '.AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Nf'
-              '-uJSs619Ej1a3tttZRKS7HXtDuDYpom0z69xVQwr4yeAS3GsNJwivd0SLipkRE11dfenSY__3u0'
-              '-PSePBoj0OzhZu1nVvW4pz4_UvZYp5lxK5crI6AgReoXnF5rmAtk5KnU36a3Xd1QoYC4iV51g',
     'dnt': '1',
     'sec-gpc': '1'
     }
+
+
+def authorise():
+    url = "https://erp.dpg.lk/"
+    payload = "strUserName=dlrmbenterp&strPassword=D0000402"
+    headers = {
+        'authority': 'erp.dpg.lk',
+        'sec-ch-ua': '"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"',
+        'accept': 'application/json, text/javascript, */*; q=0.01',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'x-requested-with': 'XMLHttpRequest',
+        'sec-ch-ua-mobile': '?0',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/95.0.4638.69 Safari/537.36',
+        'sec-ch-ua-platform': '"macOS"',
+        'origin': 'https://erp.dpg.lk',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://erp.dpg.lk/',
+        'accept-language': 'en-US,en;q=0.9',
+        'dnt': '1',
+        'sec-gpc': '1'
+        }
+    response = requests.request("POST", url, headers = headers, data = payload)
+
+    session = response.cookies._cookies['erp.dpg.lk']['/']['.AspNetCore.Session']
+    cookie = f'{session.name}={session.value}'
+    HEADERS["cookie"] = cookie
+    return cookie
 
 
 def filter_from_mobile_number(mobile_number):

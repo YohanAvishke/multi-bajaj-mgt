@@ -31,13 +31,6 @@ HEADERS = {
     'sec-fetch-dest': 'empty',
     'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
     'accept-language': 'en-US,en;q=0.9',
-    'cookie':
-        ".AspNetCore.Session=CfDJ8Nf%2BuJSs619Ej1a3tttZRKQjjdmyGrpZnx8%2FKLC"
-        "%2FcXTjbj3PQEnkzIR0jIwkKYIYwEnhUtrG2dFjxdzcMIn4BOE9%2F3ChFH0%2BV3xoRs5sMx7oTsKa0DkzqU"
-        "%2FxGKRuWgGXhlpLvnyFyepdC2aA5o40jy5JDtC6xqJF3fj%2BN5S0P6TE; "
-        ".AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Nf"
-        "-uJSs619Ej1a3tttZRKS7HXtDuDYpom0z69xVQwr4yeAS3GsNJwivd0SLipkRE11dfenSY__3u0"
-        "-PSePBoj0OzhZu1nVvW4pz4_UvZYp5lxK5crI6AgReoXnF5rmAtk5KnU36a3Xd1QoYC4iV51g",
     'dnt': '1',
     'sec-gpc': '1'
     }
@@ -46,6 +39,10 @@ HEADERS = {
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
+
+    HEADERS["cookie"] = erpClient.authorise()
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
+                 f"===================================================================================================")
 
 
 # -*- Functions -*-
@@ -369,8 +366,8 @@ def inventory_adjustment():
 
 
 # -*- Function Calls -*-
-# get_grn_for_invoice()
-# get_products_from_invoices()
+get_grn_for_invoice()
+get_products_from_invoices()
 # json_to_csv()
 # merge_duplicates()
-inventory_adjustment()
+# inventory_adjustment()
