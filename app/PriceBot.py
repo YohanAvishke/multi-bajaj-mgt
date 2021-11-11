@@ -3,6 +3,7 @@ import time
 import requests
 import pandas as pd
 import json
+import app.clients.erpClient as erpClient
 
 # -*- File Paths -*-
 PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
@@ -26,12 +27,7 @@ HEADERS = {
     "sec-fetch-mode": "cors",
     "sec-fetch-dest": "empty",
     "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
-    "accept-language": "en-US,en;q=0.9",
-    "cookie":
-        ".AspNetCore.Session=CfDJ8Ijzi2b7al9HgUPt2GjxOSwBuQxOCqhlaeag%2FnZ7YDPu7cpc%2B0lP"
-        "%2BdqVmZJqYTn1WA9hLF900Lvc7NABJYx0gATQtdxUaIn1sgVWn1glAYcte8HcbZP1usfc93dQUNu8IfCoBAjWRcDa0z7Q6vIjlJnBNXjxJ"
-        "%2BIup3dDkyc7aHoj; .AspNetCore.Antiforgery.mEZFPqlrlZ8=CfDJ8Ijzi2b7al9HgUPt2GjxOSwRwaNL6HGbzXxthYJBoCeE"
-        "-iZs_XnzIWvwQui1_rI1EKd0nvGslgY8xQLaYhALCBH8rxkbb9vGwjWkThbQhNQR8eUGWbnR1Xa-HsI30wxkgWcevCkM4UKge8AG7-HKiiI",
+    "accept-language": "en-US,en;q=0.9"
     }
 
 # -*- Main function -*-
@@ -41,6 +37,10 @@ if __name__ == "__main__":
 
     pd.set_option("display.expand_frame_repr", False)
     pd.set_option("display.max_rows", 25)
+
+    HEADERS["cookie"] = erpClient.authorise()
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
+                 f"===================================================================================================")
 
 
 # -*- Function -*-
