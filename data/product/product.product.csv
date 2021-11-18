@@ -1,0 +1,14 @@
+Internal Reference,Name,Description,Product Category/ID,Point of Sale Category/ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold
+05101072(YL),YL Clutch Disk 3W,YL Clutch Disk 3W,point_of_sale.00275,__export__.pos_category_11_9f8532a8,Storable Product,84,84,True,True,True
+24101545(YL),YL Push Rod,YL Push Rod,point_of_sale.00273,__export__.pos_category_11_9f8532a8,Storable Product,142,142,True,True,True
+24191086(YL),YL Choke Outer 3W 2S,YL Choke Outer 3W 2S,point_of_sale.00054,__export__.pos_category_11_9f8532a8,Storable Product,450,450,True,True,True
+24201303(YL),YL Indicator 3W 2S,YL Indicator 3W 2S,point_of_sale.00213,__export__.pos_category_11_9f8532a8,Storable Product,688,688,True,True,True
+31101020(YL),YL Rocker Arm Boxer,YL Rocker Arm Boxer,point_of_sale.00303,__export__.pos_category_11_9f8532a8,Storable Product,495,495,True,True,True
+36AA4102(YL),YL Engine Valve Compact New,YL Engine Valve Compact New,point_of_sale.00396,__export__.pos_category_11_9f8532a8,Storable Product,1920,1920,True,True,True
+36AA4117(YL),YL Head Set 4S 175,YL Head Set 4S 175,point_of_sale.00185,__export__.pos_category_11_9f8532a8,Storable Product,14875,14875,True,True,True
+AA121135(YL),YL Oil Cooler,YL Oil Cooler,point_of_sale.00092,__export__.pos_category_11_9f8532a8,Storable Product,5060,5060,True,True,True
+RB0619(SD),SD H/L Cowling Beading 3W 4S Set,SD H/L Cowling Beading 3W 4S Set,point_of_sale.00027,__export__.pos_category_42_b1926f89,Storable Product,210,210,True,True,True
+RB0623(SD),SD Joint Beading Frame 3W,SD Joint Beading Frame 3W,point_of_sale.00027,__export__.pos_category_42_b1926f89,Storable Product,330,330,True,True,True
+RJ0369(ENDURANCE),Endurance Brake Dail Auto Adjust Rear 4S Lh,Endurance Brake Dail Auto Adjust Rear 4S LH,point_of_sale.00007,__export__.pos_category_29_fc3f045c,Storable Product,3577,3577,True,True,True
+RJ0370(ENDURANCE),Endurance Brake Dail Auto Adjust Rear 4S Rh,Endurance Brake Dail Auto Adjust Rear 4S RH,point_of_sale.00007,__export__.pos_category_29_fc3f045c,Storable Product,3530,3530,True,True,True
+RJ0371(ENDURANCE),Endurance Brake Dail Set Front 4S,Endurance Brake Dail Set Front 4S,point_of_sale.00007,__export__.pos_category_29_fc3f045c,Storable Product,5597,5597,True,True,True
