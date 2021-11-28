@@ -1,0 +1,6 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+SA Products Lanka Invoice - MS62477,True,SA24170427(SA),__export__.product_product_50021_f1a098fd,stock.stock_location_stock,-342.0
+,,GK36AE00(SA),__export__.product_product_49893_45cd1244,stock.stock_location_stock,-17.0
+,,GKAE1001(SA),__export__.product_product_49889_3331da84,stock.stock_location_stock,-16.0
+,,SA06101007(SA),__export__.product_product_49895_16699a18,stock.stock_location_stock,30.0
+,,SAAE101007(SA),__export__.product_product_50139_c35c25f2,stock.stock_location_stock,3.0

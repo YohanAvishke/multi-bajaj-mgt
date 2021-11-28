@@ -1,14 +1,36 @@
-Internal Reference,Name,Description,Product Category/ID,Point of Sale Category/ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold
-05101072(YL),YL Clutch Disk 3W,YL Clutch Disk 3W,point_of_sale.00275,__export__.pos_category_11_9f8532a8,Storable Product,84,84,True,True,True
-24101545(YL),YL Push Rod,YL Push Rod,point_of_sale.00273,__export__.pos_category_11_9f8532a8,Storable Product,142,142,True,True,True
-24191086(YL),YL Choke Outer 3W 2S,YL Choke Outer 3W 2S,point_of_sale.00054,__export__.pos_category_11_9f8532a8,Storable Product,450,450,True,True,True
-24201303(YL),YL Indicator 3W 2S,YL Indicator 3W 2S,point_of_sale.00213,__export__.pos_category_11_9f8532a8,Storable Product,688,688,True,True,True
-31101020(YL),YL Rocker Arm Boxer,YL Rocker Arm Boxer,point_of_sale.00303,__export__.pos_category_11_9f8532a8,Storable Product,495,495,True,True,True
-36AA4102(YL),YL Engine Valve Compact New,YL Engine Valve Compact New,point_of_sale.00396,__export__.pos_category_11_9f8532a8,Storable Product,1920,1920,True,True,True
-36AA4117(YL),YL Head Set 4S 175,YL Head Set 4S 175,point_of_sale.00185,__export__.pos_category_11_9f8532a8,Storable Product,14875,14875,True,True,True
-AA121135(YL),YL Oil Cooler,YL Oil Cooler,point_of_sale.00092,__export__.pos_category_11_9f8532a8,Storable Product,5060,5060,True,True,True
-RB0619(SD),SD H/L Cowling Beading 3W 4S Set,SD H/L Cowling Beading 3W 4S Set,point_of_sale.00027,__export__.pos_category_42_b1926f89,Storable Product,210,210,True,True,True
-RB0623(SD),SD Joint Beading Frame 3W,SD Joint Beading Frame 3W,point_of_sale.00027,__export__.pos_category_42_b1926f89,Storable Product,330,330,True,True,True
-RJ0369(ENDURANCE),Endurance Brake Dail Auto Adjust Rear 4S Lh,Endurance Brake Dail Auto Adjust Rear 4S LH,point_of_sale.00007,__export__.pos_category_29_fc3f045c,Storable Product,3577,3577,True,True,True
-RJ0370(ENDURANCE),Endurance Brake Dail Auto Adjust Rear 4S Rh,Endurance Brake Dail Auto Adjust Rear 4S RH,point_of_sale.00007,__export__.pos_category_29_fc3f045c,Storable Product,3530,3530,True,True,True
-RJ0371(ENDURANCE),Endurance Brake Dail Set Front 4S,Endurance Brake Dail Set Front 4S,point_of_sale.00007,__export__.pos_category_29_fc3f045c,Storable Product,5597,5597,True,True,True
+Internal Reference,Name,Description,Product Category/ID,Point of Sale Category/ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold,INT_QUANTITY
+SAAN161074(SA),Battery Bracket 4S With Lock Nut,Battery Bracket 4S With Lock Nut,,__export__.pos_category_10_919622a7,Storable Product,450,450,true,true,true,5
+SA24151174(SA),Brake Dial Rear L/H 2S,Brake Dial Rear L/H 2S,,__export__.pos_category_10_919622a7,Storable Product,1100,1100,true,true,true,2
+SA24151178(SA),Brake Dial Rear R/h 2S,Brake Dial Rear R/h 2S,,__export__.pos_category_10_919622a7,Storable Product,1100,1100,true,true,true,2
+SA24171049(SA),Bush Shock Rear (Big),Bush Shock Rear (Big),,__export__.pos_category_10_919622a7,Storable Product,150,150,true,true,true,20
+VN22120525(SA),Carb Choke Spring (5 Pack),Carb Choke Spring (5 Pack),,__export__.pos_category_10_919622a7,Storable Product,125,125,true,true,true,2
+SA24121049(SA),Carb Hose Set 5P,Carb Hose Set 5P,,__export__.pos_category_10_919622a7,Storable Product,140,140,true,true,true,10
+VN22120522(SA),Carb Needle Lock (5 Pack),Carb Needle Lock (5 Pack),,__export__.pos_category_10_919622a7,Storable Product,140,140,true,true,true,4
+VN24100805(SA),Clutch Driving Plate Set (3P),Clutch Driving Plate Set (3P),,__export__.pos_category_10_919622a7,Storable Product,440,440,true,true,true,10
+SA0100815(SA),Clutch Washer 3P Blue (5 Pack),Clutch Washer 3P Blue (5 Pack),,__export__.pos_category_10_919622a7,Storable Product,140,140,true,true,true,4
+SA03170127(SA),Counter Gear Bearing Lock (10 Pack),Counter Gear Bearing Lock (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,240,240,true,true,true,5
+SA24170427(SA),Coupling Rubber Kit Black (20 Set),Coupling Rubber Kit Black (20 Set),,__export__.pos_category_10_919622a7,Storable Product,625,625,true,true,true,3
+SA24201275(SA),Condenser,Condenser,,__export__.pos_category_10_919622a7,Storable Product,235,235,true,true,true,5
+24231245(SA),Door Nut Black Big (10 Pack),Door Nut Black Big (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,175,175,true,true,true,2
+24231245G(SA),Door Nut Green HD (10 Pack),Door Nut Green HD (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,175,175,true,true,true,2
+24231245R(SA),Door Nut Red HD (10 Pack),Door Nut Red HD (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,175,175,true,true,true,2
+39106504S(SA),Engine Bolt Kit 4S With Starter Motor B,Engine Bolt Kit 4S With Starter Motor B,,__export__.pos_category_10_919622a7,Storable Product,415,415,true,true,true,20
+39008904S(SA),Engine Housing Bolt Kit Full 3P,Engine Housing Bolt Kit Full 3P,,__export__.pos_category_10_919622a7,Storable Product,250,250,true,true,true,10
+SA35101060(SA),Engine Oil Bolt 2S With Aluminium Washer,Engine Oil Bolt 2S With Aluminium Washer,,__export__.pos_category_10_919622a7,Storable Product,250,250,true,true,true,1
+GK36AE00(SA),,,,__export__.pos_category_10_919622a7,,,,,,,20
+SA39015008(SA),Eye Pin Big (10 Pack),Eye Pin Big (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,210.00,210.00,true,true,true,3
+SA39014609(SA),Eye Pin Small (10 Pack),Eye Pin Small (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,190.00,190.00,true,true,true,5
+SA39088601(SA),Fan Cover Bolt (10 Pack),Fan Cover Bolt (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,420.00,420.00,true,true,true,2
+SA39069415(SA),Front Axle Nut Compact (10 Pack),Front Axle Nut Compact (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,440.00,440.00,true,true,true,3
+GKAE1001(SA),,,,__export__.pos_category_10_919622a7,,,,,,,3
+GK241003(SA),Gasket Silencer (4 Hole),Gasket Silencer (4 Hole),,__export__.pos_category_10_919622a7,Storable Product,275.00,275.00,true,true,true,3
+GK241005(SA),Gasket Silencer Large (High Thickness),Gasket Silencer Large (High Thickness),,__export__.pos_category_10_919622a7,Storable Product,400.00,400.00,true,true,true,5
+SA39163015(SA),Head Nut 11NO (10 Pack),Head Nut 11NO (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,240.00,240.00,true,true,true,3
+SA39142604(SA),Kick Lever Bolt 13NO (10 Pack),Kick Lever Bolt 13NO (10 Pack),,__export__.pos_category_10_919622a7,Storable Product,330.00,330.00,true,true,true,1
+SA06101007(SA),,,,__export__.pos_category_10_919622a7,,,,,,,15
+GKDS1001(SA),Magneto Cover Discover,Magneto Cover Discover,,__export__.pos_category_10_919622a7,Storable Product,115.00,115.00,true,true,true,50
+SA24190225(SA),Outer Casing,Outer Casing,,__export__.pos_category_10_919622a7,Storable Product,175.00,175.00,true,true,true,20
+SAAE201007(SA),Reverse Switch With Bracket,Reverse Switch With Bracket,,__export__.pos_category_10_919622a7,Storable Product,265.00,265.00,true,true,true,10
+SA24231260(SA),Rubber Bar Beading,Rubber Bar Beading,,__export__.pos_category_10_919622a7,Storable Product,390.00,390.00,true,true,true,10
+SAAE101007(SA),,,,__export__.pos_category_10_919622a7,,,,,,,3
+SA36224001(SA),Wheel Rim Complete,Wheel Rim Complete,,__export__.pos_category_10_919622a7,Storable Product,"2,100.00","2,100.00",true,true,true,10
