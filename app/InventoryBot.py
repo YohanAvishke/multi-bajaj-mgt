@@ -7,7 +7,7 @@ import pandas
 import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/{date.today()}-adjustment.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
