@@ -1,0 +1,10 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Quantity Fixes,True,35101059,__export__.product_product_38403_7d3e54e9,stock.stock_location_stock,0
+,,JE581401,__export__.product_product_19166_bdf86a7f,stock.stock_location_stock,0
+,,PA511246,__export__.product_product_32931_c403ebc2,stock.stock_location_stock,0
+,,DH101544,__export__.product_product_14905_ee2ab780,stock.stock_location_stock,0
+,,DH101607,__export__.product_product_14916_3cc65248,stock.stock_location_stock,0
+,,DH101387,__export__.product_product_14856_30902515,stock.stock_location_stock,0
+,,DM191005,__export__.product_product_16397_4e1b26f7,stock.stock_location_stock,-1.0
+,,JC191009,__export__.product_product_18642_270cc098,stock.stock_location_stock,0
+,,39105315,__export__.product_product_38668_5b25d24c,stock.stock_location_stock,0

@@ -7,8 +7,7 @@ import pandas
 import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
-# ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-2021-11-22.csv"
+ADJUSTMENT_PATH = f"../data/inventory/adjustments/adjustment-{date.today()}.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -369,6 +368,6 @@ def inventory_adjustment():
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-# json_to_csv()
+json_to_csv()
 # merge_duplicates()
 inventory_adjustment()
