@@ -8,6 +8,7 @@ import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_PATH = f"../data/inventory/adjustments/{date.today()}-adjustment.csv"
+QTY_FIX_PATH = f"../data/inventory/adjustments/{date.today()}-fix.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -272,6 +273,12 @@ def json_to_csv():
                 adj_writer.writerow({"name": adj_ref,
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
+    with open(QTY_FIX_PATH, "w") as adj_csv_file:
+        field_names = ("name", "Product/Internal Reference", "Counted Quantity")
+        adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
+                                    quoting = csv.QUOTE_MINIMAL)
+        adj_writer.writeheader()
+
     logging.info("Product data modeling done.")
 
 
