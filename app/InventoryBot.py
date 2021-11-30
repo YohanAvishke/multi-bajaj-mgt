@@ -3,12 +3,12 @@ import csv
 import json
 import requests
 import logging
-import pandas
+import pandas as pd
 import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
 ADJUSTMENT_PATH = f"../data/inventory/adjustments/{date.today()}-adjustment.csv"
-QTY_FIX_PATH = f"../data/inventory/adjustments/{date.today()}-fix.csv"
+QTY_FIX_FILE_PATH = f"../data/inventory/adjustments/{date.today()}-fix.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -41,9 +41,9 @@ if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
 
-    HEADERS["cookie"] = erpClient.authorise()
-    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
-                 f"===================================================================================================")
+    # HEADERS["cookie"] = erpClient.authorise()
+    # logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
+    #              f"===================================================================================================")
 
 
 # -*- Functions -*-
@@ -273,12 +273,6 @@ def json_to_csv():
                 adj_writer.writerow({"name": adj_ref,
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
-    with open(QTY_FIX_PATH, "w") as adj_csv_file:
-        field_names = ("name", "Product/Internal Reference", "Counted Quantity")
-        adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
-                                    quoting = csv.QUOTE_MINIMAL)
-        adj_writer.writeheader()
-
     logging.info("Product data modeling done.")
 
 
@@ -287,7 +281,7 @@ def merge_duplicates():
     """
     Add the sum of the duplicate products
     """
-    df = pandas.read_csv(ADJUSTMENT_PATH)
+    df = pd.read_csv(ADJUSTMENT_PATH)
     df["Counted Quantity"] = df.groupby(["name", "Product/Internal Reference"])["Counted Quantity"].transform('sum')
     df.drop_duplicates(["name", "Product/Internal Reference"], inplace = True, keep = "last")
     df.to_csv(ADJUSTMENT_PATH, index = False)
@@ -304,6 +298,7 @@ def inventory_adjustment():
     """
     products = []
     invalid_products = []
+    qty_fixable_products = []
     previous_adjustment_invoice = None
 
     with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_PATH, "r") as adjustment_file:
@@ -329,27 +324,24 @@ def inventory_adjustment():
             if adjustment_number == inventory_number:
                 exists = True
                 finalised_quantity = inventory_quantity + adjustment_quantity
+                product_data = [adjustment_invoice, is_exhausted_included, inventory_number,
+                                inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
+                                finalised_quantity]
 
                 if inventory_quantity < 0:
+                    qty_fixable_products.append(product_data)
                     logging.warning(f"Inventory initial qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity} . Finalised "
                                     f"qty: {finalised_quantity}.")
                 elif finalised_quantity < 0:
+                    qty_fixable_products.append(product_data)
                     logging.warning(f"Inventory final qty is negative: {adjustment_number}."
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
                                     f"qty: {finalised_quantity}.")
 
-                products.append({
-                    "name": adjustment_invoice,
-                    "Include Exhausted Products": is_exhausted_included,
-                    "reference": inventory_number,
-                    "line_ids/product_id/id": inventory_product["Product/Product/ID"],
-                    "line_ids/location_id/id": "stock.stock_location_stock",
-                    "line_ids/product_qty": finalised_quantity,
-                    })
+                products.append(product_data)
                 # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
                 previous_adjustment_invoice = adjustment_product["name"]
-
                 break
 
         if not exists:
@@ -358,18 +350,24 @@ def inventory_adjustment():
     for product in invalid_products:
         logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
-    with open(ADJUSTMENT_PATH, mode = 'w') as adjustment_file:
-        field_names = (
-            "name", "Include Exhausted Products", "reference", "line_ids/product_id/id", "line_ids/location_id/id",
-            "line_ids/product_qty")
-        adjustment_writer = csv.DictWriter(adjustment_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
-                                           quoting = csv.QUOTE_MINIMAL)
-        adjustment_writer.writeheader()
+    _create_quantity_fixes(qty_fixable_products)
 
-        for product in products:
-            adjustment_writer.writerow(product)
+    columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
+               'line_ids/product_qty']
+    df = pd.DataFrame(columns = columns, data = products)
+    df.to_csv(ADJUSTMENT_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
     logging.info("Inventory Adjustment done.")
+
+
+def _create_quantity_fixes(products):
+    """
+    Create file for products with negative inventories
+    """
+    columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
+               'line_ids/product_qty']
+    df = pd.DataFrame(columns = columns, data = products)
+    df.to_csv(QTY_FIX_FILE_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
 
 # -*- Function Calls -*-
