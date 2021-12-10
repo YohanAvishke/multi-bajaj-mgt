@@ -5,119 +5,19 @@
         "Type": "Sales",
         "Products": [
           {
-            "STR_PART_NO": "36JN0015",
-            "INT_QUATITY": 8,
-            "DATE": "2021/12/02"
+            "STR_PART_NO": "36DJ4008",
+            "INT_QUATITY": 1,
+            "DATE": "2021/12/08"
+          },
+          {
+            "STR_PART_NO": "AN101123",
+            "INT_QUATITY": 1,
+            "DATE": ""
           },
           {
             "STR_PART_NO": "AA101598",
-            "INT_QUATITY": 4,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AA191091",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "36JZ0007",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "36DZ0002",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DF101055",
-            "INT_QUATITY": -4,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DD201002",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "36AA4025",
-            "INT_QUATITY": -5,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AA111085K",
-            "INT_QUATITY": -5,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AA191115",
-            "INT_QUATITY": -3,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DU161008",
-            "INT_QUATITY": -4,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AA101134",
             "INT_QUATITY": 1,
             "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AA111134",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "52JB0231",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DM191002",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AZ351207",
-            "INT_QUATITY": 4,
-            "DATE": "2021/12/03"
-          },
-          {
-            "STR_PART_NO": "AZ161212",
-            "INT_QUATITY": 2,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "PD531029",
-            "INT_QUATITY": 2,
-            "DATE": "2021/12/04"
-          },
-          {
-            "STR_PART_NO": "AA101598",
-            "INT_QUATITY": 2,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "24151171",
-            "INT_QUATITY": 2,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "36DD4008K",
-            "INT_QUATITY": -15,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "EC401030",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "39166005",
-            "INT_QUATITY": 10,
-            "DATE": "2021/12/06"
           },
           {
             "STR_PART_NO": "AN101123",
@@ -126,7 +26,7 @@
           },
           {
             "STR_PART_NO": "36DZ0002",
-            "INT_QUATITY": 2,
+            "INT_QUATITY": 1,
             "DATE": ""
           },
           {
@@ -135,98 +35,8 @@
             "DATE": ""
           },
           {
-            "STR_PART_NO": "JA511012",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "JE571007",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "36311508",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "31151060",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DD121013",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DD111018",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DX101046",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DJ201206",
-            "INT_QUATITY": -2,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "JE541240",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "JE541241",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "JE541233",
-            "INT_QUATITY": -1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "31101018",
-            "INT_QUATITY": 10,
-            "DATE": "2021/12/07"
-          },
-          {
-            "STR_PART_NO": "AA101875",
-            "INT_QUATITY": 6,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DJ151036",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DJ151088",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "36JZ0112",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "DU191035",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "AA201048",
-            "INT_QUATITY": 1,
-            "DATE": ""
-          },
-          {
-            "STR_PART_NO": "24121070",
-            "INT_QUATITY": 1,
+            "STR_PART_NO": "JA511006",
+            "INT_QUATITY": 3,
             "DATE": ""
           }
         ]
