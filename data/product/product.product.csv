@@ -1,32 +1,8 @@
 Internal Reference,Name,Description,Product Category/ID,Point of Sale Category/ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold,INT_QUANTITY
-SAAN161074(SA),Battery Bracket 4S With Lock Nut,Battery Bracket 4S With Lock Nut,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,450,450,true,true,true,5
-SA24151174(SA),Brake Dial Rear L/H 2S,Brake Dial Rear L/H 2S,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,1100,1100,true,true,true,2
-SA24151178(SA),Brake Dial Rear R/h 2S,Brake Dial Rear R/h 2S,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,1100,1100,true,true,true,2
-SA24171049(SA),Bush Shock Rear (Big),Bush Shock Rear (Big),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,150,150,true,true,true,20
-VN22120525(SA),Carb Choke Spring (5 Pack),Carb Choke Spring (5 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,10
-SA24121049(SA),Carb Hose Set 5P,Carb Hose Set 5P,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,140,140,true,true,true,10
-VN22120522(SA),Carb Needle Lock (5 Pack),Carb Needle Lock (5 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,20
-VN24100805(SA),Clutch Driving Plate Set (3P),Clutch Driving Plate Set (3P),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,440,440,true,true,true,10
-SA0100815(SA),Clutch Washer 3P Blue (5 Pack),Clutch Washer 3P Blue (5 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,20
-SA03170127(SA),Counter Gear Bearing Lock (10 Pack),Counter Gear Bearing Lock (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,50
-SA24170427(SA),Coupling Rubber Kit Black (20 Set),Coupling Rubber Kit Black (20 Set),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,40,40,true,true,true,60
-SA24201275(SA),Condenser,Condenser,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,235,235,true,true,true,5
-24231245(SA),Door Nut Black Big (10 Pack),Door Nut Black Big (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,20,20,true,true,true,20
-24231245G(SA),Door Nut Green HD (10 Pack),Door Nut Green HD (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,20,20,true,true,true,20
-24231245R(SA),Door Nut Red HD (10 Pack),Door Nut Red HD (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,20,20,true,true,true,20
-39106504S(SA),Engine Bolt Kit 4S With Starter Motor B,Engine Bolt Kit 4S With Starter Motor B,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,415,415,true,true,true,20
-39008904S(SA),Engine Housing Bolt Kit Full 3P,Engine Housing Bolt Kit Full 3P,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,250,250,true,true,true,10
-SA35101060(SA),Engine Oil Bolt 2S With Aluminium Washer,Engine Oil Bolt 2S With Aluminium Washer,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,10
-SA39015008(SA),Eye Pin Big (10 Pack),Eye Pin Big (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,30
-SA39014609(SA),Eye Pin Small (10 Pack),Eye Pin Small (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,20,20,true,true,true,50
-SA39088601(SA),Fan Cover Bolt (10 Pack),Fan Cover Bolt (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,50,50,true,true,true,20
-SA39069415(SA),Front Axle Nut Compact (10 Pack),Front Axle Nut Compact (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,50,50,true,true,true,30
-GK241003(SA),Gasket Silencer (4 Hole),Gasket Silencer (4 Hole),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,30
-GK241005(SA),Gasket Silencer Large (High Thickness),Gasket Silencer Large (High Thickness),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,40,40,true,true,true,50
-SA39163015(SA),Head Nut 11NO (10 Pack),Head Nut 11NO (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,30,30,true,true,true,30
-SA39142604(SA),Kick Lever Bolt 13NO (10 Pack),Kick Lever Bolt 13NO (10 Pack),product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,40,40,true,true,true,10
-GKDS1001(SA),Magneto Cover Discover,Magneto Cover Discover,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,115.00,115.00,true,true,true,50
-SA24190225(SA),Outer Casing,Outer Casing,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,175.00,175.00,true,true,true,20
-SAAE201007(SA),Reverse Switch With Bracket,Reverse Switch With Bracket,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,265.00,265.00,true,true,true,10
-SA24231260(SA),Rubber Bar Beading,Rubber Bar Beading,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,390.00,390.00,true,true,true,10
-SA36224001(SA),Wheel Rim Complete,Wheel Rim Complete,product.product_category_1,__export__.pos_category_10_919622a7,Storable Product,"2,100.00","2,100.00",true,true,true,10
+24111128(YL),YL CDI With Damper (New),YL CDI With Damper (New),product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,1145.00,1145.00,True,True,True,4
+24121066S(YL),YL Carburetor Piston 5PS,YL Carburetor Piston 5PS,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,803.00,803.00,True,True,True,3
+24121070S(YL),YL Needle Valves,YL Needle Valves,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,851.00,851.00,True,True,True,4
+AA1910775(YL),YL Cable Complete Clutch S,YL Cable Complete Clutch S,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,793.00,793.00,True,True,True,5
+AA191080(YL),YL Cable Inner Speedometer,YL Cable Inner Speedometer,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,292.00,292.00,True,True,True,5
+AL191043(YL),YL Speedo Meter 4S 205,YL Speedo Meter 4S 205,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,2460.00,2460.00,True,True,True,3
+BP302(YL),YL Cali Pump ASSY discovery/ Pulser E,YL Cali Pump ASSY discovery/ Pulser E,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,4785.00,4785.00,True,True,True,2

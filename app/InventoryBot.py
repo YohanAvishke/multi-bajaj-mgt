@@ -1,3 +1,4 @@
+import re
 from datetime import date
 import csv
 import json
@@ -7,8 +8,9 @@ import pandas as pd
 import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
-ADJUSTMENT_PATH = f"../data/inventory/adjustments/{date.today()}-adjustment.csv"
-QTY_FIX_FILE_PATH = f"../data/inventory/adjustments/{date.today()}-fix.csv"
+SALES_PATH = "../data/inventory/sales.xlsx"
+ADJUSTMENT_FILE_PATH = f"../data/inventory/adjustments/2021-12-08-adjustment.csv"
+QTY_FIX_FILE_PATH = f"../data/inventory/adjustments/2021-12-08-adjustment.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -247,13 +249,13 @@ def json_to_csv():
     get_products_from_invoices() should be called before
 
     ''' After Call
-    Part Numbers with the quantities will be in the `ADJUSTMENT_PATH`
+    Part Numbers with the quantities will be in the `ADJUSTMENT_FILE_PATH`
     """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     adjustments = invoice_reader["Invoice"]["Numbers"]
 
-    with open(ADJUSTMENT_PATH, "w") as adj_csv_file:
+    with open(ADJUSTMENT_FILE_PATH, "w") as adj_csv_file:
         field_names = ("name", "Product/Internal Reference", "Counted Quantity")
         adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
                                     quoting = csv.QUOTE_MINIMAL)
@@ -281,10 +283,10 @@ def merge_duplicates():
     """
     Add the sum of the duplicate products
     """
-    df = pd.read_csv(ADJUSTMENT_PATH)
+    df = pd.read_csv(ADJUSTMENT_FILE_PATH)
     df["Counted Quantity"] = df.groupby(["name", "Product/Internal Reference"])["Counted Quantity"].transform('sum')
     df.drop_duplicates(["name", "Product/Internal Reference"], inplace = True, keep = "last")
-    df.to_csv(ADJUSTMENT_PATH, index = False)
+    df.to_csv(ADJUSTMENT_FILE_PATH, index = False)
     logging.info("Adjustment's duplicate products have been merged")
 
 
@@ -294,24 +296,23 @@ def inventory_adjustment():
     json_to_csv() should be called before to get the adjustment file
 
     After Call
-    Final file to upload will be available at `ADJUSTMENT_PATH`
+    Final file to upload will be available at `ADJUSTMENT_FILE_PATH`
     """
     products = []
-    invalid_products = []
     qty_fixable_products = []
+    invalid_products = []
     previous_adjustment_invoice = None
 
-    with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_PATH, "r") as adjustment_file:
+    with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_FILE_PATH, "r") as adjustment_file:
         inventory_reader = list(csv.DictReader(inventory_file))
         adjustment_reader = list(csv.DictReader(adjustment_file))
 
     for adjustment_product in adjustment_reader:
+        exists = False
         adjustment_invoice = adjustment_product["name"]
         is_exhausted_included = True
-
         adjustment_number = adjustment_product["Product/Internal Reference"]
         adjustment_quantity = float(adjustment_product["Counted Quantity"])
-        exists = False
 
         if adjustment_invoice == previous_adjustment_invoice:
             adjustment_invoice = None
@@ -326,7 +327,7 @@ def inventory_adjustment():
                 finalised_quantity = inventory_quantity + adjustment_quantity
                 product_data = [adjustment_invoice, is_exhausted_included, inventory_number,
                                 inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
-                                finalised_quantity]
+                                inventory_quantity, adjustment_quantity, finalised_quantity]
 
                 if inventory_quantity < 0:
                     qty_fixable_products.append(product_data)
@@ -339,7 +340,9 @@ def inventory_adjustment():
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
                                     f"qty: {finalised_quantity}.")
 
-                products.append(product_data)
+                products.append([adjustment_invoice, is_exhausted_included, inventory_number,
+                                 inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
+                                 finalised_quantity])
                 # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
                 previous_adjustment_invoice = adjustment_product["name"]
                 break
@@ -347,15 +350,15 @@ def inventory_adjustment():
         if not exists:
             invalid_products.append(adjustment_product)
 
+    # Log products that are unavailable in the system
     for product in invalid_products:
         logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
     _create_quantity_fixes(qty_fixable_products)
-
     columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
                'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
-    df.to_csv(ADJUSTMENT_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
+    df.to_csv(ADJUSTMENT_FILE_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
     logging.info("Inventory Adjustment done.")
 
@@ -365,14 +368,35 @@ def _create_quantity_fixes(products):
     Create file for products with negative inventories
     """
     columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
-               'line_ids/product_qty']
+               'initial_qty', 'difference', 'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
     df.to_csv(QTY_FIX_FILE_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
+
+
+def _format_sales_data(number):
+    match = re.search(r"(?<=\[).+?(?=])", number)
+    return match.group()
+
+
+def read_sales_data():
+    sales_df = pd.read_excel(SALES_PATH,
+                             skiprows = list(range(4)),
+                             header = None,
+                             names = ['number', 'quantity'],
+                             dtype = {'number': str},
+                             converters = {'number': _format_sales_data})
+    fixable_products_df = pd.read_csv(QTY_FIX_FILE_PATH,
+                                      dtype = {'reference': str})
+    sales_mask = sales_df.number.isin(fixable_products_df.reference)
+    sales_df = sales_df[sales_mask]
+    
+    print()
 
 
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-json_to_csv()
+# json_to_csv()
 # merge_duplicates()
 inventory_adjustment()
+# read_sales_data()

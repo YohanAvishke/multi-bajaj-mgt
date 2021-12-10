@@ -3,7 +3,7 @@ import time
 import requests
 import pandas as pd
 import json
-import app.clients.erpClient as erpClient
+import clients.erpClient as erpClient
 
 # -*- File Paths -*-
 PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
