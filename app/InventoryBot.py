@@ -1,5 +1,4 @@
 import re
-from datetime import date
 import csv
 import json
 import requests
@@ -7,11 +6,14 @@ import logging
 import pandas as pd
 import app.clients.erpClient as erpClient
 
+from datetime import date
+from app.config import ROOT_DIR
+
 INVOICE_PATH = "../data/inventory/invoices.json"
+INVENTORY_FILE = f'{ROOT_DIR}/data/inventory/product.inventory.csv'
 SALES_PATH = "../data/inventory/sales.xlsx"
-ADJUSTMENT_FILE_PATH = f"../data/inventory/adjustments/{date.today()}-adjustment.csv"
-QTY_FIX_FILE_PATH = f"../data/inventory/adjustments/{date.today()}-fix.csv"
-INVENTORY_PATH = "../data/inventory/product.inventory.csv"
+FIX_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-fix.csv'
+DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv'
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -249,13 +251,13 @@ def json_to_csv():
     get_products_from_invoices() should be called before
 
     ''' After Call
-    Part Numbers with the quantities will be in the `ADJUSTMENT_FILE_PATH`
+    Part Numbers with the quantities will be in the `DATED_ADJUSTMENT_FILE`
     """
     with open(INVOICE_PATH, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     adjustments = invoice_reader["Invoice"]["Numbers"]
 
-    with open(ADJUSTMENT_FILE_PATH, "w") as adj_csv_file:
+    with open(DATED_ADJUSTMENT_FILE, "w") as adj_csv_file:
         field_names = ("name", "Product/Internal Reference", "Counted Quantity")
         adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
                                     quoting = csv.QUOTE_MINIMAL)
@@ -283,10 +285,10 @@ def merge_duplicates():
     """
     Add the sum of the duplicate products
     """
-    df = pd.read_csv(ADJUSTMENT_FILE_PATH)
+    df = pd.read_csv(DATED_ADJUSTMENT_FILE)
     df["Counted Quantity"] = df.groupby(["name", "Product/Internal Reference"])["Counted Quantity"].transform('sum')
     df.drop_duplicates(["name", "Product/Internal Reference"], inplace = True, keep = "last")
-    df.to_csv(ADJUSTMENT_FILE_PATH, index = False)
+    df.to_csv(DATED_ADJUSTMENT_FILE, index = False)
     logging.info("Adjustment's duplicate products have been merged")
 
 
@@ -296,14 +298,14 @@ def inventory_adjustment():
     json_to_csv() should be called before to get the adjustment file
 
     After Call
-    Final file to upload will be available at `ADJUSTMENT_FILE_PATH`
+    Final file to upload will be available at `DATED_ADJUSTMENT_FILE`
     """
     products = []
     qty_fixable_products = []
     invalid_products = []
     previous_adjustment_invoice = None
 
-    with open(INVENTORY_PATH, "r") as inventory_file, open(ADJUSTMENT_FILE_PATH, "r") as adjustment_file:
+    with open(INVENTORY_FILE, "r") as inventory_file, open(DATED_ADJUSTMENT_FILE, "r") as adjustment_file:
         inventory_reader = list(csv.DictReader(inventory_file))
         adjustment_reader = list(csv.DictReader(adjustment_file))
 
@@ -354,11 +356,11 @@ def inventory_adjustment():
     for product in invalid_products:
         logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
-    _create_quantity_fixes(qty_fixable_products)
+    # _create_quantity_fixes(qty_fixable_products)
     columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
                'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
-    df.to_csv(ADJUSTMENT_FILE_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
+    df.to_csv(DATED_ADJUSTMENT_FILE, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
     logging.info("Inventory Adjustment done.")
 
@@ -370,7 +372,7 @@ def _create_quantity_fixes(products):
     columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
                'initial_qty', 'difference', 'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
-    df.to_csv(QTY_FIX_FILE_PATH, encoding = 'utf-8', mode = 'w', header = True, index = False)
+    df.to_csv(FIX_FILE, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
 
 def _format_sales_data(number):
@@ -385,13 +387,12 @@ def read_sales_data():
                              names = ['number', 'quantity'],
                              dtype = {'number': str},
                              converters = {'number': _format_sales_data})
-    fixable_products_df = pd.read_csv(QTY_FIX_FILE_PATH,
+    fixable_products_df = pd.read_csv(FIX_FILE,
                                       dtype = {'reference': str})
     sales_mask = sales_df.number.isin(fixable_products_df.reference)
     sales_df = sales_df[sales_mask]
 
     print()
-
 
 # -*- Function Calls -*-
 # get_grn_for_invoice()

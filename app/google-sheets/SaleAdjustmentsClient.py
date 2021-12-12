@@ -1,13 +1,13 @@
 from __future__ import print_function
 
-import csv
-
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from datetime import date
+from app.InventoryBot import inventory_adjustment
 
+import csv
 import json
 import os.path
 import pandas as pd
@@ -106,6 +106,7 @@ def main():
     adjustments = extract_adjustments(raw_df)
     save_adjustments(adjustments)
     create_dated_adjustment()
+    inventory_adjustment()
 
 
 if __name__ == '__main__':
