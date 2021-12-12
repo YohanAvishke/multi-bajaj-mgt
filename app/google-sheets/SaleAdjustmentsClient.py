@@ -1,8 +1,12 @@
 from __future__ import print_function
+
+import csv
+
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+from datetime import date
 
 import json
 import os.path
@@ -11,7 +15,8 @@ import pandas as pd
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = '18kz-I9F90_vL60zHbGmtl8LMiAnJzy2nN_2DHzjJMIw'
 RANGE_NAME = 'A:D'
-ADJUSTMENT_FILE = '../../data/inventory/adjustment.sales.json'
+MAIN_ADJUSTMENT_FILE = '../../data/inventory/adjustment.sales.json'
+DATED_ADJUSTMENT_FILE = f"../../data/inventory/adjustments/{date.today()}-adjustment.csv"
 
 
 def get_service():
@@ -53,23 +58,46 @@ def get_sheet_data(service):
 
 
 def extract_adjustments(raw_df):
-    header_indexes = raw_df.query('PartNumber == "STR_PART_NO" & isUploaded == "False"').index.values.tolist()
+    header_indexes = raw_df.query('isUploaded == "False"').index.values.tolist()
     boundaries = header_indexes + [len(raw_df.index)]
-    # Split raw dataframe by the list of boundaries. Drop columns = ['isUploaded'] and convert sub dataframes into dicts
-    adjustments = [
-        (raw_df.iloc[(boundaries[n] + 1):boundaries[n + 1]]).drop(columns = ['isUploaded']).to_dict('records') for n in
-        range(len(boundaries) - 1)]
-    return adjustments
+    adjustments = [(raw_df.iloc[(boundaries[n] + 1):boundaries[n + 1]]) for n in range(len(boundaries) - 1)]
+    enriched_adjustments = [adjustments[n]
+                                .apply(lambda x: x.str.strip())  # Remove all whitespaces
+                                .drop(columns = ['isUploaded'])  # Drop columns = ['isUploaded']
+                                .to_dict('records')  # Convert dataframes into dicts
+                            for n in range(len(adjustments))]
+
+    return enriched_adjustments
 
 
 def save_adjustments(adjustments):
     enriched_adjustments = []
     for adjustment in adjustments:
         enriched_adjustments.append({'Products': adjustment})
-    invoice = {'Adjustments': enriched_adjustments}
-    with open(ADJUSTMENT_FILE, 'w') as file:
-        json.dump(invoice, file)
+    with open(MAIN_ADJUSTMENT_FILE, 'w') as file:
+        json.dump(enriched_adjustments, file)
     print('Adjustments saved')
+
+
+def create_dated_adjustment():
+    with open(MAIN_ADJUSTMENT_FILE, "r") as file:
+        adjustments = json.load(file)
+
+    with open(DATED_ADJUSTMENT_FILE, "w") as adj_csv_file:
+        field_names = ("name", "Product/Internal Reference", "Counted Quantity")
+        adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
+                                    quoting = csv.QUOTE_MINIMAL)
+        adj_writer.writeheader()
+
+        for adjustment in adjustments:
+            adj_ref = None
+            for product in adjustment["Products"]:
+                product_number = product["PartNumber"]
+                product_count = product["Quantity"]
+                adj_ref = f"Sales of {product['Date']}" if product['Date'] is not None else adj_ref
+                adj_writer.writerow({"name": adj_ref,
+                                     "Product/Internal Reference": product_number,
+                                     "Counted Quantity": float(product_count)})
 
 
 def main():
@@ -77,6 +105,7 @@ def main():
     raw_df = get_sheet_data(service)
     adjustments = extract_adjustments(raw_df)
     save_adjustments(adjustments)
+    create_dated_adjustment()
 
 
 if __name__ == '__main__':

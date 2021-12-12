@@ -9,8 +9,8 @@ import app.clients.erpClient as erpClient
 
 INVOICE_PATH = "../data/inventory/invoices.json"
 SALES_PATH = "../data/inventory/sales.xlsx"
-ADJUSTMENT_FILE_PATH = f"../data/inventory/adjustments/2021-12-08-adjustment.csv"
-QTY_FIX_FILE_PATH = f"../data/inventory/adjustments/2021-12-08-adjustment.csv"
+ADJUSTMENT_FILE_PATH = f"../data/inventory/adjustments/{date.today()}-adjustment.csv"
+QTY_FIX_FILE_PATH = f"../data/inventory/adjustments/{date.today()}-fix.csv"
 INVENTORY_PATH = "../data/inventory/product.inventory.csv"
 
 # -*- Request URLs -*-
@@ -389,7 +389,7 @@ def read_sales_data():
                                       dtype = {'reference': str})
     sales_mask = sales_df.number.isin(fixable_products_df.reference)
     sales_df = sales_df[sales_mask]
-    
+
     print()
 
 
@@ -398,5 +398,5 @@ def read_sales_data():
 # get_products_from_invoices()
 # json_to_csv()
 # merge_duplicates()
-inventory_adjustment()
+# inventory_adjustment()
 # read_sales_data()

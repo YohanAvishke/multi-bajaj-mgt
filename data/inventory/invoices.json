@@ -5,39 +5,5364 @@
         "Type": "Sales",
         "Products": [
           {
-            "STR_PART_NO": "36DJ4008",
-            "INT_QUATITY": 1,
-            "DATE": "2021/12/08"
+            "number": "36311006",
+            "quantity": "-1",
+            "date": "2021/09/14"
           },
           {
-            "STR_PART_NO": "AN101123",
-            "INT_QUATITY": 1,
-            "DATE": ""
+            "number": "DS101277",
+            "quantity": "-1",
+            "date": "2021/09/14"
           },
           {
-            "STR_PART_NO": "AA101598",
-            "INT_QUATITY": 1,
-            "DATE": ""
+            "number": "DS101277",
+            "quantity": "-1",
+            "date": "2021/09/14"
           },
           {
-            "STR_PART_NO": "AN101123",
-            "INT_QUATITY": 1,
-            "DATE": ""
+            "number": "30151105",
+            "quantity": "-1",
+            "date": "2021/09/14"
           },
           {
-            "STR_PART_NO": "36DZ0002",
-            "INT_QUATITY": 1,
-            "DATE": ""
+            "number": "36DS1004",
+            "quantity": "-1",
+            "date": "2021/09/14"
           },
           {
-            "STR_PART_NO": "AN101123",
-            "INT_QUATITY": 1,
-            "DATE": ""
+            "number": "AP201029",
+            "quantity": "-1",
+            "date": "2021/09/14"
           },
           {
-            "STR_PART_NO": "JA511006",
-            "INT_QUATITY": 3,
-            "DATE": ""
+            "number": "DS101036",
+            "quantity": "-1",
+            "date": "2021/09/14"
+          },
+          {
+            "number": "36DK0076",
+            "quantity": "1",
+            "date": "2021/09/15"
+          },
+          {
+            "number": "52JB0231",
+            "quantity": "1",
+            "date": "2021/09/15"
+          },
+          {
+            "number": "52JB0231",
+            "quantity": "1",
+            "date": "2021/09/15"
+          },
+          {
+            "number": "36PA0042",
+            "quantity": "1",
+            "date": "2021/09/15"
+          },
+          {
+            "number": "39102821",
+            "quantity": "4",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "AB151095",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "AB151093",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "AA191092",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DU101218KA",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "39103519",
+            "quantity": "-2",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "31101033",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "36311006",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DM101139",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DM101140",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "36DU4026",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DU191008",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "JZ161210",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "36AA4007",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "PF581423",
+            "quantity": "-3",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "AA101143",
+            "quantity": "1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "JW131809",
+            "quantity": "2",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DJ151057",
+            "quantity": "1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "JZ161204",
+            "quantity": "1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DS191054",
+            "quantity": "1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "JZ161202",
+            "quantity": "1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DM191005",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "36PA0042",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "39240320",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "36DD4008",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "30101142",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "39108019",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "39104319",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "39201719",
+            "quantity": "-2",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "AF201094",
+            "quantity": "-1",
+            "date": "2021/09/18"
+          },
+          {
+            "number": "DD121181",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "DJ151071",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "36DJ4104",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "DJ191023",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "24161371",
+            "quantity": "-2",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "DG171018",
+            "quantity": "-2",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "BG020W50C",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "24101050",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "39219019",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "AB121019",
+            "quantity": "-2",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "31151060",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "36DJ4005",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "DU101218KA",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "36DD4008",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "30101096",
+            "quantity": "-4",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "DH201080",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "30151041",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "JA521017",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "AA101692",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "DJ201202",
+            "quantity": "-1",
+            "date": "2021/09/21"
+          },
+          {
+            "number": "JG551447",
+            "quantity": "8",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "52DZ0046",
+            "quantity": "1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "DS101277",
+            "quantity": "-1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "DS101036",
+            "quantity": "-1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "36DS1004",
+            "quantity": "-1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "31151060",
+            "quantity": "-1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "36AA4007",
+            "quantity": "-1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "AL201012",
+            "quantity": "-1",
+            "date": "2021/09/22"
+          },
+          {
+            "number": "AF201036",
+            "quantity": "-1",
+            "date": "2021/09/24"
+          },
+          {
+            "number": "JA511006",
+            "quantity": "-5",
+            "date": "2021/09/24"
+          },
+          {
+            "number": "DF161416",
+            "quantity": "-5",
+            "date": "2021/09/24"
+          },
+          {
+            "number": "DH101373",
+            "quantity": "-10",
+            "date": "2021/09/24"
+          },
+          {
+            "number": "JG551447",
+            "quantity": "12",
+            "date": "2021/09/24"
+          },
+          {
+            "number": "DH181092",
+            "quantity": "1",
+            "date": "2021/09/24"
+          },
+          {
+            "number": "DJ151033",
+            "quantity": "1",
+            "date": "2021/09/25"
+          },
+          {
+            "number": "DH101648",
+            "quantity": "5",
+            "date": "2021/09/25"
+          },
+          {
+            "number": "6203CM",
+            "quantity": "4",
+            "date": "2021/09/25"
+          },
+          {
+            "number": "AA101499",
+            "quantity": "1",
+            "date": "2021/09/25"
+          },
+          {
+            "number": "6305",
+            "quantity": "2",
+            "date": "2021/09/25"
+          },
+          {
+            "number": "36AN0013",
+            "quantity": "1",
+            "date": "2021/09/25"
+          },
+          {
+            "number": "36JH0011",
+            "quantity": "1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "JB511019",
+            "quantity": "1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DX151012",
+            "quantity": "1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "24151097",
+            "quantity": "-2",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DH101016",
+            "quantity": "-10",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36DH4030",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36DS1004",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36JE0003",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36311006",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36DU1205",
+            "quantity": "-3",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "30151041",
+            "quantity": "-6",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DG111008",
+            "quantity": "-10",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36JG0011",
+            "quantity": "-2",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "24151171",
+            "quantity": "-6",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "AA101569",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "AA101134",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "AN101257",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "AN101166",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "39104219",
+            "quantity": "-10",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "AA101472",
+            "quantity": "-30",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DH101098",
+            "quantity": "-9",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36AA4041",
+            "quantity": "-5",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "-2",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DU101218KA",
+            "quantity": "-4",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DJ201183",
+            "quantity": "-3",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DH201080",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36JE0003",
+            "quantity": "-4",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "JB531005",
+            "quantity": "-2",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DJ161129",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DJ161127",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "52DH1335",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DJ201176",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "31101033",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "36311006",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DJ221003",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DJ221004",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DF161413",
+            "quantity": "-2",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "31121029",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DD111018",
+            "quantity": "-1",
+            "date": "2021/09/26"
+          },
+          {
+            "number": "DK101733",
+            "quantity": "1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "JF161201",
+            "quantity": "1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DJ221004",
+            "quantity": "1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DJ221003",
+            "quantity": "1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "24101177(YL)",
+            "quantity": "1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "AA101446",
+            "quantity": "-3",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "JN521001",
+            "quantity": "-1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DJ151071",
+            "quantity": "-3",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "AA1015392",
+            "quantity": "-1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "AN101012",
+            "quantity": "-5",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "KPBF 6305",
+            "quantity": "-5",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "36BA4039",
+            "quantity": "-3",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "39252820",
+            "quantity": "-10",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "30151019",
+            "quantity": "-40",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DH201080",
+            "quantity": "-3",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "52DH1322",
+            "quantity": "-1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DJ201176",
+            "quantity": "-1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "52DH2001",
+            "quantity": "-1",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DH101188",
+            "quantity": "-5",
+            "date": "2021/09/27"
+          },
+          {
+            "number": "DJ191055",
+            "quantity": "2",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "AA111058",
+            "quantity": "10",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "PD511229",
+            "quantity": "2",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "AB171044",
+            "quantity": "1",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "DZ191004",
+            "quantity": "-2",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "DU161008",
+            "quantity": "-2",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "DU161008",
+            "quantity": "-2",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "DU151010",
+            "quantity": "-3",
+            "date": "2021/09/28"
+          },
+          {
+            "number": "BA132173",
+            "quantity": "1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "24151175",
+            "quantity": "2",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "24151179",
+            "quantity": "1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "DH181092",
+            "quantity": "1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "AN111017",
+            "quantity": "1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "AB151095",
+            "quantity": "-1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "AA101033",
+            "quantity": "-1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "06101009",
+            "quantity": "-6",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "AA161191",
+            "quantity": "-1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "AA171025",
+            "quantity": "-1",
+            "date": "2021/09/29"
+          },
+          {
+            "number": "BH184000",
+            "quantity": "-1",
+            "date": "2021/09/29"
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "6203CM",
+            "quantity": "8",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "39186420",
+            "quantity": "2",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DZ191014",
+            "quantity": "1",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DJ191054",
+            "quantity": "1",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "59200012",
+            "quantity": "-5",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DH101424",
+            "quantity": "-10",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "05101018",
+            "quantity": "-3",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DJ101012",
+            "quantity": "-5",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "AA191102",
+            "quantity": "-3",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "24191182",
+            "quantity": "-3",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DU191047",
+            "quantity": "-5",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DU191046",
+            "quantity": "-1",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "PF161226",
+            "quantity": "-5",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "39171519",
+            "quantity": "-10",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "36DZ0002",
+            "quantity": "-1",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "36JZ0002",
+            "quantity": "-1",
+            "date": "2021/09/30"
+          },
+          {
+            "number": "DJ151041",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "DJ201206",
+            "quantity": "2",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "DJ201207",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "DJ161127",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "DJ161126",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "36311028",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "AA201041",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "DH111015",
+            "quantity": "1",
+            "date": "2021/10/01"
+          },
+          {
+            "number": "24151168",
+            "quantity": "2",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "24151175",
+            "quantity": "2",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "24151179",
+            "quantity": "2",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "CL201023",
+            "quantity": "1",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "36DH4007",
+            "quantity": "5",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "AA171006",
+            "quantity": "2",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "DJ151094",
+            "quantity": "1",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "AA111122",
+            "quantity": "1",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "AA141004",
+            "quantity": "1",
+            "date": "2021/10/02"
+          },
+          {
+            "number": "24151058",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA101569",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA101564",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "52DH1535",
+            "quantity": "-1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DJ191083",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36AA4025",
+            "quantity": "1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA101122",
+            "quantity": "1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36DH4030",
+            "quantity": "3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "LCF00001",
+            "quantity": "4",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DU101060",
+            "quantity": "2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DJ191055",
+            "quantity": "2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36PF0061",
+            "quantity": "3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA201185",
+            "quantity": "1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DJ181041",
+            "quantity": "-1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DJ181115",
+            "quantity": "-20",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36311006",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "JB401400",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "39171519",
+            "quantity": "-10",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "39104219",
+            "quantity": "-10",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36PA0143",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DU101278",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36DH4174",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "28101110",
+            "quantity": "-10",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "05190302",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA191092",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA191094",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA191093",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DM101140",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DM101139",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DJ101072",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DH101154",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DU191046",
+            "quantity": "-4",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36AA4041",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36AA4040",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA101134",
+            "quantity": "-10",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "28101118",
+            "quantity": "-10",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AF201036",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AA101392",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AB111107",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AB101067",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36AA1003K",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "AN101012",
+            "quantity": "-5",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "36AA4042",
+            "quantity": "-3",
+            "date": "2021/10/04"
+          },
+          {
+            "number": " DJ161127",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "PF402001",
+            "quantity": "-1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DF191066",
+            "quantity": "-2",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DG121010",
+            "quantity": "-1",
+            "date": "2021/10/04"
+          },
+          {
+            "number": "DS151038",
+            "quantity": "2",
+            "date": "2021/10/05"
+          },
+          {
+            "number": "39143520",
+            "quantity": "4",
+            "date": "2021/10/05"
+          },
+          {
+            "number": "36JD0021",
+            "quantity": "3",
+            "date": "2021/10/05"
+          },
+          {
+            "number": "36BA4039",
+            "quantity": "1",
+            "date": "2021/10/05"
+          },
+          {
+            "number": "AA101844",
+            "quantity": "1",
+            "date": "2021/10/05"
+          },
+          {
+            "number": "AP111023",
+            "quantity": "1",
+            "date": "2021/10/05"
+          },
+          {
+            "number": "36DU1001",
+            "quantity": "3",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DH101154",
+            "quantity": "5",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DK101733",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "24151171",
+            "quantity": "-14",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DH221013",
+            "quantity": "-2",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AM191005",
+            "quantity": "-1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AB151095",
+            "quantity": "-1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "36AA4055",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DS141014",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "36AA4007",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AA101207",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AA101210",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "36222246",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "35101059",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "JN351604",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "52DU0104",
+            "quantity": "1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DH111034",
+            "quantity": "20",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AA102094",
+            "quantity": "5",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DK101064",
+            "quantity": "10",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "36AA4025",
+            "quantity": "5",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AA201185",
+            "quantity": "10",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DH102277",
+            "quantity": "10",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "AB151095",
+            "quantity": "-1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "36BA4039",
+            "quantity": "-1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DH101401",
+            "quantity": "-1",
+            "date": "2021/10/06"
+          },
+          {
+            "number": "DU101060",
+            "quantity": "2",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "24171082",
+            "quantity": "2",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "36DU1001",
+            "quantity": "1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "AA101328",
+            "quantity": "-3",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "39143520",
+            "quantity": "-5",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "DH121093",
+            "quantity": "-5",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "JA581221",
+            "quantity": "-5",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "36DD4008",
+            "quantity": "-5",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "39191719",
+            "quantity": "-10",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "AB181017",
+            "quantity": "-1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "AB181012",
+            "quantity": "-1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "52JL0193",
+            "quantity": "-1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "59200012",
+            "quantity": "-1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "AB151093",
+            "quantity": "-1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "  AF111010",
+            "quantity": "1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "25191054",
+            "quantity": "6",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "DU101060",
+            "quantity": "2",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "JF231214",
+            "quantity": "1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "AA101261",
+            "quantity": "1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "AB101067",
+            "quantity": "1",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "DS101072",
+            "quantity": "10",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "05101018",
+            "quantity": "15",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "24131004",
+            "quantity": "30",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "24151171",
+            "quantity": "25",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "30151105",
+            "quantity": "25",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "31121029",
+            "quantity": "20",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "31151060",
+            "quantity": "25",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "36DH4030",
+            "quantity": "12",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "36DH4041",
+            "quantity": "10",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "59200012",
+            "quantity": "20",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "DJ151071",
+            "quantity": "15",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "DL181080",
+            "quantity": "30",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "DP121034",
+            "quantity": "15",
+            "date": "2021/10/07"
+          },
+          {
+            "number": "JZ581011",
+            "quantity": "10",
+            "date": "2021/10/07"
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "36AN0010",
+            "quantity": "1",
+            "date": "2021/10/18"
+          },
+          {
+            "number": "ENAB151090",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DH4025",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101077",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AN101186",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JZ161202",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101035",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36AA4041",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36JN0015",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "JD551002",
+            "quantity": "1",
+            "date": "2021/10/16"
+          },
+          {
+            "number": "AA101077",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "DH101344",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AB201072",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36JE0005",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36JU0002",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DH4117",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "PD551433",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "JY551402",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH102201",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "DD181183",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DD181184",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DJ191061",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DH111016",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DH111015",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "JG521008",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JL521022",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36JL0001",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JE511209",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "JL511010",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JL511222",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JE511233",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JL541208",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JE541241",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JE541240",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JE511022",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JE511038",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS121137",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "DX101053",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AB111107",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "JU551406",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JY351205",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DK151073",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "24130209",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AA101750",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AF111032",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AF111031",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA101481",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24171076",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "01100342K",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DS151038",
+            "quantity": "-25",
+            "date": null
+          },
+          {
+            "number": "AA101062",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DU161008",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "10111009",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "06111279",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DK101064",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "JL161200",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JL161201",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DU191038",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "JG161200",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS101072",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU101038",
+            "quantity": "1",
+            "date": "2021/10/12"
+          },
+          {
+            "number": "28101118",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AA101004",
+            "quantity": "20",
+            "date": null
+          },
+          {
+            "number": "AA111085",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DH101344",
+            "quantity": "3",
+            "date": "2021/10/13"
+          },
+          {
+            "number": "PD551427",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "DH101154",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "DJ151041",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "52DU0104",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "AN101181",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "39102821",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "DH111034",
+            "quantity": "1",
+            "date": "2021/10/15"
+          },
+          {
+            "number": "36AN0013",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DX101046",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DU201010",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DZ191041",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DU191041",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "21100711",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DH101344",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DH4011",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "52DU0104",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "52JZ0264",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AA101844",
+            "quantity": "-1",
+            "date": "2021/10/14"
+          },
+          {
+            "number": "DK101064",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101166",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101257",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ191055",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JB54124",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JV551000",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "30151105",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DD121181",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36AA4040",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101054",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101565",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101012",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101328",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36AA1003",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU201123",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JW131807",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA191080",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA121150",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24101100",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24131046",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AA101392",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AE121001",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "AP111023",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA121006",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "21130110",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AB101067",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101479",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101565",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101481",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36222256",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA181044",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA201041",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AF201094",
+            "quantity": "-1",
+            "date": "2021/10/13"
+          },
+          {
+            "number": "39103519",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "28101118",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "BG113803",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA101446",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "PA231601",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ221004",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36JF0167",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA111153",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36JZ007",
+            "quantity": "1",
+            "date": "36JZ0007"
+          },
+          {
+            "number": "DF221037",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "PA151011",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JD73014M",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH101521",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "31151060",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "DJ181011",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA141004",
+            "quantity": "-2",
+            "date": "2021/10/12"
+          },
+          {
+            "number": "24160924",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA101210",
+            "quantity": "-7",
+            "date": null
+          },
+          {
+            "number": "AA101472",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "AA101077",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52PF0735",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24151171",
+            "quantity": "-3",
+            "date": "2021/10/10"
+          },
+          {
+            "number": "36JN0015",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36AA4040",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "AA102003",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36BA4039",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "06101007",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "39143520",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "AA111094",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JN181001",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JZ161204",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "01100342K",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AM191005",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36JK0011",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH101680",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH101061",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "52JB0231",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39201719",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JB111019",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JD521002",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24181153",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA111093",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA111081",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "31111058",
+            "quantity": "1",
+            "date": "2021/10/09"
+          },
+          {
+            "number": "DH101648",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AA101054",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AB111107",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "24131009",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "22131018",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "AP111023",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DD111048",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36AN0013",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101648",
+            "quantity": "5",
+            "date": "2021/10/08"
+          },
+          {
+            "number": "36102401",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "AA101512",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DK101565",
+            "quantity": "-12",
+            "date": null
+          },
+          {
+            "number": "36DH4174",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "30151105",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101680",
+            "quantity": "13",
+            "date": null
+          },
+          {
+            "number": "DH101344",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "AA101472",
+            "quantity": "60",
+            "date": null
+          },
+          {
+            "number": "AA191091",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "AA101565",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101162",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DS1004",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JN521001",
+            "quantity": "1",
+            "date": null
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "DJ221004",
+            "quantity": "2",
+            "date": "2021/10/23"
+          },
+          {
+            "number": "31111056",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ151092",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA121006",
+            "quantity": "45",
+            "date": null
+          },
+          {
+            "number": "JH231601",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DJ191057",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "JA541212",
+            "quantity": "-6",
+            "date": null
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DH101016",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DH101098",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "AA101116",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "28101167",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "PD511229",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36281008",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "39103519",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36DS1201",
+            "quantity": "4",
+            "date": "2021/10/22"
+          },
+          {
+            "number": "36JN0007",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "36JN0015",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AA121006",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "DJ191054",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36JW0014",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AN101113",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "28101167",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "AB151063",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24121361",
+            "quantity": "2",
+            "date": "2021/10/21"
+          },
+          {
+            "number": "PA161006",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ201246",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JA581221",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ121051",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ151094",
+            "quantity": "1",
+            "date": "2021/10/19"
+          },
+          {
+            "number": "DK101503",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36DH4025",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "36AA4058",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DD101407",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "31121029",
+            "quantity": "15",
+            "date": null
+          },
+          {
+            "number": "31151060",
+            "quantity": "15",
+            "date": null
+          },
+          {
+            "number": "DU101218",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DG111008",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DU1205",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "JZ161202",
+            "quantity": "2",
+            "date": "2021/10/30"
+          },
+          {
+            "number": "JD131810",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH111083",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ111061",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ111059",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JZ161210",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36314001K",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "36JG0011",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "36PA0143",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "JD511004",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "15161069",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DS101333",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "Y-DS101336",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "Y-DS101335",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS121181",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36JD0004",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ121051",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DS1201",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "30101142",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39218919",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39191719",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39104219",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39219019",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39104319",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DM101140",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JA541212",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DH101154",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DS101096",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DH102201",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "31121029",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36DK0015",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JZ581011",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DH102277",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DX121010",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DH121171",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "JZ131601",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36DD4008",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AA101009",
+            "quantity": "-1",
+            "date": "2021/10/29"
+          },
+          {
+            "number": "AA101213",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DD111108",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AF121148",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AZ351002",
+            "quantity": "1",
+            "date": "2021/10/27"
+          },
+          {
+            "number": "24151058",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DT581062",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH102277",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JP541208",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DJ101371",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101012",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AA191102",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JW351400",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JY551402",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DZ0002",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DK201078",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AA231255",
+            "quantity": "-1",
+            "date": "2021/10/28"
+          },
+          {
+            "number": "24181043",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "BG113802",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AL201051",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52244040",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36AA4055",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS101072",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "30151105",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "JN521001",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA111092",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AZ351001",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52PF0329",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA101213",
+            "quantity": "7",
+            "date": null
+          },
+          {
+            "number": "03100338",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "36AA4055",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101135",
+            "quantity": "7",
+            "date": null
+          },
+          {
+            "number": "24131009",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "52JZ0264",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU201008",
+            "quantity": "2",
+            "date": "2021/10/26"
+          },
+          {
+            "number": "JD401003",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39253105",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "AN101181",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "AN111009",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24161267",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ201202",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101680",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AB181094",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AA191093",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "BA191051",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "BA191052",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DJ221004",
+            "quantity": "2",
+            "date": "2021/10/25"
+          },
+          {
+            "number": "01101009",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "52AA4035",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AZ351207",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "JE351200",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AB171044",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "39105515",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AB151054",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "PF351224",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "JN402000",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DX101046",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DU101214",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA191080",
+            "quantity": "1",
+            "date": "2021/11/09"
+          },
+          {
+            "number": "DD181184",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "BF351601",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "56PA056D",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "30151105",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA191093",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AA191094",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "31151060",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "AN101135",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "DM101140",
+            "quantity": "1",
+            "date": "2021/11/08"
+          },
+          {
+            "number": "JZ161204",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DL181080",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA201185",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "22170434",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ181033",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36AN0010",
+            "quantity": "1",
+            "date": "2021/11/04"
+          },
+          {
+            "number": "AA101054",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JB401400",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DK101064",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "31101020",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "AA191093",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AA191094",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AA101057",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AB151093",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36152203",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "LAD00164",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "PF551426",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "PF551428",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "24101054",
+            "quantity": "-1",
+            "date": "2021/11/05"
+          },
+          {
+            "number": "DH201080",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DJ201083",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DV101042",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DH102277",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "52JF0412",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DU1205",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "36DD4008",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AN101190",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "24121070",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JE521030",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JG551447",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "36JZ0103",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DJ181033",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101077",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24101056",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24101545",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24131046",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24191092",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39100006",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "AE101014",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "20",
+            "date": null
+          },
+          {
+            "number": "39171619",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "24131046",
+            "quantity": "1",
+            "date": "2021/11/06"
+          },
+          {
+            "number": "AE101014",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DD101349",
+            "quantity": "8",
+            "date": null
+          },
+          {
+            "number": "PF122025",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36JG0011",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DK151036",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "30151105",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA111085",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101104",
+            "quantity": "1",
+            "date": "2021/11/03"
+          },
+          {
+            "number": "AA101481",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "03100338",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "39100006",
+            "quantity": "15",
+            "date": null
+          },
+          {
+            "number": "DH101373",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "JA541027",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "03100338",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24131046",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DK101064",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "DU74013H",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "30",
+            "date": null
+          },
+          {
+            "number": "AA101261",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "6002CM",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "6302R",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DH111012",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DJ191054",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH101795",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39100820",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AA101570",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "19101003",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39128321",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "39262921",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "CL201023",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "39100006",
+            "quantity": "20",
+            "date": "2021/11/02"
+          },
+          {
+            "number": "AA101057",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101261",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36AB4001",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "03100338",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "DV151010",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DK181019",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "DG181023",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "36JV0019",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101680",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101016",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DS1002",
+            "quantity": " -1",
+            "date": null
+          },
+          {
+            "number": "39201719",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DS101036",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DS1004",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101012",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA121336",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101104",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA101392",
+            "quantity": "1",
+            "date": "2021/11/01"
+          },
+          {
+            "number": "DU101218",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101392",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU101218",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DK101064",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24151179",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU101218",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JZ511203",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JD511008",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AN101104",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36AA4041",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "36AA4040",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DJ151071",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "6905DDU",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36224004K",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "PF121076",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101166",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AF201094",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JN521001",
+            "quantity": "1",
+            "date": "2021/11/11"
+          },
+          {
+            "number": "JA551006",
+            "quantity": "8",
+            "date": null
+          },
+          {
+            "number": "DJ191081",
+            "quantity": "-11",
+            "date": null
+          },
+          {
+            "number": "AZ351207",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36DV0004",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS101072",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "24130113",
+            "quantity": "5",
+            "date": "2021/11/10"
+          },
+          {
+            "number": "24151175",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24151179",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH111012",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DJ161128",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101057",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "6002CM",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "PF161201",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24201472",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24201473",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JL401002",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS191041",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA101666",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36DU1503",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "31111056",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AA101077",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DM101140",
+            "quantity": "-10",
+            "date": null
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "31101038",
+            "quantity": "1",
+            "date": "2021/11/19"
+          },
+          {
+            "number": "DU74013H",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ161128",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ161129",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DS1002",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "03100621",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101186",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101190",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36AB4015",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ101064",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DU4017",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52DH1357",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ161221",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ161254",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA111082",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AA111085K",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "39100820",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DF121003",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "DH101188",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "JD561414",
+            "quantity": "1",
+            "date": "2021/11/17"
+          },
+          {
+            "number": "DX101051",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AB151074",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "52240483",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JA541212",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ191023",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DK101755",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "52DH0547",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101123",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AA191091",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "JY551402",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "31111056",
+            "quantity": "-7",
+            "date": null
+          },
+          {
+            "number": "JN131807",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DE151013",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DU181070",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24171118",
+            "quantity": "1",
+            "date": "2021/11/16"
+          },
+          {
+            "number": "39253105",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ151033",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "31101018",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AA101058",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AA101138",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "AA101843",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "AA101875",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "36AA4025",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "CMUDS191001",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "52240483",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA191094",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA191093",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS101072",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JA541212",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DM101139",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "CS101128",
+            "quantity": "-30",
+            "date": null
+          },
+          {
+            "number": "30181023",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "PF351224",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS181066",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA191094",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "AN111009",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24171118",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AN101190",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DD111018",
+            "quantity": "10",
+            "date": "2021/11/15"
+          },
+          {
+            "number": "39171619",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "AN101166",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AN101012",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101210",
+            "quantity": "7",
+            "date": null
+          },
+          {
+            "number": "AA101472",
+            "quantity": "6",
+            "date": null
+          },
+          {
+            "number": "AA101077",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DU4017",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA121006",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "56DU0423",
+            "quantity": "-4",
+            "date": "2021/11/12"
+          },
+          {
+            "number": "31151060",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DD201025",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36AA4025",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "AB151095",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DH171013",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36AA4050",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AA101692",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DU101041",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AM191005",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "(YL)-AA121135",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24171180",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DS121113",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DK151094",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "16007",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "39200811",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "BA132110",
+            "quantity": "50",
+            "date": null
+          },
+          {
+            "number": "DL191013",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24151175",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24151179",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JZ231201",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU101041",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24191137",
+            "quantity": "1",
+            "date": "2021/11/13"
+          },
+          {
+            "number": "DX101051",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH201080",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36AA4018",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU201010",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DZ151012",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24130209",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA101715",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24171024",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "24151171",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AN101421",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "31111056",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DH4025",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101096",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS121137",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS101036",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36DS1004",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ101216",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DG111008",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DD121013",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ101096",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH101680",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ201183",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "39104119",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36PA0042",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52DU0578",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36BA4009K",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AF201036",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "01100342K",
+            "quantity": "2",
+            "date": "2021/11/20"
+          },
+          {
+            "number": "DH111034",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24130209",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "JZ161202",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AB151095",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "15",
+            "date": null
+          },
+          {
+            "number": "AB101067",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JN122000",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DX121010",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "31121029",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36DS1201",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "PD531029",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36JZ0008",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "36DH4007",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "PD511229",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA121150",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36AA4105",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JN181001",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DH102272",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DJ161227",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ161229",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52DH1335",
+            "quantity": "-1",
+            "date": null
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "36DZ0002",
+            "quantity": "10",
+            "date": "2021/11/30"
+          },
+          {
+            "number": "36AA1004",
+            "quantity": "100",
+            "date": null
+          },
+          {
+            "number": "DZ191014",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "AA101479",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AN101123",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DS191053",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36281008",
+            "quantity": "1",
+            "date": "2021/11/29"
+          },
+          {
+            "number": "DJ191023",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA191073",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "31151060",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA111082",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA111085",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "5",
+            "date": "2021/11/27"
+          },
+          {
+            "number": "JA511006",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "DZ191004",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AB151074",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH111034",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JA351610",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JA351609",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DS121113",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH101188",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DH101680",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DH101016",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DM101140",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DH181133",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA111085K",
+            "quantity": "-10",
+            "date": "2021/11/26"
+          },
+          {
+            "number": "DJ101216",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36BA4039",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DU161008",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "36AA4018",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "AA111085",
+            "quantity": "10",
+            "date": null
+          },
+          {
+            "number": "AA131033",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "BA132173",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24171118",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "39171619",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "JZ571000",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JZ571000",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24151164",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DD4002",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "39171519",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "GK36AE00",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "GK36AE00",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AA101512",
+            "quantity": "3",
+            "date": "2021/11/25"
+          },
+          {
+            "number": "36DD4001",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "31101020",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "AN101104",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DJ121113",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA231239",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "CL201023",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "CD101008",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "03100619",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "CB101114",
+            "quantity": "-15",
+            "date": null
+          },
+          {
+            "number": "DU201008",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "36PA0002",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "AA111058",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "AA101154",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JH511207",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "DJ161254",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JZ401013",
+            "quantity": "1",
+            "date": "2021/11/24"
+          },
+          {
+            "number": "AB201076",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ161221",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101152",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101565",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24131009",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "DK181043",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "56DK32Y9",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "(YL)-DS191013",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DU191006",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DM191002",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DU191048",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DU191005",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "DM191005",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS191001",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "JZ161203",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DJ191008",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "DJ191061",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "DL161923",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DJ151094",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "JZ401013",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DS151038",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "36DS1502",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36DU1503",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "30151041",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "30151116",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DJ201035",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "31201078",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "(YL)-AN101152",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AN101190",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52DH1357",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ181033",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DH74014M",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ201207",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ161126",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ201176",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "39201719",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "36AN0013",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "36AA4106",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AB151095",
+            "quantity": "6",
+            "date": "2021/11/23"
+          },
+          {
+            "number": "24101056",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "24131009",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DS1201",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "36JB0003",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA101593",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "AA101598",
+            "quantity": "-2",
+            "date": null
+          },
+          {
+            "number": "JN181001",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "52PA0554",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DK181019",
+            "quantity": "-10",
+            "date": "2021/11/22"
+          },
+          {
+            "number": "39104319",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "39218919",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "39104619",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "30101142",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "39219019",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "39104219",
+            "quantity": "-20",
+            "date": null
+          },
+          {
+            "number": "39100820",
+            "quantity": "-10",
+            "date": null
+          },
+          {
+            "number": "DJ181119",
+            "quantity": "-3",
+            "date": null
+          },
+          {
+            "number": "AA191093",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AA191092",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "AA191091",
+            "quantity": "-4",
+            "date": null
+          },
+          {
+            "number": "24191182",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "AL241285",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "BA132110",
+            "quantity": "25",
+            "date": null
+          },
+          {
+            "number": "GK36AE00",
+            "quantity": "4",
+            "date": null
+          },
+          {
+            "number": "35101059",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36DH4025",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "24131009",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "24131018",
+            "quantity": "2",
+            "date": null
+          },
+          {
+            "number": "36JN0007",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101512",
+            "quantity": "3",
+            "date": "2021/11/25"
+          },
+          {
+            "number": "31101038",
+            "quantity": "3",
+            "date": "2021/12/01"
+          },
+          {
+            "number": "DJ151069",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DK201003",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "52DH1535",
+            "quantity": "-1",
+            "date": null
+          },
+          {
+            "number": "DJ151071",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "DV101042",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "36DD4008",
+            "quantity": "-5",
+            "date": null
+          },
+          {
+            "number": "JZ181401",
+            "quantity": "-2",
+            "date": null
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "36DJ4008",
+            "quantity": "1",
+            "date": "2021/12/08"
+          },
+          {
+            "number": "AN101123",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA101598",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101123",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "36DZ0002",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AN101123",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JA511006",
+            "quantity": "3",
+            "date": null
+          }
+        ]
+      },
+      {
+        "Type": "Sales",
+        "Products": [
+          {
+            "number": "DJ101217 ",
+            "quantity": "4",
+            "date": "2021/12/09"
+          },
+          {
+            "number": "36PF0061",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DH101422",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AL121062",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "AA191091",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DU191048",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ221003",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "DJ221004",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "JN181001",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "JA541212",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "DS101072",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "AP111023",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "28101110",
+            "quantity": "5",
+            "date": null
+          },
+          {
+            "number": "DT581062",
+            "quantity": "1",
+            "date": null
+          },
+          {
+            "number": "PA581029",
+            "quantity": "3",
+            "date": null
+          },
+          {
+            "number": "JZ113001",
+            "quantity": "2",
+            "date": null
           }
         ]
       }
