@@ -6,6 +6,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from datetime import date
 from app.InventoryBot import inventory_adjustment
+from app.config import ROOT_DIR
 
 import csv
 import json
@@ -15,8 +16,8 @@ import pandas as pd
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = '18kz-I9F90_vL60zHbGmtl8LMiAnJzy2nN_2DHzjJMIw'
 RANGE_NAME = 'A:D'
-MAIN_ADJUSTMENT_FILE = '../../data/inventory/adjustment.sales.json'
-DATED_ADJUSTMENT_FILE = f"../../data/inventory/adjustments/{date.today()}-adjustment.csv"
+MAIN_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustment.sales.json'
+DATED_ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv"
 
 
 def get_service():

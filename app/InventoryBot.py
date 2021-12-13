@@ -9,9 +9,9 @@ import app.clients.erpClient as erpClient
 from datetime import date
 from app.config import ROOT_DIR
 
-INVOICE_PATH = "../data/inventory/invoices.json"
+INVOICE_PATH = f"{ROOT_DIR}/data/inventory/invoices.json"
 INVENTORY_FILE = f'{ROOT_DIR}/data/inventory/product.inventory.csv'
-SALES_PATH = "../data/inventory/sales.xlsx"
+SALES_PATH = f"{ROOT_DIR}/data/inventory/sales.xlsx"
 FIX_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-fix.csv'
 DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv'
 
@@ -45,9 +45,9 @@ if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
 
-    # HEADERS["cookie"] = erpClient.authorise()
-    # logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
-    #              f"===================================================================================================")
+    HEADERS["cookie"] = erpClient.authorise()
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
+                 f"===================================================================================================")
 
 
 # -*- Functions -*-
@@ -394,10 +394,11 @@ def read_sales_data():
 
     print()
 
+
 # -*- Function Calls -*-
 # get_grn_for_invoice()
 # get_products_from_invoices()
-# json_to_csv()
+json_to_csv()
 # merge_duplicates()
-# inventory_adjustment()
+inventory_adjustment()
 # read_sales_data()
