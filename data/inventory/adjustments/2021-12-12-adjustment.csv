@@ -1,13 +1,13 @@
 name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
-Sales of 2021/12/09,True,DJ101217,__export__.product_product_15485_eb73a0b7,stock.stock_location_stock,1.0
-,,36PF0061,__export__.product_product_12536_126adb2f,stock.stock_location_stock,0.0
+Sales of 2021/12/09,True,DJ101217,__export__.product_product_15485_eb73a0b7,stock.stock_location_stock,2.0
+,,36PF0061,__export__.product_product_12536_126adb2f,stock.stock_location_stock,1.0
 ,,DH101422,__export__.product_product_14872_64be9160,stock.stock_location_stock,0.0
 ,,AL121062,__export__.product_product_46969_38d861bd,stock.stock_location_stock,5.0
 ,,AA191091,__export__.product_product_39387_8a9eb5aa,stock.stock_location_stock,25.0
 ,,DU191048,__export__.product_product_17452_5dadd26e,stock.stock_location_stock,2.0
 ,,DJ221003,__export__.product_product_15867_6e3ddc1a,stock.stock_location_stock,12.0
 ,,DJ221004,__export__.product_product_15868_758a6db7,stock.stock_location_stock,30.0
-,,JN181001,__export__.product_product_23848_1d67e65b,stock.stock_location_stock,1.0
+,,JN181001,__export__.product_product_23848_1d67e65b,stock.stock_location_stock,2.0
 ,,JA541212,__export__.product_product_18221_f8c7c29e,stock.stock_location_stock,64.0
 ,,DS101072,__export__.product_product_16630_4ea0250e,stock.stock_location_stock,105.0
 ,,AP111023,__export__.product_product_47249_15c67ac1,stock.stock_location_stock,13.0
@@ -16,8 +16,7 @@ Sales of 2021/12/09,True,DJ101217,__export__.product_product_15485_eb73a0b7,stoc
 ,,PA581029,__export__.product_product_32952_893a39e9,stock.stock_location_stock,8.0
 ,,JZ113001,__export__.product_product_31840_ed71e509,stock.stock_location_stock,7.0
 Sales of 2021/12/10,True,DJ101371,__export__.product_product_15504_5c371821,stock.stock_location_stock,1.0
-,,36PF0061,__export__.product_product_12536_126adb2f,stock.stock_location_stock,0.0
 ,,36JZ0002,__export__.product_product_12252_aa9afabd,stock.stock_location_stock,0.0
-,,JA351610,__export__.product_product_18155_bbdb1d09,stock.stock_location_stock,0.0
-,,JB401401,__export__.product_product_18426_2e708d0c,stock.stock_location_stock,-3.0
+,,JA351610,__export__.product_product_18155_bbdb1d09,stock.stock_location_stock,1.0
+,,JB401401,__export__.product_product_18426_2e708d0c,stock.stock_location_stock,0.0
 ,,36JZ0166,__export__.product_product_12360_69263cd9,stock.stock_location_stock,0.0
