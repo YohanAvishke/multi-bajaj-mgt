@@ -1,13 +1,18 @@
+from __future__ import print_function, unicode_literals
+
+from PyInquirer import style_from_dict, Token, prompt, Separator
+from pprint import pprint
+from datetime import date
+from app.config import ROOT_DIR
+
 import re
 import csv
 import json
 import requests
 import logging
 import pandas as pd
-import app.clients.erpClient as erpClient
-
-from datetime import date
-from app.config import ROOT_DIR
+import app.dpmc as dpmc
+import app.googlesheet as sheet
 
 INVOICE_PATH = f"{ROOT_DIR}/data/inventory/invoices.json"
 INVENTORY_FILE = f'{ROOT_DIR}/data/inventory/product.inventory.csv'
@@ -40,15 +45,6 @@ HEADERS = {
     'sec-gpc': '1'
     }
 
-# -*- Main function -*-
-if __name__ == "__main__":
-    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
-    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-
-    HEADERS["cookie"] = erpClient.authorise()
-    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
-                 f"===================================================================================================")
-
 
 # -*- Functions -*-
 def get_grn_for_invoice():
@@ -76,9 +72,9 @@ def get_grn_for_invoice():
                 col_name = "STR_INVOICE_NO"
             else:
                 if "Order" in adj_type:
-                    data = erpClient.filter_from_order_number(adj_ref)
+                    data = dpmc.filter_from_order_number(adj_ref)
                 else:
-                    data = erpClient.filter_from_mobile_number(adj_ref)
+                    data = dpmc.filter_from_mobile_number(adj_ref)
 
                 if len(data) != 1:
                     number["Type"] = "DPMC/Missing"
@@ -395,10 +391,41 @@ def read_sales_data():
     print()
 
 
-# -*- Function Calls -*-
-# get_grn_for_invoice()
-# get_products_from_invoices()
-json_to_csv()
-# merge_duplicates()
-inventory_adjustment()
-# read_sales_data()
+def get_sales_adjustments():
+    sheet.main()
+    inventory_adjustment()
+
+
+def get_dpmc_adjustments():
+    HEADERS["cookie"] = dpmc.authorise()
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
+                 f"==================================================================================================")
+    get_grn_for_invoice()
+    get_products_from_invoices()
+    json_to_csv()
+    merge_duplicates()
+    inventory_adjustment()
+    # read_sales_data()
+
+
+if __name__ == "__main__":
+    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
+    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
+    get_sales_adjustments()
+    # questions = [
+    #     {'type': 'list',
+    #      'name': 'adjustmentType',
+    #      'message': 'Select adjustment retrieval method',
+    #      'choices': [
+    #          {'key': 'p',
+    #           'name': 'Multi Bajaj',
+    #           'value': 'MultiBajaj'
+    #           },
+    #          {'key': 'p',
+    #           'name': 'DPMC',
+    #           'value': 'DPMC'
+    #           }],
+    #      'validate': lambda answer: 'You must choose at least one topping.' if len(answer) == 0 else True
+    #      }]
+    # answers = prompt(questions)
+    # pprint(answers)

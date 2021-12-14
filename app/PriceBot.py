@@ -3,7 +3,7 @@ import time
 import requests
 import pandas as pd
 import json
-import clients.erpClient as erpClient
+import app.dpmc as dpmc
 
 # -*- File Paths -*-
 PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     pd.set_option("display.expand_frame_repr", False)
     pd.set_option("display.max_rows", 25)
 
-    HEADERS["cookie"] = erpClient.authorise()
+    HEADERS["cookie"] = dpmc.authorise()
     logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
                  f"===================================================================================================")
 

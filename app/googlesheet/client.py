@@ -5,7 +5,6 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from datetime import date
-from app.InventoryBot import inventory_adjustment
 from app.config import ROOT_DIR
 
 import csv
@@ -23,18 +22,18 @@ DATED_ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustments/{date.today()}-a
 def get_service():
     credentials = None
 
-    if os.path.exists('token.json'):
-        credentials = Credentials.from_authorized_user_file('token.json', SCOPES)
+    if os.path.exists(f'{ROOT_DIR}/app/googlesheet/token.json'):
+        credentials = Credentials.from_authorized_user_file(f'{ROOT_DIR}/app/googlesheet/token.json', SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not credentials or not credentials.valid:
         if credentials and credentials.expired and credentials.refresh_token:
             credentials.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                f'{ROOT_DIR}/app/googlesheet/credentials.json', SCOPES)
             credentials = flow.run_local_server(port = 0)
         # Save the credentials for the next run
-        with open('token.json', 'w') as token:
+        with open(f'{ROOT_DIR}/app/googlesheet/token.json', 'w') as token:
             token.write(credentials.to_json())
 
     return build('sheets', 'v4', credentials = credentials)
@@ -107,7 +106,6 @@ def main():
     adjustments = extract_adjustments(raw_df)
     save_adjustments(adjustments)
     create_dated_adjustment()
-    inventory_adjustment()
 
 
 if __name__ == '__main__':
