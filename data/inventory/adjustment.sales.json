@@ -1,1 +1,217 @@
-[{"Products": [{"PartNumber": "28101129", "Quantity": "2", "Date": "2021/12/11"}, {"PartNumber": "JA511204", "Quantity": "1", "Date": null}, {"PartNumber": "36PA0004", "Quantity": "-1", "Date": null}, {"PartNumber": "JL401012", "Quantity": "-1", "Date": null}, {"PartNumber": "JL181203", "Quantity": "-1", "Date": null}, {"PartNumber": "JL181008", "Quantity": "-1", "Date": null}, {"PartNumber": "JL401405", "Quantity": "-1", "Date": null}, {"PartNumber": "JL401006", "Quantity": "-1", "Date": null}, {"PartNumber": "JL402409", "Quantity": "-1", "Date": null}, {"PartNumber": "JL231405", "Quantity": "-1", "Date": null}, {"PartNumber": "JL401002", "Quantity": "-1", "Date": null}, {"PartNumber": "52JL1035", "Quantity": "-1", "Date": null}, {"PartNumber": "DJ191057", "Quantity": "-1", "Date": null}, {"PartNumber": "36DD4001", "Quantity": "-5", "Date": null}, {"PartNumber": "39167121", "Quantity": "-10", "Date": null}, {"PartNumber": "JZ401038", "Quantity": "-1", "Date": null}, {"PartNumber": "DJ181115", "Quantity": "-20", "Date": null}, {"PartNumber": "AA101077", "Quantity": "-1", "Date": null}, {"PartNumber": "AA101210", "Quantity": "-7", "Date": null}, {"PartNumber": "AF201036", "Quantity": "-1", "Date": null}, {"PartNumber": "AN101123", "Quantity": "-2", "Date": null}, {"PartNumber": "AA101472", "Quantity": "-30", "Date": null}, {"PartNumber": "36AA4025", "Quantity": "-5", "Date": null}, {"PartNumber": "36BA4039", "Quantity": "-3", "Date": null}, {"PartNumber": "01100342K", "Quantity": "-5", "Date": null}, {"PartNumber": "DH111034", "Quantity": "-5", "Date": null}, {"PartNumber": "AA191102", "Quantity": "-3", "Date": null}, {"PartNumber": "AA101162", "Quantity": "-5", "Date": null}, {"PartNumber": "AN101149", "Quantity": "-5", "Date": null}, {"PartNumber": "AN101012", "Quantity": "-5", "Date": null}, {"PartNumber": "DK101151", "Quantity": "-15", "Date": null}, {"PartNumber": "JH511207", "Quantity": "-2", "Date": null}]}]
+{
+  "Adjustments": [
+    {
+      "Products": [
+        {
+          "PartNumber": "28101129",
+          "Quantity": "2",
+          "Date": "2021/12/11"
+        },
+        {
+          "PartNumber": "JA511204",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "36PA0004",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL401012",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL181203",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL181008",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL401405",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL401006",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL402409",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL231405",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL401002",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "52JL1035",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "DJ191057",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "36DD4001",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "39167121",
+          "Quantity": "-10",
+          "Date": null
+        },
+        {
+          "PartNumber": "JZ401038",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "DJ181115",
+          "Quantity": "-20",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA101077",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA101210",
+          "Quantity": "-7",
+          "Date": null
+        },
+        {
+          "PartNumber": "AF201036",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "AN101123",
+          "Quantity": "-2",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA101472",
+          "Quantity": "-30",
+          "Date": null
+        },
+        {
+          "PartNumber": "36AA4025",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "36BA4039",
+          "Quantity": "-3",
+          "Date": null
+        },
+        {
+          "PartNumber": "01100342K",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "DH111034",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA191102",
+          "Quantity": "-3",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA101162",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "AN101149",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "AN101012",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "DK101151",
+          "Quantity": "-15",
+          "Date": null
+        },
+        {
+          "PartNumber": "JH511207",
+          "Quantity": "-2",
+          "Date": null
+        }
+      ]
+    },
+    {
+      "Products": [
+        {
+          "PartNumber": "36BA4039",
+          "Quantity": "1",
+          "Date": "2021/12/13"
+        },
+        {
+          "PartNumber": "DH101795",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "DK151031",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "JL161010",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "AL201051",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA131036",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "39101321",
+          "Quantity": "10",
+          "Date": null
+        },
+        {
+          "PartNumber": "39193815",
+          "Quantity": "30",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA101213",
+          "Quantity": "5",
+          "Date": null
+        }
+      ]
+    }
+  ]
+}

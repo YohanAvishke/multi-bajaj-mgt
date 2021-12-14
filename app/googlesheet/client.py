@@ -7,7 +7,6 @@ from google.oauth2.credentials import Credentials
 from datetime import date
 from app.config import ROOT_DIR
 
-import csv
 import json
 import os.path
 import pandas as pd
@@ -15,6 +14,8 @@ import pandas as pd
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = '18kz-I9F90_vL60zHbGmtl8LMiAnJzy2nN_2DHzjJMIw'
 RANGE_NAME = 'A:D'
+TOKEN_FILE = F'{ROOT_DIR}/app/googlesheet/token.json'
+CREDENTIAL_FILE = f'{ROOT_DIR}/app/googlesheet/credentials.json'
 MAIN_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustment.sales.json'
 DATED_ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv"
 
@@ -22,27 +23,18 @@ DATED_ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustments/{date.today()}-a
 def get_service():
     credentials = None
 
-    if os.path.exists(f'{ROOT_DIR}/app/googlesheet/token.json'):
-        credentials = Credentials.from_authorized_user_file(f'{ROOT_DIR}/app/googlesheet/token.json', SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
+    if os.path.exists(TOKEN_FILE):
+        credentials = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
     if not credentials or not credentials.valid:
         if credentials and credentials.expired and credentials.refresh_token:
             credentials.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                f'{ROOT_DIR}/app/googlesheet/credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(CREDENTIAL_FILE, SCOPES)
             credentials = flow.run_local_server(port = 0)
-        # Save the credentials for the next run
-        with open(f'{ROOT_DIR}/app/googlesheet/token.json', 'w') as token:
+        with open(TOKEN_FILE, 'w') as token:
             token.write(credentials.to_json())
 
     return build('sheets', 'v4', credentials = credentials)
-
-
-get_spreadsheet_by_data_filter_request_body = {
-    'data_filters': [],
-    'include_grid_data': False
-    }
 
 
 def get_sheet_data(service):
@@ -74,30 +66,23 @@ def save_adjustments(adjustments):
     enriched_adjustments = []
     for adjustment in adjustments:
         enriched_adjustments.append({'Products': adjustment})
+
     with open(MAIN_ADJUSTMENT_FILE, 'w') as file:
-        json.dump(enriched_adjustments, file)
+        json.dump({'Adjustments': enriched_adjustments}, file)
     print('Adjustments saved')
 
 
 def create_dated_adjustment():
-    with open(MAIN_ADJUSTMENT_FILE, "r") as file:
-        adjustments = json.load(file)
+    adjustments = pd.read_json(MAIN_ADJUSTMENT_FILE, orient = 'records').Adjustments.to_list()
 
-    with open(DATED_ADJUSTMENT_FILE, "w") as adj_csv_file:
-        field_names = ("name", "Product/Internal Reference", "Counted Quantity")
-        adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
-                                    quoting = csv.QUOTE_MINIMAL)
-        adj_writer.writeheader()
+    products_df = pd.json_normalize(adjustments, 'Products')
+    products_df.Date = products_df.Date.fillna(method = "ffill")
+    values = products_df.apply(lambda row: f'Sales of {row["Date"]}', axis = 1)
+    products_df.insert(loc = 0, column = 'AdjustmentName', value = values)
+    products_df = products_df.drop('Date', axis = 1)
 
-        for adjustment in adjustments:
-            adj_ref = None
-            for product in adjustment["Products"]:
-                product_number = product["PartNumber"]
-                product_count = product["Quantity"]
-                adj_ref = f"Sales of {product['Date']}" if product['Date'] is not None else adj_ref
-                adj_writer.writerow({"name": adj_ref,
-                                     "Product/Internal Reference": product_number,
-                                     "Counted Quantity": float(product_count)})
+    products_df.to_csv(DATED_ADJUSTMENT_FILE, header = ['name', 'Product/Internal Reference', 'Counted Quantity'],
+                       index = False)
 
 
 def main():

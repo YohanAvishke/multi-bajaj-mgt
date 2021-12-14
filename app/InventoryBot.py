@@ -1,7 +1,5 @@
 from __future__ import print_function, unicode_literals
 
-from PyInquirer import style_from_dict, Token, prompt, Separator
-from pprint import pprint
 from datetime import date
 from app.config import ROOT_DIR
 
@@ -393,7 +391,6 @@ def read_sales_data():
 
 def get_sales_adjustments():
     sheet.main()
-    inventory_adjustment()
 
 
 def get_dpmc_adjustments():
@@ -404,28 +401,10 @@ def get_dpmc_adjustments():
     get_products_from_invoices()
     json_to_csv()
     merge_duplicates()
-    inventory_adjustment()
-    # read_sales_data()
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
     get_sales_adjustments()
-    # questions = [
-    #     {'type': 'list',
-    #      'name': 'adjustmentType',
-    #      'message': 'Select adjustment retrieval method',
-    #      'choices': [
-    #          {'key': 'p',
-    #           'name': 'Multi Bajaj',
-    #           'value': 'MultiBajaj'
-    #           },
-    #          {'key': 'p',
-    #           'name': 'DPMC',
-    #           'value': 'DPMC'
-    #           }],
-    #      'validate': lambda answer: 'You must choose at least one topping.' if len(answer) == 0 else True
-    #      }]
-    # answers = prompt(questions)
-    # pprint(answers)
+    # inventory_adjustment()
