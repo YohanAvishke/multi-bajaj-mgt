@@ -69,7 +69,6 @@ def save_adjustments(adjustments):
 
     with open(MAIN_ADJUSTMENT_FILE, 'w') as file:
         json.dump({'Adjustments': enriched_adjustments}, file)
-    print('Adjustments saved')
 
 
 def create_dated_adjustment():
