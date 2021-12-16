@@ -16,7 +16,7 @@ INVOICE_PATH = f"{ROOT_DIR}/data/inventory/invoices.json"
 INVENTORY_FILE = f'{ROOT_DIR}/data/inventory/product.inventory.csv'
 SALES_PATH = f"{ROOT_DIR}/data/inventory/sales.xlsx"
 FIX_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.2.csv'
+DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv'
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -133,7 +133,7 @@ def get_grn_for_invoice():
                     number["Type"] = "DPMC/Invoice"
             else:
                 logging.error(
-                    f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
+                        f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
@@ -168,8 +168,8 @@ def get_missing_invoice_id(details):
 
     if invoice_details == "NO DATA FOUND":
         logging.warning(
-            f"Missing data retreival failed for search code: {details['GRN search code']} and value "
-            f"{details['GRN total']}")
+                f"Missing data retreival failed for search code: {details['GRN search code']} and value "
+                f"{details['GRN total']}")
     else:
         if len(invoice_details) == 1:
             details["ID"] = invoice_details[0]["Invoice No"]
@@ -177,8 +177,8 @@ def get_missing_invoice_id(details):
         else:
             details["Retrieved Data"] = invoice_details
             logging.warning(
-                f"Missing data has multiple records. Details: {details['GRN search code']} and value "
-                f"{details['GRN total']}")
+                    f"Missing data has multiple records. Details: {details['GRN search code']} and value "
+                    f"{details['GRN total']}")
 
 
 def get_products_from_invoices():
@@ -232,7 +232,7 @@ def get_products_from_invoices():
                         number["Products"].append(product_detail)
             else:
                 logging.error(
-                    f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
+                        f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
     with open(INVOICE_PATH, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
@@ -263,12 +263,12 @@ def json_to_csv():
                 product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
                 product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
 
-                # if "Sales" in adjustment["Type"]:
-                #     adj_ref = f"Sales of {product['DATE']}" if product['DATE'] != "" else adj_ref
-                # else:
-                #     adj_ref = adjustment["ID"]
+                if "Sales" in adjustment["Type"]:
+                    adj_ref = f"Sales of {product['DATE']}" if product['DATE'] != "" else adj_ref
+                else:
+                    adj_ref = adjustment["ID"]
 
-                adj_writer.writerow({"name": "adj_ref",
+                adj_writer.writerow({"name": adj_ref,
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
     logging.info("Product data modeling done.")
@@ -393,6 +393,10 @@ def get_sales_adjustments():
     sheet.main()
 
 
+def get_other_adjustments():
+    json_to_csv()
+
+
 def get_dpmc_adjustments():
     HEADERS["cookie"] = dpmc.authorise()
     logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
@@ -406,6 +410,4 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    # get_sales_adjustments()
-    json_to_csv()
     inventory_adjustment()

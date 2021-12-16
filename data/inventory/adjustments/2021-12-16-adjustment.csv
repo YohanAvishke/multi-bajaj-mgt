@@ -1,0 +1,24 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Nishan Automobiles Inv - CB2003268,True,36AA4070(YL),__export__.product_product_50263_016309fa,stock.stock_location_stock,4.0
+,,AN101033(YL),__export__.product_product_49968_a93bc645,stock.stock_location_stock,2.0
+,,EI004081(VARROC),__export__.product_product_50192_7358e2c7,stock.stock_location_stock,6.0
+,,RJ0103(RAI),__export__.product_product_50693_3935c8ac,stock.stock_location_stock,24.0
+Sales of 2021/12/15,True,24130209,__export__.product_product_37997_bd3dbfa3,stock.stock_location_stock,4.0
+,,22191096,__export__.product_product_37781_aa78267c,stock.stock_location_stock,2.0
+,,PD511229,__export__.product_product_33165_178ac17f,stock.stock_location_stock,2.0
+,,AB151074,__export__.product_product_46813_f800696f,stock.stock_location_stock,21.0
+,,DJ151071,__export__.product_product_15601_2f33e76c,stock.stock_location_stock,16.0
+,,DH101188,__export__.product_product_14813_6613f0a6,stock.stock_location_stock,6.0
+,,DU151010,__export__.product_product_17352_2cfe35cd,stock.stock_location_stock,19.0
+,,DH101154,__export__.product_product_14800_9ce1343b,stock.stock_location_stock,58.0
+,,DM101140,__export__.product_product_16343_04f3e8a2,stock.stock_location_stock,111.0
+,,DM101139,__export__.product_product_16342_58194f41,stock.stock_location_stock,8.0
+,,24201277,__export__.product_product_38285_fc524c55,stock.stock_location_stock,1.0
+,,AM191005,__export__.product_product_47121_5eb1d4c7,stock.stock_location_stock,28.0
+,,AA191071,__export__.product_product_39378_959938c8,stock.stock_location_stock,9.0
+,,JD511010,__export__.product_product_18884_48a84f25,stock.stock_location_stock,48.0
+,,DD111048,__export__.product_product_14219_5367380d,stock.stock_location_stock,33.0
+,,DH111015,__export__.product_product_15014_35ae7052,stock.stock_location_stock,13.0
+,,DH111013,__export__.product_product_15013_21f0d50c,stock.stock_location_stock,18.0
+,,JB551411,__export__.product_product_18462_724be337,stock.stock_location_stock,25.0
+,,JB551408,__export__.product_product_18460_0f7cfaa4,stock.stock_location_stock,27.0
