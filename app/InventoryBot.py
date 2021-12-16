@@ -16,7 +16,7 @@ INVOICE_PATH = f"{ROOT_DIR}/data/inventory/invoices.json"
 INVENTORY_FILE = f'{ROOT_DIR}/data/inventory/product.inventory.csv'
 SALES_PATH = f"{ROOT_DIR}/data/inventory/sales.xlsx"
 FIX_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv'
+DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.2.csv'
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -263,12 +263,12 @@ def json_to_csv():
                 product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
                 product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
 
-                if "Sales" in adjustment["Type"]:
-                    adj_ref = f"Sales of {product['DATE']}" if product['DATE'] != "" else adj_ref
-                else:
-                    adj_ref = adjustment["ID"]
+                # if "Sales" in adjustment["Type"]:
+                #     adj_ref = f"Sales of {product['DATE']}" if product['DATE'] != "" else adj_ref
+                # else:
+                #     adj_ref = adjustment["ID"]
 
-                adj_writer.writerow({"name": adj_ref,
+                adj_writer.writerow({"name": "adj_ref",
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
     logging.info("Product data modeling done.")
@@ -406,5 +406,6 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
+    # get_sales_adjustments()
+    json_to_csv()
     inventory_adjustment()

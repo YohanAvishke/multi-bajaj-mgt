@@ -1,8 +1,17 @@
 Internal Reference,Name,Description,Product Category/ID,Point of Sale Category/ID,Product Type,Cost,Sales Price,Available in POS,Can be Purchased,Can be Sold,INT_QUANTITY
-24111128(YL),YL CDI With Damper (New),YL CDI With Damper (New),product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,1145.00,1145.00,True,True,True,4
-24121066S(YL),YL Carburetor Piston 5PS,YL Carburetor Piston 5PS,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,803.00,803.00,True,True,True,3
-24121070S(YL),YL Needle Valves,YL Needle Valves,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,851.00,851.00,True,True,True,4
-AA1910775(YL),YL Cable Complete Clutch S,YL Cable Complete Clutch S,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,793.00,793.00,True,True,True,5
-AA191080(YL),YL Cable Inner Speedometer,YL Cable Inner Speedometer,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,292.00,292.00,True,True,True,5
-AL191043(YL),YL Speedo Meter 4S 205,YL Speedo Meter 4S 205,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,2460.00,2460.00,True,True,True,3
-BP302(YL),YL Cali Pump ASSY discovery/ Pulser E,YL Cali Pump ASSY discovery/ Pulser E,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,4785.00,4785.00,True,True,True,2
+24171136(YL),YL Front Hub 2S,YL Front Hub 2S,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,4335.00,4335.00,True,True,True,1
+36A44116(YL),YL Headset 45 205,YL Headset 45 205,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,13050,13050,True,True,True,4
+36A44117(YL),YL Headset 45 175,YL Headset 45 175,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,13550.00,13550.00,True,True,True,2
+39193815(YL),YL Clutch Nut 3W 45,YL Clutch Nut 3W 45,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,75.00,75.00,True,True,True,20
+AA101624(YL),YL Pipe Oil Cooler,YL Pipe Oil Cooler,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,2250.00,2250.00,True,True,True,2
+AA101735(YL),YL Housing Magento RE,YL Housing Magento RE,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,15150.00,15150.00,True,True,True,2
+AA101952(YL),YL Air Filter Cover RE,YL Air Filter Cover RE,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,798.00,798.00,True,True,True,5
+AA101970(YL),YL Fan Cover With Heat Shield CO,YL Fan Cover With Heat Shield CO,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,770.00,770.00,True,True,True,2
+AA111031(YL),YL Reverse Switch,YL Reverse Switch,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,284.00,284.00,True,True,True,8
+AA191080(YL),YL Cable Inner Speedometer,YL Cable Inner Speedometer,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,265.00,265.00,True,True,True,15
+AN101203(YL),YL Internal Cowling 45,YL Internal Cowling 45,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,307.00,307.00,True,True,True,2
+AN121205(YL),YL Oil Cooler FL,YL Oil Cooler FL,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,5560.00,5560.00,True,True,True,2
+DX101054(YL),YL Housing Complete Clutch,YL Housing Complete Clutch,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,4410.00,4410.00,True,True,True,2
+RJ0103(RAI),Rai Wheel Rim 3W 45 N/M,Rai Wheel Rim 3W 45 N/M,product.product_category_1,__export__.pos_category_61_6aefa974,Storable Product,2245.00,2245.00,True,True,True,24
+RJ0404(ENDURANCE),Endurance Brake Cyl. Assy 2S Front,Endurance Brake Cyl. Assy 2S Front,product.product_category_1,__export__.pos_category_29_fc3f045c,Storable Product,1280.00,1280.00,True,True,True,10
+SH0141(NGG),Ngg Wiper Hybrid,Ngg Wiper Hybrid,product.product_category_1,__export__.pos_category_45_22a3df8b,Storable Product,455.00,455.00,True,True,True,6
