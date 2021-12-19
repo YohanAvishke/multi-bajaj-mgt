@@ -1,0 +1,90 @@
+{
+  "Adjustments": [
+    {
+      "Type": "Other",
+      "ID": "Deepthi Motors Invoice - DLRINV2021121704339",
+      "Products": [
+        {
+          "STR_PART_NO": "AA201012",
+          "INT_QUATITY": 10.0
+        },
+        {
+          "STR_PART_NO": "AF201036",
+          "INT_QUATITY": 5.0
+        },
+        {
+          "STR_PART_NO": "AN101155",
+          "INT_QUATITY": 10.0
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Deepthi Motors Invoice - DLRINV2021121404333",
+      "Products": [
+        {
+          "STR_PART_NO": "24151171",
+          "INT_QUATITY": 15.0
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Deepthi Motors Invoice - DLRINV2021121004301",
+      "Products": [
+        {
+          "STR_PART_NO": "AA101666",
+          "INT_QUATITY": 4.0
+        },
+        {
+          "STR_PART_NO": "AA191092",
+          "INT_QUATITY": 5.0
+        },
+        {
+          "STR_PART_NO": "AF201036",
+          "INT_QUATITY": 5.0
+        },
+        {
+          "STR_PART_NO": "AN101190",
+          "INT_QUATITY": 10.0
+        },
+        {
+          "STR_PART_NO": "DJ151071",
+          "INT_QUATITY": 15.0
+        },
+        {
+          "STR_PART_NO": "DM101139",
+          "INT_QUATITY": 20.0
+        },
+        {
+          "STR_PART_NO": "DS201003",
+          "INT_QUATITY": 4.0
+        },
+        {
+          "STR_PART_NO": "JA541205",
+          "INT_QUATITY": 10.0
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Deepthi Motors Invoice - DLRINV2021120904294",
+      "Products": [
+        {
+          "STR_PART_NO": "36DZ0002",
+          "INT_QUATITY": 10.0
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Deepthi Motors Invoice - INV00002463",
+      "Products": [
+        {
+          "STR_PART_NO": "AA101666",
+          "INT_QUATITY": 5.0
+        }
+      ]
+    }
+  ]
+}

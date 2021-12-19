@@ -17,6 +17,7 @@ INV_DIR = f'{ROOT_DIR}/data/inventory'
 ADJ_DIR = f'{INV_DIR}/adjustments'
 # -*- File Paths -*-
 ADJ_DPMC_FILE = f'{INV_DIR}/adjustment.dpmc.json'
+ADJ_OTHER_FILE = f'{INV_DIR}/adjustment.other.json'
 INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
 SALES_PATH = f'{INV_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
@@ -259,7 +260,7 @@ def get_products_from_invoices():
     logging.info("Product data scrapping done.")
 
 
-def json_to_csv():
+def json_to_csv(file):
     # -*- coding: utf-8 -*-
     """ Before
     get_products_from_invoices() should be called before
@@ -267,7 +268,7 @@ def json_to_csv():
     ''' After Call
     Part Numbers with the quantities will be in the `DATED_ADJUSTMENT_FILE`
     """
-    with open(ADJ_DPMC_FILE, "r") as invoice_file:
+    with open(file, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
     adjustments = invoice_reader["Adjustments"]
 
@@ -414,7 +415,7 @@ def get_sales_adjustments():
 
 
 def get_other_adjustments():
-    json_to_csv()
+    json_to_csv(ADJ_OTHER_FILE)
 
 
 def get_dpmc_adjustments():
@@ -423,12 +424,11 @@ def get_dpmc_adjustments():
                  f"==================================================================================================")
     get_grn_for_invoice()
     get_products_from_invoices()
-    json_to_csv()
+    json_to_csv(ADJ_DPMC_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    # main()
-    json_to_csv()
+    get_other_adjustments()
     inventory_adjustment()
