@@ -12,18 +12,21 @@ import pandas as pd
 import app.dpmc as dpmc
 import app.googlesheet as sheet
 
-INVOICE_PATH = f"{ROOT_DIR}/data/inventory/invoices.json"
-INVENTORY_FILE = f'{ROOT_DIR}/data/inventory/product.inventory.csv'
-SALES_PATH = f"{ROOT_DIR}/data/inventory/sales.xlsx"
-FIX_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv'
+# -*- Dir Paths -*-
+INV_DIR = f'{ROOT_DIR}/data/inventory'
+ADJ_DIR = f'{INV_DIR}/adjustments'
+# -*- File Paths -*-
+ADJ_DPMC_FILE = f'{INV_DIR}/adjustment.dpmc.json'
+INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
+SALES_PATH = f'{INV_DIR}/sales.xlsx'
+FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
+DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
 
-# -*- Request URLs -*-
-URL = "https://erp.dpg.lk/Help/GetHelp"
-URL_PRODUCTS = "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire"
-ULR_ADVANCED = "https://erp.dpg.lk/Help/GetHelpForAdvanceSearch"
-
-# -*- Constants -*-
+# -*- Request -*-
+URL = 'https://erp.dpg.lk/Help/GetHelp'
+URL_PRODUCTS = 'https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire'
+ULR_ADVANCED = 'https://erp.dpg.lk/Help/GetHelpForAdvanceSearch'
+# -*- Headers -*-
 HEADERS = {
     'authority': 'erp.dpg.lk',
     'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
@@ -42,30 +45,47 @@ HEADERS = {
     'dnt': '1',
     'sec-gpc': '1'
     }
+# -*- Payloads -*-
+PAYLOAD = {
+    'strInstance': 'DLR&',
+    'strPremises': 'KGL&',
+    'strAppID': '00011&',
+    'strFORMID': '00605&',
+    'strFIELD_NAME': '%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&',
+    'strHIDEN_FIELD_INDEX': '%2C0&',
+    'strDISPLAY_NAME': '%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&',
+    'strSEARCH_TEXT': '&',
+    'strSEARCH_FIELD_NAME': 'STR_GRN_NO&',
+    'strLIMIT': '0&',
+    'strARCHIVE': 'TRUE&',
+    'strORDERBY': 'STR_GRN_NO&',
+    'strOTHER_WHERE_CONDITION': '&',
+    'strAPI_URL': 'api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&',
+    'strTITEL': '&',
+    'strAll_DATA': 'true',
+    '&strSchema': ''
+    }
 
 
-# -*- Functions -*-
+def main():
+    adjustments = pd.read_json(ADJ_DPMC_FILE, orient = 'records').Adjustments.to_list()
+    adjustment_df = pd.json_normalize(adjustments)
+
+
 def get_grn_for_invoice():
-    # -*- coding: utf-8 -*-
-    """ Before
-    Add the Invoice numbers to ['Invoice']['Numbers']['Invoice']
-
-    ``` After
-    Call get_products_from_invoices()
-    """
-    with open(INVOICE_PATH, "r") as invoice_file:
+    with open(ADJ_DPMC_FILE, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
-    invoice = invoice_reader["Invoice"]
+    adjustments = invoice_reader["Adjustments"]
 
-    for number in invoice["Numbers"]:
-        adj_type = number["Type"]
+    for adjustment in adjustments:
+        adj_type = adjustment["Type"]
 
         if "DPMC" in adj_type:
             if "Missing" in adj_type:
-                get_missing_invoice_id(number)
+                get_missing_invoice_id(adjustment)
                 continue
 
-            adj_ref = number["ID"]
+            adj_ref = adjustment["ID"]
             if "Invoice" in adj_type:
                 col_name = "STR_INVOICE_NO"
             else:
@@ -75,21 +95,21 @@ def get_grn_for_invoice():
                     data = dpmc.filter_from_mobile_number(adj_ref)
 
                 if len(data) != 1:
-                    number["Type"] = "DPMC/Missing"
+                    adjustment["Type"] = "DPMC/Missing"
                     logging.warning(f"get_grn_for_invoice filtering failed for {adj_ref}\n {data}")
                     continue
                 else:
                     data = data[0]
                     if data["Invoice No"] != "":
-                        number["ID"] = data["Invoice No"]
-                        number["Type"] = "DPMC/Invoice"
+                        adjustment["ID"] = data["Invoice No"]
+                        adjustment["Type"] = "DPMC/Invoice"
                         col_name = "STR_INVOICE_NO"
                     elif data["Order No"] != "":
-                        number["ID"] = data["Order No"]
-                        number["Type"] = "DPMC/Order"
+                        adjustment["ID"] = data["Order No"]
+                        adjustment["Type"] = "DPMC/Order"
                         col_name = "STR_ORDER_NO"
                     else:
-                        number["Type"] = "DPMC/Missing"
+                        adjustment["Type"] = "DPMC/Missing"
                         logging.warning(f"get_grn_for_invoice filtered data invalid for {adj_ref}\n {data}")
                         continue
 
@@ -127,15 +147,15 @@ def get_grn_for_invoice():
                     logging.warning(f"Invoice Number: {adj_ref} is too Vague !!!")
                     continue
 
-                number["GRN"] = invoice_details[0]["GRN No"]
+                adjustment["GRN"] = invoice_details[0]["GRN No"]
                 if "Order" in adj_type:
-                    number["ID"] = invoice_details[0]["Invoice No"]
-                    number["Type"] = "DPMC/Invoice"
+                    adjustment["ID"] = invoice_details[0]["Invoice No"]
+                    adjustment["Type"] = "DPMC/Invoice"
             else:
                 logging.error(
                         f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
-    with open(INVOICE_PATH, "w") as invoice_file:
+    with open(ADJ_DPMC_FILE, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
 
     logging.info("Invoice data scrapping done.")
@@ -189,20 +209,20 @@ def get_products_from_invoices():
     ''' After Call
     Part Numbers are located at ['Invoice']['Products']
     """
-    with open(INVOICE_PATH, "r") as invoice_file:
+    with open(ADJ_DPMC_FILE, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
-    invoice = invoice_reader["Invoice"]
+    adjustments = invoice_reader["Adjustments"]
 
-    for number in invoice["Numbers"]:
-        adj_type = number["Type"]
+    for adjustment in adjustments:
+        adj_type = adjustment["Type"]
 
         if "DPMC" in adj_type:
             if "Missing" in adj_type:
                 logging.warning("Invoice with missing identifiers are still present.")
                 continue
-            adj_ref = number["ID"]
-            grn_number = number["GRN"] if "GRN" in number else None
-            number["Products"] = []
+            adj_ref = adjustment["ID"]
+            grn_number = adjustment["GRN"] if "GRN" in adjustment else None
+            adjustment["Products"] = []
 
             payload_mid = f"&strInvoiceNo={adj_ref}&" \
                           "strPADealerCode=AC2011063676&" \
@@ -223,18 +243,18 @@ def get_products_from_invoices():
                 product_details = json.loads(response.text)["DATA"]
 
                 if product_details == "NO DATA FOUND":
-                    logging.warning(f"Invoice Number: {number} is Invalid !!!")
+                    logging.warning(f"Invoice Number: {adjustment} is Invalid !!!")
                 else:
-                    product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in number \
+                    product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in adjustment \
                         else product_details["dtGRNDetails"]
 
                     for product_detail in product_details:
-                        number["Products"].append(product_detail)
+                        adjustment["Products"].append(product_detail)
             else:
                 logging.error(
                         f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
 
-    with open(INVOICE_PATH, "w") as invoice_file:
+    with open(ADJ_DPMC_FILE, "w") as invoice_file:
         json.dump(invoice_reader, invoice_file)
     logging.info("Product data scrapping done.")
 
@@ -247,9 +267,9 @@ def json_to_csv():
     ''' After Call
     Part Numbers with the quantities will be in the `DATED_ADJUSTMENT_FILE`
     """
-    with open(INVOICE_PATH, "r") as invoice_file:
+    with open(ADJ_DPMC_FILE, "r") as invoice_file:
         invoice_reader = json.load(invoice_file)
-    adjustments = invoice_reader["Invoice"]["Numbers"]
+    adjustments = invoice_reader["Adjustments"]
 
     with open(DATED_ADJUSTMENT_FILE, "w") as adj_csv_file:
         field_names = ("name", "Product/Internal Reference", "Counted Quantity")
@@ -404,11 +424,11 @@ def get_dpmc_adjustments():
     get_grn_for_invoice()
     get_products_from_invoices()
     json_to_csv()
-    merge_duplicates()
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
+    # main()
+    json_to_csv()
     inventory_adjustment()

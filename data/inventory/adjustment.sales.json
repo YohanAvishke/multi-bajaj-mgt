@@ -1,1 +1,68 @@
-{"Adjustments": [{"Products": [{"PartNumber": "AA101058", "Quantity": "2", "Date": "2021/12/16"}, {"PartNumber": "JA351610", "Quantity": "2", "Date": null}, {"PartNumber": "52210040", "Quantity": "1", "Date": null}, {"PartNumber": "31101033", "Quantity": "1", "Date": null}, {"PartNumber": "DE151013(YL)", "Quantity": "1", "Date": null}, {"PartNumber": "DJ151071", "Quantity": "-1", "Date": null}, {"PartNumber": "AA191091", "Quantity": "-5", "Date": null}, {"PartNumber": "39240320", "Quantity": "-5", "Date": null}, {"PartNumber": "JA521017", "Quantity": "-5", "Date": null}, {"PartNumber": "AF111010", "Quantity": "-3", "Date": null}, {"PartNumber": "39103519", "Quantity": "-40", "Date": null}, {"PartNumber": "PF351224", "Quantity": "-1", "Date": null}]}]}
+{
+  "Adjustments": [
+    {
+      "Products": [
+        {
+          "PartNumber": "AA101058",
+          "Quantity": "2",
+          "Date": "2021/12/16"
+        },
+        {
+          "PartNumber": "JA351610",
+          "Quantity": "2",
+          "Date": null
+        },
+        {
+          "PartNumber": "52210040",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "31101033",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "DE151013(YL)",
+          "Quantity": "1",
+          "Date": null
+        },
+        {
+          "PartNumber": "DJ151071",
+          "Quantity": "-1",
+          "Date": null
+        },
+        {
+          "PartNumber": "AA191091",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "39240320",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "JA521017",
+          "Quantity": "-5",
+          "Date": null
+        },
+        {
+          "PartNumber": "AF111010",
+          "Quantity": "-3",
+          "Date": null
+        },
+        {
+          "PartNumber": "39103519",
+          "Quantity": "-40",
+          "Date": null
+        },
+        {
+          "PartNumber": "PF351224",
+          "Quantity": "-1",
+          "Date": null
+        }
+      ]
+    }
+  ]
+}

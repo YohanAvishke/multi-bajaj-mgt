@@ -73,8 +73,8 @@ def save_adjustments(adjustments):
 
 def create_dated_adjustment():
     adjustments = pd.read_json(MAIN_ADJUSTMENT_FILE, orient = 'records').Adjustments.to_list()
-
     products_df = pd.json_normalize(adjustments, 'Products')
+
     products_df.Date = products_df.Date.fillna(method = "ffill")
     values = products_df.apply(lambda row: f'Sales of {row["Date"]}', axis = 1)
     products_df.insert(loc = 0, column = 'AdjustmentName', value = values)
