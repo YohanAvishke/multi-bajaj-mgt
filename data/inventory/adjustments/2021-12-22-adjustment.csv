@@ -1,0 +1,17 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of 2021/12/20,True,DZ191004,__export__.product_product_17745_f3f8c809,stock.stock_location_stock,0.0
+,,39186420,__export__.product_product_12709_32d73d7c,stock.stock_location_stock,6.0
+,,36JZ0007,__export__.product_product_12256_1b8a20bc,stock.stock_location_stock,12.0
+,,DK151094,__export__.product_product_16120_432a826f,stock.stock_location_stock,45.0
+,,DJ151071,__export__.product_product_15601_2f33e76c,stock.stock_location_stock,48.0
+,,AA191093,__export__.product_product_46660_62900b40,stock.stock_location_stock,13.0
+,,39103519,__export__.product_product_38666_4cd4757b,stock.stock_location_stock,536.0
+,,28101118,__export__.product_product_38367_771f9025,stock.stock_location_stock,343.0
+,,36AN0013,__export__.product_product_38527_7cb45b66,stock.stock_location_stock,36.0
+,,DU151005,__export__.product_product_17349_8fc80614,stock.stock_location_stock,4.0
+,,30151105,__export__.product_product_11238_926c2a15,stock.stock_location_stock,127.0
+,,24121118,__export__.product_product_37905_a3298065,stock.stock_location_stock,3.0
+,,DJ181119,__export__.product_product_15727_412a951c,stock.stock_location_stock,7.0
+,,AA111107,__export__.product_product_39164_bf239bed,stock.stock_location_stock,9.0
+,,36AE0001,__export__.product_product_49751_b9240984,stock.stock_location_stock,10.0
+,,52JL0982,__export__.product_product_13459_ae2b426a,stock.stock_location_stock,2.0
