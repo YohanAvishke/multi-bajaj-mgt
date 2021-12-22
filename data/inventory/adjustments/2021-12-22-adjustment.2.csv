@@ -1,0 +1,5 @@
+name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of 2021/12/21,True,DS151038,__export__.product_product_16772_7749e976,stock.stock_location_stock,477.0
+,,JV511012,__export__.product_product_24157_f660d768,stock.stock_location_stock,5.0
+,,JD511010,__export__.product_product_18884_48a84f25,stock.stock_location_stock,31.0
+,,AE101016,__export__.product_product_46883_64fd3e49,stock.stock_location_stock,3.0
