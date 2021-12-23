@@ -1,6 +1,6 @@
 from __future__ import print_function, unicode_literals
 from app.config import ROOT_DIR
-from app.InventoryBot import ADJ_DIR, inventory_adjustment
+from app.bots.InventoryBot import ADJ_DIR, inventory_adjustment
 from datetime import date
 
 import sys

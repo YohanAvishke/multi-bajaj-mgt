@@ -1,5 +1,4 @@
 from __future__ import print_function, unicode_literals
-
 from datetime import date
 from app.config import ROOT_DIR
 

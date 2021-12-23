@@ -3,7 +3,7 @@ import logging
 from datetime import date
 
 # -*- File Paths -*-
-BARCODE_NOMENCLATURE_PATH = "../data/product/product.barcode.csv"
+BARCODE_NOMENCLATURE_PATH = "../../data/product/product.barcode.csv"
 INVENTORY_ODOO_PATH = "../data/inventory/product.bajaj.inventory.csv"
 
 # -*- Main function -*-
