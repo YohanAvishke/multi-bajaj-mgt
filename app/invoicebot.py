@@ -1,11 +1,9 @@
 from __future__ import print_function, unicode_literals
-
-import sys
-
 from app.config import ROOT_DIR
 from app.InventoryBot import ADJ_DIR, inventory_adjustment
 from datetime import date
 
+import sys
 import re
 import pandas as pd
 
@@ -108,7 +106,7 @@ if __name__ == "__main__":
     current_source = ADJ_SOURCES[0]
     dated_adj_file = f"{ADJ_DIR}/{current_date}-{current_source}-adjustment.csv"
 
-    # create_adj_file()
+    create_adj_file()
     invalid_products = inventory_adjustment(dated_adj_file)
     if invalid_products:
         create_product_file(invalid_products)
