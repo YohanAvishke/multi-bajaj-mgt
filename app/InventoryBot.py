@@ -307,7 +307,7 @@ def merge_duplicates():
     logging.info("Adjustment's duplicate products have been merged")
 
 
-def inventory_adjustment():
+def inventory_adjustment(dated_adj_file):
     # -*- coding: utf-8 -*-
     """ Before
     json_to_csv() should be called before to get the adjustment file
@@ -320,7 +320,7 @@ def inventory_adjustment():
     invalid_products = []
     previous_adjustment_invoice = None
 
-    with open(INVENTORY_FILE, "r") as inventory_file, open(DATED_ADJUSTMENT_FILE, "r") as adjustment_file:
+    with open(INVENTORY_FILE, "r") as inventory_file, open(dated_adj_file, "r") as adjustment_file:
         inventory_reader = list(csv.DictReader(inventory_file))
         adjustment_reader = list(csv.DictReader(adjustment_file))
 
@@ -375,9 +375,10 @@ def inventory_adjustment():
     columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
                'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
-    df.to_csv(DATED_ADJUSTMENT_FILE, encoding = 'utf-8', mode = 'w', header = True, index = False)
+    df.to_csv(dated_adj_file, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
     logging.info("Inventory Adjustment done.")
+    return invalid_products
 
 
 def _create_quantity_fixes(products):
@@ -431,4 +432,4 @@ if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
     get_sales_adjustments()
-    inventory_adjustment()
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)

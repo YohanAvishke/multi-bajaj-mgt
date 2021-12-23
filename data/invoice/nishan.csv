@@ -1,17 +1,13 @@
-Name,PartNumber,Quantity,Price
-YL Front Hub 2S,24171136(YL),1,4335.00
-YL Headset 45 205,36A44116(YL),4,13050
-YL Headset 45 175,36A44117(YL),2,13550.00
-YL Clutch Nut 3W 45,39193815(YL),20,75.00
-YL Pipe Oil Cooler,AA101624(YL),2,2250.00
-YL Housing Magento RE,AA101735(YL),2,15150.00
-YL Air Filter Cover RE,AA101952(YL),5,798.00
-YL Fan Cover With Heat Shield CO,AA101970(YL),2,770.00
-YL Reverse Switch,AA111031(YL),8,284.00
-YL Cable Inner Speedometer,AA191080(YL),15,265.00
-YL Internal Cowling 45,AN101203(YL),2,307.00
-YL Oil Cooler FL,AN121205(YL),2,5560.00
-YL Housing Complete Clutch,DX101054(YL),2,4410.00
-Rai Wheel Rim 3W 45 N/M,RJ0103(RAI),24,2245.00
-Endurance Brake Cyl. Assy 2S Front,RJ0404(ENDURANCE),10,1280.00
-Ngg Wiper Hybrid,SH0141(NGG),6,455.00
+name,Product/Internal Reference,Counted Quantity,Price,Total
+Clutch Complete Compact,AA101593(YL),1,"8440.00","6752.00"
+Oil Cooler,AA121135(YL),2,"5060.00","8096.00"
+Clutch Plate Kit Set 3 5P,AE101016(YL),10,740.00,"5920.01"
+Clutch Cover,AE101019(YL),10,"1120.00","8960.01"
+Oil Cooler FL,AN121205(YL),1,"5560.00","4448.00"
+Ignition Switch 45,BG401401(YL),3,"1210.00","2904.01"
+Brake Shoe Dio/Activa ASK,BP1511,2,645.00,"967.50"
+Mc Pump Assy Discovery/Pulser,BP301(ENDURANCE),2,"4526.00","6789.00"
+Coupling Rubber Green New,RB0608(YL),200,10.00,"1600.00"
+Brake Dail Auto Adjust Rear 4S,RJ0369(ENDURANCE),2,"3700.00","5920.00"
+Brake Dail Auto Adjust Rear 45,RJ0370(ENDURANCE),2,"3640.00","5824.00"
+Brake Drum 3W 4S Heavy Duty,R10571(OPTUS),4,"1910.00","6112.00"

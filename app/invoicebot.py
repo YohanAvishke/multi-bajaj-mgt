@@ -1,15 +1,27 @@
 from __future__ import print_function, unicode_literals
 
-from app.config import ROOT_DIR
+import sys
 
+from app.config import ROOT_DIR
+from app.InventoryBot import ADJ_DIR, inventory_adjustment
+from datetime import date
+
+import re
 import pandas as pd
 
 INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/nishan.txt"
-INVOICE_NISHAN_FILE_2 = f"{ROOT_DIR}/data/invoice/nishan.csv"
+PRODUCT_FILE = f"{ROOT_DIR}/data/product/product.product.csv"
+POS_CATEGORY_FILE = f"{ROOT_DIR}/data/product/pos.category.csv"
+ADJ_SOURCES = ["nishan"]
+NISHAN_ADJ_NAME = "Nishan Automobile Invoice"
 
 
-def main():
-    all_capitals = ['4s', '5p', 'ct', 'cdi', 'dh', 'dz', 'jk', 'lh', 'nd', 'nm', 'ns', 'rh', 'ug']
+def create_adj_file():
+    all_capitals = ["4s", "5p", "ct", "cdi", "dh", "dz", "jk", "lh", "nd", "nm", "ns", "rh", "ug"]
+    adj_name = ""
+
+    if current_source == "nishan":
+        adj_name = f"{NISHAN_ADJ_NAME} - {invoice_number}"
 
     with open(INVOICE_NISHAN_FILE) as file:
         lines = file.readlines()
@@ -19,30 +31,84 @@ def main():
         words = line.split(" ")
 
         product = {
-            "Name": " ".join(words[1:-3]).title(),
-            "PartNumber": words[-3],
-            "Quantity": words[-2],
-            "Price": words[-1].replace(",", "")
+            "Name": adj_name,
+            "PartName": " ".join(words[1:-4]).title(),
+            "PartNumber": words[-4],
+            "Quantity": words[-3],
+            "Price": words[-2].replace(",", ""),
+            "Total": words[-1].replace("\n", "")
             }
         products.append(product)
-
-        # index = words[0]
-        # amount = words[-1].replace("\n", "")
-        # price = words[-2]
-        # quantity = words[-3]
-        # part_number = words[-4]
-        # name = ""
-        # for word in words[1:-4]:
-        #     if word.lower() in all_capitals:
-        #         name += f' {word.upper()}'
-        #     else:
-        #         name += f' {word.title()}'
-        # name = " ".join(words[1:-4])
-
     products_df = pd.DataFrame(products)
-    products_df.to_csv(INVOICE_NISHAN_FILE_2, header = ['Name', 'PartNumber', 'Quantity', 'Price'],
-                       index = False)
+    products_df.to_csv(dated_adj_file, index = False, header = ["name", "PartName", "Product/Internal Reference",
+                                                                "Counted Quantity", "Price", "Total"])
 
 
-if __name__ == '__main__':
-    main()
+def _get_product_category(product_df):
+    pos_category_df = pd.read_csv(POS_CATEGORY_FILE)
+    part_number = product_df["Internal Reference"]
+
+    m = re.search(r"\((\w+)\)", part_number)
+    if m:
+        pos_category = m.group(1)
+        if pos_category in pos_category_df.Code.values:
+            product_df["Name"] = f"{pos_category} {product_df['Name']}"
+            product_df["Point of Sale Category/ID"] = pos_category_df.loc[
+                pos_category_df["Code"] == pos_category].ID.values[0]
+            return product_df
+        else:
+            print(f"Invalid POS category {pos_category} received.")
+            sys.exit(0)
+
+    print(f"Using default POS category for {part_number}.")
+    product_df["Point of Sale Category/ID"] = pos_category_df.loc[
+        pos_category_df["Display Name"] == "Bajaj"].ID.values[0]
+    return product_df
+
+
+def create_product_file(products):
+    product_df = pd.DataFrame(products)
+    print(product_df.to_markdown())
+
+    product_df = product_df.drop(["name",
+                                  "Counted Quantity",
+                                  "Total"],
+                                 axis = 1).rename(columns = {"PartName": "Name",
+                                                             "Product/Internal Reference": "Internal Reference",
+                                                             "Price": "Sales Price"})
+    product_df = product_df.assign(**{"Product Category/ID": "product.product_category_1",
+                                      "Product Type": "Storable Product",
+                                      "Cost": product_df["Sales Price"],
+                                      "Customer Taxes": "",
+                                      "Available in POS": True,
+                                      "Can be Purchased": True,
+                                      "Can be Sold": True})
+    product_df = product_df.apply(_get_product_category, axis = 1)
+    product_df["Description"] = product_df["Name"]
+
+    columns = ["Internal Reference",
+               "Name",
+               "Description",
+               "Product Category/ID",
+               "Point of Sale Category/ID",
+               "Product Type",
+               "Cost",
+               "Sales Price",
+               "Customer Taxes",
+               "Available in POS",
+               "Can be Purchased",
+               "Can be Sold"]
+    product_df.to_csv(PRODUCT_FILE, index = False, columns = columns)
+
+
+if __name__ == "__main__":
+    invoice_number = "CB2003375"
+    current_date = ""
+    current_date = current_date if current_date != "" else date.today()
+    current_source = ADJ_SOURCES[0]
+    dated_adj_file = f"{ADJ_DIR}/{current_date}-{current_source}-adjustment.csv"
+
+    # create_adj_file()
+    invalid_products = inventory_adjustment(dated_adj_file)
+    if invalid_products:
+        create_product_file(invalid_products)
