@@ -8,17 +8,19 @@ import json
 import requests
 import logging
 import pandas as pd
+import flatten_json
 import app.dpmc as dpmc
 import app.googlesheet as sheet
 
 # -*- Dir Paths -*-
 INV_DIR = f'{ROOT_DIR}/data/inventory'
+SALES_DIR = f'{ROOT_DIR}/data/sales'
 ADJ_DIR = f'{INV_DIR}/adjustments'
 # -*- File Paths -*-
 ADJ_DPMC_FILE = f'{INV_DIR}/adjustment.dpmc.json'
 ADJ_OTHER_FILE = f'{INV_DIR}/adjustment.other.json'
 INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
-SALES_PATH = f'{INV_DIR}/sales.xlsx'
+SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
 DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
 
@@ -65,11 +67,6 @@ PAYLOAD = {
     'strAll_DATA': 'true',
     '&strSchema': ''
     }
-
-
-def main():
-    adjustments = pd.read_json(ADJ_DPMC_FILE, orient = 'records').Adjustments.to_list()
-    adjustment_df = pd.json_normalize(adjustments)
 
 
 def get_grn_for_invoice():
@@ -260,35 +257,24 @@ def get_products_from_invoices():
 
 
 def json_to_csv(file):
-    # -*- coding: utf-8 -*-
-    """ Before
-    get_products_from_invoices() should be called before
-
-    ''' After Call
-    Part Numbers with the quantities will be in the `DATED_ADJUSTMENT_FILE`
-    """
-    with open(file, "r") as invoice_file:
-        invoice_reader = json.load(invoice_file)
-    adjustments = invoice_reader["Adjustments"]
+    adjustments = pd.read_json(file, orient = 'records').Adjustments.to_list()
+    sorted_adjustment = pd \
+        .json_normalize(adjustments) \
+        .sort_values(by = ['Date', 'ID']) \
+        .to_dict('records')
 
     with open(DATED_ADJUSTMENT_FILE, "w") as adj_csv_file:
-        field_names = ("name", "Product/Internal Reference", "Counted Quantity")
+        field_names = ("name", "Accounting Date", "Product/Internal Reference", "Counted Quantity")
         adj_writer = csv.DictWriter(adj_csv_file, fieldnames = field_names, delimiter = ',', quotechar = '"',
                                     quoting = csv.QUOTE_MINIMAL)
         adj_writer.writeheader()
-
-        for adjustment in adjustments:
-            adj_ref = None
+        for adjustment in sorted_adjustment:
             for product in adjustment["Products"]:
                 product_number = product["STR_PART_NO"] if "STR_PART_NO" in product else product["STR_PART_CODE"]
                 product_count = product["INT_QUANTITY"] if "INT_QUANTITY" in product else product["INT_QUATITY"]
 
-                if "Sales" in adjustment["Type"]:
-                    adj_ref = f"Sales of {product['DATE']}" if product['DATE'] != "" else adj_ref
-                else:
-                    adj_ref = adjustment["ID"]
-
-                adj_writer.writerow({"name": adj_ref,
+                adj_writer.writerow({"name": adjustment["ID"],
+                                     "Accounting Date": adjustment["Date"],
                                      "Product/Internal Reference": product_number,
                                      "Counted Quantity": float(product_count)})
     logging.info("Product data modeling done.")
@@ -396,18 +382,19 @@ def _format_sales_data(number):
 
 
 def read_sales_data():
-    sales_df = pd.read_excel(SALES_PATH,
-                             skiprows = list(range(4)),
-                             header = None,
-                             names = ['number', 'quantity'],
-                             dtype = {'number': str},
-                             converters = {'number': _format_sales_data})
-    fixable_products_df = pd.read_csv(FIX_FILE,
-                                      dtype = {'reference': str})
-    sales_mask = sales_df.number.isin(fixable_products_df.reference)
-    sales_df = sales_df[sales_mask]
-
+    sales_df = pd.read_excel(SALES_FILE)
     print()
+    # sales_df = pd.read_excel(SALES_FILE,
+    #                          skiprows = list(range(4)),
+    #                          header = None,
+    #                          names = ['number', 'quantity'],
+    #                          dtype = {'number': str},
+    #                          converters = {'number': _format_sales_data})
+    # fixable_products_df = pd.read_csv(FIX_FILE,
+    #                                   dtype = {'reference': str})
+    # sales_mask = sales_df.number.isin(fixable_products_df.reference)
+    # sales_df = sales_df[sales_mask]
+    # print()
 
 
 def get_sales_adjustments():
@@ -430,5 +417,5 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
+    get_dpmc_adjustments()
     inventory_adjustment(DATED_ADJUSTMENT_FILE)

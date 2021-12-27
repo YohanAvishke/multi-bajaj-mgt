@@ -5,7 +5,7 @@ import json
 import app.dpmc as dpmc
 
 # -*- File Paths -*-
-PRODUCT_PRICE_PATH = "../../data/product/product.price.csv"
+PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
 PRODUCT_EMPTY_STOCK_PRICE_PATH = "../data/product/product.price-empty-stock.csv"
 
 # -*- Request URLs -*-

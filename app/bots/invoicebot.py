@@ -7,9 +7,10 @@ import sys
 import re
 import pandas as pd
 
-INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/nishan.txt"
+INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/vendors/raw/nishan.txt"
 PRODUCT_FILE = f"{ROOT_DIR}/data/product/product.product.csv"
 POS_CATEGORY_FILE = f"{ROOT_DIR}/data/product/pos.category.csv"
+
 ADJ_SOURCES = ["nishan"]
 NISHAN_ADJ_NAME = "Nishan Automobile Invoice"
 
@@ -101,10 +102,9 @@ def create_product_file(products):
 
 if __name__ == "__main__":
     invoice_number = "CB2003375"
-    current_date = ""
-    current_date = current_date if current_date != "" else date.today()
+    adj_date = "2021-12-24"
     current_source = ADJ_SOURCES[0]
-    dated_adj_file = f"{ADJ_DIR}/{current_date}-{current_source}-adjustment.csv"
+    dated_adj_file = f"{ADJ_DIR}/{date.today()}-{current_source}-adjustment.csv"
 
     create_adj_file()
     invalid_products = inventory_adjustment(dated_adj_file)
