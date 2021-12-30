@@ -1,0 +1,24 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Deepthi Motors Invoice - DLRINV2021120904294,2021-12-09,True,36DZ0002,__export__.product_product_11806_19d11b17,stock.stock_location_stock,46.0
+Deepthi Motors Invoice - INV000002463,2021-12-09,True,AA101666,__export__.product_product_39029_16dbb117,stock.stock_location_stock,17.0
+Deepthi Motors Invoice - DLRINV2021121004301,2021-12-10,True,AA101666,__export__.product_product_39029_16dbb117,stock.stock_location_stock,16.0
+,,,AA191092,__export__.product_product_39388_2e2ed593,stock.stock_location_stock,5.0
+,,,AF201036,__export__.product_product_46951_c231835c,stock.stock_location_stock,0.0
+,,,AN101190,__export__.product_product_47169_058cd2ee,stock.stock_location_stock,50.0
+,,,DJ151071,__export__.product_product_15601_2f33e76c,stock.stock_location_stock,54.0
+,,,DM101139,__export__.product_product_16342_58194f41,stock.stock_location_stock,120.0
+,,,DS201003,__export__.product_product_16914_029247d3,stock.stock_location_stock,4.0
+,,,JA541205,__export__.product_product_18217_3446076a,stock.stock_location_stock,101.0
+Deepthi Motors Invoice - DLRINV2021121404333,2021-12-14,True,24151171,__export__.product_product_38108_adc8cd62,stock.stock_location_stock,86.0
+Deepthi Motors Invoice - DLRINV2021121704339,2021-12-17,True,AA201012,__export__.product_product_46676_280283c9,stock.stock_location_stock,29.0
+,,,AF201036,__export__.product_product_46951_c231835c,stock.stock_location_stock,0.0
+,,,AN101155,__export__.product_product_47154_f65f1cda,stock.stock_location_stock,22.0
+Deepthi Motors Invoice - INV00002472,2021-12-23,True,AN111009,__export__.product_product_47218_f7ed0051,stock.stock_location_stock,2.0
+Deepthi Motors Invoice - INV00002475,2021-12-24,True,31151060,__export__.product_product_11385_a84e059b,stock.stock_location_stock,44.0
+Deepthi Motors Invoice - INV00002476,2021-12-24,True,36DJ4104,__export__.product_product_11632_f03fb0a4,stock.stock_location_stock,13.0
+,,,JN181001,__export__.product_product_23848_1d67e65b,stock.stock_location_stock,8.0
+Deepthi Motors Invoice - INV00002477,2021-12-27,True,36224004,__export__.product_product_38423_d9107dbf,stock.stock_location_stock,18.0
+,,,AA101593,__export__.product_product_39012_7fd7e7ae,stock.stock_location_stock,3.0
+,,,AA111082,__export__.product_product_39151_5b84aed5,stock.stock_location_stock,5.0
+,,,DL181080,__export__.product_product_16326_2ba4348d,stock.stock_location_stock,38.0
+Deepthi Motors Invoice - INV00002478,2021-12-27,True,AB171044,__export__.product_product_46846_92d82d48,stock.stock_location_stock,3.0

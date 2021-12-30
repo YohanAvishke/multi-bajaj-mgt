@@ -7,7 +7,7 @@ import sys
 import re
 import pandas as pd
 
-INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/vendors/raw/nishan.txt"
+INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/vendors/nishan.txt"
 PRODUCT_FILE = f"{ROOT_DIR}/data/product/product.product.csv"
 POS_CATEGORY_FILE = f"{ROOT_DIR}/data/product/pos.category.csv"
 
@@ -52,16 +52,16 @@ def _get_product_category(product_df):
         pos_category = m.group(1)
         if pos_category in pos_category_df.Code.values:
             product_df["Name"] = f"{pos_category} {product_df['Name']}"
-            product_df["Point of Sale Category/ID"] = pos_category_df.loc[
-                pos_category_df["Code"] == pos_category].ID.values[0]
+            pos_category = pos_category_df.loc[pos_category_df["Code"] == pos_category]
+            product_df["Point of Sale Category/ID"] = pos_category.ID.values[0]
             return product_df
         else:
             print(f"Invalid POS category {pos_category} received.")
             sys.exit(0)
-
+    # Product is an original bajaj Bajaj
     print(f"Using default POS category for {part_number}.")
-    product_df["Point of Sale Category/ID"] = pos_category_df.loc[
-        pos_category_df["Display Name"] == "Bajaj"].ID.values[0]
+    product_df["Point of Sale Category/ID"] = \
+        pos_category_df.loc[pos_category_df["Display Name"] == "Bajaj"].ID.values[0]
     return product_df
 
 

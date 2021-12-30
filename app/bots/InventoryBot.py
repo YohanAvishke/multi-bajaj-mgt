@@ -24,7 +24,7 @@ SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
 DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
 
-# -*- Request -*-
+# -*- Request Paths -*-
 URL = 'https://erp.dpg.lk/Help/GetHelp'
 URL_PRODUCTS = 'https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire'
 ULR_ADVANCED = 'https://erp.dpg.lk/Help/GetHelpForAdvanceSearch'
@@ -312,12 +312,14 @@ def inventory_adjustment(dated_adj_file):
     for adjustment_product in adjustment_reader:
         exists = False
         adjustment_invoice = adjustment_product["name"]
+        accounting_date = adjustment_product["Accounting Date"]
         is_exhausted_included = True
         adjustment_number = adjustment_product["Product/Internal Reference"]
         adjustment_quantity = float(adjustment_product["Counted Quantity"])
 
         if adjustment_invoice == previous_adjustment_invoice:
             adjustment_invoice = None
+            accounting_date = None
             is_exhausted_included = None
 
         for inventory_product in inventory_reader:
@@ -342,7 +344,7 @@ def inventory_adjustment(dated_adj_file):
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
                                     f"qty: {finalised_quantity}.")
 
-                products.append([adjustment_invoice, is_exhausted_included, inventory_number,
+                products.append([adjustment_invoice, accounting_date, is_exhausted_included, inventory_number,
                                  inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
                                  finalised_quantity])
                 # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
@@ -357,8 +359,8 @@ def inventory_adjustment(dated_adj_file):
         logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
     # _create_quantity_fixes(qty_fixable_products)
-    columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
-               'line_ids/product_qty']
+    columns = ['name', 'Accounting Date', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id',
+               'line_ids/location_id/id', 'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
     df.to_csv(dated_adj_file, encoding = 'utf-8', mode = 'w', header = True, index = False)
 
@@ -400,23 +402,24 @@ def read_sales_data():
 def get_sales_adjustments():
     sheet.main()
     merge_duplicates()
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 def get_other_adjustments():
     json_to_csv(ADJ_OTHER_FILE)
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 def get_dpmc_adjustments():
     HEADERS["cookie"] = dpmc.authorise()
-    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
-                 f"==================================================================================================")
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
     get_grn_for_invoice()
     get_products_from_invoices()
     json_to_csv(ADJ_DPMC_FILE)
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    # get_sales_adjustments()
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    get_other_adjustments()

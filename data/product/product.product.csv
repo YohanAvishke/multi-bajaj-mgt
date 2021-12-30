@@ -1,4 +1,2 @@
 Internal Reference,Name,Description,Product Category/ID,Point of Sale Category/ID,Product Type,Cost,Sales Price,Customer Taxes,Available in POS,Can be Purchased,Can be Sold
-AA101593(YL),YL Clutch Complete Compact,YL Clutch Complete Compact,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,8440.00,8440.00,,True,True,True
-AE101019(YL),YL Clutch Cover,YL Clutch Cover,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,1120.00,1120.00,,True,True,True
-BG401401(YL),YL Ignition Switch 45,YL Ignition Switch 4S,product.product_category_1,__export__.pos_category_11_9f8532a8,Storable Product,1210.00,1210.00,,True,True,True
+R10571(OPTUS),OPTUS Brake Drum 3W 4S Heavy Duty,OPTUS Brake Drum 3W 4S Heavy Duty,product.product_category_1,__export__.pos_category_49_7e538b61,Storable Product,1910.00,1910.00,,True,True,True
