@@ -1,24 +1,36 @@
 name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
-Deepthi Motors Invoice - DLRINV2021120904294,2021-12-09,True,36DZ0002,__export__.product_product_11806_19d11b17,stock.stock_location_stock,46.0
-Deepthi Motors Invoice - INV000002463,2021-12-09,True,AA101666,__export__.product_product_39029_16dbb117,stock.stock_location_stock,17.0
-Deepthi Motors Invoice - DLRINV2021121004301,2021-12-10,True,AA101666,__export__.product_product_39029_16dbb117,stock.stock_location_stock,16.0
-,,,AA191092,__export__.product_product_39388_2e2ed593,stock.stock_location_stock,5.0
-,,,AF201036,__export__.product_product_46951_c231835c,stock.stock_location_stock,0.0
-,,,AN101190,__export__.product_product_47169_058cd2ee,stock.stock_location_stock,50.0
-,,,DJ151071,__export__.product_product_15601_2f33e76c,stock.stock_location_stock,54.0
-,,,DM101139,__export__.product_product_16342_58194f41,stock.stock_location_stock,120.0
-,,,DS201003,__export__.product_product_16914_029247d3,stock.stock_location_stock,4.0
-,,,JA541205,__export__.product_product_18217_3446076a,stock.stock_location_stock,101.0
-Deepthi Motors Invoice - DLRINV2021121404333,2021-12-14,True,24151171,__export__.product_product_38108_adc8cd62,stock.stock_location_stock,86.0
-Deepthi Motors Invoice - DLRINV2021121704339,2021-12-17,True,AA201012,__export__.product_product_46676_280283c9,stock.stock_location_stock,29.0
-,,,AF201036,__export__.product_product_46951_c231835c,stock.stock_location_stock,0.0
-,,,AN101155,__export__.product_product_47154_f65f1cda,stock.stock_location_stock,22.0
-Deepthi Motors Invoice - INV00002472,2021-12-23,True,AN111009,__export__.product_product_47218_f7ed0051,stock.stock_location_stock,2.0
-Deepthi Motors Invoice - INV00002475,2021-12-24,True,31151060,__export__.product_product_11385_a84e059b,stock.stock_location_stock,44.0
-Deepthi Motors Invoice - INV00002476,2021-12-24,True,36DJ4104,__export__.product_product_11632_f03fb0a4,stock.stock_location_stock,13.0
-,,,JN181001,__export__.product_product_23848_1d67e65b,stock.stock_location_stock,8.0
-Deepthi Motors Invoice - INV00002477,2021-12-27,True,36224004,__export__.product_product_38423_d9107dbf,stock.stock_location_stock,18.0
-,,,AA101593,__export__.product_product_39012_7fd7e7ae,stock.stock_location_stock,3.0
-,,,AA111082,__export__.product_product_39151_5b84aed5,stock.stock_location_stock,5.0
-,,,DL181080,__export__.product_product_16326_2ba4348d,stock.stock_location_stock,38.0
-Deepthi Motors Invoice - INV00002478,2021-12-27,True,AB171044,__export__.product_product_46846_92d82d48,stock.stock_location_stock,3.0
+Sales of 2021/12/27,2021/12/27,True,AA111156,__export__.product_product_39178_a073b0eb,stock.stock_location_stock,0.0
+,,,AN101186,__export__.product_product_47166_589beacb,stock.stock_location_stock,66.0
+,,,AA101328,__export__.product_product_38952_dff91813,stock.stock_location_stock,78.0
+,,,AA101077,__export__.product_product_38888_7cc08691,stock.stock_location_stock,67.0
+,,,36AA1003,__export__.product_product_38442_6d3f8198,stock.stock_location_stock,20.0
+,,,36AA4042,__export__.product_product_38465_b0e8d713,stock.stock_location_stock,55.0
+,,,36AA4050,__export__.product_product_38470_656a956e,stock.stock_location_stock,28.0
+,,,AN101149,__export__.product_product_47152_40778cfa,stock.stock_location_stock,43.0
+,,,AN101012,__export__.product_product_47127_4dbbc186,stock.stock_location_stock,14.0
+,,,DS201025,__export__.product_product_16922_e31fcadb,stock.stock_location_stock,18.0
+,,,DK151088,__export__.product_product_16116_221c7e25,stock.stock_location_stock,2.0
+,,,01100342K,__export__.product_product_37515_dbde506e,stock.stock_location_stock,29.0
+Sales of 2021/12/28,2021/12/28,True,24165116,__export__.product_product_38176_31d64ada,stock.stock_location_stock,0.0
+,,,JL131805,__export__.product_product_23388_1c9ef2cd,stock.stock_location_stock,0.0
+,,,AB181012,__export__.product_product_46850_cdd0ca3d,stock.stock_location_stock,1.0
+,,,AA101077,__export__.product_product_38888_7cc08691,stock.stock_location_stock,66.0
+,,,AF111010,__export__.product_product_46908_3102356b,stock.stock_location_stock,11.0
+,,,36JE0014,__export__.product_product_11897_75c67b16,stock.stock_location_stock,5.0
+,,,36DJ4005,__export__.product_product_11582_dd53e505,stock.stock_location_stock,9.0
+,,,36DD4008K,__export__.product_product_11478_bf01b8d8,stock.stock_location_stock,44.0
+,,,36DD4008,__export__.product_product_11477_53ef9cbb,stock.stock_location_stock,23.0
+,,,24160924,__export__.product_product_38145_6819662c,stock.stock_location_stock,58.0
+,,,AA101210,__export__.product_product_38920_011cfcda,stock.stock_location_stock,327.0
+,,,39193120,__export__.product_product_38766_b65fe418,stock.stock_location_stock,4.0
+,,,KPBF6305,__export__.product_product_47840_cd1444ff,stock.stock_location_stock,22.0
+,,,03100338,__export__.product_product_37562_f522a1f2,stock.stock_location_stock,16.0
+,,,31151060,__export__.product_product_11385_a84e059b,stock.stock_location_stock,43.0
+,,,DZ221003,__export__.product_product_17780_c7bb5acd,stock.stock_location_stock,1.0
+,,,36DU1001,__export__.product_product_11767_a60cf2c7,stock.stock_location_stock,138.0
+,,,AA121006,__export__.product_product_39184_addf96fb,stock.stock_location_stock,113.0
+,,,24151171,__export__.product_product_38108_adc8cd62,stock.stock_location_stock,83.0
+,,,AL201017,__export__.product_product_47072_64765fd4,stock.stock_location_stock,12.0
+,,,AL201051,__export__.product_product_47080_cd8419be,stock.stock_location_stock,3.0
+,,,24201472,__export__.product_product_38297_8b677f36,stock.stock_location_stock,10.0
+,,,24201473,__export__.product_product_38298_2b15aeb8,stock.stock_location_stock,9.0

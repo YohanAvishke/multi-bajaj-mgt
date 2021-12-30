@@ -76,11 +76,13 @@ def create_dated_adjustment():
     products_df = pd.json_normalize(adjustments, 'Products')
 
     products_df.Date = products_df.Date.fillna(method = "ffill")
-    values = products_df.apply(lambda row: f'Sales of {row["Date"]}', axis = 1)
-    products_df.insert(loc = 0, column = 'AdjustmentName', value = values)
-    products_df = products_df.drop('Date', axis = 1)
+    adj_name_values = products_df.apply(lambda row: f'Sales of {row["Date"]}', axis = 1)
+    products_df.insert(loc = 0, column = 'AdjustmentName', value = adj_name_values)
+    products_df = products_df.rename({"Date": "Accounting Date"}, axis = 1)
+    # products_df = products_df.drop('Date', axis = 1)
 
-    products_df.to_csv(DATED_ADJUSTMENT_FILE, header = ['name', 'Product/Internal Reference', 'Counted Quantity'],
+    products_df.to_csv(DATED_ADJUSTMENT_FILE, columns = ["AdjustmentName", "Accounting Date", "PartNumber", "Quantity"],
+                       header = ["name", "Accounting Date", "Product/Internal Reference", "Counted Quantity"],
                        index = False)
 
 
