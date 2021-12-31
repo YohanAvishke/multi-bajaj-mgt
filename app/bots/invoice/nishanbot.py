@@ -11,16 +11,12 @@ INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/vendors/nishan.txt"
 PRODUCT_FILE = f"{ROOT_DIR}/data/product/product.product.csv"
 POS_CATEGORY_FILE = f"{ROOT_DIR}/data/product/pos.category.csv"
 
-ADJ_SOURCES = ["nishan"]
-NISHAN_ADJ_NAME = "Nishan Automobile Invoice"
+ADJ_SOURCES = {"nishan": "Nishan Automobile Invoice", "dilma": "Dilma Auto Trading Invoice"}
 
 
 def create_adj_file():
     all_capitals = ["4s", "5p", "ct", "cdi", "dh", "dz", "jk", "lh", "nd", "nm", "ns", "rh", "ug"]
-    adj_name = ""
-
-    if current_source == "nishan":
-        adj_name = f"{NISHAN_ADJ_NAME} - {invoice_number}"
+    adj_name = f"{ADJ_SOURCES[current_source]} - {invoice_number}"
 
     with open(INVOICE_NISHAN_FILE) as file:
         lines = file.readlines()
@@ -35,7 +31,6 @@ def create_adj_file():
             "PartNumber": words[-4],
             "Quantity": words[-3],
             "Price": words[-2].replace(",", ""),
-            "Total": words[-1].replace("\n", "")
             }
         products.append(product)
     products_df = pd.DataFrame(products)
@@ -103,7 +98,7 @@ def create_product_file(products):
 if __name__ == "__main__":
     invoice_number = "CB2003375"
     adj_date = "2021-12-24"
-    current_source = ADJ_SOURCES[0]
+    current_source = "nishan"
     dated_adj_file = f"{ADJ_DIR}/{date.today()}-{current_source}-adjustment.csv"
 
     create_adj_file()

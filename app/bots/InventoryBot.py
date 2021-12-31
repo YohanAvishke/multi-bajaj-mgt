@@ -325,9 +325,22 @@ def inventory_adjustment(dated_adj_file):
         for inventory_product in inventory_reader:
             inventory_number = inventory_product["Internal Reference"]
             inventory_quantity = float(inventory_product["Quantity On Hand"])
+            regex = r"\((\w+)\)"
+            match = re.search(regex, inventory_number)
+            if match:
+                split = re.split(regex, inventory_number)
+                product_numbers = split[0].split(",")
+                pos_category_name = split[1]
+                inventory_number = [f"{product_number}({pos_category_name})" for product_number in product_numbers]
 
-            if adjustment_number == inventory_number:
-                exists = True
+            if isinstance(inventory_number, list):
+                if adjustment_number in inventory_number:
+                    exists = True
+            else:
+                if adjustment_number == inventory_number:
+                    exists = True
+
+            if exists:
                 finalised_quantity = inventory_quantity + adjustment_quantity
                 product_data = [adjustment_invoice, is_exhausted_included, inventory_number,
                                 inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
