@@ -342,7 +342,7 @@ def inventory_adjustment(dated_adj_file):
 
             if exists:
                 finalised_quantity = inventory_quantity + adjustment_quantity
-                product_data = [adjustment_invoice, is_exhausted_included, inventory_number,
+                product_data = [adjustment_invoice, is_exhausted_included, inventory_product["Internal Reference"],
                                 inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
                                 inventory_quantity, adjustment_quantity, finalised_quantity]
 
@@ -357,9 +357,9 @@ def inventory_adjustment(dated_adj_file):
                                     f"Inventory: {inventory_quantity}. Difference: {adjustment_quantity}. Finalised "
                                     f"qty: {finalised_quantity}.")
 
-                products.append([adjustment_invoice, accounting_date, is_exhausted_included, inventory_number,
-                                 inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
-                                 finalised_quantity])
+                products.append([adjustment_invoice, accounting_date, is_exhausted_included,
+                                 inventory_product["Internal Reference"], inventory_product["Product/Product/ID"],
+                                 'stock.stock_location_stock', finalised_quantity])
                 # Update `previous_adjustment_invoice` if `adjustment_invoice` is valid and exists
                 previous_adjustment_invoice = adjustment_product["name"]
                 break

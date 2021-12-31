@@ -14,6 +14,20 @@ POS_CATEGORY_FILE = f"{ROOT_DIR}/data/product/pos.category.csv"
 ADJ_SOURCES = {"nishan": "Nishan Automobile Invoice", "dilma": "Dilma Auto Trading Invoice"}
 
 
+def _enrich_product(product_df):
+    product_number = product_df["PartNumber"]
+    product_name = product_df["PartName"]
+    regex = r"\((\w+)\)"
+    match = re.search(regex, product_name)
+    if match:
+        split = re.split(regex, product_name)
+        product_name = split[0]
+        pos_category_name = split[1]
+        product_df["PartNumber"] = f"{product_number}({pos_category_name.upper()})"
+        product_df["PartName"] = f"{pos_category_name.capitalize()} {product_name}"
+    return product_df
+
+
 def create_adj_file():
     all_capitals = ["4s", "5p", "ct", "cdi", "dh", "dz", "jk", "lh", "nd", "nm", "ns", "rh", "ug"]
     adj_name = f"{ADJ_SOURCES[current_source]} - {invoice_number}"
@@ -41,17 +55,26 @@ def create_adj_file():
                                                                 "Price"])
 
 
-def _enrich_product(product_df):
-    product_number = product_df["PartNumber"]
-    product_name = product_df["PartName"]
+def _get_product_category(product_df):
+    pos_category_df = pd.read_csv(POS_CATEGORY_FILE)
+    product_number = product_df["Internal Reference"]
     regex = r"\((\w+)\)"
-    match = re.search(regex, product_name)
+    match = re.search(regex, product_number)
     if match:
-        split = re.split(regex, product_name)
-        product_name = split[0]
-        pos_category_name = split[1]
-        product_df["PartNumber"] = f"{product_number}({pos_category_name.upper()})"
-        product_df["PartName"] = f"{pos_category_name.capitalize()} {product_name}"
+        pos_category_name = match.group(1)
+        if pos_category_name in pos_category_df.Code.values:
+            pos_category = pos_category_df.loc[pos_category_df["Code"] == pos_category_name]
+
+            product_df["Point of Sale Category/ID"] = pos_category.ID.values[0]
+            product_df["Image"] = pos_category.Image.values[0]
+            return product_df
+        else:
+            print(f"Invalid POS category {pos_category_name} received.")
+            sys.exit(0)
+    # Product is an original bajaj Bajaj
+    print(f"Using default POS category for {product_number}.")
+    product_df["Point of Sale Category/ID"] = \
+        pos_category_df.loc[pos_category_df["Display Name"] == "Bajaj"].ID.values[0]
     return product_df
 
 
@@ -87,29 +110,6 @@ def create_product_file(products):
                "Can be Sold",
                "Image"]
     product_df.to_csv(PRODUCT_FILE, index = False, columns = columns)
-
-
-def _get_product_category(product_df):
-    pos_category_df = pd.read_csv(POS_CATEGORY_FILE)
-    product_number = product_df["Internal Reference"]
-    regex = r"\((\w+)\)"
-    match = re.search(regex, product_number)
-    if match:
-        pos_category_name = match.group(1)
-        if pos_category_name in pos_category_df.Code.values:
-            pos_category = pos_category_df.loc[pos_category_df["Code"] == pos_category_name]
-
-            product_df["Point of Sale Category/ID"] = pos_category.ID.values[0]
-            product_df["Image"] = pos_category.Image.values[0]
-            return product_df
-        else:
-            print(f"Invalid POS category {pos_category_name} received.")
-            sys.exit(0)
-    # Product is an original bajaj Bajaj
-    print(f"Using default POS category for {product_number}.")
-    product_df["Point of Sale Category/ID"] = \
-        pos_category_df.loc[pos_category_df["Display Name"] == "Bajaj"].ID.values[0]
-    return product_df
 
 
 if __name__ == "__main__":

@@ -27,6 +27,7 @@ def create_adj_file():
 
         product = {
             "Name": adj_name,
+            "Date": adj_date,
             "PartName": " ".join(words[1:-4]).title(),
             "PartNumber": words[-4],
             "Quantity": words[-3],
@@ -34,8 +35,9 @@ def create_adj_file():
             }
         products.append(product)
     products_df = pd.DataFrame(products)
-    products_df.to_csv(dated_adj_file, index = False, header = ["name", "PartName", "Product/Internal Reference",
-                                                                "Counted Quantity", "Price", "Total"])
+    products_df.to_csv(dated_adj_file, index = False,
+                       header = ["name", "Accounting Date", "PartName", "Product/Internal Reference",
+                                 "Counted Quantity", "Price"])
 
 
 def _get_product_category(product_df):
@@ -49,6 +51,7 @@ def _get_product_category(product_df):
             product_df["Name"] = f"{pos_category} {product_df['Name']}"
             pos_category = pos_category_df.loc[pos_category_df["Code"] == pos_category]
             product_df["Point of Sale Category/ID"] = pos_category.ID.values[0]
+            product_df["Image"] = pos_category.Image.values[0]
             return product_df
         else:
             print(f"Invalid POS category {pos_category} received.")
@@ -64,9 +67,7 @@ def create_product_file(products):
     product_df = pd.DataFrame(products)
     print(product_df.to_markdown())
 
-    product_df = product_df.drop(["name",
-                                  "Counted Quantity",
-                                  "Total"],
+    product_df = product_df.drop(["name", "Counted Quantity"],
                                  axis = 1).rename(columns = {"PartName": "Name",
                                                              "Product/Internal Reference": "Internal Reference",
                                                              "Price": "Sales Price"})
@@ -91,7 +92,8 @@ def create_product_file(products):
                "Customer Taxes",
                "Available in POS",
                "Can be Purchased",
-               "Can be Sold"]
+               "Can be Sold",
+               "Image"]
     product_df.to_csv(PRODUCT_FILE, index = False, columns = columns)
 
 

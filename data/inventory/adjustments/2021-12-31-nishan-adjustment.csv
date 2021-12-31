@@ -1,0 +1,12 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Dilma Auto Trading Invoice - 56301/3W,2021-12-28,True,CUP-007(CHANGE),__export__.product_product_50571_1d4bf8c6,stock.stock_location_stock,18.0
+,,,CUP-008(CHANGE),__export__.product_product_50720_a5e9ba27,stock.stock_location_stock,18.0
+,,,CUP-009(CHANGE),__export__.product_product_50721_6a827b54,stock.stock_location_stock,18.0
+Dilma Auto Trading Invoice - 56336/2W,2021-12-28,True,"['BP302(ENDURANCE)', 'CAA-2B002(ENDURANCE)']",__export__.product_product_50189_05cee7f9,stock.stock_location_stock,1.0
+,,,"['BP301(ENDURANCE)', 'MAC-2B003(ENDURANCE)']",__export__.product_product_50280_5dd13a08,stock.stock_location_stock,4.0
+,,,['CLH-2B023(ENDURANCE)'],__export__.product_product_50029_7ceef7bd,stock.stock_location_stock,42.0
+Nishan Automobile Invoice - CB2003470,2021-12-28,True,AL191043(YL),__export__.product_product_50484_72854b72,stock.stock_location_stock,1.0
+,,,BP0902(CLAMP),__export__.product_product_50201_c0ce7f90,stock.stock_location_stock,3.0
+,,,EI0918(MINDA),__export__.product_product_50122_8e46caa5,stock.stock_location_stock,-6.0
+,,,RB0601(SD),__export__.product_product_50042_05dc3bb1,stock.stock_location_stock,1.0
+,,,RB0623(SD),__export__.product_product_50399_a7486de1,stock.stock_location_stock,13.0
