@@ -429,7 +429,7 @@ def get_dpmc_adjustments():
     get_grn_for_invoice()
     get_products_from_invoices()
     json_to_csv(ADJ_DPMC_FILE)
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
