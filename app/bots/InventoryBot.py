@@ -415,7 +415,7 @@ def read_sales_data():
 def get_sales_adjustments():
     sheet.main()
     merge_duplicates()
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 def get_other_adjustments():
