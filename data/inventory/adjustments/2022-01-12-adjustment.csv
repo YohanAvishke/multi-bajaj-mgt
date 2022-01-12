@@ -1,0 +1,3 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Deepthi Motors Invoice - DLRINV2022011004443,2022-01-10,True,24151171,__export__.product_product_38108_adc8cd62,stock.stock_location_stock,72.0
+,,,36DJ4104,__export__.product_product_11632_f03fb0a4,stock.stock_location_stock,70.0
