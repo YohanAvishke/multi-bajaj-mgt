@@ -413,8 +413,8 @@ def read_sales_data():
 
 
 def get_sales_adjustments():
-    sheet.main()
-    merge_duplicates()
+    # sheet.main()
+    # merge_duplicates()
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
@@ -424,10 +424,10 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    HEADERS["cookie"] = dpmc.authorise()
-    logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    get_grn_for_invoice()
-    get_products_from_invoices()
+    # HEADERS["cookie"] = dpmc.authorise()
+    # logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
+    # get_grn_for_invoice()
+    # get_products_from_invoices()
     json_to_csv(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
@@ -435,4 +435,4 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_other_adjustments()
+    get_dpmc_adjustments()
