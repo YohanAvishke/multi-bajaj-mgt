@@ -22,7 +22,7 @@ ADJ_OTHER_FILE = f'{INV_DIR}/adjustment.other.json'
 INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
 SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
+DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment-2.csv'
 
 # -*- Request Paths -*-
 URL = 'https://erp.dpg.lk/Help/GetHelp'
@@ -424,10 +424,10 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    # HEADERS["cookie"] = dpmc.authorise()
-    # logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    # get_grn_for_invoice()
-    # get_products_from_invoices()
+    HEADERS["cookie"] = dpmc.authorise()
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
+    get_grn_for_invoice()
+    get_products_from_invoices()
     json_to_csv(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
@@ -435,4 +435,4 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_dpmc_adjustments()
+    get_sales_adjustments()
