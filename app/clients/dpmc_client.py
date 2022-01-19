@@ -23,7 +23,7 @@ HEADERS = {
     }
 
 
-def authorise():
+def authenticate():
     url = "https://erp.dpg.lk/"
     payload = "strUserName=dlrmbenterp&strPassword=D0000402"
     headers = {
@@ -53,7 +53,36 @@ def authorise():
     return cookie
 
 
-def filter_from_mobile_number(mobile_number):
+def get_grn_from_column(column_name, number):
+    payload = "strInstance=DLR&" \
+              "strPremises=KGL&" \
+              "strAppID=00011&" \
+              "strFORMID=00605&" \
+              "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO" \
+              "%2CINT_TOTAL_GRN_VALUE&" \
+              "strHIDEN_FIELD_INDEX=%2C0&" \
+              "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
+              f"strSearch={number}&" \
+              f"strSEARCH_TEXT=&" \
+              f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
+              f"strColName={column_name}&" \
+              f"strLIMIT=0&" \
+              f"strARCHIVE=TRUE&" \
+              f"strORDERBY=STR_GRN_NO&" \
+              f"strOTHER_WHERE_CONDITION=&" \
+              f"strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
+              f"strTITEL=&" \
+              f"strAll_DATA=true" \
+              f"&strSchema="
+    response = requests.request("POST", URL, headers = HEADERS, data = payload)
+    if response.ok:
+        return response.json()
+    else:
+        print(f"GRN retrieval from column: {column_name} for number: {number} failed. Status: {response.status_code} "
+              f"for reason {response.text}")
+
+
+def get_grn_from_mobile(mobile_number):
     payload = "strInstance=DLR&" \
               "strPremises=KGL&" \
               "strAppID=00011&" \
@@ -74,10 +103,14 @@ def filter_from_mobile_number(mobile_number):
               "strAll_DATA=true&" \
               "strSchema="
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
-    return json.loads(json.loads(response.text))
+    if response.ok:
+        return response.json()
+    else:
+        print(f"GRN retrieval from Mobile number: {mobile_number} failed. Status: {response.status_code} "
+              f"for reason {response.text}")
 
 
-def filter_from_order_number(order_number):
+def get_grn_from_order(order_number):
     payload = {
         'strInstance': 'DLR',
         'strPremises': 'KGL',
@@ -100,5 +133,8 @@ def filter_from_order_number(order_number):
         'strSchema': ''
         }
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
-    # 2 fucking strings
-    return json.loads(json.loads(response.text))
+    if response.ok:
+        return response.json()
+    else:
+        print(f"GRN retrieval from Mobile number: {order_number} failed. Status: {response.status_code} "
+              f"for reason {response.text}")

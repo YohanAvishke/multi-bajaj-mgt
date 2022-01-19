@@ -1,6 +1,7 @@
 from __future__ import print_function, unicode_literals
 from datetime import date
 from app.config import ROOT_DIR
+import app.clients.dpmc_client as dpmc_client
 
 import re
 import csv
@@ -9,7 +10,6 @@ import requests
 import logging
 import pandas as pd
 import flatten_json
-import app.dpmc as dpmc
 import app.googlesheet as sheet
 
 # -*- Dir Paths -*-
@@ -69,93 +69,33 @@ PAYLOAD = {
     }
 
 
-def get_grn_for_invoice():
-    with open(ADJ_DPMC_FILE, "r") as invoice_file:
-        invoice_reader = json.load(invoice_file)
-    adjustments = invoice_reader["Adjustments"]
+def _fetch_grn_invoice():
+    logging.info("GRN Invoice retrieval started")
+    adjustments = pd.read_json(ADJ_DPMC_FILE, orient = "records").Adjustments.to_list()
 
     for adjustment in adjustments:
-        adj_type = adjustment["Type"]
-
-        if "DPMC" in adj_type:
-            if "Missing" in adj_type:
-                get_missing_invoice_id(adjustment)
+        adjustment_type = adjustment["Type"]
+        adjustment_id = adjustment["ID"]
+        if "Order" in adjustment_type:
+            response_data = dpmc_client.get_grn_from_order(adjustment_id)
+            column_name = "STR_ORDER_NO"
+        else:
+            response_data = dpmc_client.get_grn_from_mobile(adjustment_id)
+            column_name = "STR_MOBILE_NO"
+        if "NO DATA FOUND" in response_data:
+            response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
+            if "NO DATA FOUND" in response_data:
+                adjustment["Type"] = "Invalid"
+                logging.warning(f"GRN not found for {adjustment_id}")
                 continue
+        response_data = json.loads(response_data)[0]
+        adjustment["Type"] = "Invoice"
+        adjustment["ID"] = response_data["Invoice No"]
+        logging.info(f"GRN retrieved for {adjustment['ID']} of {adjustment['Type']}")
 
-            adj_ref = adjustment["ID"]
-            if "Invoice" in adj_type:
-                col_name = "STR_INVOICE_NO"
-            else:
-                if "Order" in adj_type:
-                    data = dpmc.filter_from_order_number(adj_ref)
-                else:
-                    data = dpmc.filter_from_mobile_number(adj_ref)
-
-                if len(data) != 1:
-                    adjustment["Type"] = "DPMC/Missing"
-                    logging.warning(f"get_grn_for_invoice filtering failed for {adj_ref}\n {data}")
-                    continue
-                else:
-                    data = data[0]
-                    if data["Invoice No"] != "":
-                        adjustment["ID"] = data["Invoice No"]
-                        adjustment["Type"] = "DPMC/Invoice"
-                        col_name = "STR_INVOICE_NO"
-                    elif data["Order No"] != "":
-                        adjustment["ID"] = data["Order No"]
-                        adjustment["Type"] = "DPMC/Order"
-                        col_name = "STR_ORDER_NO"
-                    else:
-                        adjustment["Type"] = "DPMC/Missing"
-                        logging.warning(f"get_grn_for_invoice filtered data invalid for {adj_ref}\n {data}")
-                        continue
-
-            payload = "strInstance=DLR&" \
-                      "strPremises=KGL&" \
-                      "strAppID=00011&" \
-                      "strFORMID=00605&" \
-                      "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO" \
-                      "%2CINT_TOTAL_GRN_VALUE&" \
-                      "strHIDEN_FIELD_INDEX=%2C0&" \
-                      "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
-                      f"strSearch={adj_ref}&" \
-                      f"strSEARCH_TEXT=&" \
-                      f"strSEARCH_FIELD_NAME=STR_GRN_NO&" \
-                      f"strColName={col_name}&" \
-                      f"strLIMIT=0&" \
-                      f"strARCHIVE=TRUE&" \
-                      f"strORDERBY=STR_GRN_NO&" \
-                      f"strOTHER_WHERE_CONDITION=&" \
-                      f"strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
-                      f"strTITEL=&" \
-                      f"strAll_DATA=true" \
-                      f"&strSchema="
-            response = requests.request("POST", URL, headers = HEADERS, data = payload)
-
-            if response:
-                invoice_details = json.loads(response.text)
-
-                if invoice_details == "NO DATA FOUND":
-                    logging.warning(f"Invoice Number: {adj_ref} has no data !!!")
-                    continue
-                elif type(invoice_details) is str:
-                    invoice_details = json.loads(invoice_details)
-                elif len(invoice_details) > 1:
-                    logging.warning(f"Invoice Number: {adj_ref} is too Vague !!!")
-                    continue
-
-                adjustment["GRN"] = invoice_details[0]["GRN No"]
-                if "Order" in adj_type:
-                    adjustment["ID"] = invoice_details[0]["Invoice No"]
-                    adjustment["Type"] = "DPMC/Invoice"
-            else:
-                logging.error(
-                        f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
-
-    with open(ADJ_DPMC_FILE, "w") as invoice_file:
-        json.dump(invoice_reader, invoice_file)
-
-    logging.info("Invoice data scrapping done.")
+    adjustment_df = pd.json_normalize(adjustments)
+    adjustment_df.to_json(ADJ_DPMC_FILE, orient = "records")
+    logging.info("GRN Invoice retrieval completed")
 
 
 def get_missing_invoice_id(details):
@@ -424,9 +364,9 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    HEADERS["cookie"] = dpmc.authorise()
+    HEADERS["cookie"] = dpmc_client.authenticate()
     logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    get_grn_for_invoice()
+    _fetch_grn_invoice()
     get_products_from_invoices()
     json_to_csv(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
@@ -435,4 +375,3 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
