@@ -172,3 +172,26 @@ def advanced_grn_search(search_query):
     else:
         print(f"GRN advance search for query: {search_query} failed. Status: {response.status_code} "
               f"for reason {response.text}")
+
+
+def get_products(invoice_number, grn_number):
+    payload = {
+        "STR_INSTANT": "DLR",
+        "STR_PREMIS": "KGL",
+        "STR_APP_ID": "00011",
+        "STR_FORM_ID": "00605",
+        "strMode": "GRN" if grn_number else "INVOICE",
+        "STR_FUNCTION_ID": "IQ" if grn_number else "CR",
+        "strInvoiceNo": f"{invoice_number}",
+        "strPADealerCode": "AC2011063676"
+        }
+    if grn_number:
+        payload["strGRNno"] = grn_number
+    response = requests.request("POST", "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire", headers = HEADERS,
+                                data = payload)
+
+    if response.ok:
+        return response.json()
+    else:
+        print(f"Product retrieval for invoice: {invoice_number} failed. Status: {response.status_code} "
+              f"for reason {response.text}")

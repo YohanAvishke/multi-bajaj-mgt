@@ -70,69 +70,39 @@ def _fetch_grn_invoice():
         response_data = json.loads(response_data)[0]
         adjustment["Type"] = "Invoice"
         adjustment["ID"] = response_data["Invoice No"]
+        adjustment["GRN"] = response_data["GRN No"] if "GRN No" in response_data else None
         logging.info(f"GRN retrieved for {adjustment['ID']} of {adjustment['Type']}")
 
-    adjustment_df = pd.json_normalize(adjustments)
-    adjustment_df.to_json(ADJ_DPMC_FILE, orient = "records")
+    adjustments = {"Adjustments": adjustments}
+    with open(ADJ_DPMC_FILE, "w") as file:
+        json.dump(adjustments, file)
     logging.info("GRN Invoice retrieval completed")
 
 
-def get_products_from_invoices():
-    # -*- coding: utf-8 -*-
-    """ Before
-    get_grn_for_invoice() should be called before
-
-    ''' After Call
-    Part Numbers are located at ['Invoice']['Products']
-    """
-    with open(ADJ_DPMC_FILE, "r") as invoice_file:
-        invoice_reader = json.load(invoice_file)
-    adjustments = invoice_reader["Adjustments"]
+def _fetch_products():
+    logging.info("Product retrieval started")
+    adjustments = pd.read_json(ADJ_DPMC_FILE, orient = "records").Adjustments.to_list()
 
     for adjustment in adjustments:
-        adj_type = adjustment["Type"]
+        adjustment_type = adjustment["Type"]
+        adjustment_id = adjustment["ID"]
+        grn_number = adjustment["GRN"]
+        if "Missing" in adjustment_type:
+            logging.warning(f"Missing adjustment {adjustment_id}")
+            continue
+        response_data = dpmc_client.get_products(adjustment_id, grn_number)
+        response_data = response_data["DATA"]
+        if "NO DATA FOUND" in response_data:
+            logging.warning(f"Products not found for {adjustment_id}")
+            continue
+        products = response_data["dsGRNDetails"]["Table"] if adjustment["GRN"] else response_data["dtGRNDetails"]
+        adjustment["Products"] = products
+        logging.info(f"Products retrieved for {adjustment_id}")
 
-        if "DPMC" in adj_type:
-            if "Missing" in adj_type:
-                logging.warning("Invoice with missing identifiers are still present.")
-                continue
-            adj_ref = adjustment["ID"]
-            grn_number = adjustment["GRN"] if "GRN" in adjustment else None
-            adjustment["Products"] = []
-
-            payload_mid = f"&strInvoiceNo={adj_ref}&" \
-                          "strPADealerCode=AC2011063676&" \
-                          "STR_FORM_ID=00605"
-            payload = "strMode=GRN&" \
-                      f"strGRNno={grn_number + payload_mid}&" \
-                      "STR_FUNCTION_ID=IQ" \
-                if grn_number else f"strMode=INVOICE{payload_mid}&" \
-                                   "STR_FUNCTION_ID=CR"
-            payload = f"{payload}&" \
-                      "STR_PREMIS=KGL&" \
-                      "STR_INSTANT=DLR&" \
-                      "STR_APP_ID=00011"
-
-            response = requests.request("POST", URL_PRODUCTS, headers = HEADERS, data = payload)
-
-            if response:
-                product_details = json.loads(response.text)["DATA"]
-
-                if product_details == "NO DATA FOUND":
-                    logging.warning(f"Invoice Number: {adjustment} is Invalid !!!")
-                else:
-                    product_details = product_details["dsGRNDetails"]["Table"] if "GRN" in adjustment \
-                        else product_details["dtGRNDetails"]
-
-                    for product_detail in product_details:
-                        adjustment["Products"].append(product_detail)
-            else:
-                logging.error(
-                        f'An error has occurred !!! \nStatus: {response.status_code} \nFor reason: {response.reason}')
-
-    with open(ADJ_DPMC_FILE, "w") as invoice_file:
-        json.dump(invoice_reader, invoice_file)
-    logging.info("Product data scrapping done.")
+    adjustments = {"Adjustment": adjustments}
+    with open(ADJ_DPMC_FILE, "w") as file:
+        json.dump(adjustments, file)
+    logging.info("Product retrieval completed")
 
 
 def json_to_csv(file):
@@ -305,7 +275,8 @@ def get_other_adjustments():
 def get_dpmc_adjustments():
     HEADERS["cookie"] = dpmc_client.authenticate()
     logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    _fetch_grn_invoice()
+    # _fetch_grn_invoice()
+    _fetch_products()
     # get_products_from_invoices()
     # json_to_csv(ADJ_DPMC_FILE)
     # inventory_adjustment(DATED_ADJUSTMENT_FILE)
