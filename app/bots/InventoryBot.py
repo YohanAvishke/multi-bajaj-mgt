@@ -9,7 +9,6 @@ import json
 import requests
 import logging
 import pandas as pd
-import flatten_json
 import app.googlesheet as sheet
 
 # -*- Dir Paths -*-
@@ -47,26 +46,6 @@ HEADERS = {
     'dnt': '1',
     'sec-gpc': '1'
     }
-# -*- Payloads -*-
-PAYLOAD = {
-    'strInstance': 'DLR&',
-    'strPremises': 'KGL&',
-    'strAppID': '00011&',
-    'strFORMID': '00605&',
-    'strFIELD_NAME': '%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&',
-    'strHIDEN_FIELD_INDEX': '%2C0&',
-    'strDISPLAY_NAME': '%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&',
-    'strSEARCH_TEXT': '&',
-    'strSEARCH_FIELD_NAME': 'STR_GRN_NO&',
-    'strLIMIT': '0&',
-    'strARCHIVE': 'TRUE&',
-    'strORDERBY': 'STR_GRN_NO&',
-    'strOTHER_WHERE_CONDITION': '&',
-    'strAPI_URL': 'api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&',
-    'strTITEL': '&',
-    'strAll_DATA': 'true',
-    '&strSchema': ''
-    }
 
 
 def _fetch_grn_invoice():
@@ -96,46 +75,6 @@ def _fetch_grn_invoice():
     adjustment_df = pd.json_normalize(adjustments)
     adjustment_df.to_json(ADJ_DPMC_FILE, orient = "records")
     logging.info("GRN Invoice retrieval completed")
-
-
-def get_missing_invoice_id(details):
-    # -*- coding: utf-8 -*-
-    payload = "strInstance=DLR&" \
-              "strPremises=KGL&" \
-              "strAppID=00011&" \
-              "strFORMID=00605&" \
-              "strFIELD_NAME=%2CSTR_DEALER_CODE%2CSTR_GRN_NO%2CSTR_ORDER_NO%2CSTR_INVOICE_NO%2CINT_TOTAL_GRN_VALUE&" \
-              "strHIDEN_FIELD_INDEX=%2C0&" \
-              "strDISPLAY_NAME=%2CSTR_DEALER_CODE%2CGRN+No%2COrder+No%2CInvoice+No%2CTotal+GRN+Value&" \
-              f"strSearch={details['GRN search code']}&" \
-              "strSEARCH_TEXT=&" \
-              "strSEARCH_FIELD_NAME=STR_GRN_NO&" \
-              "strColName=STR_GRN_NO&" \
-              "strLIMIT=0&" \
-              "strARCHIVE=TRUE&" \
-              "strORDERBY=STR_GRN_NO&" \
-              f"strOTHER_WHERE_CONDITION=+(+INT_TOTAL_GRN_VALUE%3D+'{details['GRN total']}'++)&" \
-              "strAPI_URL=api%2FModules%2FPadealer%2FPadlrgoodreceivenote%2FList&" \
-              "strTITEL=&" \
-              "strAll_DATA=true&" \
-              "strSchema="
-
-    response = requests.request("POST", ULR_ADVANCED, headers = HEADERS, data = payload)
-    invoice_details = json.loads(response.text)
-
-    if invoice_details == "NO DATA FOUND":
-        logging.warning(
-                f"Missing data retreival failed for search code: {details['GRN search code']} and value "
-                f"{details['GRN total']}")
-    else:
-        if len(invoice_details) == 1:
-            details["ID"] = invoice_details[0]["Invoice No"]
-            details["GRN"] = invoice_details[0]["GRN No"]
-        else:
-            details["Retrieved Data"] = invoice_details
-            logging.warning(
-                    f"Missing data has multiple records. Details: {details['GRN search code']} and value "
-                    f"{details['GRN total']}")
 
 
 def get_products_from_invoices():
@@ -367,11 +306,12 @@ def get_dpmc_adjustments():
     HEADERS["cookie"] = dpmc_client.authenticate()
     logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
     _fetch_grn_invoice()
-    get_products_from_invoices()
-    json_to_csv(ADJ_DPMC_FILE)
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    # get_products_from_invoices()
+    # json_to_csv(ADJ_DPMC_FILE)
+    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
+    get_dpmc_adjustments()
