@@ -209,7 +209,6 @@ def inventory_adjustment(dated_adj_file):
     for product in invalid_products:
         logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
-    # _create_quantity_fixes(qty_fixable_products)
     columns = ['name', 'Accounting Date', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id',
                'line_ids/location_id/id', 'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)
@@ -217,21 +216,6 @@ def inventory_adjustment(dated_adj_file):
 
     logging.info("Inventory Adjustment done.")
     return invalid_products
-
-
-def _create_quantity_fixes(products):
-    """
-    Create file for products with negative inventories
-    """
-    columns = ['name', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id', 'line_ids/location_id/id',
-               'initial_qty', 'difference', 'line_ids/product_qty']
-    df = pd.DataFrame(columns = columns, data = products)
-    df.to_csv(FIX_FILE, encoding = 'utf-8', mode = 'w', header = True, index = False)
-
-
-def _format_sales_data(number):
-    match = re.search(r"(?<=\[).+?(?=])", number)
-    return match.group()
 
 
 def get_other_adjustments():
