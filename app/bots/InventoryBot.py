@@ -99,13 +99,13 @@ def _fetch_products():
         adjustment["Products"] = products
         logging.info(f"Products retrieved for {adjustment_id}")
 
-    adjustments = {"Adjustment": adjustments}
+    adjustments = {"Adjustments": adjustments}
     with open(ADJ_DPMC_FILE, "w") as file:
         json.dump(adjustments, file)
     logging.info("Product retrieval completed")
 
 
-def json_to_csv(file):
+def _save_dated_adjustment(file):
     adjustments = pd.read_json(file, orient = 'records').Adjustments.to_list()
     sorted_adjustment = pd \
         .json_normalize(adjustments) \
@@ -130,10 +130,6 @@ def json_to_csv(file):
 
 
 def merge_duplicates():
-    # -*- coding: utf-8 -*-
-    """
-    Add the sum of the duplicate products
-    """
     df = pd.read_csv(DATED_ADJUSTMENT_FILE)
     df["Counted Quantity"] = df.groupby(["name", "Product/Internal Reference"])["Counted Quantity"].transform('sum')
     df.drop_duplicates(["name", "Product/Internal Reference"], inplace = True, keep = "last")
@@ -142,13 +138,6 @@ def merge_duplicates():
 
 
 def inventory_adjustment(dated_adj_file):
-    # -*- coding: utf-8 -*-
-    """ Before
-    json_to_csv() should be called before to get the adjustment file
-
-    After Call
-    Final file to upload will be available at `DATED_ADJUSTMENT_FILE`
-    """
     products = []
     qty_fixable_products = []
     invalid_products = []
@@ -245,41 +234,18 @@ def _format_sales_data(number):
     return match.group()
 
 
-def read_sales_data():
-    sales_df = pd.read_excel(SALES_FILE)
-    print()
-    # sales_df = pd.read_excel(SALES_FILE,
-    #                          skiprows = list(range(4)),
-    #                          header = None,
-    #                          names = ['number', 'quantity'],
-    #                          dtype = {'number': str},
-    #                          converters = {'number': _format_sales_data})
-    # fixable_products_df = pd.read_csv(FIX_FILE,
-    #                                   dtype = {'reference': str})
-    # sales_mask = sales_df.number.isin(fixable_products_df.reference)
-    # sales_df = sales_df[sales_mask]
-    # print()
-
-
-def get_sales_adjustments():
-    # sheet.main()
-    # merge_duplicates()
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
-
-
 def get_other_adjustments():
-    json_to_csv(ADJ_OTHER_FILE)
+    _save_dated_adjustment(ADJ_OTHER_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 def get_dpmc_adjustments():
     HEADERS["cookie"] = dpmc_client.authenticate()
     logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    # _fetch_grn_invoice()
+    _fetch_grn_invoice()
     _fetch_products()
-    # get_products_from_invoices()
-    # json_to_csv(ADJ_DPMC_FILE)
-    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    _save_dated_adjustment(ADJ_DPMC_FILE)
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
