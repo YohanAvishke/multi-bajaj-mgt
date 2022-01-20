@@ -21,7 +21,7 @@ ADJ_OTHER_FILE = f'{INV_DIR}/adjustment.other.json'
 INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
 SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment-2.csv'
+DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
 
 # -*- Request Paths -*-
 URL = 'https://erp.dpg.lk/Help/GetHelp'
@@ -224,11 +224,11 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    HEADERS["cookie"] = dpmc_client.authenticate()
-    logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    _fetch_grn_invoice()
-    _fetch_products()
-    _save_dated_adjustment(ADJ_DPMC_FILE)
+    # HEADERS["cookie"] = dpmc_client.authenticate()
+    # logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
+    # _fetch_grn_invoice()
+    # _fetch_products()
+    # _save_dated_adjustment(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
