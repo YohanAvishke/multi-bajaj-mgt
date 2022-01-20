@@ -8,7 +8,7 @@ import json
 import logging
 import pandas as pd
 import app.clients.dpmc_client as dpmc_client
-import app.googlesheet as sheet
+import app.googlesheet.client as sheet_client
 
 # -*- Dir Paths -*-
 INV_DIR = f'{ROOT_DIR}/data/inventory'
@@ -193,6 +193,11 @@ def inventory_adjustment(dated_adj_file):
     return invalid_products
 
 
+def get_sales_adjustments():
+    sheet_client.main()
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+
+
 def get_other_adjustments():
     _save_dated_adjustment(ADJ_OTHER_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
@@ -200,13 +205,13 @@ def get_other_adjustments():
 
 def get_dpmc_adjustments():
     dpmc_client.authenticate()
-    # _fetch_grn_invoice()
-    # _fetch_products()
-    # _save_dated_adjustment(ADJ_DPMC_FILE)
-    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    _fetch_grn_invoice()
+    _fetch_products()
+    _save_dated_adjustment(ADJ_DPMC_FILE)
+    inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_dpmc_adjustments()
+    get_sales_adjustments()
