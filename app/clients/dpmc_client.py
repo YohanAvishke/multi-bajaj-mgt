@@ -1,4 +1,5 @@
 import requests
+import logging
 
 URL = "https://erp.dpg.lk/Help/GetHelp"
 HEADERS = {
@@ -44,10 +45,10 @@ def authenticate():
         'sec-gpc': '1'
         }
     response = requests.request("POST", "https://erp.dpg.lk/", headers = headers, data = payload)
-
     session = response.cookies._cookies['erp.dpg.lk']['/']['.AspNetCore.Session']
     cookie = f'{session.name}={session.value}'
     HEADERS["cookie"] = cookie
+    logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
     return cookie
 
 
@@ -74,12 +75,11 @@ def get_grn_from_column(column_name, number):
         'strSchema': ''
         }
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
-
     if response.ok:
         return response.json()
     else:
-        print(f"GRN retrieval from column: {column_name} for number: {number} failed. Status: {response.status_code} "
-              f"for reason {response.text}")
+        logging.error(f"GRN retrieval from column: {column_name} for number: {number} failed. Status: "
+                      f"{response.status_code} for reason {response.text}")
 
 
 def get_grn_from_mobile(mobile_number):
@@ -103,12 +103,11 @@ def get_grn_from_mobile(mobile_number):
               "strAll_DATA=true&" \
               "strSchema="
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
-
     if response.ok:
         return response.json()
     else:
-        print(f"GRN retrieval from Mobile number: {mobile_number} failed. Status: {response.status_code} "
-              f"for reason {response.text}")
+        logging.error(f"GRN retrieval from Mobile number: {mobile_number} failed. Status: {response.status_code} "
+                      f"for reason {response.text}")
 
 
 def get_grn_from_order(order_number):
@@ -134,12 +133,11 @@ def get_grn_from_order(order_number):
         'strSchema': ''
         }
     response = requests.request("POST", URL, headers = HEADERS, data = payload)
-
     if response.ok:
         return response.json()
     else:
-        print(f"GRN retrieval from Mobile number: {order_number} failed. Status: {response.status_code} "
-              f"for reason {response.text}")
+        logging.error(f"GRN retrieval from Mobile number: {order_number} failed. Status: {response.status_code} "
+                      f"for reason {response.text}")
 
 
 def advanced_grn_search(search_query):
@@ -166,12 +164,11 @@ def advanced_grn_search(search_query):
         }
     response = requests.request("POST", "https://erp.dpg.lk/Help/GetHelpForAdvanceSearch", headers = HEADERS,
                                 data = payload)
-
     if response.ok:
         return response.json()
     else:
-        print(f"GRN advance search for query: {search_query} failed. Status: {response.status_code} "
-              f"for reason {response.text}")
+        logging.error(f"GRN advance search for query: {search_query} failed. Status: {response.status_code} "
+                      f"for reason {response.text}")
 
 
 def get_products(invoice_number, grn_number):
@@ -189,9 +186,13 @@ def get_products(invoice_number, grn_number):
         payload["strGRNno"] = grn_number
     response = requests.request("POST", "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire", headers = HEADERS,
                                 data = payload)
-
     if response.ok:
         return response.json()
     else:
-        print(f"Product retrieval for invoice: {invoice_number} failed. Status: {response.status_code} "
-              f"for reason {response.text}")
+        logging.error(f"Product retrieval for invoice: {invoice_number} failed. Status: {response.status_code} "
+                      f"for reason {response.text}")
+
+
+if __name__ == "__main__":
+    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
+    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")

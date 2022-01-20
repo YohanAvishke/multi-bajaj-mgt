@@ -1,14 +1,13 @@
 from __future__ import print_function, unicode_literals
 from datetime import date
 from app.config import ROOT_DIR
-import app.clients.dpmc_client as dpmc_client
 
 import re
 import csv
 import json
-import requests
 import logging
 import pandas as pd
+import app.clients.dpmc_client as dpmc_client
 import app.googlesheet as sheet
 
 # -*- Dir Paths -*-
@@ -22,30 +21,6 @@ INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
 SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
 DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
-
-# -*- Request Paths -*-
-URL = 'https://erp.dpg.lk/Help/GetHelp'
-URL_PRODUCTS = 'https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire'
-ULR_ADVANCED = 'https://erp.dpg.lk/Help/GetHelpForAdvanceSearch'
-# -*- Headers -*-
-HEADERS = {
-    'authority': 'erp.dpg.lk',
-    'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-    'accept': 'application/json, text/javascript, */*; q=0.01',
-    'x-requested-with': 'XMLHttpRequest',
-    'sec-ch-ua-mobile': '?0',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/91.0.4472.114 Safari/537.36',
-    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'origin': 'https://erp.dpg.lk',
-    'sec-fetch-site': 'same-origin',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-dest': 'empty',
-    'referer': 'https://erp.dpg.lk/Application/Home/PADEALER',
-    'accept-language': 'en-US,en;q=0.9',
-    'dnt': '1',
-    'sec-gpc': '1'
-    }
 
 
 def _fetch_grn_invoice():
@@ -224,11 +199,9 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    # HEADERS["cookie"] = dpmc_client.authenticate()
-    # logging.info(f"Session created. Cookie: {HEADERS['cookie']}")
-    # _fetch_grn_invoice()
-    # _fetch_products()
-    # _save_dated_adjustment(ADJ_DPMC_FILE)
+    _fetch_grn_invoice()
+    _fetch_products()
+    _save_dated_adjustment(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
