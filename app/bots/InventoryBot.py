@@ -8,7 +8,7 @@ import json
 import logging
 import pandas as pd
 import app.clients.dpmc_client as dpmc_client
-import app.googlesheet.client as sheet_client
+import app.clients.googlesheet.client as sheet_client
 
 # -*- Dir Paths -*-
 INV_DIR = f'{ROOT_DIR}/data/inventory'
