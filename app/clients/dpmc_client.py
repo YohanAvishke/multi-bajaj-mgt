@@ -16,7 +16,6 @@ headers = {
     "sec-fetch-site": "same-origin",
     "sec-fetch-mode": "cors",
     "sec-fetch-dest": "empty",
-    "referer": "https://erp.dpg.lk/Application/Home/PADEALER",
     "accept-language": "en-US,en;q=0.9",
     "dnt": "1",
     "sec-gpc": "1"
@@ -24,8 +23,11 @@ headers = {
 
 
 def authenticate():
-    payload = "strUserName=dlrmbenterp&strPassword=D0000402"
     headers["referer"] = "https://erp.dpg.lk/"
+    payload = {
+        "strUserName": "dlrmbenterp",
+        "strPassword": "D0000402"
+        }
 
     response = requests.request("POST", "https://erp.dpg.lk/", headers = headers, data = payload)
     session = response.cookies._cookies['erp.dpg.lk']['/']['.AspNetCore.Session']
@@ -37,6 +39,7 @@ def authenticate():
 
 
 def get_grn_from_column(column_name, number):
+    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
     payload = {
         "strInstance": "DLR",
         "strPremises": "KGL",
@@ -69,6 +72,7 @@ def get_grn_from_column(column_name, number):
 
 
 def get_grn_from_mobile(mobile_number):
+    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
     payload = {
         "strInstance": "DLR",
         "strPremises": "KGL",
@@ -101,6 +105,7 @@ def get_grn_from_mobile(mobile_number):
 
 
 def get_grn_from_order(order_number):
+    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
     payload = {
         "strInstance": "DLR",
         "strPremises": "KGL",
@@ -133,6 +138,7 @@ def get_grn_from_order(order_number):
 
 
 def advanced_grn_search(search_query):
+    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
     payload = {
         "strInstance": "DLR",
         "strPremises": "KGL",
@@ -157,6 +163,7 @@ def advanced_grn_search(search_query):
 
     response = requests.request("POST", "https://erp.dpg.lk/Help/GetHelpForAdvanceSearch", headers = headers,
                                 data = payload)
+
     if response.ok:
         return response.json()
     else:
@@ -165,6 +172,7 @@ def advanced_grn_search(search_query):
 
 
 def get_products(invoice_number, grn_number):
+    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
     payload = {
         "STR_INSTANT": "DLR",
         "STR_PREMIS": "KGL",
@@ -180,6 +188,7 @@ def get_products(invoice_number, grn_number):
         payload["strGRNno"] = grn_number
     response = requests.request("POST", "https://erp.dpg.lk/PADEALER/PADLRGOODRECEIVENOTE/Inquire", headers = headers,
                                 data = payload)
+
     if response.ok:
         return response.json()
     else:
