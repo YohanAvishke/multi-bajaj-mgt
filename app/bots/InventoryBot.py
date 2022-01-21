@@ -30,18 +30,24 @@ def _fetch_grn_invoice():
     for adjustment in adjustments:
         adjustment_type = adjustment["Type"]
         adjustment_id = adjustment["ID"]
-        if "Order" in adjustment_type:
-            response_data = dpmc_client.get_grn_from_order(adjustment_id)
+
+        if "Invoice" in adjustment_type:
+            column_name = "STR_INVOICE_NO"
+            response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
+        elif "Order" in adjustment_type:
             column_name = "STR_ORDER_NO"
+            response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
         else:
-            response_data = dpmc_client.get_grn_from_mobile(adjustment_id)
             column_name = "STR_MOBILE_NO"
+            response_data = dpmc_client.get_grn_from_mobile(adjustment_id)
+
         if "NO DATA FOUND" in response_data:
             response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
             if "NO DATA FOUND" in response_data:
-                adjustment["Type"] = "Invalid"
+                adjustment["GRN"] = None
                 logging.warning(f"GRN not found for {adjustment_id}")
                 continue
+
         response_data = json.loads(response_data)[0]
         adjustment["Type"] = "Invoice"
         adjustment["ID"] = response_data["Invoice No"]
@@ -204,14 +210,14 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    dpmc_client.authenticate()
-    _fetch_grn_invoice()
-    _fetch_products()
-    _save_dated_adjustment(ADJ_DPMC_FILE)
+    # dpmc_client.authenticate()
+    # _fetch_grn_invoice()
+    # _fetch_products()
+    # _save_dated_adjustment(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
+    get_dpmc_adjustments()
