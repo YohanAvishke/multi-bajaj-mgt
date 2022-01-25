@@ -1,0 +1,9 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+SA Products Lanka - OL4966,2022-01-24,True,GRE-R-100(SA),__export__.product_product_50742_4b8441a7,stock.stock_location_stock,20.0
+SA Products Lanka - MS63813,2022-01-24,True,SADJ181044(SA),__export__.product_product_50012_1b73a8af,stock.stock_location_stock,50.0
+,,,VN22120503(SA),__export__.product_product_50743_95df9958,stock.stock_location_stock,5.0
+,,,VN01100339(SA),__export__.product_product_50195_5cb58785,stock.stock_location_stock,39.0
+,,,SA03170127(SA),__export__.product_product_50443_7c7c4583,stock.stock_location_stock,1.0
+,,,39154321S(SA),__export__.product_product_50744_acdbbc25,stock.stock_location_stock,10.0
+,,,GK241002(SA),__export__.product_product_50745_19b81227,stock.stock_location_stock,5.0
+,,,SA06101007(SA),__export__.product_product_49895_16699a18,stock.stock_location_stock,20.0
