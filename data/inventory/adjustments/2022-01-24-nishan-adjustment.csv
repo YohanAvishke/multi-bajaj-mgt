@@ -1,0 +1,7 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Nishan Automobile Invoice - CB2003867,2022-01-21,True,24101177(YL),__export__.product_product_49939_26f97cfb,stock.stock_location_stock,11.0
+,,,24141090(YL),__export__.product_product_50741_11e8b490,stock.stock_location_stock,3.0
+,,,52AA4035(YL),__export__.product_product_50161_009349b6,stock.stock_location_stock,7.0
+,,,AA121135(YL),__export__.product_product_50397_e1240392,stock.stock_location_stock,5.0
+,,,AA161215(YL),__export__.product_product_49909_4cb023a9,stock.stock_location_stock,4.0
+,,,AL191043(YL),__export__.product_product_50484_72854b72,stock.stock_location_stock,3.0

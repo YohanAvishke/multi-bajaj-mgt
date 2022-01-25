@@ -98,8 +98,8 @@ def create_product_file(products):
 
 
 if __name__ == "__main__":
-    invoice_number = "CB2003375"
-    adj_date = "2021-12-24"
+    invoice_number = "CB2003867"
+    adj_date = "2022-01-21"
     current_source = "nishan"
     dated_adj_file = f"{ADJ_DIR}/{date.today()}-{current_source}-adjustment.csv"
 
