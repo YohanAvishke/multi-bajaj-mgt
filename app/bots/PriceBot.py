@@ -1,11 +1,14 @@
 import logging
+import sys
+
 import requests
 import pandas as pd
 import json
-import app.dpmc as dpmc
+import app.clients.dpmc_client as dpmc_client
 
 # -*- File Paths -*-
 PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
+PRODUCT_UPDATED_PRICE_PATH = "../data/product/product.price.updated.csv"
 PRODUCT_EMPTY_STOCK_PRICE_PATH = "../data/product/product.price-empty-stock.csv"
 
 # -*- Request URLs -*-
@@ -29,23 +32,10 @@ HEADERS = {
     "accept-language": "en-US,en;q=0.9"
     }
 
-# -*- Main function -*-
-if __name__ == "__main__":
-    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
-    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-
-    pd.set_option("display.expand_frame_repr", False)
-    pd.set_option("display.max_rows", 25)
-
-    HEADERS["cookie"] = dpmc.authorise()
-    logging.info(f"Session created. Cookie: {HEADERS['cookie']} \n"
-                 f"===================================================================================================")
-
 
 # -*- Function -*-
 def fetch_prices():
     df = pd.read_csv(PRODUCT_PRICE_PATH)
-
     if "Updated Sales Price" not in df.columns:
         df["Updated Sales Price"] = df["Updated Cost"] = df["Status"] = None
         df.to_csv(PRODUCT_PRICE_PATH, index = False)
@@ -65,7 +55,7 @@ def fetch_prices():
                 response = requests.request("POST", URL, headers = HEADERS, data = payload)
             except requests.exceptions.ConnectionError as e:
                 logging.error(e)
-                break
+                sys.exit(0)
 
             if response:
                 product_data = json.loads(response.text)["DATA"]
@@ -92,8 +82,15 @@ def fetch_prices():
             else:
                 logging.error(f"An error has occurred with the request !!! \n"
                               f"Status: {response.status_code} ,For reason: {response.reason}")
-                break
+                sys.exit(0)
             # time.sleep(5)
+    return df
+
+
+def filter_by_status(df, options):
+    df = df[df['Status'].isin(options)]
+    df.to_csv(PRODUCT_UPDATED_PRICE_PATH, index = False)
+    return df
 
 
 def sort_products_by_price():
@@ -107,6 +104,16 @@ def get_price_fluctuations():
     a = price_reader[["Sales Price"]].eq(price_reader["Updated Sales Price"], axis = 0).assign(no = True)
 
 
-# -*- Function Calls -*-
-fetch_prices()
-# sort_products_by_price()
+if __name__ == "__main__":
+    # logging config
+    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
+    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
+    # pandas config
+    pd.set_option("display.expand_frame_repr", False)
+    pd.set_option("display.max_rows", 25)
+    # dpmmc client authentication
+    HEADERS["cookie"] = dpmc_client.authenticate()
+    logging.info(f"Session created")
+    # function calls
+    products_df = fetch_prices()
+    filter_by_status(products_df, ['up', 'down'])
