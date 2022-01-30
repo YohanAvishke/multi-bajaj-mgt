@@ -14,10 +14,10 @@ import pandas as pd
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = '18kz-I9F90_vL60zHbGmtl8LMiAnJzy2nN_2DHzjJMIw'
 RANGE_NAME = 'A:D'
-TOKEN_FILE = F'{ROOT_DIR}/app/googlesheet/token.json'
-CREDENTIAL_FILE = f'{ROOT_DIR}/app/googlesheet/credentials.json'
+TOKEN_FILE = F'{ROOT_DIR}/app/clients/googlesheet/token.json'
+CREDENTIAL_FILE = f'{ROOT_DIR}/app/clients/googlesheet/credentials.json'
 MAIN_ADJUSTMENT_FILE = f'{ROOT_DIR}/data/inventory/adjustment.sales.json'
-DATED_ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.csv"
+DATED_ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustments/{date.today()}-adjustment.sales.csv"
 
 
 def get_service():

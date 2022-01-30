@@ -1,7 +1,7 @@
 import requests
 import logging
 
-URL = "https://erp.dpg.lk/Help/GetHelp"
+GET_HELP_URL = "https://erp.dpg.lk/Help/GetHelp"
 headers = {
     "authority": "erp.dpg.lk",
     "sec-ch-ua": "'Google Chrome';v='93', ' Not;A Brand';v='99', 'Chromium';v='93'",
@@ -38,7 +38,49 @@ def authenticate():
     return cookie
 
 
-def get_grn_from_column(column_name, number):
+def grn_from_order_field(column_name, number):
+    """
+    column_name: STR_INVOICE_NO(invoice number),
+                 STR_DLR_ORD_NO(order number),
+                 STR_MOBILE_INVOICE_NO(mobile invoice number)
+    """
+    headers["referer"] = "https://erp.dpg.lk/"
+    payload = {
+        "strInstance": "DLR",
+        "strPremises": "KGL",
+        "strAppID": "00011",
+        "strFORMID": "00605",
+        "strFIELD_NAME": ",DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO",
+        "strHIDEN_FIELD_INDEX": "",
+        "strDISPLAY_NAME": ",Order No,Invoice No,Mobile Invoice No",
+        "strSearch": f"{number}",
+        "strSEARCH_TEXT": "",
+        "strSEARCH_FIELD_NAME": "STR_DLR_ORD_NO",
+        "strColName": f"{column_name}",
+        "strLIMIT": "0",
+        "strARCHIVE": "TRUE",
+        "strORDERBY": "STR_DLR_ORD_NO",
+        "strOTHER_WHERE_CONDITION": "",
+        "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo",
+        "strTITEL": "",
+        "strAll_DATA": "true",
+        "strSchema": ""
+        }
+
+    response = requests.request("POST", GET_HELP_URL, headers = headers, data = payload)
+
+    if response.ok:
+        return response.json()
+    else:
+        logging.error(f"GRN retrieval failed for order number field for column {column_name} for {number}. "
+                      f"Status: {response.status_code} for reason {response.text}")
+
+
+def grn_from_grn_field(column_name, number):
+    """
+       column_name: STR_INVOICE_NO(invoice number),
+                    STR_ORDER_NO(order number)
+    """
     headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
     payload = {
         "strInstance": "DLR",
@@ -62,79 +104,13 @@ def get_grn_from_column(column_name, number):
         "strSchema": ""
         }
 
-    response = requests.request("POST", URL, headers = headers, data = payload)
+    response = requests.request("POST", GET_HELP_URL, headers = headers, data = payload)
 
     if response.ok:
         return response.json()
     else:
-        logging.error(f"GRN retrieval from column: {column_name} for number: {number} failed. Status: "
-                      f"{response.status_code} for reason {response.text}")
-
-
-def get_grn_from_mobile(mobile_number):
-    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
-    payload = {
-        "strInstance": "DLR",
-        "strPremises": "KGL",
-        "strAppID": "00011",
-        "strFORMID": "00605",
-        "strFIELD_NAME": ",DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO",
-        "strHIDEN_FIELD_INDEX": "",
-        "strDISPLAY_NAME": ",Order No,Invoice No,Mobile Invoice No",
-        "strSearch": f"{mobile_number}",
-        "strSEARCH_TEXT": "",
-        "strSEARCH_FIELD_NAME": "STR_DLR_ORD_NO",
-        "strColName": "STR_MOBILE_INVOICE_NO",
-        "strLIMIT": "50",
-        "strARCHIVE": "TRUE",
-        "strORDERBY": "STR_DLR_ORD_NO",
-        "strOTHER_WHERE_CONDITION": "",
-        "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo",
-        "strTITEL": "",
-        "strAll_DATA": "true",
-        "strSchema": ""
-        }
-
-    response = requests.request("POST", URL, headers = headers, data = payload)
-
-    if response.ok:
-        return response.json()
-    else:
-        logging.error(f"GRN retrieval from Mobile number: {mobile_number} failed. Status: {response.status_code} "
-                      f"for reason {response.text}")
-
-
-def get_grn_from_order(order_number):
-    headers["referer"] = "https://erp.dpg.lk/Application/Home/PADEALER"
-    payload = {
-        "strInstance": "DLR",
-        "strPremises": "KGL",
-        "strAppID": "00011",
-        "strFORMID": "00605",
-        "strFIELD_NAME": ",DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO",
-        "strHIDEN_FIELD_INDEX": "",
-        "strDISPLAY_NAME": ",Order No,Invoice No,Mobile Invoice No",
-        "strSearch": "",
-        "strSEARCH_TEXT": f"{order_number}",
-        "strSEARCH_FIELD_NAME": "STR_DLR_ORD_NO",
-        "strColName": "",
-        "strLIMIT": "50",
-        "strARCHIVE": "TRUE",
-        "strORDERBY": "STR_DLR_ORD_NO",
-        "strOTHER_WHERE_CONDITION": "",
-        "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo",
-        "strTITEL": "",
-        "strAll_DATA": "true",
-        "strSchema": ""
-        }
-
-    response = requests.request("POST", URL, headers = headers, data = payload)
-
-    if response.ok:
-        return response.json()
-    else:
-        logging.error(f"GRN retrieval from Mobile number: {order_number} failed. Status: {response.status_code} "
-                      f"for reason {response.text}")
+        logging.error(f"GRN retrieval failed for grn number field for column {column_name} for {number}. "
+                      f"Status: {response.status_code} for reason {response.text}")
 
 
 def advanced_grn_search(search_query):

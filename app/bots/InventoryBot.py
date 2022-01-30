@@ -30,28 +30,36 @@ def _fetch_grn_invoice():
     for adjustment in adjustments:
         adjustment_type = adjustment["Type"]
         adjustment_id = adjustment["ID"]
+        order_field_column, grn_field_column = None, None
 
         if "Invoice" in adjustment_type:
-            column_name = "STR_INVOICE_NO"
-            response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
+            order_field_column = "STR_INVOICE_NO"
+            grn_field_column = "STR_INVOICE_NO"
         elif "Order" in adjustment_type:
-            column_name = "STR_ORDER_NO"
-            response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
-        else:
-            column_name = "STR_MOBILE_NO"
-            response_data = dpmc_client.get_grn_from_mobile(adjustment_id)
-
-        if "NO DATA FOUND" in response_data:
-            response_data = dpmc_client.get_grn_from_column(column_name, adjustment_id)
+            order_field_column = "STR_DLR_ORD_NO"
+            grn_field_column = "STR_ORDER_NO"
+        elif "Mobile" in adjustment_type:
+            order_field_column = "STR_MOBILE_INVOICE_NO"
+        response_data = dpmc_client.grn_from_order_field(order_field_column, adjustment_id)
+        # grn field doesn't support mobile invoice number
+        if "NO DATA FOUND" in response_data and "Mobile" not in adjustment_type:
+            response_data = dpmc_client.grn_from_grn_field(grn_field_column, adjustment_id)
             if "NO DATA FOUND" in response_data:
-                adjustment["GRN"] = None
-                logging.warning(f"GRN not found for {adjustment_id}")
+                adjustment["Type"] = "Missing"
+                logging.warning(f"GRN retrieval failed for {adjustment_id} with response {response_data}")
                 continue
+        response_data = json.loads(response_data)
 
-        response_data = json.loads(response_data)[0]
-        adjustment["Type"] = "Invoice"
-        adjustment["ID"] = response_data["Invoice No"]
-        adjustment["GRN"] = response_data["GRN No"] if "GRN No" in response_data else None
+        if len(response_data) > 1:
+            # If duplicate order numbers are present in the receipt
+            adjustment["Type"] = "Duplicate"
+            adjustment["ID"] = [response_data[n]["Invoice No"] for n in range(len(response_data))]
+        else:
+            response_data = response_data[0]
+            adjustment["Type"] = "Invoice"
+            adjustment["ID"] = response_data["Invoice No"]
+            if "GRN No" in response_data:
+                adjustment["GRN"] = response_data["GRN No"]
         logging.info(f"GRN retrieved for {adjustment['ID']} of {adjustment['Type']}")
 
     adjustments = {"Adjustments": adjustments}
@@ -67,14 +75,17 @@ def _fetch_products():
     for adjustment in adjustments:
         adjustment_type = adjustment["Type"]
         adjustment_id = adjustment["ID"]
-        grn_number = adjustment["GRN"]
-        if "Missing" in adjustment_type:
-            logging.warning(f"Missing adjustment {adjustment_id}")
+        grn_number = adjustment["GRN"] if "GRN" in adjustment else None
+
+        # adjustment validity check
+        if "Missing" or "Duplicate" in adjustment_type:
+            logging.warning(f"Product retrieval failed for {adjustment_id} due to {adjustment_type} adjustment")
             continue
+
         response_data = dpmc_client.get_products(adjustment_id, grn_number)
         response_data = response_data["DATA"]
         if "NO DATA FOUND" in response_data:
-            logging.warning(f"Products not found for {adjustment_id}")
+            logging.warning(f"Product retrieval failed for {adjustment_id} with response {response_data}")
             continue
         products = response_data["dsGRNDetails"]["Table"] if adjustment["GRN"] else response_data["dtGRNDetails"]
         adjustment["Products"] = products
@@ -118,6 +129,16 @@ def merge_duplicates():
     logging.info("Adjustment's duplicate products have been merged")
 
 
+# def main(adjustment_file):
+#     current_inventory_df = pd.read_csv(INVENTORY_FILE)
+#     adjustment_df = pd.read_csv(adjustment_file)
+#     return
+#
+#
+# f = f'{ADJ_DIR}/2022-01-28-nishan-adjustment.csv'
+# main(f)
+
+
 def inventory_adjustment(dated_adj_file):
     products = []
     qty_fixable_products = []
@@ -136,6 +157,7 @@ def inventory_adjustment(dated_adj_file):
         adjustment_number = adjustment_product["Product/Internal Reference"]
         adjustment_quantity = float(adjustment_product["Counted Quantity"])
 
+        # To group products under a adjustment
         if adjustment_invoice == previous_adjustment_invoice:
             adjustment_invoice = None
             accounting_date = None
@@ -144,6 +166,8 @@ def inventory_adjustment(dated_adj_file):
         for inventory_product in inventory_reader:
             inventory_number = inventory_product["Internal Reference"]
             inventory_quantity = float(inventory_product["Quantity On Hand"])
+
+            # For products with multiple part numbers in inventory(Not for dpmc parts)
             regex = r"\((\w+)\)"
             match = re.search(regex, inventory_number)
             if match:
@@ -152,6 +176,7 @@ def inventory_adjustment(dated_adj_file):
                 pos_category_name = split[1]
                 inventory_number = [f"{product_number}({pos_category_name})" for product_number in product_numbers]
 
+            # Check if product exists
             if isinstance(inventory_number, list):
                 if adjustment_number in inventory_number:
                     exists = True
@@ -159,12 +184,13 @@ def inventory_adjustment(dated_adj_file):
                 if adjustment_number == inventory_number:
                     exists = True
 
+            # Calculate quantity
             if exists:
                 finalised_quantity = inventory_quantity + adjustment_quantity
                 product_data = [adjustment_invoice, is_exhausted_included, inventory_product["Internal Reference"],
                                 inventory_product["Product/Product/ID"], 'stock.stock_location_stock',
                                 inventory_quantity, adjustment_quantity, finalised_quantity]
-
+                # Log invalid quantity products
                 if inventory_quantity < 0:
                     qty_fixable_products.append(product_data)
                     logging.warning(f"Inventory initial qty is negative: {adjustment_number}."
@@ -190,6 +216,7 @@ def inventory_adjustment(dated_adj_file):
     for product in invalid_products:
         logging.error(f"Product Number: {product['Product/Internal Reference']} is Invalid !!!")
 
+    # Save
     columns = ['name', 'Accounting Date', 'Include Exhausted Products', 'reference', 'line_ids/product_id/id',
                'line_ids/location_id/id', 'line_ids/product_qty']
     df = pd.DataFrame(columns = columns, data = products)

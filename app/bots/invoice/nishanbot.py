@@ -5,20 +5,19 @@ from datetime import date
 
 import sys
 import re
+import logging
 import pandas as pd
 
-INVOICE_NISHAN_FILE = f"{ROOT_DIR}/data/invoice/vendors/nishan.txt"
+ADJUSTMENT_FILE = f"{ROOT_DIR}/data/inventory/adjustment.other.txt"
 PRODUCT_FILE = f"{ROOT_DIR}/data/product/product.product.csv"
 POS_CATEGORY_FILE = f"{ROOT_DIR}/data/product/pos.category.csv"
-
-ADJ_SOURCES = {"nishan": "Nishan Automobile Invoice", "dilma": "Dilma Auto Trading Invoice"}
 
 
 def create_adj_file():
     all_capitals = ["4s", "5p", "ct", "cdi", "dh", "dz", "jk", "lh", "nd", "nm", "ns", "rh", "ug"]
-    adj_name = f"{ADJ_SOURCES[current_source]} - {invoice_number}"
+    adj_name = f"Nishan Automobile Invoice - {invoice_number}"
 
-    with open(INVOICE_NISHAN_FILE) as file:
+    with open(ADJUSTMENT_FILE) as file:
         lines = file.readlines()
 
     products = []
@@ -67,10 +66,11 @@ def create_product_file(products):
     product_df = pd.DataFrame(products)
     print(product_df.to_markdown())
 
-    product_df = product_df.drop(["name", "Counted Quantity"],
-                                 axis = 1).rename(columns = {"PartName": "Name",
-                                                             "Product/Internal Reference": "Internal Reference",
-                                                             "Price": "Sales Price"})
+    product_df = product_df \
+        .drop(["name", "Counted Quantity"], axis = 1) \
+        .rename(columns = {"PartName": "Name",
+                           "Product/Internal Reference": "Internal Reference",
+                           "Price": "Sales Price"})
     product_df = product_df.assign(**{"Product Category/ID": "product.product_category_1",
                                       "Product Type": "Storable Product",
                                       "Cost": product_df["Sales Price"],
@@ -98,12 +98,15 @@ def create_product_file(products):
 
 
 if __name__ == "__main__":
+    # logging config
+    logging_format = "%(asctime)s: %(levelname)s - %(message)s"
+    logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
+    # basic config
     invoice_number = "CB2003867"
     adj_date = "2022-01-21"
-    current_source = "nishan"
-    dated_adj_file = f"{ADJ_DIR}/{date.today()}-{current_source}-adjustment.csv"
-
+    dated_adj_file = f"{ADJ_DIR}/{date.today()}-nishan-adjustment.csv"
+    # function calls
     create_adj_file()
-    invalid_products = inventory_adjustment(dated_adj_file)
+    valid_products, invalid_products = inventory_adjustment(dated_adj_file)
     if invalid_products:
         create_product_file(invalid_products)
