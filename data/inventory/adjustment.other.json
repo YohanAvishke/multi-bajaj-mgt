@@ -2,27 +2,76 @@
   "Adjustments": [
     {
       "Type": "Other",
-      "ID": "Deepthi Motors Invoice - DLRINV2022011204476",
-      "Date": "2022-01-12",
+      "ID": "Deepthi Motors Invoice - INV00002503",
+      "Date": "2022-01-20",
       "Products": [
         {
-          "STR_PART_NO": "36AN0013",
-          "INT_QUATITY": 10.0
+          "STR_PART_NO": "24151171",
+          "INT_QUATITY": 30
         },
         {
-          "STR_PART_NO": "AB171044",
-          "INT_QUATITY": 6.0
-        }
-      ]
-    },
-    {
-      "Type": "Other",
-      "ID": "Deepthi Motors Invoice - DLRINV2022011204477",
-      "Date": "2022-01-12",
-      "Products": [
+          "STR_PART_NO": "36224004",
+          "INT_QUATITY": 16
+        },
         {
-          "STR_PART_NO": "36JZ0007",
-          "INT_QUATITY": 5.0
+          "STR_PART_NO": "36311006",
+          "INT_QUATITY": 20
+        },
+        {
+          "STR_PART_NO": "36DD4008",
+          "INT_QUATITY": 20
+        },
+        {
+          "STR_PART_NO": "AA101565",
+          "INT_QUATITY": 4
+        },
+        {
+          "STR_PART_NO": "AA101569",
+          "INT_QUATITY": 22
+        },
+        {
+          "STR_PART_NO": "AA111082",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "AA111085",
+          "INT_QUATITY": 15
+        },
+        {
+          "STR_PART_NO": "AA121006",
+          "INT_QUATITY": 20
+        },
+        {
+          "STR_PART_NO": "AA201185",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "AF111010",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "AN101190",
+          "INT_QUATITY": 15
+        },
+        {
+          "STR_PART_NO": "CL201023",
+          "INT_QUATITY": 7
+        },
+        {
+          "STR_PART_NO": "DH111034",
+          "INT_QUATITY": 15
+        },
+        {
+          "STR_PART_NO": "DH201080",
+          "INT_QUATITY": 6
+        },
+        {
+          "STR_PART_NO": "JZ161204",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JZ161210",
+          "INT_QUATITY": 10
         }
       ]
     }
