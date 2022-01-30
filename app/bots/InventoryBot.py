@@ -20,7 +20,7 @@ ADJ_OTHER_FILE = f'{INV_DIR}/adjustment.other.json'
 INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
 SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.other.csv'
+DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
 
 
 def _fetch_grn_invoice():
@@ -240,7 +240,7 @@ def get_dpmc_adjustments():
     # dpmc_client.authenticate()
     # _fetch_grn_invoice()
     # _fetch_products()
-    # _save_dated_adjustment(ADJ_DPMC_FILE)
+    _save_dated_adjustment(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
