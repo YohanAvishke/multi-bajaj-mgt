@@ -2,16 +2,27 @@
   "Adjustments": [
     {
       "Type": "Other",
-      "ID": "Deepthi Motors Invoice - DLRINV2022011004443",
-      "Date": "2022-01-10",
+      "ID": "Deepthi Motors Invoice - DLRINV2022011204476",
+      "Date": "2022-01-12",
       "Products": [
         {
-          "STR_PART_NO": "24151171",
-          "INT_QUATITY": 8.0
+          "STR_PART_NO": "36AN0013",
+          "INT_QUATITY": 10.0
         },
         {
-          "STR_PART_NO": "36DJ4104",
-          "INT_QUATITY": 30.0
+          "STR_PART_NO": "AB171044",
+          "INT_QUATITY": 6.0
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Deepthi Motors Invoice - DLRINV2022011204477",
+      "Date": "2022-01-12",
+      "Products": [
+        {
+          "STR_PART_NO": "36JZ0007",
+          "INT_QUATITY": 5.0
         }
       ]
     }
