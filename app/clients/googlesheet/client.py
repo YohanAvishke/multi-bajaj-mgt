@@ -87,10 +87,10 @@ def create_dated_adjustment():
 
 
 def main():
-    # service = get_service()
-    # raw_df = get_sheet_data(service)
-    # adjustments = extract_adjustments(raw_df)
-    # save_adjustments(adjustments)
+    service = get_service()
+    raw_df = get_sheet_data(service)
+    adjustments = extract_adjustments(raw_df)
+    save_adjustments(adjustments)
     create_dated_adjustment()
 
 
