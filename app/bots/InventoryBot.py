@@ -20,7 +20,7 @@ ADJ_OTHER_FILE = f'{INV_DIR}/adjustment.other.json'
 INVENTORY_FILE = f'{INV_DIR}/product.inventory.csv'
 SALES_FILE = f'{SALES_DIR}/sales.xlsx'
 FIX_FILE = f'{ADJ_DIR}/{date.today()}-fix.csv'
-DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.csv'
+DATED_ADJUSTMENT_FILE = f'{ADJ_DIR}/{date.today()}-adjustment.2.csv'
 
 
 def _fetch_grn_invoice():
@@ -247,4 +247,4 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
+    get_dpmc_adjustments()
