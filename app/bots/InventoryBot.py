@@ -78,7 +78,7 @@ def _fetch_products():
         grn_number = adjustment["GRN"] if "GRN" in adjustment else None
 
         # adjustment validity check
-        if "Missing" or "Duplicate" in adjustment_type:
+        if "Missing" in adjustment_type or "Duplicate" in adjustment_type:
             logging.warning(f"Product retrieval failed for {adjustment_id} due to {adjustment_type} adjustment")
             continue
 
@@ -87,7 +87,7 @@ def _fetch_products():
         if "NO DATA FOUND" in response_data:
             logging.warning(f"Product retrieval failed for {adjustment_id} with response {response_data}")
             continue
-        products = response_data["dsGRNDetails"]["Table"] if adjustment["GRN"] else response_data["dtGRNDetails"]
+        products = response_data["dsGRNDetails"]["Table"] if "GRN" in adjustment else response_data["dtGRNDetails"]
         adjustment["Products"] = products
         logging.info(f"Products retrieved for {adjustment_id}")
 
@@ -227,7 +227,7 @@ def inventory_adjustment(dated_adj_file):
 
 
 def get_sales_adjustments():
-    sheet_client.main()
+    # sheet_client.main()
     inventory_adjustment(sheet_client.DATED_ADJUSTMENT_FILE)
 
 
@@ -240,11 +240,11 @@ def get_dpmc_adjustments():
     # dpmc_client.authenticate()
     # _fetch_grn_invoice()
     # _fetch_products()
-    _save_dated_adjustment(ADJ_DPMC_FILE)
+    # _save_dated_adjustment(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_dpmc_adjustments()
+    get_sales_adjustments()

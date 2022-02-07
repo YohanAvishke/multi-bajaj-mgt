@@ -1,0 +1,6 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of 2022/01/29,2022/01/29,True,BA191051,__export__.product_product_47467_b3f709ee,stock.stock_location_stock,29.0
+,,,BA191052,__export__.product_product_47468_06b53744,stock.stock_location_stock,29.0
+,,,AA191068,__export__.product_product_39375_7d7dc136,stock.stock_location_stock,12.0
+,,,24160924,__export__.product_product_38145_6819662c,stock.stock_location_stock,43.0
+,,,AA101567,__export__.product_product_39002_69a7c261,stock.stock_location_stock,2.0
