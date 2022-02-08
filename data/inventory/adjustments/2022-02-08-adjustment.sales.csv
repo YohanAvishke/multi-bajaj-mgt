@@ -1,0 +1,10 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of None,,True,24191137,__export__.product_product_38275_85cf5ef5,stock.stock_location_stock,0.0
+,,,AL201066,__export__.product_product_47084_46c2b99e,stock.stock_location_stock,1.0
+,,,AA191102,__export__.product_product_46663_9a5ea4ce,stock.stock_location_stock,0.0
+,,,AA231255,__export__.product_product_46770_4a6c5144,stock.stock_location_stock,5.0
+,,,52DH0169,__export__.product_product_12881_f430c88a,stock.stock_location_stock,11.0
+,,,DH171013,__export__.product_product_15219_e4f9fa30,stock.stock_location_stock,19.0
+,,,GF121045,__export__.product_product_17979_bcaa230c,stock.stock_location_stock,2.0
+,,,AA111153,__export__.product_product_39176_ca376fb3,stock.stock_location_stock,245.0
+,,,AA201313,__export__.product_product_46729_02746fcc,stock.stock_location_stock,3.0
