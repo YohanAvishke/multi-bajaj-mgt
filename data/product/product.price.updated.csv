@@ -1,1 +1,4 @@
 ID,Internal Reference,Point of Sale Category,Sales Price,Cost,Updated Sales Price,Updated Cost,Status
+point_of_sale.PF581045,PF581045,Bajaj / 2W,1840.0,1840.0,1670.0,1670.0,down
+point_of_sale.JH113203,JH113203,Bajaj / 2W,100.0,100.0,240.0,240.0,up
+point_of_sale.JD402219,JD402219,Bajaj / 2W,6990.0,6990.0,11900.0,11900.0,up
