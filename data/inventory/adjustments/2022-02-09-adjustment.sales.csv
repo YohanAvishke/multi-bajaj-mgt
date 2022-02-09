@@ -1,0 +1,11 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of 2022/02/08,2022/02/08,True,JE511038,__export__.product_product_18993_e67b16a0,stock.stock_location_stock,36.0
+,,,JW401011,__export__.product_product_24240_2749cfa1,stock.stock_location_stock,6.0
+,,,36JE0002,__export__.product_product_11889_5ae6b213,stock.stock_location_stock,1.0
+,,,JD511201,__export__.product_product_18885_785341a9,stock.stock_location_stock,14.0
+,,,JD511202,__export__.product_product_18886_cdf248f5,stock.stock_location_stock,28.0
+,,,36AB4015,__export__.product_product_38501_c244c379,stock.stock_location_stock,4.0
+,,,39104319,__export__.product_product_12636_4201873b,stock.stock_location_stock,54.0
+,,,PF121079,__export__.product_product_33241_fe421125,stock.stock_location_stock,0.0
+,,,DK181062,__export__.product_product_16229_604d57de,stock.stock_location_stock,0.0
+,,,AB201076,__export__.product_product_46867_ea08547a,stock.stock_location_stock,0.0
