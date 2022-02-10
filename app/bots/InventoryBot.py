@@ -227,12 +227,12 @@ def inventory_adjustment(dated_adj_file):
 
 
 def get_sales_adjustments():
-    sheet_client.main()
+    # sheet_client.main()
     inventory_adjustment(sheet_client.DATED_ADJUSTMENT_FILE)
 
 
 def get_other_adjustments():
-    _save_dated_adjustment(ADJ_OTHER_FILE)
+    # _save_dated_adjustment(ADJ_OTHER_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
