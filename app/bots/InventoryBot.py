@@ -241,7 +241,7 @@ def get_dpmc_adjustments():
     _fetch_grn_invoice()
     _fetch_products()
     _save_dated_adjustment(ADJ_DPMC_FILE)
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
