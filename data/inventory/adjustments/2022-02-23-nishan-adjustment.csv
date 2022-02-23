@@ -1,0 +1,10 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Anura Diesel House - SKL0006920,2022-02-14,True,STMR-PLTN-PF01(VARROC),__export__.product_product_50757_49c9dfd4,stock.stock_location_stock,5.0
+,,,FC-4987z(MINDA),__export__.product_product_50758_d3af82cc,stock.stock_location_stock,3.0
+,,,FC-4856z(MINDA),__export__.product_product_50759_40014143,stock.stock_location_stock,4.0
+,,,WH-1049(MINDA),__export__.product_product_50760_b56b825d,stock.stock_location_stock,1.0
+,,,WH-1088MX(MINDA),__export__.product_product_50761_ac547433,stock.stock_location_stock,5.0
+,,,WH-1099UH(MINDA),__export__.product_product_50762_66e49c08,stock.stock_location_stock,1.0
+,,,39167121,__export__.product_product_12680_1f7fa7b1,stock.stock_location_stock,95.0
+,,,DH161404,__export__.product_product_15185_a4fb3601,stock.stock_location_stock,4.0
+,,,DU151009,__export__.product_product_17351_56a2c0db,stock.stock_location_stock,5.0

@@ -102,11 +102,11 @@ if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
     # basic config
-    invoice_number = "CB2003867"
-    adj_date = "2022-01-21"
+    invoice_number = "SKL0006920"
+    adj_date = "2022-02-14"
     dated_adj_file = f"{ADJ_DIR}/{date.today()}-nishan-adjustment.csv"
     # function calls
     create_adj_file()
-    valid_products, invalid_products = inventory_adjustment(dated_adj_file)
+    invalid_products = inventory_adjustment(dated_adj_file)
     if invalid_products:
         create_product_file(invalid_products)
