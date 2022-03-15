@@ -79,11 +79,17 @@ def fetch_prices():
                     logging.warning(f"{idx + 1} - Product Number: {product_number} is Invalid !!!")
 
                 df.to_csv(PRODUCT_PRICE_PATH, index = False)
+                filter_by_status(df, ['up', 'down'])
             else:
                 logging.error(f"An error has occurred with the request !!! \n"
                               f"Status: {response.status_code} ,For reason: {response.reason}")
+                main()
                 sys.exit(0)
             # time.sleep(5)
+        else:
+            df.loc[idx, "Updated Sales Price"] = df.loc[idx, "Sales Price"]
+            df.loc[idx, "Updated Cost"] = df.loc[idx, "Cost"]
+            df.loc[idx, "Status"] = "none"
     return df
 
 
@@ -104,6 +110,15 @@ def get_price_fluctuations():
     a = price_reader[["Sales Price"]].eq(price_reader["Updated Sales Price"], axis = 0).assign(no = True)
 
 
+def main():
+    # dpmmc client authentication
+    HEADERS["cookie"] = dpmc_client.authenticate()
+    logging.info(f"Session created")
+    # function calls
+    products_df = fetch_prices()
+    filter_by_status(products_df, ['up', 'down'])
+
+
 if __name__ == "__main__":
     # logging config
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
@@ -111,9 +126,4 @@ if __name__ == "__main__":
     # pandas config
     pd.set_option("display.expand_frame_repr", False)
     pd.set_option("display.max_rows", 25)
-    # dpmmc client authentication
-    HEADERS["cookie"] = dpmc_client.authenticate()
-    logging.info(f"Session created")
-    # function calls
-    products_df = fetch_prices()
-    filter_by_status(products_df, ['up', 'down'])
+    main()
