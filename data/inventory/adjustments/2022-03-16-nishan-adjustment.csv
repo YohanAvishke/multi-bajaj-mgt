@@ -1,0 +1,6 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Nishan Automobile Invoice - SKL0006920,2022-02-14,True,AE101014(YL),__export__.product_product_49905_4171a260,stock.stock_location_stock,1.0
+,,,EI0205(VARROC),__export__.product_product_50160_dabfbb9d,stock.stock_location_stock,3.0
+,,,EI0808(VARROC),__export__.product_product_50181_bf9967d2,stock.stock_location_stock,-1.0
+,,,RJ0404(ENDURANCE),__export__.product_product_50112_cac98b7d,stock.stock_location_stock,2.0
+,,,RJ0571(SUN),__export__.product_product_50178_1ca9285b,stock.stock_location_stock,6.0

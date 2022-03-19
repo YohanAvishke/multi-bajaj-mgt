@@ -227,7 +227,7 @@ def inventory_adjustment(dated_adj_file):
 
 
 def get_sales_adjustments():
-    sheet_client.main()
+    # sheet_client.main()
     inventory_adjustment(sheet_client.DATED_ADJUSTMENT_FILE)
 
 
@@ -237,14 +237,14 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    # dpmc_client.authenticate()
-    # _fetch_grn_invoice()
-    # _fetch_products()
-    _save_dated_adjustment(ADJ_DPMC_FILE)
-    inventory_adjustment(DATED_ADJUSTMENT_FILE)
+    dpmc_client.authenticate()
+    _fetch_grn_invoice()
+    _fetch_products()
+    # _save_dated_adjustment(ADJ_DPMC_FILE)
+    # inventory_adjustment(DATED_ADJUSTMENT_FILE)
 
 
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_dpmc_adjustments()
+    get_sales_adjustments()

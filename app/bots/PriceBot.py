@@ -111,10 +111,8 @@ def get_price_fluctuations():
 
 
 def main():
-    # dpmmc client authentication
     HEADERS["cookie"] = dpmc_client.authenticate()
     logging.info(f"Session created")
-    # function calls
     products_df = fetch_prices()
     filter_by_status(products_df, ['up', 'down'])
 
