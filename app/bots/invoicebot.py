@@ -9,7 +9,7 @@ import pandas as pd
 logging_format = "%(asctime)s: %(levelname)s - %(message)s"
 logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
 # file paths
-INVOICE_FILE_PATH = f"{ROOT_DIR}/data/inventory/main"
+INVOICE_FILE_PATH = f"{ROOT_DIR}/data/inventory/adjustment.other.txt"
 INVENTORY_FILE_PATH = f"{ROOT_DIR}/data/inventory/product.inventory.csv"
 POS_CATEGORY_FILE_PATH = f"{ROOT_DIR}/data/product/pos.category.csv"
 PRODUCT_FILE_PATH = f"{ROOT_DIR}/data/product/product.product.csv"
@@ -101,25 +101,27 @@ def create_product_creation(product_df):
                                       "Can be Sold": True})
     product_df = product_df.apply(_add_pos_category, axis = 1)
     product_df["Description"] = product_df["Name"]
-    product_df.to_csv(PRODUCT_FILE_PATH, index = False,
-                      columns = ["Internal Reference", "Name", "Description", "Product Category/ID",
-                                 "Point of Sale Category/ID", "Product Type", "Cost", "Sales Price", "Customer Taxes",
-                                 "Available in POS", "Can be Purchased", "Can be Sold", "Image"])
+    if not product_df.empty:
+        product_df.to_csv(PRODUCT_FILE_PATH, index = False,
+                          columns = ["Internal Reference", "Name", "Description", "Product Category/ID",
+                                     "Point of Sale Category/ID", "Product Type", "Cost", "Sales Price",
+                                     "Customer Taxes", "Available in POS", "Can be Purchased", "Can be Sold", "Image"])
 
 
 def create_price_update(product_df):
     product_df = product_df \
         .rename(columns = {"ExternalId": "ID", "ProductNumber": "Internal Reference", "Price": "Sales Price"})
     product_df["Cost"] = product_df["Sales Price"]
-    product_df.to_csv(PRICE_FILE_PATH, index = False,
-                      columns = ["ID", "Internal Reference", "Sales Price", "Cost", "OutdatedSalesPrice",
-                                 "OutdatedCost"])
+    if not product_df.empty:
+        product_df.to_csv(PRICE_FILE_PATH, index = False,
+                          columns = ["ID", "Internal Reference", "Sales Price", "Cost", "OutdatedSalesPrice",
+                                     "OutdatedCost"])
 
 
 def main():
-    invoice_df = pd.read_csv(INVOICE_FILE_PATH, header = None, names = ["InvoiceName", "InvoiceNumber", 'Date',
-                                                                        "ProductName", "ProductNumber", "Quantity",
-                                                                        "Price"])
+    invoice_df = pd.read_csv(INVOICE_FILE_PATH, delimiter = "\t", header = None,
+                             names = ["InvoiceName", "InvoiceNumber", 'Date', "ProductName", "ProductNumber",
+                                      "Quantity", "Price"])
     invoice_df = invoice_df.apply(_enrich_invoice, axis = 1)
 
     invoice_df["Quantity"] = invoice_df.groupby(["InvoiceNumber", "ProductNumber"])["Quantity"].transform("sum")
