@@ -121,22 +121,12 @@ def _save_dated_adjustment(file):
     logging.info("Product data modeling done.")
 
 
-def merge_duplicates():
-    df = pd.read_csv(DATED_ADJUSTMENT_FILE)
+def merge_duplicates(file):
+    df = pd.read_csv(file)
     df["Counted Quantity"] = df.groupby(["name", "Product/Internal Reference"])["Counted Quantity"].transform('sum')
     df.drop_duplicates(["name", "Product/Internal Reference"], inplace = True, keep = "last")
-    df.to_csv(DATED_ADJUSTMENT_FILE, index = False)
+    df.to_csv(file, index = False)
     logging.info("Adjustment's duplicate products have been merged")
-
-
-# def main(adjustment_file):
-#     current_inventory_df = pd.read_csv(INVENTORY_FILE)
-#     adjustment_df = pd.read_csv(adjustment_file)
-#     return
-#
-#
-# f = f'{ADJ_DIR}/2022-01-28-nishan-adjustment.csv'
-# main(f)
 
 
 def inventory_adjustment(dated_adj_file):
@@ -228,6 +218,7 @@ def inventory_adjustment(dated_adj_file):
 
 def get_sales_adjustments():
     # sheet_client.main()
+    merge_duplicates(sheet_client.DATED_ADJUSTMENT_FILE)
     inventory_adjustment(sheet_client.DATED_ADJUSTMENT_FILE)
 
 
@@ -247,4 +238,4 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_sales_adjustments()
+    get_dpmc_adjustments()
