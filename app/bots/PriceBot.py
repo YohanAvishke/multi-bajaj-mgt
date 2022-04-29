@@ -7,9 +7,9 @@ import json
 import app.clients.dpmc_client as dpmc_client
 
 # -*- File Paths -*-
-PRODUCT_PRICE_PATH = "../data/product/product.price.csv"
-PRODUCT_UPDATED_PRICE_PATH = "../data/product/product.price.updated.csv"
-PRODUCT_EMPTY_STOCK_PRICE_PATH = "../data/product/product.price-empty-stock.csv"
+PRODUCT_PRICE_PATH = "../../data/product/product.price.csv"
+PRODUCT_UPDATED_PRICE_PATH = "../../data/product/product.price.updated.csv"
+PRODUCT_EMPTY_STOCK_PRICE_PATH = "../../data/product/product.price-empty-stock.csv"
 
 # -*- Request URLs -*-
 URL = "https://erp.dpg.lk/PADEALER/PADLRItemInquiry/Inquire"
