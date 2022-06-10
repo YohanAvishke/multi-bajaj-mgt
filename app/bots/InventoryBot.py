@@ -217,8 +217,8 @@ def inventory_adjustment(dated_adj_file):
 
 
 def get_sales_adjustments():
-    sheet_client.main()
-    merge_duplicates(sheet_client.DATED_ADJUSTMENT_FILE)
+    # sheet_client.main()
+    # merge_duplicates(sheet_client.DATED_ADJUSTMENT_FILE)
     inventory_adjustment(sheet_client.DATED_ADJUSTMENT_FILE)
 
 
@@ -238,4 +238,4 @@ def get_dpmc_adjustments():
 if __name__ == "__main__":
     logging_format = "%(asctime)s: %(levelname)s - %(message)s"
     logging.basicConfig(format = logging_format, level = logging.INFO, datefmt = "%H:%M:%S")
-    get_dpmc_adjustments()
+    get_sales_adjustments()
