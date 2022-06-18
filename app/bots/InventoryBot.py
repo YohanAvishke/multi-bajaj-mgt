@@ -217,8 +217,8 @@ def inventory_adjustment(dated_adj_file):
 
 
 def get_sales_adjustments():
-    sheet_client.main()
-    merge_duplicates(sheet_client.DATED_ADJUSTMENT_FILE)
+    # sheet_client.main()
+    # merge_duplicates(sheet_client.DATED_ADJUSTMENT_FILE)
     inventory_adjustment(sheet_client.DATED_ADJUSTMENT_FILE)
 
 
