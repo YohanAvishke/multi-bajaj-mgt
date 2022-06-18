@@ -7,7 +7,7 @@ import json
 import app.clients.dpmc_client as dpmc_client
 
 # -*- File Paths -*-
-PRODUCT_PRICE_PATH = "../../data/product/product.price.csv"
+PRODUCT_PRICE_PATH = "../../data/product.template.csv"
 PRODUCT_UPDATED_PRICE_PATH = "../../data/product/product.price.updated.csv"
 PRODUCT_EMPTY_STOCK_PRICE_PATH = "../../data/product/product.price-empty-stock.csv"
 
@@ -33,7 +33,7 @@ HEADERS = {
     }
 
 
-# -*- Function -*-
+# -*- Functions -*-
 def fetch_prices():
     df = pd.read_csv(PRODUCT_PRICE_PATH)
     if "Updated Sales Price" not in df.columns:
@@ -112,7 +112,7 @@ def get_price_fluctuations():
 
 def main():
     HEADERS["cookie"] = dpmc_client.authenticate()
-    logging.info(f"Session created")
+    logging.info("Cookie Added")
     products_df = fetch_prices()
     filter_by_status(products_df, ['up', 'down'])
 
