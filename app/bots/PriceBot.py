@@ -59,6 +59,7 @@ def fetch_prices():
 
             if response:
                 product_data = json.loads(response.text)["DATA"]
+
                 if "dblSellingPrice" in product_data and product_data["dblSellingPrice"]:
                     price = float(product_data["dblSellingPrice"])
                     df.loc[idx, "Updated Sales Price"] = df.loc[idx, "Updated Cost"] = price
@@ -69,13 +70,12 @@ def fetch_prices():
                         df.loc[idx, "Status"] = "up"
                     else:
                         df.loc[idx, "Status"] = "equal"
-
                     logging.info(f"{idx + 1} - Product Number: {product_number}, Price: {price}")
+
                 else:
                     df.loc[idx, "Updated Sales Price"] = df.loc[idx, "Sales Price"]
                     df.loc[idx, "Updated Cost"] = df.loc[idx, "Cost"]
                     df.loc[idx, "Status"] = "none"
-
                     logging.warning(f"{idx + 1} - Product Number: {product_number} is Invalid !!!")
 
                 df.to_csv(PRODUCT_PRICE_PATH, index = False)
@@ -85,7 +85,7 @@ def fetch_prices():
                               f"Status: {response.status_code} ,For reason: {response.reason}")
                 main()
                 sys.exit(0)
-            # time.sleep(5)
+                
         else:
             df.loc[idx, "Updated Sales Price"] = df.loc[idx, "Sales Price"]
             df.loc[idx, "Updated Cost"] = df.loc[idx, "Cost"]

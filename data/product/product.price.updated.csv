@@ -1,3 +1,1 @@
-ID,Internal Reference,Point of Sale Category,Sales Price,Cost,Updated Sales Price,Updated Cost,Status
-point_of_sale.52DU0104,52DU0104,Bajaj / 2W,3720.0,3720.0,4280.0,4280.0,up
-point_of_sale.JA511218,JA511218,Bajaj / 2W,240.0,240.0,270.0,270.0,up
+ID,Product/Product/ID,Point of Sale Category,Internal Reference,Quantity On Hand,Sales Price,Cost,Updated Sales Price,Updated Cost,Status
