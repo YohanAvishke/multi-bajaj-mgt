@@ -1,9 +1,8 @@
-ID,Internal Reference,Point of Sale Category,Sales Price,Cost,Updated Sales Price,Updated Cost,Status
-point_of_sale.52JZ0264,52JZ0264,Bajaj / 2W,4640.0,4640.0,4640.0,4640.0,none
-point_of_sale.52DU0104,52DU0104,Bajaj / 2W,3720.0,3720.0,3720.0,3720.0,none
-point_of_sale.52JZ0264,52JZ0264,Bajaj / 2W,4640.0,4640.0,4640.0,4640.0,equal
-point_of_sale.52DU0104,52DU0104,Bajaj / 2W,3720.0,3720.0,4280.0,4280.0,up
-point_of_sale.52JZ0264,52JZ0264,Bajaj / 2W,4640.0,4640.0,4640.0,4640.0,equal
-point_of_sale.52DU0104,52DU0104,Bajaj / 2W,3720.0,3720.0,,,
-point_of_sale.52JZ0264,52JZ0264,Bajaj / 2W,4640.0,4640.0,,,
-point_of_sale.52DU0104,52DU0104,Bajaj / 2W,3720.0,3720.0,,,
+ID,Internal Reference,Sales Price,Cost,OutdatedSalesPrice,OutdatedCost
+__export__.product_template_50522_f3af301a,VN24100805(SA),580.0,580.0,525.0,525.0
+__export__.product_template_50091_a92c35f3,SA24170427(SA),35.0,35.0,20.0,20.0
+__export__.product_template_50951_abb67b45,SAAA111094(SA),1550.0,1550.0,1350.0,1350.0
+__export__.product_template_50887_ba3a14a8,VN36102401(SA),700.0,700.0,390.0,390.0
+__export__.product_template_50267_653b014e,SA24231499(SA),1570.0,1570.0,820.0,820.0
+__export__.product_template_49941_728d4084,GK36AE00(SA),300.0,300.0,160.0,160.0
+__export__.product_template_49943_c3d18475,SA06101007(SA),800.0,800.0,690.0,690.0
