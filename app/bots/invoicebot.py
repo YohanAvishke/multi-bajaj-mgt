@@ -51,7 +51,7 @@ def _update_statuses(invoice_row, inventory_df):
         inventory_row = inventory_df[inventory_df["Internal Reference"] == invoice_row["ProductNumber"]]
         if not inventory_row.empty:
             invoice_row["Exists"] = True
-            invoice_row["ExternalId"] = inventory_row.iloc[0]["External ID"]
+            invoice_row["ExternalId"] = inventory_row.iloc[0]["ID"]
             invoice_row["OutdatedSalesPrice"] = inventory_row.iloc[0]["Sales Price"]
             invoice_row["OutdatedCost"] = inventory_row.iloc[0]["Cost"]
             if (inventory_row["Sales Price"] < invoice_row["Price"]).iloc[0]:
