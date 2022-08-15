@@ -1,19 +1,7 @@
 ID,Internal Reference,Sales Price,Cost,OutdatedSalesPrice,OutdatedCost
-__export__.product_template_50930_27d3c4af,AA191064(YL),1180.0,1180.0,980.0,980.0
-__export__.product_template_50931_6fc2f95d,AA191092(YL),1600.0,1600.0,1650.0,1650.0
-__export__.product_template_50933_7615ad55,AA101150(YL),950.0,950.0,790.0,790.0
-__export__.product_template_50771_c11240ff,AN101203(YL),1500.0,1500.0,1300.0,1300.0
-__export__.product_template_50934_0cc1bab8,AA101692(YL),1350.0,1350.0,1100.0,1100.0
-__export__.product_template_50890_6a82328f,AA111107(YL),5300.0,5300.0,4750.0,4750.0
-__export__.product_template_50935_bf561211,AA191093(YL),1200.0,1200.0,1050.0,1050.0
-
-__export__.product_template_50936_c3ddebc0,AA191094(YL),1250.0,1250.0,1050.0,1050.0
-__export__.product_template_50937_acdc8ded,AA191115(YL),1800.0,1800.0,1600.0,1600.0
-__export__.product_template_50938_0193595e,AZ161212(YL),1600.0,1600.0,1320.0,1320.0
-__export__.product_template_50939_7a8d67f5,2491092(YL),1250.0,1250.0,950.0,950.0
-__export__.product_template_50880_cbf88071,39143520(YL),600.0,600.0,490.0,490.0
-__export__.product_template_50944_ce6d1ca0,BFFL(YL),9000.0,9000.0,4300.0,4300.0
-__export__.product_template_50947_94eb5dfa,AA201242(YL),13500.0,13500.0,12250.0,12250.0
-__export__.product_template_50614_12622710,AE101042(YL),40000.0,40000.0,29200.0,29200.0
-__export__.product_template_50948_b04ea528,KHH2S(YL),2200.0,2200.0,1850.0,1850.0
-__export__.product_template_50949_0f6eda3b,KHHFL(YL),2200.0,2200.0,1850.0,1850.0
+__export__.product_template_50866_b64df886,30141052(YL),120.0,120.0,85.0,85.0
+__export__.product_template_50621_19124eb9,EI0816(VARROC),6170.0,6170.0,5875.0,5875.0
+__export__.product_template_50193_22e02874,EI0919(MINDA),5925.0,5925.0,5362.0,5362.0
+__export__.product_template_51124_b8e4ccd9,EI0351(ULTRON),2485.0,2485.0,2365.0,2365.0
+__export__.product_template_50996_e4107ec6,SC0104(CLAMP),6045.0,6045.0,5755.0,5755.0
+__export__.product_template_50999_313d0cfc,SC0109(CLAMP),6415.0,6415.0,6110.0,6110.0

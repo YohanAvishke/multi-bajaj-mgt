@@ -142,5 +142,5 @@ if __name__ == "__main__":
     # TODO
     # 1. Some adverbs become simple-tense after capitalization (LH, RH, etc.)
     # 2. Commas cannot be included in name (with multiple vehicles 2S,3S)
-    # 3. Comma references should work
+    # 3. Comma cannot be included in internal ID
     #
