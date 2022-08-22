@@ -228,9 +228,9 @@ def get_other_adjustments():
 
 
 def get_dpmc_adjustments():
-    dpmc_client.authenticate()
-    _fetch_grn_invoice()
-    _fetch_products()
+    # dpmc_client.authenticate()
+    # _fetch_grn_invoice()
+    # _fetch_products()
     _save_dated_adjustment(ADJ_DPMC_FILE)
     inventory_adjustment(DATED_ADJUSTMENT_FILE)
 

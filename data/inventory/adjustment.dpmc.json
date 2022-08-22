@@ -1,1 +1,183 @@
-{"Adjustments": [{"Type": "Invoice", "ID": "PRIBDM2022082001945", "Date": "2022-08-20", "Products": [{"STR_PART_NO": "52JD0067", "STR_DESC": "WINDSHIELD WITH MASK", "INT_QUATITY": 2.0, "INT_UNIT_PRICE": 9248.0, "INT_TOTAL_VALUE": 18496.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000021002001"}, {"STR_PART_NO": "AA111107", "STR_DESC": "DIGITAL CDI WITH STARTER INTERLOCK", "INT_QUATITY": 3.0, "INT_UNIT_PRICE": 9360.0, "INT_TOTAL_VALUE": 28080.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000003002004"}, {"STR_PART_NO": "AA231255", "STR_DESC": "GLASS GREEN WINDSHLD SINGLE PC", "INT_QUATITY": 2.0, "INT_UNIT_PRICE": 29616.0, "INT_TOTAL_VALUE": 59232.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000011004005"}, {"STR_PART_NO": "DU191046", "STR_DESC": "CABLE BRAKE WITHOUT ADJUSTER", "INT_QUATITY": 5.0, "INT_UNIT_PRICE": 2648.0, "INT_TOTAL_VALUE": 13240.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000006004006"}, {"STR_PART_NO": "JD122009", "STR_DESC": "SWING ARM ASSEMBLY COMPLETE", "INT_QUATITY": 1.0, "INT_UNIT_PRICE": 22616.0, "INT_TOTAL_VALUE": 22616.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000009001004"}, {"STR_PART_NO": "BA132141", "STR_DESC": "SLIDER BLOCK-SECTOR LEVER", "INT_QUATITY": 20.0, "INT_UNIT_PRICE": 376.0, "INT_TOTAL_VALUE": 7520.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000004003009"}, {"STR_PART_NO": "BH184000", "STR_DESC": "GLASS GREEN WINDSHLD ONE PIECE FL", "INT_QUATITY": 4.0, "INT_UNIT_PRICE": 30504.0, "INT_TOTAL_VALUE": 122016.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000011004005"}, {"STR_PART_NO": "DH101016", "STR_DESC": "GASKET - CYLINDER", "INT_QUATITY": 25.0, "INT_UNIT_PRICE": 296.0, "INT_TOTAL_VALUE": 7400.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000007002001"}, {"STR_PART_NO": "DS181071", "STR_DESC": "BUSH - SLIDE", "INT_QUATITY": 6.0, "INT_UNIT_PRICE": 1624.0, "INT_TOTAL_VALUE": 9744.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000003006001"}, {"STR_PART_NO": "DS181077", "STR_DESC": "CYLINDER COMPLETE-FORK", "INT_QUATITY": 6.0, "INT_UNIT_PRICE": 1256.0, "INT_TOTAL_VALUE": 7536.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000007005005"}, {"STR_PART_NO": "DS191011", "STR_DESC": "SPRING BRAKE PEDAL", "INT_QUATITY": 10.0, "INT_UNIT_PRICE": 168.0, "INT_TOTAL_VALUE": 1680.0, "STR_SERIAL_STATUS": "N", "STR_WAREHOUSE_HIER": "000000004006006"}]}]}
+{
+  "Adjustments": [
+    {
+      "Type": "Invoice",
+      "ID": "PRIBDM2022082001945",
+      "Date": "2022-08-20",
+      "Products": [
+        {
+          "STR_PART_NO": "31191003",
+          "INT_QUATITY": "4"
+        },
+        {
+          "STR_PART_NO": "JC191004",
+          "INT_QUATITY": "5"
+        },
+        {
+          "STR_PART_NO": "DS191018",
+          "INT_QUATITY": "10"
+        },
+        {
+          "STR_PART_NO": "DL161048",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DS161077",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DJ161218",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "36DS1004",
+          "INT_QUATITY": "3"
+        },
+        {
+          "STR_PART_NO": "36DH1003",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "30151105",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DL181080",
+          "INT_QUATITY": "6"
+        },
+        {
+          "STR_PART_NO": "DJ181087",
+          "INT_QUATITY": "8"
+        },
+        {
+          "STR_PART_NO": "DS101277",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "DH161283",
+          "INT_QUATITY": "20"
+        },
+        {
+          "STR_PART_NO": "DJ161068",
+          "INT_QUATITY": "5"
+        },
+        {
+          "STR_PART_NO": "DH111034",
+          "INT_QUATITY": "3"
+        },
+        {
+          "STR_PART_NO": "15151066",
+          "INT_QUATITY": "3"
+        },
+        {
+          "STR_PART_NO": "36314001",
+          "INT_QUATITY": "3"
+        },
+        {
+          "STR_PART_NO": "DG161121",
+          "INT_QUATITY": "20"
+        },
+        {
+          "STR_PART_NO": "DS101197",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "36311014",
+          "INT_QUATITY": "5"
+        },
+        {
+          "STR_PART_NO": "31101033",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DS121005",
+          "INT_QUATITY": "7"
+        },
+        {
+          "STR_PART_NO": "DJ151074",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "CL201023",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "JD141003",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "39268120",
+          "INT_QUATITY": "4"
+        },
+        {
+          "STR_PART_NO": "JG191004",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "36JW0011",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "36JE0007",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DK201050",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DK201051",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "DP201019",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "36DK0072",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "36JZ0037",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "36DH4025",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "36JA0020",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "36DK0074",
+          "INT_QUATITY": "2"
+        },
+        {
+          "STR_PART_NO": "25201009",
+          "INT_QUATITY": "7"
+        },
+        {
+          "STR_PART_NO": "DJ191023",
+          "INT_QUATITY": "1"
+        },
+        {
+          "STR_PART_NO": "JN141002",
+          "INT_QUATITY": "6"
+        },
+        {
+          "STR_PART_NO": "39103519",
+          "INT_QUATITY": "4"
+        },
+        {
+          "STR_PART_NO": "36JW0014",
+          "INT_QUATITY": "4"
+        },
+        {
+          "STR_PART_NO": "DJ151067",
+          "INT_QUATITY": "1"
+        }
+      ]
+    }
+  ]
+}
