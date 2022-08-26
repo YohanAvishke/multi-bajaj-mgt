@@ -1,8 +1,7 @@
 ID,Internal Reference,Sales Price,Cost,OutdatedSalesPrice,OutdatedCost
-__export__.product_template_50340_9c4a6deb,JN581216(YL),23000.0,23000.0,10750.0,10750.0
-__export__.product_template_50345_4b538859,DX101053(YL),5000.0,5000.0,2300.0,2300.0
-__export__.product_template_51146_e2d50634,DD111018(YL),1050.0,1050.0,860.0,860.0
-__export__.product_template_50344_b6d05b11,DJ101064(YL),600.0,600.0,220.0,220.0
-__export__.product_template_49946_c7dfa4af,DU101190(YL),4000.0,4000.0,1600.0,1600.0
-__export__.product_template_49995_ee404a04,36311014(YL),550.0,550.0,350.0,350.0
-__export__.product_template_50475_0c00be24,31101020(YL),1550.0,1550.0,495.0,495.0
+__export__.product_template_51126_894c950c,CC00503(MILEX),565.0,565.0,535.0,535.0
+__export__.product_template_51127_49160cce,CC00507(MILEX),470.0,470.0,450.0,450.0
+__export__.product_template_51031_dc43ad7b,DD101478(YL),20130.0,20130.0,20126.0,20126.0
+__export__.product_template_50230_ddaecdd2,EI0205(VARROC),4860.0,4860.0,3360.0,3360.0
+__export__.product_template_50251_4f2dc4f1,EI0808(VARROC),4965.0,4965.0,4727.0,4727.0
+__export__.product_template_50248_f57b0b7b,RJ0571(SUN),3810.0,3810.0,3670.0,3670.0
