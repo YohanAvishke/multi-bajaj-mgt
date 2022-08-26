@@ -1,0 +1,41 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of 2022/08/16,2022/08/16,True,39188020,__export__.product_product_12710_7078efe6,stock.stock_location_stock,13.0
+,,,36DU1205,__export__.product_product_11773_dc7dfd0d,stock.stock_location_stock,23.0
+,,,39137704,__export__.product_product_38689_7943a834,stock.stock_location_stock,4.0
+,,,DH101468,__export__.product_product_14879_363f20ea,stock.stock_location_stock,1.0
+,,,52DH0880,__export__.product_product_12920_e149f407,stock.stock_location_stock,0.0
+,,,DJ181033,__export__.product_product_15694_741f0d86,stock.stock_location_stock,11.0
+,,,DH161194,__export__.product_product_15152_f4515635,stock.stock_location_stock,30.0
+,,,DG111008,__export__.product_product_14583_695d257d,stock.stock_location_stock,68.0
+,,,PA581029,__export__.product_product_32952_893a39e9,stock.stock_location_stock,3.0
+,,,52JA0023,__export__.product_product_13218_943288c1,stock.stock_location_stock,0.0
+Sales of 2022/08/17,2022/08/17,True,DF181092,__export__.product_product_14516_e8db244f,stock.stock_location_stock,100.0
+,,,DF181091,__export__.product_product_14515_87912a6e,stock.stock_location_stock,195.0
+,,,39219019,__export__.product_product_12753_805bbacd,stock.stock_location_stock,243.0
+,,,31151060,__export__.product_product_11385_a84e059b,stock.stock_location_stock,74.0
+Sales of 2022/08/18,2022/08/18,True,AA111082,__export__.product_product_39151_5b84aed5,stock.stock_location_stock,0.0
+Sales of 2022/08/19,2022/08/19,True,DJ151071,__export__.product_product_15601_2f33e76c,stock.stock_location_stock,0.0
+,,,DS151038,__export__.product_product_16772_7749e976,stock.stock_location_stock,365.0
+,,,DH111034,__export__.product_product_15020_1a12903d,stock.stock_location_stock,26.0
+,,,JA351610,__export__.product_product_18155_bbdb1d09,stock.stock_location_stock,10.0
+,,,JA351609,__export__.product_product_18154_a62db45c,stock.stock_location_stock,20.0
+,,,JC191009,__export__.product_product_18642_270cc098,stock.stock_location_stock,12.0
+,,,39199819,__export__.product_product_12730_52fbb1bf,stock.stock_location_stock,70.0
+,,,DD121013,__export__.product_product_14222_0e4fd623,stock.stock_location_stock,19.0
+,,,JA541212,__export__.product_product_18221_f8c7c29e,stock.stock_location_stock,62.0
+,,,DS191011,__export__.product_product_16887_f7289278,stock.stock_location_stock,11.0
+,,,DU101218,__export__.product_product_17291_dc76456a,stock.stock_location_stock,1.0
+Sales of 2022/08/22,2022/08/22,True,PA181276,__export__.product_product_32794_d08912b6,stock.stock_location_stock,0.0
+,,,31151021,__export__.product_product_11372_72b44663,stock.stock_location_stock,86.0
+,,,DZ111002,__export__.product_product_17690_a9a1c333,stock.stock_location_stock,0.0
+,,,DU191005,__export__.product_product_17428_146da871,stock.stock_location_stock,0.0
+,,,JE541241,__export__.product_product_19068_d7207ac8,stock.stock_location_stock,1.0
+,,,DT581062,__export__.product_product_17233_49b6bcdd,stock.stock_location_stock,5.0
+,,,JE511209,__export__.product_product_19010_5450df0f,stock.stock_location_stock,2.0
+Sales of 2022/08/23,2022/08/23,True,PA581029,__export__.product_product_32952_893a39e9,stock.stock_location_stock,3.0
+,,,JD621001,__export__.product_product_18934_1d890ce3,stock.stock_location_stock,1.0
+,,,AA231026,__export__.product_product_46759_1193c833,stock.stock_location_stock,0.0
+Sales of 2022/08/24,2022/08/24,True,JA511012,__export__.product_product_18171_4c121c4a,stock.stock_location_stock,1.0
+,,,JA351610,__export__.product_product_18155_bbdb1d09,stock.stock_location_stock,12.0
+,,,JA351609,__export__.product_product_18154_a62db45c,stock.stock_location_stock,22.0
+,,,DJ191054,__export__.product_product_15765_d2da3119,stock.stock_location_stock,10.0
