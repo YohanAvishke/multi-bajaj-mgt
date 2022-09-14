@@ -1,6 +1,0 @@
-name,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
-Sales of 2021/12/08,True,36DJ4008,__export__.product_product_11583_e13fe182,stock.stock_location_stock,8.0
-,,AA101598,__export__.product_product_39016_87c85ca4,stock.stock_location_stock,7.0
-,,36DZ0002,__export__.product_product_11806_19d11b17,stock.stock_location_stock,0.0
-,,AN101123,__export__.product_product_47142_6ac208e3,stock.stock_location_stock,0
-,,JA511006,__export__.product_product_18166_db60c6c8,stock.stock_location_stock,2.0
