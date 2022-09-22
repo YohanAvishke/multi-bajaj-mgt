@@ -18,3 +18,5 @@ SERVER_URL = os.getenv(EnvVariable.server_url)
 SERVER_USERNAME = os.getenv(EnvVariable.server_username)
 SERVER_API_KEY = os.getenv(EnvVariable.server_api_key)
 DATABASE_NAME = os.getenv(EnvVariable.database_name)
+
+DATA_DIR = f"{ROOT_DIR}/data"

@@ -2,9 +2,7 @@ import random
 import json
 import logging
 import requests
-import pandas as pd
 
-from multibajajmgt.logger import configure_logging
 from multibajajmgt.config import (
     SERVER_URL, SERVER_USERNAME, SERVER_API_KEY, DATABASE_NAME,
 )
@@ -40,13 +38,48 @@ def _call(url, service, method, *args):
 
 
 def _authenticate():
-    log.info("Authenticating odoo-client and setting up the user-id")
     global user_id
-    user_id = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
+    if not user_id:
+        log.info("Authenticating odoo-client and setting up the user-id")
+        user_id = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
 
 
-
-if __name__ == "__main__":
-    configure_logging()
+def fetch_product_external_id(db_id_list, limit = 0):
+    """
+    External ids are necessary for importing data
+    :param limit:
+    :param db_id_list:
+    :return:
+    """
+    domain = ["&", ["model", "=", "product.template"],
+              ["res_id", "in", db_id_list]]
+    fields = ["res_id", "name", "module"]
     _authenticate()
-    fetch_price_report()
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "ir.model.data", "search_read",
+            [domain, fields], {"limit": limit}
+    )
+    return data
+
+
+def fetch_all_dpmc_prices(limit = 0):
+    """
+    All(qty>=0 and qty<0) prices belonging to dpmc pos categories(bajaj, 2w, 3w, qute)
+    :param limit:
+    :return:
+    """
+    domain = ["&", ["available_in_pos", "=", True],
+              "|", "|", "|", ["pos_categ_id", "ilike", "bajaj"],
+              ["pos_categ_id", "ilike", "2w"],
+              ["pos_categ_id", "ilike", "3w"],
+              ["pos_categ_id", "ilike", "qute"]]
+    fields = ["id", "default_code", "list_price", "standard_price"]
+    _authenticate()
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "product.template", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
