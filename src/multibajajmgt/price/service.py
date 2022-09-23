@@ -1,10 +1,13 @@
 import logging
+
 import pandas as pd
 
 import multibajajmgt.clients.odoo as odoo_client
-
-from multibajajmgt.config import DATA_DIR
 from multibajajmgt.common import write_to_csv
+from multibajajmgt.config import DATA_DIR
+from multibajajmgt.enums import (
+    DocumentResourceType, OdooFieldName
+)
 
 log = logging.getLogger(__name__)
 
@@ -35,6 +38,8 @@ def export_all_dpmc_products():
         .drop(["id", "name", "module", "is_duplicate"], axis = 1) \
         .rename({"res_id": "id"}, axis = 1)
     enrich_price_df = ex_id_df.merge(price_df, on = "id", how = "inner")
-    write_to_csv(DATA_DIR + "/price/" + "price.dpmc.all.csv", enrich_price_df,
-                 ["external_id", "default_code", "list_price", "standard_price"],
-                 ["External ID", "Internal Reference", "Sales Price", "Cost"])
+    write_to_csv(
+            f"{DATA_DIR}/price/{DocumentResourceType.price_dpmc_all}", enrich_price_df,
+            ["external_id", "default_code", "list_price", "standard_price"],
+            [OdooFieldName.external_id, OdooFieldName.internal_id, OdooFieldName.sales_price, OdooFieldName.cost]
+    )

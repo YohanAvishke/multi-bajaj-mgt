@@ -1,9 +1,10 @@
 import os
 import logging
 
+import multibajajmgt.price.service as price_service
+
 from logger import configure_logging
 from config import configure_env
-from multibajajmgt.price.service import export_all_dpmc_products
 
 log = logging.getLogger(__name__)
 
@@ -14,4 +15,4 @@ configure_logging()
 if not os.getenv("ENV_FLAG"):
     configure_env()
 
-export_all_dpmc_products()
+price_service.export_all_dpmc_products()
