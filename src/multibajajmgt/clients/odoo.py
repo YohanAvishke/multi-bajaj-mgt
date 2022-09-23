@@ -47,10 +47,11 @@ def _authenticate():
 def fetch_product_external_id(db_id_list, limit = 0):
     """
     External ids are necessary for importing data
-    :param limit:
-    :param db_id_list:
-    :return:
+    :param limit: limit result count
+    :param db_id_list: products database reference id
+    :return: dataframe of dicts
     """
+    log.info("Fetching product external ids from 'ir.model.data'")
     domain = ["&", ["model", "=", "product.template"],
               ["res_id", "in", db_id_list]]
     fields = ["res_id", "name", "module"]
@@ -67,9 +68,10 @@ def fetch_product_external_id(db_id_list, limit = 0):
 def fetch_all_dpmc_prices(limit = 0):
     """
     All(qty>=0 and qty<0) prices belonging to dpmc pos categories(bajaj, 2w, 3w, qute)
-    :param limit:
-    :return:
+    :param limit: limit result count
+    :return: dataframe of dicts
     """
+    log.info("Fetching product prices from 'product.template'")
     domain = ["&", ["available_in_pos", "=", True],
               "|", "|", "|", ["pos_categ_id", "ilike", "bajaj"],
               ["pos_categ_id", "ilike", "2w"],

@@ -3,7 +3,6 @@ import pandas as pd
 
 import multibajajmgt.clients.odoo as odoo_client
 
-from multibajajmgt.logger import configure_logging
 from multibajajmgt.config import DATA_DIR
 from multibajajmgt.common import write_to_csv
 
@@ -12,8 +11,7 @@ log = logging.getLogger(__name__)
 
 def export_all_dpmc_products():
     """
-
-    :return:
+    Fetch and save all(qty >= 0 and qty < 0) dpmc product price
     """
     # Fetch dpmc product's price list
     prices = odoo_client.fetch_all_dpmc_prices()
@@ -40,8 +38,3 @@ def export_all_dpmc_products():
     write_to_csv(DATA_DIR + "/price/" + "price.dpmc.all.csv", enrich_price_df,
                  ["external_id", "default_code", "list_price", "standard_price"],
                  ["External ID", "Internal Reference", "Sales Price", "Cost"])
-
-
-if __name__ == "__main__":
-    configure_logging()
-    export_all_dpmc_products()

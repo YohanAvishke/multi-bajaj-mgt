@@ -11,6 +11,9 @@ log = logging.getLogger(__name__)
 
 
 def configure_env():
+    """
+    Configure environment variables
+    """
     load_dotenv(find_dotenv(f"{ROOT_DIR}/.env"))
 
 
