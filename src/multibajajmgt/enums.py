@@ -7,10 +7,13 @@ class MultiBajajMgtEnum(str, Enum):
 
 
 class EnvVariable(MultiBajajMgtEnum):
-    server_url = "SERVER_URL"
-    server_api_key = "SERVER_API_KEY"
-    database_name = "DATABASE_NAME"
-    server_username = "SERVER_USERNAME"
+    odoo_server_url = "ODOO_SERVER_URL"
+    odoo_server_api_key = "ODOO_SERVER_API_KEY"
+    odoo_database_name = "ODOO_DATABASE_NAME"
+    odoo_server_username = "ODOO_SERVER_USERNAME"
+    dpmc_server_url = "DPMC_SERVER_URL"
+    dpmc_server_username = "DPMC_SERVER_SERVER_USERNAME"
+    dpmc_server_password = "DPMC_SERVER_PASSWORD"
 
 
 class DocumentResourceType(MultiBajajMgtEnum):

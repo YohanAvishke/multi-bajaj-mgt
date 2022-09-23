@@ -4,7 +4,10 @@ import logging
 import requests
 
 from multibajajmgt.config import (
-    SERVER_URL, SERVER_USERNAME, SERVER_API_KEY, DATABASE_NAME,
+    ODOO_SERVER_URL as SERVER_URL,
+    ODOO_SERVER_USERNAME as SERVER_USERNAME,
+    ODOO_SERVER_API_KEY as SERVER_API_KEY,
+    ODOO_DATABASE_NAME as DATABASE_NAME,
 )
 
 log = logging.getLogger(__name__)
