@@ -1,15 +1,18 @@
 import logging
 import requests
 import json
+import time
 
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import (
     DPMC_SERVER_URL as SERVER_URL,
     DPMC_SERVER_USERNAME as SERVER_USERNAME,
-    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR,
+    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DATETIME_FORMAT,
 )
 
 log = logging.getLogger(__name__)
+
+PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
 
 cookie = None
 headers = {
@@ -34,9 +37,6 @@ headers = {
 
 def _call(url, referer, payload = None):
     global headers
-    global cookie
-    if not cookie:
-        _authenticate()
     headers |= {
         "referer": referer,
         "cookie": cookie
@@ -52,6 +52,9 @@ def _call(url, referer, payload = None):
         return response
     except requests.exceptions.HTTPError as e:
         log.error("Invalid response: ", e)
+    except requests.exceptions.ConnectionError as e:
+        log.error("Connection failed: ", e)
+        raise requests.exceptions.ConnectionError("Connection failed")
     except requests.exceptions.RequestException as e:
         log.error("Something went wrong with the request: ", e)
 
@@ -66,7 +69,12 @@ def _authenticate():
     }
     session = requests.Session()
     session.post(SERVER_URL, headers = headers, data = payload)
-    write_to_json(F"{SOURCE_DIR}/clients/dpmc/token.json", session.cookies.get_dict())
+    token_data = session.cookies.get_dict()
+    token_data |= {
+        "created-at": session.cookies._now,
+        "expires-at": session.cookies._now + 7200
+    }
+    write_to_json(F"{SOURCE_DIR}/clients/dpmc/token.json", token_data)
 
 
 def configure():
@@ -75,15 +83,41 @@ def configure():
     try:
         with open(f"{SOURCE_DIR}/clients/dpmc/token.json", "r") as file:
             file_data = json.load(file)
+            # does cookie exist in the data
             if ".AspNetCore.Session" in file_data:
-                cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
+                # is the cookie expired
+                now = int(time.time())
+                if "expires-at" in file_data and now < file_data["expires-at"]:
+                    cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
+                else:
+                    log.warning(
+                        f"Cookie expired at {time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at']))}")
+                    _authenticate()
+                    configure()
             else:
                 _authenticate()
-    except FileNotFoundError as error:
+                configure()
+    except FileNotFoundError as e:
         _authenticate()
-    return
+        configure()
 
 
-if __name__ == "__main__":
-    configure()
-    print(cookie)
+def product_inquiry(ref_id):
+    payload = {
+        "strPartNo_PAItemInq": ref_id,
+        "strFuncType": "INVENTORYDATA",
+        "strPADealerCode_PAItemInq": "AC2011063676",
+        "STR_FORM_ID": "00602",
+        "STR_FUNCTION_ID": "IQ",
+        "STR_PREMIS": "KGL",
+        "STR_INSTANT": "DLR",
+        "STR_APP_ID": "00011"
+    }
+    try:
+        _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
+    except requests.exceptions.ConnectionError as e:
+        log.error("Connection timed out. Restarting service...", e)
+        product_inquiry(ref_id)
+
+
+configure()
