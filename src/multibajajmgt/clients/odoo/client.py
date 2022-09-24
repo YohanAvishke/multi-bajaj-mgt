@@ -69,7 +69,7 @@ def _authenticate():
     write_to_json(F"{SOURCE_DIR}/clients/odoo/token.json", {"user-id": data})
 
 
-def configure_client():
+def configure():
     """Setup Odoo client with credentials.
 
     Configure credentials and create a token file.
