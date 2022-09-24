@@ -5,9 +5,10 @@ import time
 
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import (
+    DATETIME_FORMAT,
     DPMC_SERVER_URL as SERVER_URL,
     DPMC_SERVER_USERNAME as SERVER_USERNAME,
-    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DATETIME_FORMAT,
+    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR
 )
 
 log = logging.getLogger(__name__)
@@ -130,4 +131,4 @@ def product_inquiry(ref_id):
         if conn_restart_count <= CONN_RESTART_MAX:
             product_inquiry(ref_id)
         else:
-            log.error(f"Connection restarted for {CONN_RESTART_MAX} times, but still failed")
+            raise Exception(f"Connection restarted for {CONN_RESTART_MAX} times, but still failed")
