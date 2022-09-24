@@ -1,8 +1,7 @@
 import logging
-
 import pandas as pd
+import multibajajmgt.clients.odoo.client as odoo_client
 
-import multibajajmgt.clients.odoo as odoo_client
 from multibajajmgt.common import write_to_csv
 from multibajajmgt.config import DATA_DIR
 from multibajajmgt.enums import (

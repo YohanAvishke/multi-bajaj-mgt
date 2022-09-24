@@ -60,7 +60,7 @@ def _call(url, service, method, *args):
 
 
 def _authenticate():
-    """ Get User-ID to verify Username and API Key.
+    """Get User-ID to verify Username and API Key.
 
     Save the User-ID for future Requests from the Client.
     """
@@ -69,7 +69,11 @@ def _authenticate():
     write_to_json(F"{SOURCE_DIR}/clients/odoo/token.json", {"user-id": data})
 
 
-def configure_odoo_client():
+def configure_client():
+    """Setup Odoo client with credentials.
+
+    Configure credentials and create a token file.
+    """
     log.debug("Configuring Odoo client.")
     global user_id
     try:
@@ -127,6 +131,3 @@ def fetch_all_dpmc_prices(limit = 0):
             "product.template", "search_read", [domain, fields], {"limit": limit}
     )
     return data
-
-
-configure_odoo_client()
