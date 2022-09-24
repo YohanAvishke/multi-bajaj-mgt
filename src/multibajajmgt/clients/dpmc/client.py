@@ -13,7 +13,9 @@ from multibajajmgt.config import (
 log = logging.getLogger(__name__)
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
+CONN_RESTART_MAX = 5
 
+conn_restart_count = 0
 cookie = None
 headers = {
     "authority": "erp.dpg.lk",
@@ -91,15 +93,18 @@ def configure():
                     cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
                 else:
                     log.warning(
-                        f"Cookie expired at {time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at']))}")
-                    _authenticate()
-                    configure()
+                            f"Cookie expired at "
+                            f"{time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at']))}")
+                    _refresh_token()
             else:
-                _authenticate()
-                configure()
+                _refresh_token()
     except FileNotFoundError as e:
-        _authenticate()
-        configure()
+        _refresh_token()
+
+
+def _refresh_token():
+    _authenticate()
+    configure()
 
 
 def product_inquiry(ref_id):
@@ -114,10 +119,15 @@ def product_inquiry(ref_id):
         "STR_APP_ID": "00011"
     }
     try:
-        _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
+        response_data = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
+        if response_data["STATE"] == "FALSE":
+            raise Exception(f"No data found for reference: {ref_id}")
+        return response_data
     except requests.exceptions.ConnectionError as e:
-        log.error("Connection timed out. Restarting service...", e)
-        product_inquiry(ref_id)
-
-
-configure()
+        log.error("Connection timed out. Restarting service")
+        global conn_restart_count
+        conn_restart_count = conn_restart_count + 1
+        if conn_restart_count <= CONN_RESTART_MAX:
+            product_inquiry(ref_id)
+        else:
+            log.error(f"Connection restarted for {CONN_RESTART_MAX} times, but still failed")
