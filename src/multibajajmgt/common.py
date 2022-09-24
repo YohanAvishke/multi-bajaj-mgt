@@ -4,7 +4,7 @@ import json
 log = logging.getLogger(__name__)
 
 
-def write_to_csv(path, df, columns, headers):
+def write_to_csv(path, df, columns = None, headers = True):
     """Save data to a CSV file.
 
     :param path: file path

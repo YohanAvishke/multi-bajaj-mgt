@@ -1,6 +1,9 @@
 import logging
+import sys
+
 import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
+import multibajajmgt.clients.dpmc.client as dpmc_client
 
 from multibajajmgt.common import write_to_csv
 from multibajajmgt.config import DATA_DIR
@@ -9,6 +12,8 @@ from multibajajmgt.enums import (
 )
 
 log = logging.getLogger(__name__)
+
+PRICE_DPMC_ALL_FILE = f"{DATA_DIR}/price/{DocumentResourceType.price_dpmc_all}"
 
 
 def export_all_dpmc_products():
@@ -38,7 +43,35 @@ def export_all_dpmc_products():
         .rename({"res_id": "id"}, axis = 1)
     enrich_price_df = ex_id_df.merge(price_df, on = "id", how = "inner")
     write_to_csv(
-            f"{DATA_DIR}/price/{DocumentResourceType.price_dpmc_all}", enrich_price_df,
-            ["external_id", "default_code", "list_price", "standard_price"],
-            [OdooFieldName.external_id, OdooFieldName.internal_id, OdooFieldName.sales_price, OdooFieldName.cost]
-    )
+            PRICE_DPMC_ALL_FILE, enrich_price_df, ["external_id", "default_code", "list_price", "standard_price"],
+            [OdooFieldName.external_id, OdooFieldName.internal_id, "Old Sales Price", "Old Cost"])
+
+
+def _update_dpmc_product_price(price_row):
+    try:
+        ref_id = price_row["Internal Reference"]
+        # Fetch new price
+        product_data = dpmc_client.inquire_product_data(ref_id)
+        price = product_data["DATA"]["dblSellingPrice"]
+        price_row["Sales Price"] = price_row["Cost"] = price
+        # Calculate status
+        if price_row["Sales Price"] > price:
+            price_row["Status"] = "down"
+        elif price_row["Sales Price"] < price:
+            price_row["Status"] = "up"
+        else:
+            price_row["Status"] = "equal"
+        logging.info(f"{price_row.name + 1} - Product Number: {ref_id}, Price: {price}")
+    except Exception as e:
+        log.error("Issue occurred while fetching a product's price: ", e)
+        sys.exit(0)
+
+
+def update_dpmc_product_prices():
+    price_df = pd.read_csv(PRICE_DPMC_ALL_FILE)
+    # Add columns for updated prices and price fluctuation state
+    if OdooFieldName.sales_price not in price_df.columns:
+        price_df[OdooFieldName.sales_price] = price_df[OdooFieldName.cost] = price_df["Status"] = None
+        write_to_csv(path = PRICE_DPMC_ALL_FILE, df = price_df)
+    # Loop and fetch and save each product's updated price
+    product_df = price_df.apply(_update_dpmc_product_price, axis = 1)

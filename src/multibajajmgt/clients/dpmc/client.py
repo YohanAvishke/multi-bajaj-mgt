@@ -108,7 +108,7 @@ def _refresh_token():
     configure()
 
 
-def product_inquiry(ref_id):
+def inquire_product_data(ref_id):
     payload = {
         "strPartNo_PAItemInq": ref_id,
         "strFuncType": "INVENTORYDATA",
@@ -129,6 +129,6 @@ def product_inquiry(ref_id):
         global conn_restart_count
         conn_restart_count = conn_restart_count + 1
         if conn_restart_count <= CONN_RESTART_MAX:
-            product_inquiry(ref_id)
+            inquire_product_data(ref_id)
         else:
             raise Exception(f"Connection restarted for {CONN_RESTART_MAX} times, but still failed")
