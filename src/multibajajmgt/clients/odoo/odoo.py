@@ -4,11 +4,13 @@ import logging
 import requests
 
 from multibajajmgt.config import (
+    SOURCE_DIR,
     ODOO_SERVER_URL as SERVER_URL,
     ODOO_SERVER_USERNAME as SERVER_USERNAME,
     ODOO_SERVER_API_KEY as SERVER_API_KEY,
     ODOO_DATABASE_NAME as DATABASE_NAME
 )
+from multibajajmgt.common import write_to_json
 
 log = logging.getLogger(__name__)
 user_id = None
@@ -62,10 +64,23 @@ def _authenticate():
 
     Save the User-ID for future Requests from the Client.
     """
+    log.info("Authenticating odoo-client and setting up the user-id")
+    data = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
+    write_to_json(F"{SOURCE_DIR}/clients/odoo/token.json", {"user-id": data})
+
+
+def configure_odoo_client():
+    log.debug("Configuring Odoo client.")
     global user_id
-    if not user_id:
-        log.info("Authenticating odoo-client and setting up the user-id")
-        user_id = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
+    try:
+        with open(f"{SOURCE_DIR}/clients/odoo/token.json", "r") as file:
+            file_data = json.load(file)
+            if "user-id" in file_data:
+                user_id = file_data["user-id"]
+            else:
+                _authenticate()
+    except FileNotFoundError as error:
+        _authenticate()
 
 
 def fetch_product_external_id(db_id_list, limit = 0):
@@ -81,7 +96,6 @@ def fetch_product_external_id(db_id_list, limit = 0):
     domain = ["&", ["model", "=", "product.template"],
               ["res_id", "in", db_id_list]]
     fields = ["res_id", "name", "module"]
-    _authenticate()
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
@@ -107,10 +121,12 @@ def fetch_all_dpmc_prices(limit = 0):
               ["pos_categ_id", "ilike", "3w"],
               ["pos_categ_id", "ilike", "qute"]]
     fields = ["id", "default_code", "list_price", "standard_price"]
-    _authenticate()
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
             "product.template", "search_read", [domain, fields], {"limit": limit}
     )
     return data
+
+
+configure_odoo_client()

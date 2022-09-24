@@ -204,10 +204,10 @@ Sessionx.vim
 # Ignore exuberant ctags, and other tags files
 tags
 
-# exclude docker env files
-.env
-
 # exclude data dump files
 *.dump
 
 .gitconfig
+
+# API clients token files
+src/multibajajmgt/clients/**/token.json
