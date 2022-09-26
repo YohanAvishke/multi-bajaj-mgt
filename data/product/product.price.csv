@@ -1,7 +1,8 @@
-ID,Product/Product/ID,Point of Sale Category,Internal Reference,Quantity On Hand,Sales Price,Cost,Updated Sales Price,Updated Cost,Status
-point_of_sale.DU7401W1,__export__.product_product_17550_f013f3e2,Bajaj / 2W,DU7401W1,0.0,2010.0,2010.0,2070.0,2070.0,up
-point_of_sale.DS7401X3,__export__.product_product_16980_79737712,Bajaj / 2W,DS7401X3,0.0,4510.0,4510.0,4640.0,4640.0,up
-point_of_sale.DJ7401X3,__export__.product_product_15887_49fa5f35,Bajaj / 2W,DJ7401X3,0.0,12240.0,12240.0,12570.0,12570.0,up
-point_of_sale.DS7401X4,__export__.product_product_16981_fbb02fae,Bajaj / 2W,DS7401X4,0.0,5330.0,5330.0,5480.0,5480.0,up
-point_of_sale.DJ7401X4,__export__.product_product_15888_7e154091,Bajaj / 2W,DJ7401X4,4.0,5290.0,5290.0,5440.0,5440.0,up
-point_of_sale.DU7402X4,__export__.product_product_17555_295ba294,Bajaj / 2W,DU7402X4,-2.0,8680.0,8680.0,8920.0,8920.0,up
+ID,Internal Reference,Sales Price,Cost,OutdatedSalesPrice,OutdatedCost
+__export__.product_template_51220_9bb07ae3,DS141009(YL),4300.0,4300.0,4000.0,4000.0
+__export__.product_template_50345_4b538859,DX101053(YL),5200.0,5200.0,5000.0,5000.0
+__export__.product_template_51236_9478c35b,JA511012(YL),1600.0,1600.0,980.0,980.0
+__export__.product_template_51228_d244dd37,31101062(YL),120.0,120.0,150.0,150.0
+__export__.product_template_49995_ee404a04,36311014(YL),630.0,630.0,570.0,570.0
+__export__.product_template_51223_e7008fe2,59150014(YL),140.0,140.0,220.0,220.0
+__export__.product_template_51225_75542858,DH141048(YL),1090.0,1090.0,880.0,880.0
