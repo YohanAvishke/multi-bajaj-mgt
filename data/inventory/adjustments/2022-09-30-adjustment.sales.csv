@@ -1,0 +1,27 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Sales of 2022/09/21,2022/09/21,True,30151105,__export__.product_product_11238_926c2a15,stock.stock_location_stock,160.0
+,,,AL201100,__export__.product_product_47088_dc2662f4,stock.stock_location_stock,0.0
+,,,DH101862,__export__.product_product_14953_7d8396b7,stock.stock_location_stock,0.0
+Sales of 2022/09/23,2022/09/23,True,31101038,__export__.product_product_11303_9ca9dc4a,stock.stock_location_stock,2.0
+,,,BF551613,__export__.product_product_47576_f5c05a99,stock.stock_location_stock,29.0
+,,,39268120,__export__.product_product_12844_9916232b,stock.stock_location_stock,3.0
+Sales of 2022/09/24,2022/09/24,True,JV511012,__export__.product_product_24157_f660d768,stock.stock_location_stock,5.0
+,,,JF161202,__export__.product_product_22438_8d3bbe57,stock.stock_location_stock,0.0
+Sales of 2022/09/26,2022/09/26,True,36AA4112,__export__.product_product_38488_4dd5571b,stock.stock_location_stock,5.0
+,,,JN231200,__export__.product_product_23871_284444bc,stock.stock_location_stock,1.0
+Sales of 2022/09/27,2022/09/27,True,DS191040,__export__.product_product_16902_a4bd546a,stock.stock_location_stock,0.0
+,,,DM101139,__export__.product_product_16342_58194f41,stock.stock_location_stock,86.0
+,,,39104219,__export__.product_product_12635_e93d2566,stock.stock_location_stock,78.0
+,,,36DS1201,__export__.product_product_11708_54d75bd3,stock.stock_location_stock,7.0
+,,,36DJ4104,__export__.product_product_11632_f03fb0a4,stock.stock_location_stock,33.0
+,,,39240320,__export__.product_product_12787_61902238,stock.stock_location_stock,75.0
+,,,DE151046,__export__.product_product_14413_dbf576de,stock.stock_location_stock,11.0
+,,,DU181070,__export__.product_product_17409_f989c718,stock.stock_location_stock,0.0
+,,,36DK0036,__export__.product_product_11654_f7247dc2,stock.stock_location_stock,1.0
+,,,DU101041,__export__.product_product_17254_81ffd2a3,stock.stock_location_stock,0.0
+Sales of 2022/09/28,2022/09/28,True,AB151091,__export__.product_product_46817_288089b6,stock.stock_location_stock,0.0
+,,,AA101162,__export__.product_product_38912_73e327e5,stock.stock_location_stock,2.0
+,,,DD121181,__export__.product_product_14243_470851c1,stock.stock_location_stock,52.0
+,,,PF621003,__export__.product_product_33503_b91ca379,stock.stock_location_stock,0.0
+,,,24101557,__export__.product_product_37841_339b2537,stock.stock_location_stock,0.0
+,,,DS201003,__export__.product_product_16914_029247d3,stock.stock_location_stock,0.0
