@@ -8,7 +8,7 @@ ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__fil
 SOURCE_DIR = f"{ROOT_DIR}/src/multibajajmgt"
 DATA_DIR = f"{ROOT_DIR}/data"
 
-LOG_LEVEL = logging.DEBUG
+LOG_LEVEL = logging.INFO
 
 log = logging.getLogger(__name__)
 
@@ -28,5 +28,7 @@ ODOO_DATABASE_NAME = os.getenv(EnvVariable.odoo_database_name)
 DPMC_SERVER_URL = os.getenv(EnvVariable.dpmc_server_url)
 DPMC_SERVER_USERNAME = os.getenv(EnvVariable.dpmc_server_username)
 DPMC_SERVER_PASSWORD = os.getenv(EnvVariable.dpmc_server_password)
+DPMC_SESSION_LIFETIME = 5400  # 1 and 1/2 hours
 
 DATETIME_FORMAT = "%c"
+DATETIME_FILE_FORMAT = "%Y-%m-%d_%H-%M-%S"

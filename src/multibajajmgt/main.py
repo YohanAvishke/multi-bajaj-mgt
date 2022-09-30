@@ -3,7 +3,7 @@ import logging
 
 import multibajajmgt.clients.odoo.client as odoo_client
 import multibajajmgt.clients.dpmc.client as dpmc_client
-import multibajajmgt.price.service as price_service
+import multibajajmgt.price.dpmc_service as dpmc_service
 
 from logger import configure_logging
 from config import configure_env
@@ -18,8 +18,8 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # configure clients
-# odoo_client.configure()
+odoo_client.configure()
 dpmc_client.configure()
 
-# price_service.export_all_dpmc_products()
-price_service.update_dpmc_product_prices()
+dpmc_service.export_all_products()
+dpmc_service.update_product_prices()

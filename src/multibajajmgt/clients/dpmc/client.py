@@ -1,5 +1,7 @@
 import logging
+import sys
 import requests
+import requests.exceptions as r_exceptions
 import json
 import time
 
@@ -8,15 +10,16 @@ from multibajajmgt.config import (
     DATETIME_FORMAT,
     DPMC_SERVER_URL as SERVER_URL,
     DPMC_SERVER_USERNAME as SERVER_USERNAME,
-    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR
+    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DPMC_SESSION_LIFETIME
 )
+from multibajajmgt.exceptions import *
 
 log = logging.getLogger(__name__)
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
-CONN_RESTART_MAX = 5
+CONN_RETRY_MAX = 5
 
-conn_restart_count = 0
+retry_count = 0
 cookie = None
 headers = {
     "authority": "erp.dpg.lk",
@@ -49,17 +52,23 @@ def _call(url, referer, payload = None):
                                  headers = headers,
                                  data = payload)
         response.raise_for_status()
-        response = response.json()
-        if "error" in response:
-            raise Exception(response["error"])
-        return response
-    except requests.exceptions.HTTPError as e:
-        log.error("Invalid response: ", e)
-    except requests.exceptions.ConnectionError as e:
-        log.error("Connection failed: ", e)
-        raise requests.exceptions.ConnectionError("Connection failed")
-    except requests.exceptions.RequestException as e:
+    except r_exceptions.HTTPError as e:
+        log.error("Invalid Response received: ", e)
+        sys.exit(0)
+    except r_exceptions.ConnectionError as e:
+        message = "Connection failed"
+        raise r_exceptions.ConnectionError(message, e)
+    except r_exceptions.RequestException as e:
         log.error("Something went wrong with the request: ", e)
+        sys.exit(0)
+    else:
+        response = response.json()
+        if response["STATE"] == "FALSE":
+            raise DataNotFoundError(f"Response failed due to invalid Request payload: {payload}", response)
+        response = response["DATA"]
+        if not response["dblSellingPrice"]:
+            raise ProductRefExpired(f"Response failed due to expired Request payload: {payload}", response)
+        return response
 
 
 def _authenticate():
@@ -75,7 +84,7 @@ def _authenticate():
     token_data = session.cookies.get_dict()
     token_data |= {
         "created-at": session.cookies._now,
-        "expires-at": session.cookies._now + 7200
+        "expires-at": session.cookies._now + DPMC_SESSION_LIFETIME
     }
     write_to_json(F"{SOURCE_DIR}/clients/dpmc/token.json", token_data)
 
@@ -86,7 +95,7 @@ def configure():
     try:
         with open(f"{SOURCE_DIR}/clients/dpmc/token.json", "r") as file:
             file_data = json.load(file)
-            # does cookie exist in the data
+            # Does cookie exist in the data
             if ".AspNetCore.Session" in file_data:
                 # is the cookie expired
                 now = int(time.time())
@@ -108,6 +117,17 @@ def _refresh_token():
     configure()
 
 
+def _retry_request(request_func, *args):
+    global retry_count
+    retry_count = retry_count + 1
+    if retry_count <= CONN_RETRY_MAX:
+        request_func(*args)
+    else:
+        message = f"Connection retried for {CONN_RETRY_MAX} times, but still failed"
+        log.error(message)
+        raise RetryTimeout(message)
+
+
 def inquire_product_data(ref_id):
     payload = {
         "strPartNo_PAItemInq": ref_id,
@@ -121,14 +141,19 @@ def inquire_product_data(ref_id):
     }
     try:
         response_data = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
-        if response_data["STATE"] == "FALSE":
-            raise Exception(f"No data found for reference: {ref_id}")
         return response_data
-    except requests.exceptions.ConnectionError as e:
-        log.error("Connection timed out. Restarting service")
-        global conn_restart_count
-        conn_restart_count = conn_restart_count + 1
-        if conn_restart_count <= CONN_RESTART_MAX:
-            inquire_product_data(ref_id)
-        else:
-            raise Exception(f"Connection restarted for {CONN_RESTART_MAX} times, but still failed")
+    except r_exceptions.ConnectionError as e:
+        log.warning("Connection timed out. Restarting service")
+        try:
+            # Calculate retry count and resend the request
+            _retry_request(inquire_product_data, ref_id)
+        except RetryTimeout as e:
+            message = f"Product data inquiring timed out, for Reference ID: {ref_id}"
+            log.error(message, e)
+            raise RetryTimeout(message, e)
+    except ProductRefExpired as e:
+        message = f"Inquiring data failed, for expired Reference ID: {ref_id}"
+        raise InvalidIdentityError(message, e)
+    except DataNotFoundError as e:
+        message = f"Inquiring data failed, for invalid Reference ID: {ref_id}"
+        raise InvalidIdentityError(message, e)
