@@ -60,7 +60,7 @@ def _call(url, service, method, *args):
 
 
 def _authenticate():
-    """Get User-ID to verify Username and API Key.
+    """ Get User-ID to verify Username and API Key.
 
     Save the User-ID for future Requests from the Client.
     """
@@ -70,7 +70,7 @@ def _authenticate():
 
 
 def configure():
-    """Setup Odoo client with credentials.
+    """ Setup Odoo client with credentials.
 
     Configure credentials and create a token file.
     """
@@ -88,7 +88,7 @@ def configure():
 
 
 def fetch_product_external_id(db_id_list, limit = 0):
-    """Fetch External IDs for a list of product.template Primary Keys.
+    """ Fetch External IDs for a list of product.template Primary Keys.
 
     External IDs are necessary for importing data to the products of the server.
 
@@ -110,7 +110,7 @@ def fetch_product_external_id(db_id_list, limit = 0):
 
 
 def fetch_all_dpmc_prices(limit = 0):
-    """Fetch every single Product Prices of DPMC POS Category.
+    """ Fetch every single Product Prices of DPMC POS Category.
 
     If available_qty >= 0 or available_qty < 0 retrieve their prices.
     All products should belonging to DPMC's POS categories (Bajaj, 2W, 3W, QUTE)
@@ -118,12 +118,41 @@ def fetch_all_dpmc_prices(limit = 0):
     :param limit: int, limit the result count
     :return: pandas dataframe, a list of dicts with product.template rows containing sales price and cost
     """
-    log.info("Fetching product prices from 'product.template'")
-    domain = ["&", ["available_in_pos", "=", True],
-              "|", "|", "|", ["pos_categ_id", "ilike", "bajaj"],
-              ["pos_categ_id", "ilike", "2w"],
-              ["pos_categ_id", "ilike", "3w"],
-              ["pos_categ_id", "ilike", "qute"]]
+    log.info("Fetching all product prices from 'product.template'")
+    domain = [
+        "&",
+        ["available_in_pos", "=", True],
+        "|", "|", "|",
+        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
+        ["pos_categ_id", "ilike", "qute"]
+    ]
+    fields = ["id", "default_code", "list_price", "standard_price"]
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "product.template", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
+
+
+def fetch_available_dpmc_prices(limit = 0):
+    """ Fetch available Product's Prices of DPMC POS Category.
+
+    Every product except available_qty = 0.
+    All products should belonging to DPMC's POS categories (Bajaj, 2W, 3W, QUTE)
+
+    :param limit: int, limit the result count
+    :return: pandas dataframe, a list of dicts with product.template rows containing sales price and cost
+    """
+    log.info("Fetching available product prices from 'product.template'")
+    domain = [
+        "&", "&",
+        ["available_in_pos", "=", True],
+        "|", "|", "|",
+        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
+        ["pos_categ_id", "ilike", "qute"],
+        ["qty_available", "!=", 0]
+    ]
     fields = ["id", "default_code", "list_price", "standard_price"]
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
