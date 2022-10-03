@@ -13,7 +13,7 @@ from multibajajmgt.enums import (
     OdooDBFieldName as DBField,
     ProductPriceStatus as Status
 )
-from multibajajmgt.exceptions import InvalidIdentityError, RetryTimeout
+from multibajajmgt.exceptions import InvalidIdentityError
 
 log = logging.getLogger(__name__)
 
@@ -64,7 +64,7 @@ def _get_price_info(row):
     try:
         # Fetch new price
         product_data = dpmc_client.inquire_product_data(ref_id)
-    except (InvalidIdentityError, RetryTimeout) as e:
+    except InvalidIdentityError:
         # Duplicate existing price since the data fetching failed
         price = old_price
         process_status = "Failed"

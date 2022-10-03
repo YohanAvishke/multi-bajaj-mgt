@@ -53,21 +53,24 @@ def _call(url, referer, payload = None):
                                  data = payload)
         response.raise_for_status()
     except r_exceptions.HTTPError as e:
-        log.error("Invalid Response received: ", e)
+        log.error("Invalid Response Status received: ", e)
         sys.exit(0)
     except r_exceptions.ConnectionError as e:
-        message = "Connection failed"
-        raise r_exceptions.ConnectionError(message, e)
+        raise r_exceptions.ConnectionError("Connection issue occurred", e)
     except r_exceptions.RequestException as e:
         log.error("Something went wrong with the request: ", e)
         sys.exit(0)
     else:
+        if response.text == "LOGOUT":
+            log.warning("Session expired")
+            configure()
+            return _call(url, referer, payload)
         response = response.json()
         if response["STATE"] == "FALSE":
             raise DataNotFoundError(f"Response failed due to invalid Request payload: {payload}", response)
         response = response["DATA"]
         if not response["dblSellingPrice"]:
-            raise ProductRefExpired(f"Response failed due to expired Request payload: {payload}", response)
+            raise ProductRefExpired(f"Response failed due to an expired Request payload: {payload}", response)
         return response
 
 
@@ -118,14 +121,15 @@ def _refresh_token():
 
 
 def _retry_request(request_func, *args):
+    log.warning(f"Connection timed out for: {args} Retrying Request")
     global retry_count
     retry_count = retry_count + 1
     if retry_count <= CONN_RETRY_MAX:
         request_func(*args)
     else:
-        message = f"Connection retried for {CONN_RETRY_MAX} times, but still failed"
+        message = f"Connection retried for {retry_count} times, but still failed"
         log.error(message)
-        raise RetryTimeout(message)
+        sys.exit(0)
 
 
 def inquire_product_data(ref_id):
@@ -141,19 +145,13 @@ def inquire_product_data(ref_id):
     }
     try:
         response_data = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
-        return response_data
-    except r_exceptions.ConnectionError as e:
-        log.warning("Connection timed out. Restarting service")
-        try:
-            # Calculate retry count and resend the request
-            _retry_request(inquire_product_data, ref_id)
-        except RetryTimeout as e:
-            message = f"Product data inquiring timed out, for Reference ID: {ref_id}"
-            log.error(message, e)
-            raise RetryTimeout(message, e)
+    except r_exceptions.ConnectionError:
+        _retry_request(inquire_product_data, ref_id)
     except ProductRefExpired as e:
         message = f"Inquiring data failed, for expired Reference ID: {ref_id}"
         raise InvalidIdentityError(message, e)
     except DataNotFoundError as e:
-        message = f"Inquiring data failed, for invalid Reference ID: {ref_id}"
+        message = f"Inquiring data failed, for incorrect Reference ID: {ref_id}"
         raise InvalidIdentityError(message, e)
+    else:
+        return response_data
