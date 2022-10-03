@@ -42,6 +42,13 @@ headers = {
 
 
 def _call(url, referer, payload = None):
+    """ Base function for requests to the DPMC server
+
+    :param url: string, url for the request
+    :param referer: string, base url
+    :param payload: dict, None or data to be created/updated
+    :return: dict, json response payload
+    """
     global headers
     headers |= {
         "referer": referer,
@@ -75,6 +82,8 @@ def _call(url, referer, payload = None):
 
 
 def _authenticate():
+    """ Fetch and store(in token.json) cookie for DPMC server
+    """
     log.info("Authenticating DPMC-ERP Client and setting up the Cookie")
     global headers
     headers |= {"referer": SERVER_URL}
@@ -93,6 +102,8 @@ def _authenticate():
 
 
 def configure():
+    """ Validate and attach login session to request header
+    """
     log.debug("Configuring DPMC client")
     global cookie
     try:
@@ -116,16 +127,24 @@ def configure():
 
 
 def _refresh_token():
+    """ Wrapper for fetch,save and configure session
+    """
     _authenticate()
     configure()
 
 
 def _retry_request(request_func, *args):
+    """ Retry a failed reqeust(eg: closed by peer)
+
+    :param request_func: function, function pointer to be retired
+    :param args: tuple, parameters for the request_func
+    :return: function call
+    """
     log.warning(f"Connection timed out for: {args} Retrying Request")
     global retry_count
     retry_count = retry_count + 1
     if retry_count <= CONN_RETRY_MAX:
-        request_func(*args)
+        return request_func(*args)
     else:
         message = f"Connection retried for {retry_count} times, but still failed"
         log.error(message)
@@ -133,6 +152,11 @@ def _retry_request(request_func, *args):
 
 
 def inquire_product_data(ref_id):
+    """ Fetch data of a product
+
+    :param ref_id: string, product's part number
+    :return: dict, data
+    """
     payload = {
         "strPartNo_PAItemInq": ref_id,
         "strFuncType": "INVENTORYDATA",
@@ -144,8 +168,9 @@ def inquire_product_data(ref_id):
         "STR_APP_ID": "00011"
     }
     try:
-        response_data = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
+        product_data = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
     except r_exceptions.ConnectionError:
+        # Retry each request for maximum of 5 times
         _retry_request(inquire_product_data, ref_id)
     except ProductRefExpired as e:
         message = f"Inquiring data failed, for expired Reference ID: {ref_id}"
@@ -154,4 +179,4 @@ def inquire_product_data(ref_id):
         message = f"Inquiring data failed, for incorrect Reference ID: {ref_id}"
         raise InvalidIdentityError(message, e)
     else:
-        return response_data
+        return product_data
