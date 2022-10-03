@@ -5,7 +5,7 @@ import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
 import multibajajmgt.clients.dpmc.client as dpmc_client
 
-from multibajajmgt.common import write_to_csv, get_filename_curr_date
+from multibajajmgt.common import *
 from multibajajmgt.config import DATA_DIR
 from multibajajmgt.enums import (
     DocumentResourceType,
@@ -87,12 +87,11 @@ def _get_price_info(row):
     }
 
 
-def _save_price_info(info, df, file):
+def _save_price_info(info, df, dir_path):
     """ Save new price information to price-dpmc-all.csv(base file) and time based historical file.
 
     :param info: dict, necessary information for a price update to be completed.
     :param df: pandas dataframe, dataframe with data of base file.
-    :param file: string, historical file path
     """
     index = info["index"]
     price = info["updated_price"]
@@ -104,6 +103,7 @@ def _save_price_info(info, df, file):
     write_to_csv(PRICE_ALL_BASE_FILE, df)
     # Save row to historic csv file
     if status in (Status.up, Status.down):
+        file = mk_historical(dir_path, get_now_file("csv", "price-dpmc-all"))
         # Get the row as a series. Convert it to a df and flip the row and column
         row_transposed = df.loc[index].to_frame().T
         write_to_csv(path = file, df = row_transposed, mode = "a",
@@ -115,8 +115,7 @@ def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
     price_df = pd.read_csv(PRICE_ALL_BASE_FILE)
-    history_file_path = get_filename_curr_date(dir_path = f"{DATA_DIR}/price/history", base_name = "price-dpmc-all",
-                                               extension = "csv")
+    curr_dir = get_curr_dir(f"{DATA_DIR}/price/history")
     # Add columns for updated prices and price fluctuation state
     if CSVField.sales_price not in price_df.columns:
         price_df[CSVField.sales_price] = price_df[CSVField.cost] = price_df["Status"] = None
@@ -127,4 +126,8 @@ def update_product_prices():
         # Filter rows with non-updated price and status
         if pd.isnull(price_row[7]):
             info = _get_price_info(price_row)
-            _save_price_info(info, df = price_df, file = history_file_path)
+            _save_price_info(info, price_df, curr_dir)
+
+
+def merge_historical_data():
+    return

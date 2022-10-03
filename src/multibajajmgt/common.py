@@ -32,36 +32,41 @@ def write_to_json(path, data):
         json.dump(data, file)
 
 
-def mkdir_p(path):
-    """ Create a directory
+def get_curr_dir(base_path):
+    """ Get dir name depending on current date(yyyy-mm-dd)
 
-    :param path: string, path of the dir
+    :param base_path: string, base suffix path for dir
+    :return: string, base combined with curr path
+    """
+    now_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+    return f"{base_path}/{now_date}"
+
+
+def get_now_file(file_extension, base_name = None):
+    """ Get file name  depending on current time(hh-mm-ss
+
+    :param file_extension: string, files' extension type(eg: csv, json)
+    :param base_name:  string, base suffix name for file
+    :return: string, base combined with curr name
+    """
+    now_time = time.strftime("%H-%M-%S", time.localtime(time.time()))
+    if base_name:
+        return f"{base_name}_{now_time}.{file_extension}"
+    return f"{now_time}.{file_extension}"
+
+
+def mk_historical(dir_path, file_path):
+    """ Create historical directory
+
+    :param dir_path: string, directory(date) path
+    :param file_path: string, file(time) name
+    :return: string, combination of dir path and file name
     """
     try:
-        os.makedirs(path)
+        os.makedirs(dir_path)
     except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
+        if exc.errno == errno.EEXIST and os.path.isdir(dir_path):
             pass
         else:
             raise
-
-
-def get_filename_curr_date(dir_path, extension, base_name = None):
-    """ Used for historical files. Create dir for date and get file name for time
-
-    Current Date(directory)
-        - Current time(file)
-        - ...
-
-    :param dir_path: string, place for the files to be created
-    :param extension: string, files' extension type(eg: csv, json)
-    :param base_name: string, base name(id) for each file name
-    :return: string, file path
-    """
-    now_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    now_time = time.strftime("%H-%M-%S", time.localtime(time.time()))
-    dir_path = f"{dir_path}/{now_date}"
-    mkdir_p(dir_path)
-    if base_name:
-        return f"{dir_path}/{base_name}_{now_time}.{extension}"
-    return f"{dir_path}/{now_time}.{extension}"
+    return f"{dir_path}/{file_path}"
