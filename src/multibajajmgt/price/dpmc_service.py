@@ -1,10 +1,12 @@
 import logging
 import os
+import glob
 
 import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
 import multibajajmgt.clients.dpmc.client as dpmc_client
 
+from pathlib import Path
 from multibajajmgt.common import *
 from multibajajmgt.config import DATA_DIR
 from multibajajmgt.enums import (
@@ -54,8 +56,8 @@ def export_all_products():
 def _get_price_info(row):
     """ Fetch price data from DPMC server.
 
-    :param row: itertuples obj, each row of price df.
-    :return: dict, necessary information for a price update to be completed.
+    :param row: iter-tuples obj, each row of price df
+    :return: dict, necessary information for a price update to be completed
     """
     index = row.Index
     ref_id = row[2]  # getattr(row, DBField.internal_id)
@@ -87,11 +89,12 @@ def _get_price_info(row):
     }
 
 
-def _save_price_info(info, df, dir_path):
+def _save_price_info(info, df, file):
     """ Save new price information to price-dpmc-all.csv(base file) and time based historical file.
 
-    :param info: dict, necessary information for a price update to be completed.
-    :param df: pandas dataframe, dataframe with data of base file.
+    :param info: dict, necessary information for a price update to be completed
+    :param df: pandas dataframe, dataframe with data of base file
+    :param file: string, historical file
     """
     index = info["index"]
     price = info["updated_price"]
@@ -103,7 +106,6 @@ def _save_price_info(info, df, dir_path):
     write_to_csv(PRICE_ALL_BASE_FILE, df)
     # Save row to historic csv file
     if status in (Status.up, Status.down):
-        file = mk_historical(dir_path, get_now_file("csv", "price-dpmc-all"))
         # Get the row as a series. Convert it to a df and flip the row and column
         row_transposed = df.loc[index].to_frame().T
         write_to_csv(path = file, df = row_transposed, mode = "a",
@@ -115,7 +117,8 @@ def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
     price_df = pd.read_csv(PRICE_ALL_BASE_FILE)
-    curr_dir = get_curr_dir(f"{DATA_DIR}/price/history")
+    historical_file_path = mk_historical(get_curr_dir(PRICE_HISTORY_DIR),
+                                         get_now_file("csv", "price-dpmc-all"))
     # Add columns for updated prices and price fluctuation state
     if CSVField.sales_price not in price_df.columns:
         price_df[CSVField.sales_price] = price_df[CSVField.cost] = price_df["Status"] = None
@@ -126,8 +129,21 @@ def update_product_prices():
         # Filter rows with non-updated price and status
         if pd.isnull(price_row[7]):
             info = _get_price_info(price_row)
-            _save_price_info(info, price_df, curr_dir)
+            _save_price_info(info, price_df, historical_file_path)
 
 
 def merge_historical_data():
-    return
+    """ Merge timed files in a historical dir
+    """
+    historical_dir = get_curr_dir(PRICE_HISTORY_DIR)
+    merged_file = f"{historical_dir}/price-dpmc-all.csv"
+    # Remove existing merge file
+    if os.path.isfile(merged_file):
+        os.remove(merged_file)
+    # Read, sort, merge and save the new merge file
+    files = sorted(Path(historical_dir).glob('*.csv'))
+    df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
+    write_to_csv(f"{historical_dir}/price-dpmc-all.csv", df)
+    # Remove timed files
+    for f in files:
+        os.remove(f)
