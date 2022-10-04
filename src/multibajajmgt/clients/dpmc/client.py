@@ -17,6 +17,7 @@ from multibajajmgt.exceptions import *
 log = logging.getLogger(__name__)
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
+GET_HELP_URL = "https://erp.dpg.lk/Help/GetHelp"
 CONN_RETRY_MAX = 5
 
 retry_count = 0
@@ -75,9 +76,6 @@ def _call(url, referer, payload = None):
         response = response.json()
         if response["STATE"] == "FALSE":
             raise DataNotFoundError(f"Response failed due to invalid Request payload: {payload}", response)
-        response = response["DATA"]
-        if not response["dblSellingPrice"]:
-            raise ProductRefExpired(f"Response failed due to an expired Request payload: {payload}", response)
         return response
 
 
@@ -122,7 +120,7 @@ def configure():
                     _refresh_token()
             else:
                 _refresh_token()
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         _refresh_token()
 
 
@@ -168,15 +166,72 @@ def inquire_product_data(ref_id):
         "STR_APP_ID": "00011"
     }
     try:
-        product_data = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
+        response = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
     except r_exceptions.ConnectionError:
         # Retry each request for maximum of 5 times
         _retry_request(inquire_product_data, ref_id)
     except ProductRefExpired as e:
-        message = f"Inquiring data failed, for expired Reference ID: {ref_id}"
-        raise InvalidIdentityError(message, e)
+        raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
     except DataNotFoundError as e:
-        message = f"Inquiring data failed, for incorrect Reference ID: {ref_id}"
-        raise InvalidIdentityError(message, e)
+        raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", e)
     else:
+        product_data = response["DATA"]
+        if not product_data["dblSellingPrice"]:
+            raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
         return product_data
+
+
+def _inquire_goodreceivenote(referer, payload):
+    base_payload = {
+        "strInstance": "DLR",
+        "strPremises": "KGL",
+        "strAppID": "00011",
+        "strFORMID": "00605",
+        "strSEARCH_TEXT": "",
+        "strLIMIT": "0",
+        "strARCHIVE": "TRUE",
+        "strOTHER_WHERE_CONDITION": "",
+        "strTITEL": "",
+        "strAll_DATA": "true",
+        "strSchema": ""
+    }
+    payload = base_payload | payload
+    try:
+        response_data = _call(GET_HELP_URL, referer, payload)
+    except DataNotFoundError as e:
+        raise DataNotFoundError(f"Inquiring grn data failed, for incorrect Reference ID: {payload['strSearch']}", e)
+    else:
+        return json.loads(response_data)
+
+
+def inquire_goodreceivenote_by_grn_ref(col, ref_id):
+    try:
+        return _inquire_goodreceivenote(
+                f"{SERVER_URL}/Application/Home/PADEALER",
+                {"strFIELD_NAME": ",STR_DEALER_CODE,STR_GRN_NO,STR_ORDER_NO,STR_INVOICE_NO,INT_TOTAL_GRN_VALUE",
+                 "strHIDEN_FIELD_INDEX": ",0",
+                 "strDISPLAY_NAME": ",STR_DEALER_CODE,GRN No,Order No,Invoice No,Total GRN Value",
+                 "strSearch": f"{ref_id}",
+                 "strSEARCH_FIELD_NAME": "STR_GRN_NO",
+                 "strColName": f"{col}",
+                 "strORDERBY": "STR_GRN_NO",
+                 "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/List"})
+    except DataNotFoundError as e:
+        raise DataNotFoundError(e)
+
+
+def inquire_goodreceivenote_by_order_ref(col, ref_id):
+    try:
+        return _inquire_goodreceivenote(
+                SERVER_URL,
+                {"strFIELD_NAME": ",DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO",
+                 "strHIDEN_FIELD_INDEX": "",
+                 "strDISPLAY_NAME": ",Order No,Invoice No,Mobile Invoice No",
+                 "strSearch": f"{ref_id}",
+                 "strSEARCH_FIELD_NAME": "STR_DLR_ORD_NO",
+                 "strColName": f"{col}",
+                 "strORDERBY": "STR_DLR_ORD_NO",
+                 "strOTHER_WHERE_CONDITION": "",
+                 "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo"})
+    except DataNotFoundError as e:
+        raise DataNotFoundError(e)

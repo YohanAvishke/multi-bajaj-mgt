@@ -18,9 +18,9 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # configure clients
-odoo_client.configure()
-# dpmc_client.configure()
+# odoo_client.configure()
+dpmc_client.configure()
 
-price_service.export_all_products()
-# price_service.update_product_prices()
+# price_service.export_all_products()
+price_service.update_product_prices()
 # price_service.merge_historical_data()
