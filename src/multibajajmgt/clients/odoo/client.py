@@ -160,3 +160,21 @@ def fetch_available_dpmc_prices(limit = 0):
             "product.template", "search_read", [domain, fields], {"limit": limit}
     )
     return data
+
+
+def fetch_all_dpmc_stock(limit = 0):
+    log.info("Fetching stock from 'product.template'")
+    domain = [
+        "&",
+        ["available_in_pos", "=", True],
+        "|", "|", "|",
+        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
+        ["pos_categ_id", "ilike", "qute"]
+    ]
+    fields = ["id", "default_code", "qty_available"]
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "product.template", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
