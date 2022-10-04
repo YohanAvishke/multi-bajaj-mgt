@@ -34,20 +34,9 @@ def export_all_products():
     ex_ids = odoo_client.fetch_product_external_id(ids)
     ex_id_df = pd.DataFrame(ex_ids)
     # Drop external ids duplicates, if any
-    ex_id_df["is_duplicate"] = ex_id_df.duplicated(subset = ['res_id'], keep = False)
-    duplicate_df = ex_id_df[ex_id_df['is_duplicate']]
-    if duplicate_df.size > 0:
-        log.warning(f"Filtering duplicates,\n {duplicate_df}")
-        ex_id_df = ex_id_df.drop_duplicates(subset = ["res_id"], keep = "first")
-    # Enrich the price list by,
-    #   * Create external id
-    #   * Drop and rename columns
-    #   * Merge price list and external id list(by id)
-    ex_id_df["external_id"] = ex_id_df[["module", "name"]].agg('.'.join, axis = 1)
-    ex_id_df = ex_id_df \
-        .drop(["id", "name", "module", "is_duplicate"], axis = 1) \
-        .rename({"res_id": "id"}, axis = 1)
-    enrich_price_df = ex_id_df.merge(price_df, on = "id", how = "inner")
+    ex_id_df = drop_duplicates(ex_id_df, "res_id")
+    # Merge prices with external ids
+    enrich_price_df = enrich_products_by_external_id(price_df, ex_id_df)
     write_to_csv(PRICE_ALL_BASE_FILE, enrich_price_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.sales_price, DBField.cost],
                  header = [CSVField.external_id, CSVField.internal_id, "Old Sales Price", "Old Cost"])
@@ -123,7 +112,7 @@ def update_product_prices():
     if CSVField.sales_price not in price_df.columns:
         price_df[CSVField.sales_price] = price_df[CSVField.cost] = price_df["Status"] = None
         write_to_csv(path = PRICE_ALL_BASE_FILE, df = price_df)
-    price_updatable_df = price_df[pd.isnull(price_df['Status'])]
+    price_updatable_df = price_df[pd.isnull(price_df["Status"])]
     # Loop and fetch and save each product's updated price
     for price_row in price_updatable_df.itertuples():
         # Filter rows with non-updated price and status
@@ -141,7 +130,7 @@ def merge_historical_data():
     if os.path.isfile(merged_file):
         os.remove(merged_file)
     # Read, sort, merge and save the new merge file
-    files = sorted(Path(historical_dir).glob('*.csv'))
+    files = sorted(Path(historical_dir).glob("*.csv"))
     df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
     write_to_csv(f"{historical_dir}/price-dpmc-all.csv", df)
     # Remove timed files

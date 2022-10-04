@@ -4,6 +4,8 @@ import logging
 import os
 import time
 
+import pandas as pd
+
 log = logging.getLogger(__name__)
 
 
@@ -70,3 +72,38 @@ def mk_historical(dir_path, file_path):
         else:
             raise
     return f"{dir_path}/{file_path}"
+
+
+def drop_duplicates(df, key):
+    """ Filter duplicates by a column and drop the found rows
+
+    :param df: pandas dataframe,
+    :param key: string, column name
+    :return: pandas dataframe,
+    """
+    df["is_duplicate"] = df.duplicated(subset = [key], keep = False)
+    duplicate_df = df[df["is_duplicate"]]
+    if duplicate_df.size > 0:
+        log.warning(f"Filtering duplicates,\n {duplicate_df}")
+        df = df.drop_duplicates(subset = ["res_id"], keep = "first")
+    df = df.drop("is_duplicate")
+    return df
+
+
+def enrich_products_by_external_id(product_df, id_df):
+    """ Add id dataframe to poduct dataframe
+
+    * Build external id
+    * Drop and rename columns
+    * Merge price list and external id list(by id)
+
+    :param product_df: pandas dataframe, products
+    :param id_df: pandas dataframe, ids
+    :return: pandas dataframe, products merged with ids
+    """
+    id_df["external_id"] = id_df[["module", "name"]].agg(".".join, axis = 1)
+    id_df = id_df \
+        .drop(["id", "name", "module"], axis = 1) \
+        .rename({"res_id": "id"}, axis = 1)
+    enrich_price_df = id_df.merge(product_df, on = "id", how = "inner")
+    return enrich_price_df
