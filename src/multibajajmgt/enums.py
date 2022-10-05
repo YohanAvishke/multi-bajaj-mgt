@@ -19,6 +19,7 @@ class EnvVariable(MultiBajajMgtEnum):
 class DocumentResourceType(MultiBajajMgtEnum):
     price_dpmc_all = "price-dpmc-all.csv"
     price_dpmc_available = "price-dpmc-available.csv"
+    stock_dpmc_all = "stock_dpmc_all.csv"
 
 
 class OdooCSVFieldName(MultiBajajMgtEnum):
@@ -26,6 +27,7 @@ class OdooCSVFieldName(MultiBajajMgtEnum):
     internal_id = "Internal Reference"
     sales_price = "Sales Price"
     cost = "Cost"
+    qty_available = "Quantity On Hand"
 
 
 class OdooDBFieldName(MultiBajajMgtEnum):
@@ -33,6 +35,7 @@ class OdooDBFieldName(MultiBajajMgtEnum):
     internal_id = "default_code"
     sales_price = "list_price"
     cost = "standard_price"
+    qty_available = "qty_available"
 
 
 class ProductPriceStatus(MultiBajajMgtEnum):

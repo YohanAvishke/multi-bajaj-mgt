@@ -17,9 +17,9 @@ user_id = None
 
 
 def _json_rpc(url, method, params):
-    """Create Requests to Odoo's JSON-RPC server
+    """Create Requests to Odoo's JSON-RPC server.
 
-    Common wrapper method for all calls
+    Common wrapper method for all calls.
 
     :param url: string, url of the endpoint
     :param method: string
@@ -110,7 +110,7 @@ def fetch_product_external_id(db_id_list, limit = 0):
 
 
 def fetch_all_dpmc_prices(limit = 0):
-    """ Fetch every single Product Prices of DPMC POS Category.
+    """ Fetch every single Product Prices from DPMC POS category.
 
     If available_qty >= 0 or available_qty < 0 retrieve their prices.
     All products should belonging to DPMC's POS categories (Bajaj, 2W, 3W, QUTE)
@@ -136,7 +136,7 @@ def fetch_all_dpmc_prices(limit = 0):
 
 
 def fetch_available_dpmc_prices(limit = 0):
-    """ Fetch available Product's Prices of DPMC POS Category.
+    """ Fetch available Product's Prices from DPMC POS category.
 
     Every product except available_qty = 0.
     All products should belonging to DPMC's POS categories (Bajaj, 2W, 3W, QUTE)
@@ -163,6 +163,11 @@ def fetch_available_dpmc_prices(limit = 0):
 
 
 def fetch_all_dpmc_stock(limit = 0):
+    """ Fetch every single Product stock from DPMC POS category.
+
+    :param limit: int, limit the result count
+    :return: pandas dataframe, a list of dicts with product.template rows containing quantity available
+    """
     log.info("Fetching stock from 'product.template'")
     domain = [
         "&",
