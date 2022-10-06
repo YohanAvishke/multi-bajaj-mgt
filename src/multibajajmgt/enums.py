@@ -20,6 +20,7 @@ class DocumentResourceType(MultiBajajMgtEnum):
     price_dpmc_all = "price-dpmc-all.csv"
     price_dpmc_available = "price-dpmc-available.csv"
     stock_dpmc_all = "stock_dpmc_all.csv"
+    invoice_dpmc = "invoice_dpmc.json"
 
 
 class OdooCSVFieldName(MultiBajajMgtEnum):
@@ -43,3 +44,30 @@ class ProductPriceStatus(MultiBajajMgtEnum):
     up = "up"
     down = "down"
     equal = "equal"
+
+
+class DPMCFieldName(MultiBajajMgtEnum):
+    invoice_no = "STR_INVOICE_NO"
+    order_no = "STR_ORDER_NO"
+    dlr_order_no = "STR_DLR_ORD_NO"
+    mobile_no = "STR_MOBILE_INVOICE_NO"
+
+
+class InvoiceStatus(MultiBajajMgtEnum):
+    invalid = "Invalid"
+    success = "Success"
+    multiple = "Multiple"
+
+
+class InvoiceType(MultiBajajMgtEnum):
+    invoice = "Invoice"
+    order = "Order"
+    mobile = "Mobile"
+
+
+class InvoiceJSONFieldName(MultiBajajMgtEnum):
+    default_id = "Default ID"
+    type = "Type"
+    grn_id = "GRN ID"
+    invoice_id = "Invoice ID"
+    invoices = "Invoices"
