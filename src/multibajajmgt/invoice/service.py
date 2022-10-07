@@ -46,19 +46,21 @@ def fetch_invoices():
                 invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(grn_field, default_id)
             except DataNotFoundError as e:
                 log.error(f"Invoice retrieval failed for {default_id} of {invoice_type}", e)
-                invoice[JSONField.type] = Status.invalid
+                invoice[JSONField.status] = Status.failed
                 continue
         if len(invoice_data) > 1:
             # If "id" is incomplete and matches parts of multiple invoice ids.
-            invoice[JSONField.type] = Status.multiple
+            invoice[JSONField.status] = Status.multiple
             invoice[JSONField.invoice_id] = [invoice_data[n]["Invoice No"] for n in range(len(invoice_data))]
         else:
             invoice_data = invoice_data[0]
-            invoice[JSONField.type] = Status.success
+            invoice[JSONField.status] = Status.success
             invoice[JSONField.invoice_id] = invoice_data["Invoice No"]
+            # Available after a call to "inquire_goodreceivenote_by_grn_ref"
             if "GRN No" in invoice_data:
-                # Available after a call to "inquire_goodreceivenote_by_grn_ref"
                 invoice[JSONField.grn_id] = invoice_data["GRN No"]
+            if "Order No" in invoice_data:
+                invoice[JSONField.order_id] = invoice_data["Order No"]
         log.info(f"Invoice retrieved success for {default_id} of {invoice_type}")
         # Remove default data
         del invoice[JSONField.default_id]

@@ -73,10 +73,7 @@ def _call(url, referer, payload = None):
             log.warning("Session expired")
             configure()
             return _call(url, referer, payload)
-        response = response.json()
-        if response["STATE"] == "FALSE":
-            raise DataNotFoundError(f"Response failed due to invalid Request payload: {payload}", response)
-        return response
+        return response.json()
 
 
 def _authenticate():
@@ -149,7 +146,7 @@ def _retry_request(request_func, *args):
         sys.exit(0)
 
 
-def inquire_product_data(ref_id):
+def inquire_product_by_id(ref_id):
     """ Fetch data of a product
 
     :param ref_id: string, product's part number
@@ -169,16 +166,43 @@ def inquire_product_data(ref_id):
         response = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
     except r_exceptions.ConnectionError:
         # Retry each request for maximum of 5 times
-        _retry_request(inquire_product_data, ref_id)
+        _retry_request(inquire_product_by_id, ref_id)
     except ProductRefExpired as e:
         raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
-    except DataNotFoundError as e:
-        raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", e)
     else:
+        if response["STATE"] == "FALSE":
+            raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", e, response)
         product_data = response["DATA"]
         if not product_data["dblSellingPrice"]:
             raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
         return product_data
+
+
+# def inquire_product_by_invoice(invoice, grn):
+#     payload = {
+#         "strPartNo_PAItemInq": ref_id,
+#         "strFuncType": "INVENTORYDATA",
+#         "strPADealerCode_PAItemInq": "AC2011063676",
+#         "STR_FORM_ID": "00602",
+#         "STR_FUNCTION_ID": "IQ",
+#         "STR_PREMIS": "KGL",
+#         "STR_INSTANT": "DLR",
+#         "STR_APP_ID": "00011"
+#     }
+#     try:
+#         response = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
+#     except r_exceptions.ConnectionError:
+#         # Retry each request for maximum of 5 times
+#         _retry_request(inquire_product_by_id, ref_id)
+#     except ProductRefExpired as e:
+#         raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
+#     except DataNotFoundError as e:
+#         raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", e)
+#     else:
+#         product_data = response["DATA"]
+#         if not product_data["dblSellingPrice"]:
+#             raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
+#         return product_data
 
 
 def _inquire_goodreceivenote(referer, payload):
@@ -198,9 +222,13 @@ def _inquire_goodreceivenote(referer, payload):
     payload = base_payload | payload
     try:
         response_data = _call(GET_HELP_URL, referer, payload)
-    except DataNotFoundError as e:
-        raise DataNotFoundError(f"Inquiring grn data failed, for incorrect Reference ID: {payload['strSearch']}", e)
+    except r_exceptions.ConnectionError as e:
+        log.error(e)
+        sys.exit(0)
     else:
+        if response_data == "NO DATA FOUND":
+            raise DataNotFoundError(f"Inquiring grn data failed, for incorrect Reference ID: {payload['strSearch']}",
+                                    response_data)
         return json.loads(response_data)
 
 

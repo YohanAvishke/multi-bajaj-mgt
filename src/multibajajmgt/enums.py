@@ -54,7 +54,7 @@ class DPMCFieldName(MultiBajajMgtEnum):
 
 
 class InvoiceStatus(MultiBajajMgtEnum):
-    invalid = "Invalid"
+    failed = "Failed"
     success = "Success"
     multiple = "Multiple"
 
@@ -67,7 +67,9 @@ class InvoiceType(MultiBajajMgtEnum):
 
 class InvoiceJSONFieldName(MultiBajajMgtEnum):
     default_id = "Default ID"
+    status = "Status"
     type = "Type"
     grn_id = "GRN ID"
     invoice_id = "Invoice ID"
-    invoices = "Invoices"
+    order_id = "Order ID"
+    invoices = "Invoice List"
