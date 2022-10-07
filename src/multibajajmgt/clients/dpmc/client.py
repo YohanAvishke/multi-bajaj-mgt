@@ -171,38 +171,37 @@ def inquire_product_by_id(ref_id):
         raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
     else:
         if response["STATE"] == "FALSE":
-            raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", e, response)
+            raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", response)
         product_data = response["DATA"]
         if not product_data["dblSellingPrice"]:
             raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
         return product_data
 
 
-# def inquire_product_by_invoice(invoice, grn):
-#     payload = {
-#         "strPartNo_PAItemInq": ref_id,
-#         "strFuncType": "INVENTORYDATA",
-#         "strPADealerCode_PAItemInq": "AC2011063676",
-#         "STR_FORM_ID": "00602",
-#         "STR_FUNCTION_ID": "IQ",
-#         "STR_PREMIS": "KGL",
-#         "STR_INSTANT": "DLR",
-#         "STR_APP_ID": "00011"
-#     }
-#     try:
-#         response = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
-#     except r_exceptions.ConnectionError:
-#         # Retry each request for maximum of 5 times
-#         _retry_request(inquire_product_by_id, ref_id)
-#     except ProductRefExpired as e:
-#         raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
-#     except DataNotFoundError as e:
-#         raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", e)
-#     else:
-#         product_data = response["DATA"]
-#         if not product_data["dblSellingPrice"]:
-#             raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
-#         return product_data
+def inquire_product_by_invoice(invoice, grn):
+    payload = {
+        "STR_INSTANT": "DLR",
+        "STR_PREMIS": "KGL",
+        "STR_APP_ID": "00011",
+        "STR_FORM_ID": "00605",
+        "strMode": "GRN" if grn else "INVOICE",
+        "STR_FUNCTION_ID": "IQ" if grn else "CR",
+        "strInvoiceNo": f"{invoice}",
+        "strPADealerCode": "AC2011063676"
+    }
+    if grn:
+        payload["strGRNno"] = grn
+    try:
+        response_data = _call(f"{SERVER_URL}/PADEALER/PADLRGOODRECEIVENOTE/Inquire",
+                              f"{SERVER_URL}/Application/Home/PADEALER", payload)
+    except r_exceptions.ConnectionError as e:
+        log.error(e)
+        sys.exit(0)
+    else:
+        if response_data == "NO DATA FOUND":
+            raise DataNotFoundError(f"Inquiring grn data failed, for incorrect Reference ID: {payload['strSearch']}",
+                                    response_data)
+        return json.loads(response_data)
 
 
 def _inquire_goodreceivenote(referer, payload):
