@@ -2,94 +2,352 @@
   "Adjustments": [
     {
       "Type": "Other",
-      "ID": "Nishan Automobile - C82-01366",
-      "Date": "2022-10-04",
+      "ID": "Anura Diesel House - AD037B012889",
+      "Date": "2022-09-27",
       "Products": [
         {
-          "STR_PART_NO": "36AA4042(YL)",
+          "STR_PART_NO": "36DS1001(YL)",
+          "INT_QUATITY": 30
+        },
+        {
+          "STR_PART_NO": "36DU1202(YL)",
+          "INT_QUATITY": 13
+        },
+        {
+          "STR_PART_NO": "36JB0021(YL)",
           "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "AB111107(YL)",
-          "INT_QUATITY": 4
+          "STR_PART_NO": "36JB0022(YL)",
+          "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "AB151054(YL)",
-          "INT_QUATITY": 8
+          "STR_PART_NO": "36JD0001(YL)",
+          "INT_QUATITY": 3
         },
         {
-          "STR_PART_NO": "CC0952(MILEX)",
+          "STR_PART_NO": "36JD0005(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "36JD0006(YL)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "36JE0005(YL)",
+          "INT_QUATITY": 25
+        },
+        {
+          "STR_PART_NO": "36JK0021(YL)",
+          "INT_QUATITY": 2
+        },
+        {
+          "STR_PART_NO": "36JK0022(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "36JL0007(YL)",
+          "INT_QUATITY": 2
+        },
+        {
+          "STR_PART_NO": "36PA0011(YL)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "36PA0012(YL)",
           "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "36PA0015(YL)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "36PA0093(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "36PA0156(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "52JZ0054(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "DD121168(YL)",
+          "INT_QUATITY": 15
+        },
+        {
+          "STR_PART_NO": "DD201155(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "DF181098(YL)",
+          "INT_QUATITY": 100
+        },
+        {
+          "STR_PART_NO": "DH101648(YL)",
+          "INT_QUATITY": 25
+        },
+        {
+          "STR_PART_NO": "DH101680(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "DH102053(YL)",
+          "INT_QUATITY": 1
+        },
+        {
+          "STR_PART_NO": "DH181069(YL)",
+          "INT_QUATITY": 2
+        },
+        {
+          "STR_PART_NO": "DJ101012(YL)",
+          "INT_QUATITY": 30
+        },
+        {
+          "STR_PART_NO": "DJ121052(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DJ151047(YL)",
+          "INT_QUATITY": 50
+        },
+        {
+          "STR_PART_NO": "DJ73024M(YL)",
+          "INT_QUATITY": 3
         }
       ]
     },
     {
       "Type": "Other",
-      "ID": "SA Product Lanka - MS66432",
-      "Date": "2022-10-07",
+      "ID": "Anura Diesel House - AD037B012892",
+      "Date": "2022-09-27",
       "Products": [
         {
-          "STR_PART_NO": "SA24191016(SA)",
+          "STR_PART_NO": "DK101063(YL)",
           "INT_QUATITY": 30
         },
         {
-          "STR_PART_NO": "SA24171049(SA)",
-          "INT_QUATITY": 20
+          "STR_PART_NO": "DK101163(YL)",
+          "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "SA24111098(SA)",
-          "INT_QUATITY": 1
+          "STR_PART_NO": "DK101564(YL)",
+          "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "SA22161190(SA)",
-          "INT_QUATITY": 10
-        },
-        {
-          "STR_PART_NO": "SA36BA4002(SA)",
-          "INT_QUATITY": 2
-        },
-        {
-          "STR_PART_NO": "39154321S(SA)",
-          "INT_QUATITY": 25
-        },
-        {
-          "STR_PART_NO": "SAAA111094(SA)",
-          "INT_QUATITY": 10
-        },
-        {
-          "STR_PART_NO": "SA06101007(SA)",
+          "STR_PART_NO": "DK151085(YL)",
           "INT_QUATITY": 15
         },
         {
-          "STR_PART_NO": "SAAA171011(SA)",
-          "INT_QUATITY": 8
+          "STR_PART_NO": "DL181010(YL)",
+          "INT_QUATITY": 200
         },
         {
-          "STR_PART_NO": "BA24171118(SA)",
-          "INT_QUATITY": 7
-        },
-        {
-          "STR_PART_NO": "SA22231144(SA)",
+          "STR_PART_NO": "DL191012(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "SAAA111072(SA)",
+          "STR_PART_NO": "DL191013(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "D5121020(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DS161077(YL)",
+          "INT_QUATITY": 14
+        },
+        {
+          "STR_PART_NO": "DS181036(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DS191053(YL)",
+          "INT_QUATITY": 7
+        },
+        {
+          "STR_PART_NO": "DT511261(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DT511262(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DU111006(YL)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "DU181031(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DU181032(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DU181107(YL)",
+          "INT_QUATITY": 6
+        },
+        {
+          "STR_PART_NO": "DU201008(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DZ181004(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DU201066(YL)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "DZ191014(YL)",
+          "INT_QUATITY": 25
+        },
+        {
+          "STR_PART_NO": "D2191035(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JB401401(YL)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "JE511038(YL)",
+          "INT_QUATITY": 14
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Anura Diesel House - AD037B012891",
+      "Date": "2022-09-27",
+      "Products": [
+        {
+          "STR_PART_NO": "WH-1099UH(MINDA)",
           "INT_QUATITY": 2
         },
         {
-          "STR_PART_NO": "SAAZ351001(SA)",
+          "STR_PART_NO": "S20111301M(ENDURANCE)",
+          "INT_QUATITY": 6
+        },
+        {
+          "STR_PART_NO": "S330102601(ENDURANCE)",
+          "INT_QUATITY": 5
+        },
+        {
+          "STR_PART_NO": "FORK-OIL(APLUS)",
+          "INT_QUATITY": 300
+        }
+      ]
+    },
+    {
+      "Type": "Other",
+      "ID": "Anura Diesel House - AD037B012890",
+      "Date": "2022-09-27",
+      "Products": [
+        {
+          "STR_PART_NO": "JD511010(YL)",
+          "INT_QUATITY": 30
+        },
+        {
+          "STR_PART_NO": "JG232606(YL)",
           "INT_QUATITY": 3
         },
         {
-          "STR_PART_NO": "SA36AB4015(SA)",
+          "STR_PART_NO": "JL351200(YL)",
+          "INT_QUATITY": 1
+        },
+        {
+          "STR_PART_NO": "JL511001(YL)",
+          "INT_QUATITY": 20
+        },
+        {
+          "STR_PART_NO": "JL511010(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JL511222(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JL541277(YL)",
+          "INT_QUATITY": 20
+        },
+        {
+          "STR_PART_NO": "JN131807(YL)",
           "INT_QUATITY": 2
         },
         {
-          "STR_PART_NO": "SA36BA4003(SA)",
+          "STR_PART_NO": "JW521000(YL)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "JZ232600(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "YPA26006(YL)",
           "INT_QUATITY": 2
         },
         {
-          "STR_PART_NO": "SA22231142(SA)",
+          "STR_PART_NO": "CDEI-PLSR-DJ17(VARROC)",
+          "INT_QUATITY": 2
+        },
+        {
+          "STR_PART_NO": "CDEI-PLTN-PF20(VARROC)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "CDEI-XCED-JA00(VARROC)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "REGR-K-4S-3145(VARROC)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "RELY-BAJJ-SL25(VARROC)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "RELY-DSVR-BJ43(VARROC)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "STMR-PLTN-PF01(VARROC)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "FC-4809RZ(MINDA)",
+          "INT_QUATITY": 1
+        },
+        {
+          "STR_PART_NO": "FC-4850Z(MINDA)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "EI0919/SW-0647C(MINDA)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "EI0918/SW-0648C(MINDA)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "SW-0672J(MINDA)",
+          "INT_QUATITY": 3
+        },
+        {
+          "STR_PART_NO": "SW-0681H(MINDA)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "WH-1088MX(MINDA)",
           "INT_QUATITY": 5
         }
       ]
