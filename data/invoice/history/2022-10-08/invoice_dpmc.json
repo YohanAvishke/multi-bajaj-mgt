@@ -1,10 +1,11 @@
 [
   {
     "Date": "2022-09-29",
-    "Default ID": null,
-    "GRN ID": "DGRN2022100301758",
+    "Status": "Success",
+    "Type": "Invoice",
     "Invoice ID": "PRIBDM2022092804098",
     "Order ID": "PADC2022091606088",
+    "GRN ID": "DGRN2022100301758",
     "Products": [
       {
         "ID": "01100355",
@@ -34,18 +35,15 @@
         "Unit Cost": 3784.0,
         "Total": 18920.0
       }
-    ],
-    "Status": "Success",
-    "Type": "Invoice"
+    ]
   },
   {
     "Date": "2022-09-29",
-    "Default ID": "abcssdazsd",
-    "GRN ID": null,
-    "Invoice ID": null,
-    "Order ID": null,
-    "Products": null,
     "Status": "Failed",
-    "Type": "Invoice"
+    "Type": "Invoice",
+    "Invoice ID": "",
+    "Order ID": "",
+    "GRN ID": "",
+    "Products": ""
   }
 ]

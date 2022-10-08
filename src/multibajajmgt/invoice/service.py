@@ -3,7 +3,7 @@ import logging
 import multibajajmgt.clients.dpmc.client as dpmc_client
 import pandas as pd
 
-from multibajajmgt.common import mk_historical, get_curr_dir
+from multibajajmgt.common import *
 from multibajajmgt.config import DATA_DIR
 from multibajajmgt.enums import (
     InvoiceJSONFieldName as JSONField,
@@ -18,11 +18,13 @@ log = logging.getLogger(__name__)
 
 BASE_FILE = f"{DATA_DIR}/invoice/{DocumentResourceType.invoice_dpmc}"
 HISTORY_DIR = f"{DATA_DIR}/invoice/history"
+REINDEX_LIST = [JSONField.date, JSONField.status, JSONField.type, JSONField.invoice_id, JSONField.order_id,
+                JSONField.grn_id, JSONField.products]
 
 
-def _enrich_with_advance_invoice_data(row):
+def _enrich_with_metadata(row):
     invoice_type = row[JSONField.type]
-    # Could be invoice, order, mobile number
+    # Can-be invoice, order, mobile number
     default_id = row[JSONField.default_id]
     # For column types used in the request
     order_field = grn_field = None
@@ -43,7 +45,7 @@ def _enrich_with_advance_invoice_data(row):
             # fast
             invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(grn_field, default_id)
         except DataNotFoundError:
-            log.error(f"Invoice retrieval failed for {default_id} of {invoice_type}")
+            log.error(f"Invoice retrieval failed for {default_id}")
             row[JSONField.status] = Status.failed
             return row
     if len(invoice_data) > 1:
@@ -59,17 +61,18 @@ def _enrich_with_advance_invoice_data(row):
             row[JSONField.grn_id] = invoice_data["GRN No"]
         if "Order No" in invoice_data:
             row[JSONField.order_id] = invoice_data["Order No"]
-    log.info(f"Invoice retrieved success for {default_id} of {invoice_type}")
-    # Remove default data
-    row = row.drop(JSONField.default_id)
+    log.info(f"Invoice retrieval success for {default_id}")
     return row
 
 
 def fetch_invoice_metadata():
     invoice_df = pd.read_json(BASE_FILE, orient = "records", convert_dates = False)
-    invoice_df = invoice_df.apply(_enrich_with_advance_invoice_data, axis = 1)
+    invoice_df = invoice_df.apply(_enrich_with_metadata, axis = 1)
     historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
-    invoice_df.to_json(historical_file, orient = "records")
+    invoice_df = invoice_df \
+        .drop(JSONField.default_id, axis = 1)
+    invoice_df = restructure_df(invoice_df, REINDEX_LIST)
+    write_to_json(historical_file, invoice_df.to_dict("records"))
 
 
 def _enrich_with_products(row):
@@ -80,7 +83,7 @@ def _enrich_with_products(row):
         try:
             product_data = dpmc_client.inquire_product_by_invoice(invoice_id, grn_id)
         except DataNotFoundError:
-            log.error(f"Product inquiry failed for Invoice {invoice_id} and for GRN {grn_id}")
+            log.error(f"Product inquiry failed for Invoice {invoice_id}")
             row[JSONField.status] = Status.failed
             return row
         products = product_data["dsGRNDetails"]["Table"] if grn_id else product_data["dtGRNDetails"]
@@ -93,7 +96,7 @@ def _enrich_with_products(row):
                                Field.total: JSONField.total}) \
             .to_dict("records")
         row[JSONField.products] = products
-        logging.info(f"Product inquiry successful for Invoice {invoice_id} and for GRN {grn_id}")
+        logging.info(f"Product inquiry success for Invoice {invoice_id}")
     return row
 
 
@@ -101,4 +104,5 @@ def fetch_products():
     historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
-    invoice_df.to_json(historical_file, orient = "records")
+    invoice_df = restructure_df(invoice_df, REINDEX_LIST)
+    write_to_json(historical_file, invoice_df.to_dict("records"))

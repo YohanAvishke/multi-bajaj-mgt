@@ -78,12 +78,14 @@ class InvoiceType(MultiBajajMgtEnum):
 
 
 class InvoiceJSONFieldName(MultiBajajMgtEnum):
+    date = "Date"
     default_id = "Default ID"
     status = "Status"
     type = "Type"
     grn_id = "GRN ID"
     invoice_id = "Invoice ID"
     order_id = "Order ID"
+    # Product list fields
     products = "Products"
     part_code = "ID"
     part_desc = "Name"
