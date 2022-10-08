@@ -1,0 +1,21 @@
+name,Accounting Date,Include Exhausted Products,reference,line_ids/product_id/id,line_ids/location_id/id,line_ids/product_qty
+Nishan Automobile - C82-01366,2022-10-04,True,36AA4042(YL),__export__.product_product_51122_f5de88b7,stock.stock_location_stock,4.0
+,,,AB111107(YL),__export__.product_product_51124_382fdc06,stock.stock_location_stock,2.0
+,,,AB151054(YL),__export__.product_product_50883_39ef85ae,stock.stock_location_stock,7.0
+,,,CC0952(MILEX),__export__.product_product_50941_3bbdf282,stock.stock_location_stock,10.0
+SA Product Lanka - MS66432,2022-10-07,True,SA24191016(SA),__export__.product_product_50953_6d7fc7e3,stock.stock_location_stock,30.0
+,,,SA24171049(SA),__export__.product_product_50437_506dedad,stock.stock_location_stock,20.0
+,,,SA24111098(SA),__export__.product_product_51287_28c534b0,stock.stock_location_stock,1.0
+,,,SA22161190(SA),__export__.product_product_51288_674f6e85,stock.stock_location_stock,10.0
+,,,SA36BA4002(SA),__export__.product_product_51289_98a09f53,stock.stock_location_stock,2.0
+,,,39154321S(SA),__export__.product_product_50744_acdbbc25,stock.stock_location_stock,29.0
+,,,SAAA111094(SA),__export__.product_product_50862_f4323aad,stock.stock_location_stock,10.0
+,,,SA06101007(SA),__export__.product_product_49895_16699a18,stock.stock_location_stock,14.0
+,,,SAAA171011(SA),__export__.product_product_51290_0451c34a,stock.stock_location_stock,8.0
+,,,BA24171118(SA),__export__.product_product_51291_f7e9083c,stock.stock_location_stock,7.0
+,,,SA22231144(SA),__export__.product_product_51292_191d23d7,stock.stock_location_stock,10.0
+,,,SAAA111072(SA),__export__.product_product_50954_9544e6f3,stock.stock_location_stock,2.0
+,,,SAAZ351001(SA),__export__.product_product_50955_3cf7e1db,stock.stock_location_stock,3.0
+,,,SA36AB4015(SA),__export__.product_product_51293_b7461332,stock.stock_location_stock,2.0
+,,,SA36BA4003(SA),__export__.product_product_51294_456d8ab5,stock.stock_location_stock,2.0
+,,,SA22231142(SA),__export__.product_product_50957_613d4248,stock.stock_location_stock,5.0
