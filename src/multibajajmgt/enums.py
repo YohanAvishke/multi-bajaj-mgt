@@ -51,6 +51,18 @@ class DPMCFieldName(MultiBajajMgtEnum):
     order_no = "STR_ORDER_NO"
     dlr_order_no = "STR_DLR_ORD_NO"
     mobile_no = "STR_MOBILE_INVOICE_NO"
+    # Products from invoice
+    part_code = "STR_PART_CODE"
+    part_desc = "STR_DESC"
+    part_qty = "INT_QUANTITY"
+    unit_cost = "INT_UNIT_COST"
+    total = "INT_TOTAL_PART_COST"
+    ware_code = "WAREHOUSE_CODE"
+    loc_code = "LOCATION_CODE"
+    rack_code = "RACK_CODE"
+    bin_code = "BIN_CODE"
+    sbin_code = "SUBBIN_CODE"
+    serial_base = "STR_SERIAL_BASE"
 
 
 class InvoiceStatus(MultiBajajMgtEnum):
@@ -72,4 +84,9 @@ class InvoiceJSONFieldName(MultiBajajMgtEnum):
     grn_id = "GRN ID"
     invoice_id = "Invoice ID"
     order_id = "Order ID"
-    invoices = "Invoice List"
+    products = "Products"
+    part_code = "ID"
+    part_desc = "Name"
+    part_qty = "Quantity"
+    unit_cost = "Unit Cost"
+    total = "Total"

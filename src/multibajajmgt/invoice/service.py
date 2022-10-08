@@ -3,7 +3,7 @@ import logging
 import multibajajmgt.clients.dpmc.client as dpmc_client
 import pandas as pd
 
-from multibajajmgt.common import write_to_json, mk_historical, get_curr_dir, get_now_file
+from multibajajmgt.common import mk_historical, get_curr_dir
 from multibajajmgt.config import DATA_DIR
 from multibajajmgt.enums import (
     InvoiceJSONFieldName as JSONField,
@@ -42,8 +42,8 @@ def _enrich_with_advance_invoice_data(row):
             # Usually happens when for older invoices since "inquire_goodreceivenote_by_order_ref"'s data expires
             # fast
             invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(grn_field, default_id)
-        except DataNotFoundError as e:
-            log.error(f"Invoice retrieval failed for {default_id} of {invoice_type}", e)
+        except DataNotFoundError:
+            log.error(f"Invoice retrieval failed for {default_id} of {invoice_type}")
             row[JSONField.status] = Status.failed
             return row
     if len(invoice_data) > 1:
@@ -65,8 +65,40 @@ def _enrich_with_advance_invoice_data(row):
     return row
 
 
-def fetch_invoices():
+def fetch_invoice_metadata():
     invoice_df = pd.read_json(BASE_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advance_invoice_data, axis = 1)
-    historical_file_path = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
-    invoice_df.to_json(historical_file_path, orient = "records")
+    historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
+    invoice_df.to_json(historical_file, orient = "records")
+
+
+def _enrich_with_products(row):
+    invoice_status = row[JSONField.status]
+    invoice_id = row[JSONField.invoice_id]
+    grn_id = row[JSONField.grn_id]
+    if Status.success in invoice_status:
+        try:
+            product_data = dpmc_client.inquire_product_by_invoice(invoice_id, grn_id)
+        except DataNotFoundError:
+            log.error(f"Product inquiry failed for Invoice {invoice_id} and for GRN {grn_id}")
+            row[JSONField.status] = Status.failed
+            return row
+        products = product_data["dsGRNDetails"]["Table"] if grn_id else product_data["dtGRNDetails"]
+        products = pd \
+            .DataFrame(products) \
+            .drop([Field.ware_code, Field.loc_code, Field.rack_code, Field.bin_code, Field.sbin_code,
+                   Field.serial_base], axis = 1) \
+            .rename(columns = {Field.part_code: JSONField.part_code, Field.part_desc: JSONField.part_desc,
+                               Field.part_qty: JSONField.part_qty, Field.unit_cost: JSONField.unit_cost,
+                               Field.total: JSONField.total}) \
+            .to_dict("records")
+        row[JSONField.products] = products
+        logging.info(f"Product inquiry successful for Invoice {invoice_id} and for GRN {grn_id}")
+    return row
+
+
+def fetch_products():
+    historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
+    invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
+    invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
+    invoice_df.to_json(historical_file, orient = "records")

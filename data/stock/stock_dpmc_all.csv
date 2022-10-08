@@ -1,12 +1,12 @@
 External ID,Internal Reference,Quantity On Hand
 __export__.product_product_50817_2bfba0ae,36AA4151,1.0
-__export__.product_product_50818_128deb33,CMU24191072,15.0
+__export__.product_product_50818_128deb33,CMU24191072,11.0
 __export__.product_product_50820_e780714a,SVA0024,300.0
 __export__.product_template_49776_2051bade,36AE0001,7.0
 __export__.product_template_49777_5b8e0fc8,JE511012,1.0
 __export__.product_template_49778_a1075597,SVA0054,8.0
 __export__.product_template_49779_24582232,24171006,6.0
-__export__.product_template_49803_18dcbc23,BGO20W50C,146.0
+__export__.product_template_49803_18dcbc23,BGO20W50C,142.0
 __export__.product_template_49804_fbfb3d2a,BGO10W30C,33.0
 __export__.product_template_50076_3663fb14,DJ221002,1.0
 __export__.product_template_50237_3271aa93,JF161009,0.0
@@ -19,10 +19,10 @@ __export__.product_template_50294_ae7769d6,CMUAA191085,8.0
 __export__.product_template_50295_84cb0fbe,CMUBA191050,180.0
 __export__.product_template_50296_c4b83302,CMUBA191051,9.0
 __export__.product_template_50297_1be82d35,CMUBA191052,8.0
-__export__.product_template_50298_026e7b7d,CMUDJ191015,10.0
+__export__.product_template_50298_026e7b7d,CMUDJ191015,9.0
 __export__.product_template_50299_a2218484,CMUDS191001,6.0
-__export__.product_template_50300_2205b26a,CMUDS191054,10.0
-__export__.product_template_50301_a6dd37c3,CMUDU191006,13.0
+__export__.product_template_50300_2205b26a,CMUDS191054,9.0
+__export__.product_template_50301_a6dd37c3,CMUDU191006,11.0
 __export__.product_template_50302_02e161d8,CMUJD161200,1.0
 __export__.product_template_50303_6edc408d,CMUJD161201,9.0
 __export__.product_template_50304_9dabdf5d,CMUJZ161203,22.0
@@ -42,7 +42,7 @@ __export__.product_template_50367_4fd915ca,36AU0001,1.0
 __export__.product_template_50368_2b7a61ce,AF101277,1.0
 __export__.product_template_50369_8992b91d,RA511202,2.0
 __export__.product_template_50370_072d6815,CMU24191092,9.0
-__export__.product_template_50371_6183f11a,CMU24191059,5.0
+__export__.product_template_50371_6183f11a,CMU24191059,1.0
 __export__.product_template_50372_b7d4d6e1,R56DK05X3,4.0
 __export__.product_template_50567_d7209cdb,CMUBG131802,10.0
 __export__.product_template_50827_e1d07c2e,CMU24190216,1.0
@@ -51,7 +51,7 @@ __export__.product_template_50830_59a2712e,CMU24150501,12.0
 __export__.product_template_50831_b8d73034,AA201570,0.0
 __export__.product_template_50855_321ccd42,36172201,0.0
 __export__.product_template_50954_0b8ed091,CMUAA191068,15.0
-__export__.product_template_50955_e8fa9793,CMUDU191041,6.0
+__export__.product_template_50955_e8fa9793,CMUDU191041,5.0
 __export__.product_template_50956_fb332189,CMUAA191010,15.0
 __export__.product_template_50957_651cd942,CMUDZ191014,0.0
 __export__.product_template_50966_0fd49d7d,CMUAA191091,12.0
@@ -79,7 +79,7 @@ __export__.product_template_51195_2e8a3d1c,SVA0030,300.0
 __export__.product_template_51196_241dec7a,SVA0033,5.0
 __export__.product_template_51197_f34af0c5,SVA0040,20.0
 __export__.product_template_51198_c706f6a3,SVA0029,10.0
-__export__.product_template_51199_e8539b46,SVA0031,50.0
+__export__.product_template_51199_e8539b46,SVA0031,46.0
 __export__.product_template_51200_30c610f8,SVA0034,20.0
 __export__.product_template_51201_7800b046,SVA0038,15.0
 __export__.product_template_51202_d99bb517,SVA0028,15.0
@@ -143,7 +143,7 @@ point_of_sale.01160508,01160508,-6.0
 point_of_sale.01160509,01160509,-39.0
 point_of_sale.01160717,01160717,-52.0
 point_of_sale.01170110,01170110,0.0
-point_of_sale.01170111,01170111,82.0
+point_of_sale.01170111,01170111,80.0
 point_of_sale.01170119,01170119,-34.0
 point_of_sale.01170122,01170122,-18.0
 point_of_sale.01170130,01170130,0.0
@@ -160,10 +160,10 @@ point_of_sale.02140121,02140121,-1.0
 point_of_sale.02190249,02190249,0.0
 point_of_sale.03100308,03100308,-2.0
 point_of_sale.03100335,03100335,23.0
-point_of_sale.03100338,03100338,46.0
+point_of_sale.03100338,03100338,45.0
 point_of_sale.03100609,03100609,-1.0
 point_of_sale.03100619,03100619,10.0
-point_of_sale.03100620,03100620,21.0
+point_of_sale.03100620,03100620,20.0
 point_of_sale.03100621,03100621,7.0
 point_of_sale.03100622,03100622,9.0
 point_of_sale.03100623,03100623,0.0
@@ -199,7 +199,7 @@ point_of_sale.05101051,05101051,0.0
 point_of_sale.05101056,05101056,0.0
 point_of_sale.05101057,05101057,0.0
 point_of_sale.05101071,05101071,11.0
-point_of_sale.05101072,05101072,44.0
+point_of_sale.05101072,05101072,43.0
 point_of_sale.05101083,05101083,0.0
 point_of_sale.05111065,05111065,0.0
 point_of_sale.05111095,05111095,0.0
@@ -240,7 +240,7 @@ point_of_sale.06101098,06101098,0.0
 point_of_sale.06101099,06101099,0.0
 point_of_sale.06101112,06101112,0.0
 point_of_sale.06101213,06101213,-1.0
-point_of_sale.06101218,06101218,5.0
+point_of_sale.06101218,06101218,4.0
 point_of_sale.06101252,06101252,78.0
 point_of_sale.06101254,06101254,-3.0
 point_of_sale.06111026,06111026,0.0
@@ -438,7 +438,7 @@ point_of_sale.20201030,20201030,0.0
 point_of_sale.20201031,20201031,0.0
 point_of_sale.20221002,20221002,0.0
 point_of_sale.21100314,21100314,0.0
-point_of_sale.21100324,21100324,48.0
+point_of_sale.21100324,21100324,28.0
 point_of_sale.21100711,21100711,0.0
 point_of_sale.21101408,21101408,-1.0
 point_of_sale.21101427,21101427,32.0
@@ -581,7 +581,7 @@ point_of_sale.24100908,24100908,0.0
 point_of_sale.24101006,24101006,144.0
 point_of_sale.24101031,24101031,0.0
 point_of_sale.24101049,24101049,0.0
-point_of_sale.24101050,24101050,4.0
+point_of_sale.24101050,24101050,3.0
 point_of_sale.24101054,24101054,0.0
 point_of_sale.24101055,24101055,5.0
 point_of_sale.24101056,24101056,7.0
@@ -595,7 +595,7 @@ point_of_sale.24101087,24101087,0.0
 point_of_sale.24101096,24101096,-1.0
 point_of_sale.24101100,24101100,2.0
 point_of_sale.24101109,24101109,36.0
-point_of_sale.24101114,24101114,31.0
+point_of_sale.24101114,24101114,30.0
 point_of_sale.24101121,24101121,16.0
 point_of_sale.24101122,24101122,-2.0
 point_of_sale.24101123,24101123,0.0
@@ -883,7 +883,7 @@ point_of_sale.24151167,24151167,3.0
 point_of_sale.24151168,24151168,0.0
 point_of_sale.24151169,24151169,0.0
 point_of_sale.24151170,24151170,0.0
-point_of_sale.24151171,24151171,90.0
+point_of_sale.24151171,24151171,88.0
 point_of_sale.24151172,24151172,0.0
 point_of_sale.24151173,24151173,6.0
 point_of_sale.24151174,24151174,0.0
@@ -976,7 +976,7 @@ point_of_sale.24171055,24171055,47.0
 point_of_sale.24171063,24171063,0.0
 point_of_sale.24171066,24171066,212.0
 point_of_sale.24171075,24171075,0.0
-point_of_sale.24171076,24171076,81.0
+point_of_sale.24171076,24171076,80.0
 point_of_sale.24171079,24171079,0.0
 point_of_sale.24171082,24171082,0.0
 point_of_sale.24171094,24171094,21.0
@@ -1155,7 +1155,7 @@ point_of_sale.28101089,28101089,0.0
 point_of_sale.28101099,28101099,-1.0
 point_of_sale.28101103,28101103,0.0
 point_of_sale.28101107,28101107,145.0
-point_of_sale.28101110,28101110,14.0
+point_of_sale.28101110,28101110,13.0
 point_of_sale.28101118,28101118,142.0
 point_of_sale.28101119,28101119,-1.0
 point_of_sale.28101125,28101125,0.0
@@ -1252,7 +1252,7 @@ point_of_sale.30101115,30101115,0.0
 point_of_sale.30101121,30101121,0.0
 point_of_sale.30101133,30101133,0.0
 point_of_sale.30101136,30101136,0.0
-point_of_sale.30101142,30101142,171.0
+point_of_sale.30101142,30101142,169.0
 point_of_sale.30101154,30101154,3.0
 point_of_sale.30101185,30101185,0.0
 point_of_sale.30101192,30101192,0.0
@@ -1281,7 +1281,7 @@ point_of_sale.30151032,30151032,0.0
 point_of_sale.30151033,30151033,1.0
 point_of_sale.30151035,30151035,5.0
 point_of_sale.30151038,30151038,0.0
-point_of_sale.30151039,30151039,14.0
+point_of_sale.30151039,30151039,13.0
 point_of_sale.30151041,30151041,23.0
 point_of_sale.30151042,30151042,0.0
 point_of_sale.30151046,30151046,0.0
@@ -1307,7 +1307,7 @@ point_of_sale.30161157,30161157,11.0
 point_of_sale.30161158,30161158,22.0
 point_of_sale.30161168,30161168,0.0
 point_of_sale.30161169,30161169,-3.0
-point_of_sale.30171018,30171018,0.0
+point_of_sale.30171018,30171018,-2.0
 point_of_sale.30171022,30171022,0.0
 point_of_sale.30171023,30171023,0.0
 point_of_sale.30171024,30171024,0.0
@@ -1332,7 +1332,7 @@ point_of_sale.30191022,30191022,0.0
 point_of_sale.30191023,30191023,1.0
 point_of_sale.30191024,30191024,0.0
 point_of_sale.30191030,30191030,-2.0
-point_of_sale.30191031,30191031,157.0
+point_of_sale.30191031,30191031,156.0
 point_of_sale.30191035,30191035,29.0
 point_of_sale.30191036,30191036,0.0
 point_of_sale.30191037,30191037,-27.0
@@ -1426,7 +1426,7 @@ point_of_sale.31121006,31121006,-3.0
 point_of_sale.31121007,31121007,0.0
 point_of_sale.31121008,31121008,1.0
 point_of_sale.31121014,31121014,0.0
-point_of_sale.31121029,31121029,75.0
+point_of_sale.31121029,31121029,74.0
 point_of_sale.31121041,31121041,0.0
 point_of_sale.31121055,31121055,0.0
 point_of_sale.31121067,31121067,-1.0
@@ -1456,7 +1456,7 @@ point_of_sale.31151037,31151037,1.0
 point_of_sale.31151041,31151041,0.0
 point_of_sale.31151042,31151042,0.0
 point_of_sale.31151056,31151056,0.0
-point_of_sale.31151060,31151060,98.0
+point_of_sale.31151060,31151060,97.0
 point_of_sale.31151060K,31151060K,0.0
 point_of_sale.31151064,31151064,0.0
 point_of_sale.31161008,31161008,0.0
@@ -1499,7 +1499,7 @@ point_of_sale.31201028,31201028,-1.0
 point_of_sale.31201045,31201045,0.0
 point_of_sale.31201051,31201051,0.0
 point_of_sale.31201078,31201078,-5.0
-point_of_sale.31201079,31201079,13.0
+point_of_sale.31201079,31201079,10.0
 point_of_sale.31201080,31201080,0.0
 point_of_sale.31201081,31201081,7.0
 point_of_sale.31201090,31201090,0.0
@@ -1507,7 +1507,7 @@ point_of_sale.32201021,32201021,0.0
 point_of_sale.33141007,33141007,0.0
 point_of_sale.33141008,33141008,46.0
 point_of_sale.35101058,35101058,-1.0
-point_of_sale.35101059,35101059,6.0
+point_of_sale.35101059,35101059,5.0
 point_of_sale.35101060,35101060,-4.0
 point_of_sale.35101114,35101114,0.0
 point_of_sale.35101167,35101167,0.0
@@ -1532,7 +1532,7 @@ point_of_sale.35191041,35191041,0.0
 point_of_sale.35191043,35191043,0.0
 point_of_sale.35201098,35201098,0.0
 point_of_sale.35790323,35790323,0.0
-point_of_sale.36011001,36011001,129.0
+point_of_sale.36011001,36011001,128.0
 point_of_sale.36101601,36101601,0.0
 point_of_sale.36102401,36102401,0.0
 point_of_sale.36103002,36103002,0.0
@@ -1556,7 +1556,7 @@ point_of_sale.36224006,36224006,0.0
 point_of_sale.36241001,36241001,0.0
 point_of_sale.36241001K,36241001K,0.0
 point_of_sale.36241002,36241002,9.0
-point_of_sale.36241010,36241010,19.0
+point_of_sale.36241010,36241010,18.0
 point_of_sale.36241011,36241011,0.0
 point_of_sale.36244004,36244004,0.0
 point_of_sale.36244005,36244005,0.0
@@ -1567,24 +1567,24 @@ point_of_sale.36244044,36244044,1.0
 point_of_sale.36244055,36244055,0.0
 point_of_sale.36244062,36244062,0.0
 point_of_sale.36244063,36244063,1.0
-point_of_sale.36281008,36281008,17.0
+point_of_sale.36281008,36281008,16.0
 point_of_sale.36301509,36301509,-2.0
 point_of_sale.36311006,36311006,10.0
 point_of_sale.36311008,36311008,86.0
 point_of_sale.36311014,36311014,-13.0
 point_of_sale.36311027,36311027,19.0
-point_of_sale.36311028,36311028,30.0
+point_of_sale.36311028,36311028,28.0
 point_of_sale.36311032,36311032,0.0
 point_of_sale.36311508,36311508,13.0
 point_of_sale.36311803,36311803,0.0
 point_of_sale.36314001,36314001,19.0
-point_of_sale.36314001K,36314001K,36.0
+point_of_sale.36314001K,36314001K,34.0
 point_of_sale.36314002,36314002,47.0
 point_of_sale.36314005,36314005,0.0
 point_of_sale.36314006,36314006,6.0
 point_of_sale.36AA1003,36AA1003,3.0
-point_of_sale.36AA1003K,36AA1003K,70.0
-point_of_sale.36AA1004,36AA1004,76.0
+point_of_sale.36AA1003K,36AA1003K,68.0
+point_of_sale.36AA1004,36AA1004,74.0
 point_of_sale.36AA4007,36AA4007,12.0
 point_of_sale.36AA4008,36AA4008,0.0
 point_of_sale.36AA4012,36AA4012,2.0
@@ -1624,7 +1624,7 @@ point_of_sale.36AA4074,36AA4074,0.0
 point_of_sale.36AA4075,36AA4075,0.0
 point_of_sale.36AA4082,36AA4082,0.0
 point_of_sale.36AA4100,36AA4100,0.0
-point_of_sale.36AA4102,36AA4102,18.0
+point_of_sale.36AA4102,36AA4102,17.0
 point_of_sale.36AA4105,36AA4105,3.0
 point_of_sale.36AA4106,36AA4106,28.0
 point_of_sale.36AA4110,36AA4110,2.0
@@ -1703,10 +1703,10 @@ point_of_sale.36DD1502,36DD1502,0.0
 point_of_sale.36DD1503,36DD1503,0.0
 point_of_sale.36DD1504,36DD1504,2.0
 point_of_sale.36DD4001,36DD4001,7.0
-point_of_sale.36DD4002,36DD4002,41.0
+point_of_sale.36DD4002,36DD4002,39.0
 point_of_sale.36DD4006,36DD4006,7.0
 point_of_sale.36DD4007,36DD4007,0.0
-point_of_sale.36DD4008,36DD4008,17.0
+point_of_sale.36DD4008,36DD4008,14.0
 point_of_sale.36DD4008K,36DD4008K,44.0
 point_of_sale.36DD4009,36DD4009,0.0
 point_of_sale.36DD4010,36DD4010,0.0
@@ -1737,7 +1737,7 @@ point_of_sale.36DH4018,36DH4018,-2.0
 point_of_sale.36DH4019,36DH4019,1.0
 point_of_sale.36DH4020,36DH4020,-11.0
 point_of_sale.36DH4021,36DH4021,0.0
-point_of_sale.36DH4025,36DH4025,3.0
+point_of_sale.36DH4025,36DH4025,2.0
 point_of_sale.36DH4027,36DH4027,6.0
 point_of_sale.36DH4028,36DH4028,0.0
 point_of_sale.36DH4030,36DH4030,23.0
@@ -1748,7 +1748,7 @@ point_of_sale.36DH4035,36DH4035,0.0
 point_of_sale.36DH4037,36DH4037,0.0
 point_of_sale.36DH4038,36DH4038,0.0
 point_of_sale.36DH4039,36DH4039,0.0
-point_of_sale.36DH4041,36DH4041,43.0
+point_of_sale.36DH4041,36DH4041,42.0
 point_of_sale.36DH4042,36DH4042,0.0
 point_of_sale.36DH4043,36DH4043,0.0
 point_of_sale.36DH4044,36DH4044,0.0
@@ -1861,7 +1861,7 @@ point_of_sale.36DJ4082,36DJ4082,0.0
 point_of_sale.36DJ4089,36DJ4089,0.0
 point_of_sale.36DJ4092,36DJ4092,0.0
 point_of_sale.36DJ4093,36DJ4093,0.0
-point_of_sale.36DJ4104,36DJ4104,27.0
+point_of_sale.36DJ4104,36DJ4104,26.0
 point_of_sale.36DK0004,36DK0004,0.0
 point_of_sale.36DK0005,36DK0005,-1.0
 point_of_sale.36DK0007,36DK0007,-1.0
@@ -1933,9 +1933,9 @@ point_of_sale.36DK0183,36DK0183,0.0
 point_of_sale.36DM0001,36DM0001,1.0
 point_of_sale.36DS1000,36DS1000,4.0
 point_of_sale.36DS1001,36DS1001,45.0
-point_of_sale.36DS1002,36DS1002,25.0
+point_of_sale.36DS1002,36DS1002,23.0
 point_of_sale.36DS1003,36DS1003,-1.0
-point_of_sale.36DS1004,36DS1004,28.0
+point_of_sale.36DS1004,36DS1004,25.0
 point_of_sale.36DS1007,36DS1007,-1.0
 point_of_sale.36DS1201,36DS1201,6.0
 point_of_sale.36DS1202,36DS1202,3.0
@@ -2011,8 +2011,8 @@ point_of_sale.36DU1505,36DU1505,0.0
 point_of_sale.36DU1901,36DU1901,8.0
 point_of_sale.36DU4003,36DU4003,1.0
 point_of_sale.36DU4004,36DU4004,0.0
-point_of_sale.36DU4017,36DU4017,2.0
-point_of_sale.36DU4026,36DU4026,15.0
+point_of_sale.36DU4017,36DU4017,0.0
+point_of_sale.36DU4026,36DU4026,14.0
 point_of_sale.36DU4037,36DU4037,0.0
 point_of_sale.36DU4038,36DU4038,0.0
 point_of_sale.36DU4041,36DU4041,0.0
@@ -2119,7 +2119,7 @@ point_of_sale.36JD0093,36JD0093,0.0
 point_of_sale.36JD0104,36JD0104,0.0
 point_of_sale.36JE0001,36JE0001,0.0
 point_of_sale.36JE0002,36JE0002,1.0
-point_of_sale.36JE0003,36JE0003,22.0
+point_of_sale.36JE0003,36JE0003,20.0
 point_of_sale.36JE0004,36JE0004,0.0
 point_of_sale.36JE0005,36JE0005,11.0
 point_of_sale.36JE0007,36JE0007,2.0
@@ -2356,7 +2356,7 @@ point_of_sale.36JL0145,36JL0145,0.0
 point_of_sale.36JL0189,36JL0189,0.0
 point_of_sale.36JL0191,36JL0191,0.0
 point_of_sale.36JN0007,36JN0007,13.0
-point_of_sale.36JN0015,36JN0015,5.0
+point_of_sale.36JN0015,36JN0015,4.0
 point_of_sale.36JP0001,36JP0001,0.0
 point_of_sale.36JP0003,36JP0003,0.0
 point_of_sale.36JP0004,36JP0004,0.0
@@ -2480,7 +2480,7 @@ point_of_sale.36JY0221,36JY0221,0.0
 point_of_sale.36JY0224,36JY0224,0.0
 point_of_sale.36JY0226,36JY0226,0.0
 point_of_sale.36JY0239,36JY0239,0.0
-point_of_sale.36JZ0001,36JZ0001,9.0
+point_of_sale.36JZ0001,36JZ0001,8.0
 point_of_sale.36JZ0002,36JZ0002,5.0
 point_of_sale.36JZ0003,36JZ0003,0.0
 point_of_sale.36JZ0004,36JZ0004,0.0
@@ -2550,7 +2550,7 @@ point_of_sale.36JZ0098,36JZ0098,2.0
 point_of_sale.36JZ0099,36JZ0099,0.0
 point_of_sale.36JZ0101,36JZ0101,0.0
 point_of_sale.36JZ0102,36JZ0102,60.0
-point_of_sale.36JZ0103,36JZ0103,53.0
+point_of_sale.36JZ0103,36JZ0103,52.0
 point_of_sale.36JZ0107,36JZ0107,0.0
 point_of_sale.36JZ0110,36JZ0110,0.0
 point_of_sale.36JZ0111,36JZ0111,1.0
@@ -2862,14 +2862,14 @@ point_of_sale.39030715,39030715,-2.0
 point_of_sale.39032615,39032615,0.0
 point_of_sale.39033617,39033617,-1.0
 point_of_sale.39033717,39033717,45.0
-point_of_sale.39034017,39034017,100.0
+point_of_sale.39034017,39034017,96.0
 point_of_sale.39034217,39034217,2.0
 point_of_sale.39037511,39037511,0.0
 point_of_sale.39038709,39038709,-3.0
 point_of_sale.39038904,39038904,-20.0
 point_of_sale.39039004,39039004,50.0
 point_of_sale.39042215,39042215,48.0
-point_of_sale.39042606,39042606,611.0
+point_of_sale.39042606,39042606,610.0
 point_of_sale.39042706,39042706,0.0
 point_of_sale.39042817,39042817,0.0
 point_of_sale.39043217,39043217,0.0
@@ -2960,7 +2960,7 @@ point_of_sale.39093915,39093915,0.0
 point_of_sale.39095615,39095615,-6.0
 point_of_sale.39096315,39096315,-2.0
 point_of_sale.39097204,39097204,77.0
-point_of_sale.39097315,39097315,451.0
+point_of_sale.39097315,39097315,450.0
 point_of_sale.39097804,39097804,-4.0
 point_of_sale.39098004,39098004,-8.0
 point_of_sale.39098115,39098115,-1.0
@@ -2993,12 +2993,12 @@ point_of_sale.39102121,39102121,-6.0
 point_of_sale.39102304,39102304,-3.0
 point_of_sale.39102821,39102821,23.0
 point_of_sale.39103309,39103309,331.0
-point_of_sale.39103519,39103519,542.0
+point_of_sale.39103519,39103519,538.0
 point_of_sale.39104011,39104011,0.0
 point_of_sale.39104119,39104119,12.0
 point_of_sale.39104219,39104219,75.0
 point_of_sale.39104319,39104319,-7.0
-point_of_sale.39104619,39104619,121.0
+point_of_sale.39104619,39104619,120.0
 point_of_sale.39104904,39104904,0.0
 point_of_sale.39105315,39105315,6.0
 point_of_sale.39105411,39105411,-2.0
@@ -3070,7 +3070,7 @@ point_of_sale.39152301,39152301,0.0
 point_of_sale.39152401,39152401,0.0
 point_of_sale.39153419,39153419,-1.0
 point_of_sale.39153519,39153519,0.0
-point_of_sale.39153721,39153721,30.0
+point_of_sale.39153721,39153721,29.0
 point_of_sale.39154011,39154011,0.0
 point_of_sale.39154321,39154321,0.0
 point_of_sale.39154905,39154905,5.0
@@ -3101,8 +3101,8 @@ point_of_sale.39166005,39166005,67.0
 point_of_sale.39166311,39166311,0.0
 point_of_sale.39166511,39166511,0.0
 point_of_sale.39166711,39166711,0.0
-point_of_sale.39167121,39167121,72.0
-point_of_sale.39167204,39167204,0.0
+point_of_sale.39167121,39167121,71.0
+point_of_sale.39167204,39167204,-2.0
 point_of_sale.39167304,39167304,146.0
 point_of_sale.39167404,39167404,-9.0
 point_of_sale.39167604,39167604,0.0
@@ -3117,7 +3117,7 @@ point_of_sale.39169901,39169901,-4.0
 point_of_sale.39170207,39170207,0.0
 point_of_sale.39170415,39170415,-4.0
 point_of_sale.39170919,39170919,0.0
-point_of_sale.39171519,39171519,235.0
+point_of_sale.39171519,39171519,231.0
 point_of_sale.39171619,39171619,48.0
 point_of_sale.39171905,39171905,13.0
 point_of_sale.39172104,39172104,25.0
@@ -3162,19 +3162,19 @@ point_of_sale.39185519,39185519,7.0
 point_of_sale.39185604,39185604,0.0
 point_of_sale.39185821,39185821,0.0
 point_of_sale.39186319,39186319,0.0
-point_of_sale.39186420,39186420,9.0
+point_of_sale.39186420,39186420,5.0
 point_of_sale.39186919,39186919,86.0
 point_of_sale.39187019,39187019,65.0
 point_of_sale.39187105,39187105,51.0
 point_of_sale.39187411,39187411,0.0
-point_of_sale.39188020,39188020,27.0
+point_of_sale.39188020,39188020,26.0
 point_of_sale.39188515,39188515,59.0
 point_of_sale.39189921,39189921,0.0
 point_of_sale.39190204,39190204,0.0
 point_of_sale.39190701,39190701,0.0
 point_of_sale.39191204,39191204,0.0
-point_of_sale.39191719,39191719,44.0
-point_of_sale.39192707,39192707,-1.0
+point_of_sale.39191719,39191719,43.0
+point_of_sale.39192707,39192707,-2.0
 point_of_sale.39193120,39193120,12.0
 point_of_sale.39193815,39193815,145.0
 point_of_sale.39194004,39194004,-4.0
@@ -3199,7 +3199,7 @@ point_of_sale.39199715,39199715,0.0
 point_of_sale.39199819,39199819,70.0
 point_of_sale.39200811,39200811,97.0
 point_of_sale.39201619,39201619,-2.0
-point_of_sale.39201719,39201719,92.0
+point_of_sale.39201719,39201719,78.0
 point_of_sale.39203804,39203804,0.0
 point_of_sale.39204021,39204021,15.0
 point_of_sale.39206004,39206004,0.0
@@ -3220,13 +3220,13 @@ point_of_sale.39216511,39216511,0.0
 point_of_sale.39216611,39216611,0.0
 point_of_sale.39217924,39217924,0.0
 point_of_sale.39218006,39218006,-6.0
-point_of_sale.39218106,39218106,25.0
+point_of_sale.39218106,39218106,24.0
 point_of_sale.39218304,39218304,0.0
 point_of_sale.39218520,39218520,0.0
 point_of_sale.39218819,39218819,50.0
 point_of_sale.39218919,39218919,543.0
 point_of_sale.39218919K,39218919K,0.0
-point_of_sale.39219019,39219019,224.0
+point_of_sale.39219019,39219019,221.0
 point_of_sale.39219421,39219421,1.0
 point_of_sale.39219721,39219721,0.0
 point_of_sale.39219908,39219908,0.0
@@ -3240,7 +3240,7 @@ point_of_sale.39222204,39222204,0.0
 point_of_sale.39222815,39222815,-2.0
 point_of_sale.39223202,39223202,0.0
 point_of_sale.39223801,39223801,0.0
-point_of_sale.39224020,39224020,9.0
+point_of_sale.39224020,39224020,8.0
 point_of_sale.39224120,39224120,0.0
 point_of_sale.39224220,39224220,0.0
 point_of_sale.39224915,39224915,0.0
@@ -3266,7 +3266,7 @@ point_of_sale.39239304,39239304,31.0
 point_of_sale.39239620,39239620,23.0
 point_of_sale.39239620K,39239620K,0.0
 point_of_sale.39240011,39240011,0.0
-point_of_sale.39240320,39240320,70.0
+point_of_sale.39240320,39240320,69.0
 point_of_sale.39240817,39240817,0.0
 point_of_sale.39241204,39241204,0.0
 point_of_sale.39241304,39241304,0.0
@@ -3749,7 +3749,7 @@ point_of_sale.52DU0197,52DU0197,0.0
 point_of_sale.52DU0239,52DU0239,3.0
 point_of_sale.52DU0240,52DU0240,0.0
 point_of_sale.52DU0249,52DU0249,0.0
-point_of_sale.52DU0289,52DU0289,2.0
+point_of_sale.52DU0289,52DU0289,1.0
 point_of_sale.52DU0290,52DU0290,0.0
 point_of_sale.52DU0291,52DU0291,0.0
 point_of_sale.52DU0292,52DU0292,0.0
@@ -3759,7 +3759,7 @@ point_of_sale.52DU0555,52DU0555,0.0
 point_of_sale.52DU0575,52DU0575,9.0
 point_of_sale.52DU0576,52DU0576,0.0
 point_of_sale.52DU0577,52DU0577,2.0
-point_of_sale.52DU0578,52DU0578,27.0
+point_of_sale.52DU0578,52DU0578,26.0
 point_of_sale.52DU0579,52DU0579,6.0
 point_of_sale.52DU0580,52DU0580,0.0
 point_of_sale.52DU0582,52DU0582,-1.0
@@ -4665,7 +4665,7 @@ point_of_sale.AA101003,AA101003,0.0
 point_of_sale.AA101004,AA101004,52.0
 point_of_sale.AA101009,AA101009,60.0
 point_of_sale.AA101013,AA101013,119.0
-point_of_sale.AA101015,AA101015,23.0
+point_of_sale.AA101015,AA101015,21.0
 point_of_sale.AA101025,AA101025,0.0
 point_of_sale.AA101031,AA101031,1.0
 point_of_sale.AA101033,AA101033,5.0
@@ -4689,7 +4689,7 @@ point_of_sale.AA101073,AA101073,-1.0
 point_of_sale.AA101074,AA101074,0.0
 point_of_sale.AA101076,AA101076,10.0
 point_of_sale.AA101077,AA101077,1.0
-point_of_sale.AA101084,AA101084,66.0
+point_of_sale.AA101084,AA101084,65.0
 point_of_sale.AA101108,AA101108,6.0
 point_of_sale.AA101116,AA101116,72.0
 point_of_sale.AA101122,AA101122,-2.0
@@ -4698,7 +4698,7 @@ point_of_sale.AA101124,AA101124,0.0
 point_of_sale.AA101127,AA101127,0.0
 point_of_sale.AA101128,AA101128,0.0
 point_of_sale.AA101132,AA101132,0.0
-point_of_sale.AA101134,AA101134,72.0
+point_of_sale.AA101134,AA101134,71.0
 point_of_sale.AA101135,AA101135,0.0
 point_of_sale.AA101137,AA101137,19.0
 point_of_sale.AA101138,AA101138,40.0
@@ -4710,7 +4710,7 @@ point_of_sale.AA101145,AA101145,-1.0
 point_of_sale.AA101150,AA101150,-1.0
 point_of_sale.AA101154,AA101154,111.0
 point_of_sale.AA101155,AA101155,0.0
-point_of_sale.AA101156,AA101156,128.0
+point_of_sale.AA101156,AA101156,127.0
 point_of_sale.AA101157,AA101157,0.0
 point_of_sale.AA101162,AA101162,2.0
 point_of_sale.AA101168,AA101168,17.0
@@ -4720,7 +4720,7 @@ point_of_sale.AA101206,AA101206,0.0
 point_of_sale.AA101207,AA101207,19.0
 point_of_sale.AA101208,AA101208,0.0
 point_of_sale.AA101209,AA101209,0.0
-point_of_sale.AA101210,AA101210,112.0
+point_of_sale.AA101210,AA101210,105.0
 point_of_sale.AA101210K,AA101210K,0.0
 point_of_sale.AA101211,AA101211,12.0
 point_of_sale.AA101212,AA101212,-4.0
@@ -4761,7 +4761,7 @@ point_of_sale.AA101340,AA101340,0.0
 point_of_sale.AA101345,AA101345,149.0
 point_of_sale.AA101347,AA101347,0.0
 point_of_sale.AA101361,AA101361,-2.0
-point_of_sale.AA101364,AA101364,89.0
+point_of_sale.AA101364,AA101364,83.0
 point_of_sale.AA101366,AA101366,0.0
 point_of_sale.AA101370,AA101370,0.0
 point_of_sale.AA101373,AA101373,0.0
@@ -4785,7 +4785,7 @@ point_of_sale.AA101466,AA101466,0.0
 point_of_sale.AA101468,AA101468,3.0
 point_of_sale.AA101470,AA101470,10.0
 point_of_sale.AA101471,AA101471,5.0
-point_of_sale.AA101472,AA101472,293.0
+point_of_sale.AA101472,AA101472,287.0
 point_of_sale.AA101473,AA101473,12.0
 point_of_sale.AA101474,AA101474,1.0
 point_of_sale.AA101475,AA101475,7.0
@@ -4805,7 +4805,7 @@ point_of_sale.AA101560,AA101560,0.0
 point_of_sale.AA101564,AA101564,46.0
 point_of_sale.AA101565,AA101565,90.0
 point_of_sale.AA101567,AA101567,0.0
-point_of_sale.AA101569,AA101569,40.0
+point_of_sale.AA101569,AA101569,38.0
 point_of_sale.AA101570,AA101570,149.0
 point_of_sale.AA101571,AA101571,0.0
 point_of_sale.AA101577,AA101577,1.0
@@ -5054,7 +5054,7 @@ point_of_sale.AA121305,AA121305,0.0
 point_of_sale.AA121322,AA121322,0.0
 point_of_sale.AA121324,AA121324,0.0
 point_of_sale.AA121328,AA121328,0.0
-point_of_sale.AA121336,AA121336,18.0
+point_of_sale.AA121336,AA121336,17.0
 point_of_sale.AA131002,AA131002,-1.0
 point_of_sale.AA131004,AA131004,54.0
 point_of_sale.AA131014,AA131014,0.0
@@ -5065,7 +5065,7 @@ point_of_sale.AA131025,AA131025,0.0
 point_of_sale.AA131033,AA131033,1.0
 point_of_sale.AA131036,AA131036,19.0
 point_of_sale.AA131043,AA131043,0.0
-point_of_sale.AA131049,AA131049,14.0
+point_of_sale.AA131049,AA131049,13.0
 point_of_sale.AA131063,AA131063,18.0
 point_of_sale.AA131074,AA131074,1.0
 point_of_sale.AA131078,AA131078,0.0
@@ -5319,7 +5319,7 @@ point_of_sale.AB101014,AB101014,-4.0
 point_of_sale.AB101038,AB101038,2.0
 point_of_sale.AB101058,AB101058,4.0
 point_of_sale.AB101059,AB101059,1.0
-point_of_sale.AB101067,AB101067,1.0
+point_of_sale.AB101067,AB101067,0.0
 point_of_sale.AB101084,AB101084,0.0
 point_of_sale.AB101100,AB101100,0.0
 point_of_sale.AB111001,AB111001,0.0
@@ -5430,7 +5430,7 @@ point_of_sale.AE101063,AE101063,0.0
 point_of_sale.AE101068,AE101068,8.0
 point_of_sale.AE101069,AE101069,0.0
 point_of_sale.AE101070,AE101070,8.0
-point_of_sale.AE121001,AE121001,-3.0
+point_of_sale.AE121001,AE121001,-4.0
 point_of_sale.AE121004,AE121004,0.0
 point_of_sale.AE121006,AE121006,1.0
 point_of_sale.AE121007,AE121007,18.0
@@ -5675,7 +5675,7 @@ point_of_sale.AN101062,AN101062,0.0
 point_of_sale.AN101066,AN101066,5.0
 point_of_sale.AN101068,AN101068,0.0
 point_of_sale.AN101070,AN101070,3.0
-point_of_sale.AN101083,AN101083,9.0
+point_of_sale.AN101083,AN101083,8.0
 point_of_sale.AN101084,AN101084,0.0
 point_of_sale.AN101085,AN101085,0.0
 point_of_sale.AN101104,AN101104,34.0
@@ -5686,7 +5686,7 @@ point_of_sale.AN101123,AN101123,41.0
 point_of_sale.AN101123K,AN101123K,0.0
 point_of_sale.AN101123KA,AN101123KA,0.0
 point_of_sale.AN101127,AN101127,2.0
-point_of_sale.AN101129,AN101129,20.0
+point_of_sale.AN101129,AN101129,19.0
 point_of_sale.AN101133,AN101133,0.0
 point_of_sale.AN101135,AN101135,194.0
 point_of_sale.AN101138,AN101138,7.0
@@ -5706,7 +5706,7 @@ point_of_sale.AN101178,AN101178,0.0
 point_of_sale.AN101181,AN101181,8.0
 point_of_sale.AN101182,AN101182,11.0
 point_of_sale.AN101183,AN101183,0.0
-point_of_sale.AN101186,AN101186,41.0
+point_of_sale.AN101186,AN101186,40.0
 point_of_sale.AN101188,AN101188,0.0
 point_of_sale.AN101189,AN101189,0.0
 point_of_sale.AN101190,AN101190,19.0
@@ -6942,7 +6942,7 @@ point_of_sale.CB101026,CB101026,0.0
 point_of_sale.CB101032,CB101032,0.0
 point_of_sale.CB101074,CB101074,0.0
 point_of_sale.CB101079,CB101079,0.0
-point_of_sale.CB101114,CB101114,132.0
+point_of_sale.CB101114,CB101114,131.0
 point_of_sale.CB101181,CB101181,0.0
 point_of_sale.CB101254,CB101254,0.0
 point_of_sale.CB111008,CB111008,4.0
@@ -6977,7 +6977,7 @@ point_of_sale.CF111019,CF111019,0.0
 point_of_sale.CF181004,CF181004,0.0
 point_of_sale.CF181008,CF181008,0.0
 point_of_sale.CF201015,CF201015,0.0
-point_of_sale.CL201023,CL201023,81.0
+point_of_sale.CL201023,CL201023,80.0
 point_of_sale.CL201042,CL201042,0.0
 point_of_sale.CM101029,CM101029,0.0
 point_of_sale.CM191049,CM191049,117.0
@@ -6986,7 +6986,7 @@ point_of_sale.CR101062,CR101062,0.0
 point_of_sale.CR101068,CR101068,0.0
 point_of_sale.CS101114,CS101114,0.0
 point_of_sale.CS101118,CS101118,0.0
-point_of_sale.CS101128,CS101128,475.0
+point_of_sale.CS101128,CS101128,474.0
 point_of_sale.CS101167,CS101167,0.0
 point_of_sale.CS101170,CS101170,0.0
 point_of_sale.CS101174,CS101174,0.0
@@ -7061,7 +7061,7 @@ point_of_sale.DD101333,DD101333,0.0
 point_of_sale.DD101336,DD101336,10.0
 point_of_sale.DD101343,DD101343,0.0
 point_of_sale.DD101347,DD101347,-2.0
-point_of_sale.DD101349,DD101349,11.0
+point_of_sale.DD101349,DD101349,10.0
 point_of_sale.DD101350,DD101350,0.0
 point_of_sale.DD101355,DD101355,0.0
 point_of_sale.DD101366,DD101366,0.0
@@ -7082,13 +7082,13 @@ point_of_sale.DD101475,DD101475,98.0
 point_of_sale.DD101478,DD101478,0.0
 point_of_sale.DD101480,DD101480,0.0
 point_of_sale.DD101481,DD101481,0.0
-point_of_sale.DD101492,DD101492,31.0
-point_of_sale.DD101493,DD101493,8.0
+point_of_sale.DD101492,DD101492,30.0
+point_of_sale.DD101493,DD101493,7.0
 point_of_sale.DD101495,DD101495,0.0
 point_of_sale.DD101517,DD101517,-6.0
 point_of_sale.DD111011,DD111011,67.0
 point_of_sale.DD111012,DD111012,31.0
-point_of_sale.DD111018,DD111018,207.0
+point_of_sale.DD111018,DD111018,205.0
 point_of_sale.DD111027,DD111027,0.0
 point_of_sale.DD111041,DD111041,0.0
 point_of_sale.DD111042,DD111042,0.0
@@ -7096,7 +7096,7 @@ point_of_sale.DD111046,DD111046,0.0
 point_of_sale.DD111048,DD111048,27.0
 point_of_sale.DD121007,DD121007,0.0
 point_of_sale.DD121009,DD121009,0.0
-point_of_sale.DD121013,DD121013,68.0
+point_of_sale.DD121013,DD121013,53.0
 point_of_sale.DD121014,DD121014,0.0
 point_of_sale.DD121015,DD121015,0.0
 point_of_sale.DD121025,DD121025,0.0
@@ -7117,7 +7117,7 @@ point_of_sale.DD121168,DD121168,0.0
 point_of_sale.DD121169,DD121169,0.0
 point_of_sale.DD121170,DD121170,0.0
 point_of_sale.DD121178,DD121178,0.0
-point_of_sale.DD121181,DD121181,44.0
+point_of_sale.DD121181,DD121181,41.0
 point_of_sale.DD141016,DD141016,0.0
 point_of_sale.DD141022,DD141022,0.0
 point_of_sale.DD141024,DD141024,0.0
@@ -7257,7 +7257,7 @@ point_of_sale.DD201156,DD201156,0.0
 point_of_sale.DD201157,DD201157,0.0
 point_of_sale.DD201167,DD201167,0.0
 point_of_sale.DD201168,DD201168,0.0
-point_of_sale.DD201170,DD201170,9.0
+point_of_sale.DD201170,DD201170,8.0
 point_of_sale.DD221007,DD221007,0.0
 point_of_sale.DD221008,DD221008,2.0
 point_of_sale.DD221017,DD221017,0.0
@@ -7285,7 +7285,7 @@ point_of_sale.DE151013,DE151013,0.0
 point_of_sale.DE151014,DE151014,0.0
 point_of_sale.DE151015,DE151015,1.0
 point_of_sale.DE151030,DE151030,0.0
-point_of_sale.DE151037,DE151037,17.0
+point_of_sale.DE151037,DE151037,15.0
 point_of_sale.DE151043,DE151043,9.0
 point_of_sale.DE151045,DE151045,0.0
 point_of_sale.DE151046,DE151046,10.0
@@ -7323,7 +7323,7 @@ point_of_sale.DE201016,DE201016,0.0
 point_of_sale.DE201017,DE201017,0.0
 point_of_sale.DF101019,DF101019,0.0
 point_of_sale.DF101024,DF101024,0.0
-point_of_sale.DF101055,DF101055,75.0
+point_of_sale.DF101055,DF101055,74.0
 point_of_sale.DF101071,DF101071,0.0
 point_of_sale.DF111007,DF111007,0.0
 point_of_sale.DF111015,DF111015,0.0
@@ -7331,7 +7331,7 @@ point_of_sale.DF111017,DF111017,0.0
 point_of_sale.DF111020,DF111020,2.0
 point_of_sale.DF111033,DF111033,2.0
 point_of_sale.DF111040,DF111040,0.0
-point_of_sale.DF121003,DF121003,6.0
+point_of_sale.DF121003,DF121003,5.0
 point_of_sale.DF121023,DF121023,0.0
 point_of_sale.DF141071,DF141071,0.0
 point_of_sale.DF141120,DF141120,0.0
@@ -7390,8 +7390,8 @@ point_of_sale.DF181083,DF181083,0.0
 point_of_sale.DF181085,DF181085,0.0
 point_of_sale.DF181086,DF181086,0.0
 point_of_sale.DF181090,DF181090,0.0
-point_of_sale.DF181091,DF181091,175.0
-point_of_sale.DF181092,DF181092,80.0
+point_of_sale.DF181091,DF181091,165.0
+point_of_sale.DF181092,DF181092,70.0
 point_of_sale.DF181093,DF181093,0.0
 point_of_sale.DF181094,DF181094,0.0
 point_of_sale.DF181097,DF181097,0.0
@@ -7458,7 +7458,7 @@ point_of_sale.DG101418,DG101418,56.0
 point_of_sale.DG101456,DG101456,3.0
 point_of_sale.DG101460,DG101460,0.0
 point_of_sale.DG101498,DG101498,360.0
-point_of_sale.DG111008,DG111008,39.0
+point_of_sale.DG111008,DG111008,37.0
 point_of_sale.DG121002,DG121002,0.0
 point_of_sale.DG121003,DG121003,0.0
 point_of_sale.DG121010,DG121010,-9.0
@@ -7500,7 +7500,7 @@ point_of_sale.DG151102,DG151102,0.0
 point_of_sale.DG161117,DG161117,0.0
 point_of_sale.DG161118,DG161118,-2.0
 point_of_sale.DG161120,DG161120,0.0
-point_of_sale.DG161121,DG161121,73.0
+point_of_sale.DG161121,DG161121,71.0
 point_of_sale.DG161124,DG161124,1.0
 point_of_sale.DG161129,DG161129,-4.0
 point_of_sale.DG161144,DG161144,0.0
@@ -7633,7 +7633,7 @@ point_of_sale.DH010413,DH010413,0.0
 point_of_sale.DH101006,DH101006,24.0
 point_of_sale.DH101010,DH101010,13.0
 point_of_sale.DH101012,DH101012,0.0
-point_of_sale.DH101016,DH101016,143.0
+point_of_sale.DH101016,DH101016,140.0
 point_of_sale.DH101017,DH101017,7.0
 point_of_sale.DH101018,DH101018,0.0
 point_of_sale.DH101024,DH101024,0.0
@@ -7666,7 +7666,7 @@ point_of_sale.DH101113,DH101113,0.0
 point_of_sale.DH101116,DH101116,-1.0
 point_of_sale.DH101117,DH101117,4.0
 point_of_sale.DH101121,DH101121,19.0
-point_of_sale.DH101125,DH101125,43.0
+point_of_sale.DH101125,DH101125,42.0
 point_of_sale.DH101126,DH101126,0.0
 point_of_sale.DH101141,DH101141,3.0
 point_of_sale.DH101142,DH101142,3.0
@@ -7721,7 +7721,7 @@ point_of_sale.DH101333,DH101333,-3.0
 point_of_sale.DH101334,DH101334,29.0
 point_of_sale.DH101335,DH101335,0.0
 point_of_sale.DH101341,DH101341,0.0
-point_of_sale.DH101344,DH101344,22.0
+point_of_sale.DH101344,DH101344,20.0
 point_of_sale.DH101346,DH101346,24.0
 point_of_sale.DH101353,DH101353,0.0
 point_of_sale.DH101355,DH101355,0.0
@@ -7737,7 +7737,7 @@ point_of_sale.DH101387,DH101387,42.0
 point_of_sale.DH101388,DH101388,0.0
 point_of_sale.DH101389,DH101389,0.0
 point_of_sale.DH101390,DH101390,0.0
-point_of_sale.DH101392,DH101392,13.0
+point_of_sale.DH101392,DH101392,12.0
 point_of_sale.DH101393,DH101393,0.0
 point_of_sale.DH101394,DH101394,0.0
 point_of_sale.DH101395,DH101395,0.0
@@ -7771,7 +7771,7 @@ point_of_sale.DH101503,DH101503,0.0
 point_of_sale.DH101508,DH101508,1.0
 point_of_sale.DH101509,DH101509,0.0
 point_of_sale.DH101519,DH101519,0.0
-point_of_sale.DH101520,DH101520,43.0
+point_of_sale.DH101520,DH101520,42.0
 point_of_sale.DH101521,DH101521,2.0
 point_of_sale.DH101525,DH101525,0.0
 point_of_sale.DH101527,DH101527,0.0
@@ -7785,7 +7785,7 @@ point_of_sale.DH101540,DH101540,0.0
 point_of_sale.DH101544,DH101544,48.0
 point_of_sale.DH101545,DH101545,0.0
 point_of_sale.DH101555,DH101555,0.0
-point_of_sale.DH101557,DH101557,17.0
+point_of_sale.DH101557,DH101557,14.0
 point_of_sale.DH101576,DH101576,0.0
 point_of_sale.DH101578,DH101578,0.0
 point_of_sale.DH101581,DH101581,35.0
@@ -7877,7 +7877,7 @@ point_of_sale.DH102261,DH102261,4.0
 point_of_sale.DH102263,DH102263,0.0
 point_of_sale.DH102272,DH102272,-1.0
 point_of_sale.DH102274,DH102274,0.0
-point_of_sale.DH102277,DH102277,7.0
+point_of_sale.DH102277,DH102277,6.0
 point_of_sale.DH102281,DH102281,0.0
 point_of_sale.DH102285,DH102285,2.0
 point_of_sale.DH102292,DH102292,-1.0
@@ -7937,7 +7937,7 @@ point_of_sale.DH121067,DH121067,0.0
 point_of_sale.DH121086,DH121086,0.0
 point_of_sale.DH121087,DH121087,0.0
 point_of_sale.DH121088,DH121088,0.0
-point_of_sale.DH121093,DH121093,10.0
+point_of_sale.DH121093,DH121093,9.0
 point_of_sale.DH121095,DH121095,0.0
 point_of_sale.DH121096,DH121096,0.0
 point_of_sale.DH121097,DH121097,0.0
@@ -8028,13 +8028,13 @@ point_of_sale.DH161133,DH161133,44.0
 point_of_sale.DH161145,DH161145,0.0
 point_of_sale.DH161146,DH161146,0.0
 point_of_sale.DH161155,DH161155,0.0
-point_of_sale.DH161158,DH161158,297.0
+point_of_sale.DH161158,DH161158,293.0
 point_of_sale.DH161170,DH161170,0.0
 point_of_sale.DH161183,DH161183,0.0
 point_of_sale.DH161189,DH161189,0.0
 point_of_sale.DH161190,DH161190,0.0
 point_of_sale.DH161192,DH161192,0.0
-point_of_sale.DH161194,DH161194,37.0
+point_of_sale.DH161194,DH161194,36.0
 point_of_sale.DH161227,DH161227,0.0
 point_of_sale.DH161228,DH161228,0.0
 point_of_sale.DH161229,DH161229,0.0
@@ -8409,7 +8409,7 @@ point_of_sale.DI3W074,DI3W074,0.0
 point_of_sale.DI3W075,DI3W075,0.0
 point_of_sale.DJ010025,DJ010025,0.0
 point_of_sale.DJ101004,DJ101004,35.0
-point_of_sale.DJ101012,DJ101012,7.0
+point_of_sale.DJ101012,DJ101012,6.0
 point_of_sale.DJ101012K,DJ101012K,30.0
 point_of_sale.DJ101018,DJ101018,0.0
 point_of_sale.DJ101060,DJ101060,0.0
@@ -8593,7 +8593,7 @@ point_of_sale.DJ161115,DJ161115,0.0
 point_of_sale.DJ161120,DJ161120,0.0
 point_of_sale.DJ161122,DJ161122,0.0
 point_of_sale.DJ161126,DJ161126,8.0
-point_of_sale.DJ161127,DJ161127,6.0
+point_of_sale.DJ161127,DJ161127,5.0
 point_of_sale.DJ161128,DJ161128,15.0
 point_of_sale.DJ161129,DJ161129,13.0
 point_of_sale.DJ161130,DJ161130,8.0
@@ -8691,7 +8691,7 @@ point_of_sale.DJ191003,DJ191003,0.0
 point_of_sale.DJ191004,DJ191004,0.0
 point_of_sale.DJ191005,DJ191005,0.0
 point_of_sale.DJ191006,DJ191006,0.0
-point_of_sale.DJ191008,DJ191008,12.0
+point_of_sale.DJ191008,DJ191008,11.0
 point_of_sale.DJ191009,DJ191009,0.0
 point_of_sale.DJ191010,DJ191010,8.0
 point_of_sale.DJ191011,DJ191011,0.0
@@ -8702,7 +8702,7 @@ point_of_sale.DJ191015,DJ191015,12.0
 point_of_sale.DJ191017,DJ191017,0.0
 point_of_sale.DJ191018,DJ191018,0.0
 point_of_sale.DJ191021,DJ191021,0.0
-point_of_sale.DJ191023,DJ191023,24.0
+point_of_sale.DJ191023,DJ191023,23.0
 point_of_sale.DJ191024,DJ191024,-1.0
 point_of_sale.DJ191025,DJ191025,0.0
 point_of_sale.DJ191026,DJ191026,5.0
@@ -8742,7 +8742,7 @@ point_of_sale.DJ201021,DJ201021,0.0
 point_of_sale.DJ201023,DJ201023,-1.0
 point_of_sale.DJ201024,DJ201024,2.0
 point_of_sale.DJ201028,DJ201028,3.0
-point_of_sale.DJ201034,DJ201034,3.0
+point_of_sale.DJ201034,DJ201034,2.0
 point_of_sale.DJ201035,DJ201035,25.0
 point_of_sale.DJ201037,DJ201037,0.0
 point_of_sale.DJ201040,DJ201040,0.0
@@ -8765,10 +8765,10 @@ point_of_sale.DJ201100,DJ201100,0.0
 point_of_sale.DJ201102,DJ201102,14.0
 point_of_sale.DJ201104,DJ201104,0.0
 point_of_sale.DJ201105,DJ201105,0.0
-point_of_sale.DJ201106,DJ201106,0.0
+point_of_sale.DJ201106,DJ201106,-1.0
 point_of_sale.DJ201107,DJ201107,-1.0
 point_of_sale.DJ201108,DJ201108,0.0
-point_of_sale.DJ201109,DJ201109,9.0
+point_of_sale.DJ201109,DJ201109,4.0
 point_of_sale.DJ201111,DJ201111,-2.0
 point_of_sale.DJ201112,DJ201112,0.0
 point_of_sale.DJ201113,DJ201113,1.0
@@ -9078,7 +9078,7 @@ point_of_sale.DK151083,DK151083,0.0
 point_of_sale.DK151084,DK151084,0.0
 point_of_sale.DK151085,DK151085,10.0
 point_of_sale.DK151088,DK151088,0.0
-point_of_sale.DK151089,DK151089,0.0
+point_of_sale.DK151089,DK151089,-2.0
 point_of_sale.DK151090,DK151090,0.0
 point_of_sale.DK151092,DK151092,0.0
 point_of_sale.DK151094,DK151094,9.0
@@ -9135,7 +9135,7 @@ point_of_sale.DK161226,DK161226,0.0
 point_of_sale.DK161228,DK161228,2.0
 point_of_sale.DK161242,DK161242,0.0
 point_of_sale.DK161245,DK161245,0.0
-point_of_sale.DK161250,DK161250,2.0
+point_of_sale.DK161250,DK161250,1.0
 point_of_sale.DK161255,DK161255,0.0
 point_of_sale.DK161308,DK161308,0.0
 point_of_sale.DK161309,DK161309,0.0
@@ -9288,7 +9288,7 @@ point_of_sale.DL181009,DL181009,149.0
 point_of_sale.DL181010,DL181010,-90.0
 point_of_sale.DL181038,DL181038,-13.0
 point_of_sale.DL181060,DL181060,0.0
-point_of_sale.DL181080,DL181080,54.0
+point_of_sale.DL181080,DL181080,52.0
 point_of_sale.DL191012,DL191012,9.0
 point_of_sale.DL191013,DL191013,0.0
 point_of_sale.DL191014,DL191014,13.0
@@ -9304,7 +9304,7 @@ point_of_sale.DM101060,DM101060,0.0
 point_of_sale.DM101098,DM101098,0.0
 point_of_sale.DM101099,DM101099,-1.0
 point_of_sale.DM101114,DM101114,-8.0
-point_of_sale.DM101139,DM101139,76.0
+point_of_sale.DM101139,DM101139,75.0
 point_of_sale.DM101140,DM101140,77.0
 point_of_sale.DM121001,DM121001,0.0
 point_of_sale.DM121004,DM121004,0.0
@@ -9577,7 +9577,7 @@ point_of_sale.DS101024,DS101024,0.0
 point_of_sale.DS101026,DS101026,0.0
 point_of_sale.DS101030,DS101030,0.0
 point_of_sale.DS101032,DS101032,8.0
-point_of_sale.DS101036,DS101036,20.0
+point_of_sale.DS101036,DS101036,14.0
 point_of_sale.DS101046,DS101046,2.0
 point_of_sale.DS101047,DS101047,-1.0
 point_of_sale.DS101048,DS101048,-3.0
@@ -9594,7 +9594,7 @@ point_of_sale.DS101061,DS101061,0.0
 point_of_sale.DS101062,DS101062,10.0
 point_of_sale.DS101067,DS101067,7.0
 point_of_sale.DS101071,DS101071,27.0
-point_of_sale.DS101072,DS101072,32.0
+point_of_sale.DS101072,DS101072,29.0
 point_of_sale.DS101072K,DS101072K,0.0
 point_of_sale.DS101073,DS101073,0.0
 point_of_sale.DS101076,DS101076,57.0
@@ -9602,7 +9602,7 @@ point_of_sale.DS101077,DS101077,2.0
 point_of_sale.DS101078,DS101078,0.0
 point_of_sale.DS101079,DS101079,-1.0
 point_of_sale.DS101084,DS101084,12.0
-point_of_sale.DS101096,DS101096,107.0
+point_of_sale.DS101096,DS101096,105.0
 point_of_sale.DS101101,DS101101,35.0
 point_of_sale.DS101102,DS101102,0.0
 point_of_sale.DS101103,DS101103,49.0
@@ -9614,7 +9614,7 @@ point_of_sale.DS101111,DS101111,-1.0
 point_of_sale.DS101112,DS101112,0.0
 point_of_sale.DS101116,DS101116,0.0
 point_of_sale.DS101117,DS101117,-2.0
-point_of_sale.DS101118,DS101118,-1.0
+point_of_sale.DS101118,DS101118,-2.0
 point_of_sale.DS101119,DS101119,0.0
 point_of_sale.DS101123,DS101123,0.0
 point_of_sale.DS101128,DS101128,0.0
@@ -9662,7 +9662,7 @@ point_of_sale.DS101294,DS101294,0.0
 point_of_sale.DS101295,DS101295,0.0
 point_of_sale.DS101311,DS101311,0.0
 point_of_sale.DS101316,DS101316,5.0
-point_of_sale.DS101319,DS101319,12.0
+point_of_sale.DS101319,DS101319,11.0
 point_of_sale.DS101320,DS101320,0.0
 point_of_sale.DS101333,DS101333,45.0
 point_of_sale.DS101335,DS101335,-2.0
@@ -9716,7 +9716,7 @@ point_of_sale.DS121073,DS121073,0.0
 point_of_sale.DS121076,DS121076,4.0
 point_of_sale.DS121080,DS121080,0.0
 point_of_sale.DS121089,DS121089,0.0
-point_of_sale.DS121113,DS121113,7.0
+point_of_sale.DS121113,DS121113,5.0
 point_of_sale.DS121115,DS121115,0.0
 point_of_sale.DS121116,DS121116,0.0
 point_of_sale.DS121117,DS121117,0.0
@@ -9843,7 +9843,7 @@ point_of_sale.DS181083,DS181083,4.0
 point_of_sale.DS181084,DS181084,1.0
 point_of_sale.DS181085,DS181085,0.0
 point_of_sale.DS181117,DS181117,0.0
-point_of_sale.DS191001,DS191001,13.0
+point_of_sale.DS191001,DS191001,12.0
 point_of_sale.DS191002,DS191002,5.0
 point_of_sale.DS191003,DS191003,7.0
 point_of_sale.DS191006,DS191006,-1.0
@@ -10368,7 +10368,7 @@ point_of_sale.DU181021,DU181021,-1.0
 point_of_sale.DU181028,DU181028,0.0
 point_of_sale.DU181029,DU181029,2.0
 point_of_sale.DU181030,DU181030,2.0
-point_of_sale.DU181031,DU181031,13.0
+point_of_sale.DU181031,DU181031,12.0
 point_of_sale.DU181032,DU181032,2.0
 point_of_sale.DU181047,DU181047,-1.0
 point_of_sale.DU181048,DU181048,0.0
@@ -10425,7 +10425,7 @@ point_of_sale.DU191062,DU191062,0.0
 point_of_sale.DU191063,DU191063,0.0
 point_of_sale.DU201007,DU201007,0.0
 point_of_sale.DU201008,DU201008,2.0
-point_of_sale.DU201010,DU201010,8.0
+point_of_sale.DU201010,DU201010,7.0
 point_of_sale.DU201016,DU201016,0.0
 point_of_sale.DU201018,DU201018,0.0
 point_of_sale.DU201023,DU201023,0.0
@@ -11185,7 +11185,7 @@ point_of_sale.JA541011,JA541011,14.0
 point_of_sale.JA541012,JA541012,0.0
 point_of_sale.JA541016,JA541016,-1.0
 point_of_sale.JA541018,JA541018,23.0
-point_of_sale.JA541019,JA541019,28.0
+point_of_sale.JA541019,JA541019,27.0
 point_of_sale.JA541020,JA541020,50.0
 point_of_sale.JA541021,JA541021,13.0
 point_of_sale.JA541027,JA541027,19.0
@@ -11201,7 +11201,7 @@ point_of_sale.JA541205,JA541205,128.0
 point_of_sale.JA541208,JA541208,0.0
 point_of_sale.JA541209,JA541209,0.0
 point_of_sale.JA541211,JA541211,10.0
-point_of_sale.JA541212,JA541212,59.0
+point_of_sale.JA541212,JA541212,56.0
 point_of_sale.JA541214,JA541214,0.0
 point_of_sale.JA541215,JA541215,0.0
 point_of_sale.JA541216,JA541216,0.0
@@ -11745,7 +11745,7 @@ point_of_sale.JD161001,JD161001,3.0
 point_of_sale.JD161002,JD161002,0.0
 point_of_sale.JD161003,JD161003,2.0
 point_of_sale.JD161006,JD161006,0.0
-point_of_sale.JD161200,JD161200,24.0
+point_of_sale.JD161200,JD161200,23.0
 point_of_sale.JD161201,JD161201,16.0
 point_of_sale.JD171016,JD171016,0.0
 point_of_sale.JD171018,JD171018,0.0
@@ -11868,18 +11868,18 @@ point_of_sale.JD402405,JD402405,0.0
 point_of_sale.JD402600,JD402600,0.0
 point_of_sale.JD402601,JD402601,0.0
 point_of_sale.JD511004,JD511004,0.0
-point_of_sale.JD511008,JD511008,14.0
-point_of_sale.JD511010,JD511010,12.0
+point_of_sale.JD511008,JD511008,13.0
+point_of_sale.JD511010,JD511010,11.0
 point_of_sale.JD511201,JD511201,20.0
 point_of_sale.JD511202,JD511202,25.0
 point_of_sale.JD511203,JD511203,0.0
 point_of_sale.JD511204,JD511204,0.0
 point_of_sale.JD511205,JD511205,0.0
-point_of_sale.JD511207,JD511207,16.0
+point_of_sale.JD511207,JD511207,15.0
 point_of_sale.JD511209,JD511209,0.0
 point_of_sale.JD511211,JD511211,7.0
-point_of_sale.JD521002,JD521002,172.0
-point_of_sale.JD521002K,JD521002K,60.0
+point_of_sale.JD521002,JD521002,169.0
+point_of_sale.JD521002K,JD521002K,58.0
 point_of_sale.JD531003,JD531003,-1.0
 point_of_sale.JD531004,JD531004,4.0
 point_of_sale.JD541000,JD541000,3.0
@@ -13341,7 +13341,7 @@ point_of_sale.JL181402,JL181402,0.0
 point_of_sale.JL181405,JL181405,0.0
 point_of_sale.JL181407,JL181407,3.0
 point_of_sale.JL181408,JL181408,2.0
-point_of_sale.JL181409,JL181409,3.0
+point_of_sale.JL181409,JL181409,2.0
 point_of_sale.JL181411,JL181411,0.0
 point_of_sale.JL181416,JL181416,0.0
 point_of_sale.JL181417,JL181417,0.0
@@ -13982,7 +13982,7 @@ point_of_sale.JV402205,JV402205,0.0
 point_of_sale.JV511004,JV511004,0.0
 point_of_sale.JV511005,JV511005,0.0
 point_of_sale.JV511006,JV511006,7.0
-point_of_sale.JV511007,JV511007,6.0
+point_of_sale.JV511007,JV511007,5.0
 point_of_sale.JV511011,JV511011,0.0
 point_of_sale.JV511012,JV511012,5.0
 point_of_sale.JV511013,JV511013,0.0
@@ -14578,7 +14578,7 @@ point_of_sale.JZ161207,JZ161207,21.0
 point_of_sale.JZ161208,JZ161208,5.0
 point_of_sale.JZ161210,JZ161210,-1.0
 point_of_sale.JZ161217,JZ161217,0.0
-point_of_sale.JZ161221,JZ161221,5.0
+point_of_sale.JZ161221,JZ161221,4.0
 point_of_sale.JZ161223,JZ161223,0.0
 point_of_sale.JZ161224,JZ161224,0.0
 point_of_sale.JZ161232,JZ161232,0.0
@@ -14753,8 +14753,8 @@ point_of_sale.JZ402600,JZ402600,0.0
 point_of_sale.JZ402602,JZ402602,0.0
 point_of_sale.JZ403601,JZ403601,0.0
 point_of_sale.JZ511004,JZ511004,6.0
-point_of_sale.JZ511016,JZ511016,15.0
-point_of_sale.JZ511016K,JZ511016K,73.0
+point_of_sale.JZ511016,JZ511016,13.0
+point_of_sale.JZ511016K,JZ511016K,72.0
 point_of_sale.JZ511020,JZ511020,0.0
 point_of_sale.JZ511021,JZ511021,0.0
 point_of_sale.JZ511029,JZ511029,0.0
@@ -14812,7 +14812,7 @@ point_of_sale.JZ581006,JZ581006,0.0
 point_of_sale.JZ581007,JZ581007,0.0
 point_of_sale.JZ581009,JZ581009,0.0
 point_of_sale.JZ581010,JZ581010,0.0
-point_of_sale.JZ581011,JZ581011,23.0
+point_of_sale.JZ581011,JZ581011,22.0
 point_of_sale.JZ581012,JZ581012,0.0
 point_of_sale.JZ581020,JZ581020,0.0
 point_of_sale.JZ581025,JZ581025,0.0
@@ -14824,7 +14824,7 @@ point_of_sale.JZ581059,JZ581059,0.0
 point_of_sale.JZ581204,JZ581204,0.0
 point_of_sale.JZ581205,JZ581205,1.0
 point_of_sale.JZ581209,JZ581209,0.0
-point_of_sale.JZ581210,JZ581210,0.0
+point_of_sale.JZ581210,JZ581210,-1.0
 point_of_sale.JZ581216,JZ581216,1.0
 point_of_sale.JZ581220,JZ581220,0.0
 point_of_sale.JZ581227,JZ581227,0.0
@@ -15192,7 +15192,7 @@ point_of_sale.KPBB6200,KPBB6200,0.0
 point_of_sale.KPBB6201,KPBB6201,0.0
 point_of_sale.KPBB6202,KPBB6202,7.0
 point_of_sale.KPBB6300,KPBB6300,0.0
-point_of_sale.KPBB6301,KPBB6301,7.0
+point_of_sale.KPBB6301,KPBB6301,5.0
 point_of_sale.KPBB6302,KPBB6302,71.0
 point_of_sale.KPBC6004,KPBC6004,13.0
 point_of_sale.KPBC6202,KPBC6202,9.0

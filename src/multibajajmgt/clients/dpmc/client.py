@@ -192,16 +192,17 @@ def inquire_product_by_invoice(invoice, grn):
     if grn:
         payload["strGRNno"] = grn
     try:
-        response_data = _call(f"{SERVER_URL}/PADEALER/PADLRGOODRECEIVENOTE/Inquire",
-                              f"{SERVER_URL}/Application/Home/PADEALER", payload)
+        response = _call(f"{SERVER_URL}/PADEALER/PADLRGOODRECEIVENOTE/Inquire",
+                         f"{SERVER_URL}/Application/Home/PADEALER", payload)
     except r_exceptions.ConnectionError as e:
         log.error(e)
         sys.exit(0)
     else:
-        if response_data == "NO DATA FOUND":
-            raise DataNotFoundError(f"Inquiring grn data failed, for incorrect Reference ID: {payload['strSearch']}",
-                                    response_data)
-        return json.loads(response_data)
+        if response["STATE"] == "FALSE":
+            raise DataNotFoundError(f"Inquiring data failed, for incorrect Invoice ID: {invoice} and GRN ID: {grn}",
+                                    response)
+        product_data = response["DATA"]
+        return product_data
 
 
 def _inquire_goodreceivenote(referer, payload):
