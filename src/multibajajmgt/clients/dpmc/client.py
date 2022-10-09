@@ -147,7 +147,7 @@ def _retry_request(request_func, *args):
 
 
 def inquire_product_by_id(ref_id):
-    """ Fetch data of a product
+    """ Fetch product by product id.
 
     :param ref_id: string, product's part number
     :return: dict, data
@@ -179,6 +179,18 @@ def inquire_product_by_id(ref_id):
 
 
 def inquire_product_by_invoice(invoice, grn):
+    """ Fetch products by invoice data.
+
+    :param invoice: string, invoice id
+    :param grn: string, grn id
+    :return: dict, data
+    """
+    # Payload should be altered depending on the availability of grn id
+    # If grn and invoice id exists:
+    #   "strMode" = "GRN", "STR_FUNCTION_ID" = "IQ"
+    #   "strGRNno" = @grn
+    # else only invoice id exists:
+    #   "strMode" = "INVOICE", "STR_FUNCTION_ID" = "CR"
     payload = {
         "STR_INSTANT": "DLR",
         "STR_PREMIS": "KGL",
@@ -206,6 +218,12 @@ def inquire_product_by_invoice(invoice, grn):
 
 
 def _inquire_goodreceivenote(referer, payload):
+    """ Base function to fetch invoice advanced data
+
+    :param referer: string, url
+    :param payload: dict,
+    :return: dict, data
+    """
     base_payload = {
         "strInstance": "DLR",
         "strPremises": "KGL",
@@ -233,6 +251,12 @@ def _inquire_goodreceivenote(referer, payload):
 
 
 def inquire_goodreceivenote_by_grn_ref(col, ref_id):
+    """ Fetch invoice advanced data by grn
+
+    :param col: string, DPMCFieldName depending on @ref_id
+    :param ref_id: string, either invoice/order id
+    :return: dict, data
+    """
     try:
         return _inquire_goodreceivenote(
                 f"{SERVER_URL}/Application/Home/PADEALER",
@@ -249,6 +273,12 @@ def inquire_goodreceivenote_by_grn_ref(col, ref_id):
 
 
 def inquire_goodreceivenote_by_order_ref(col, ref_id):
+    """ Fetch invoice advanced data by order
+
+        :param col: string, DPMCFieldName depending on @ref_id
+        :param ref_id: string, either invoice/order/mobile id
+        :return: dict, data
+        """
     try:
         return _inquire_goodreceivenote(
                 SERVER_URL,

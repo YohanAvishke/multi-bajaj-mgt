@@ -47,11 +47,12 @@ class ProductPriceStatus(MultiBajajMgtEnum):
 
 
 class DPMCFieldName(MultiBajajMgtEnum):
+    # Invoice
     invoice_no = "STR_INVOICE_NO"
     order_no = "STR_ORDER_NO"
     dlr_order_no = "STR_DLR_ORD_NO"
     mobile_no = "STR_MOBILE_INVOICE_NO"
-    # Products from invoice
+    # Product
     part_code = "STR_PART_CODE"
     part_desc = "STR_DESC"
     part_qty = "INT_QUANTITY"
@@ -78,6 +79,7 @@ class InvoiceType(MultiBajajMgtEnum):
 
 
 class InvoiceJSONFieldName(MultiBajajMgtEnum):
+    # Invoice
     date = "Date"
     default_id = "Default ID"
     status = "Status"
@@ -85,7 +87,7 @@ class InvoiceJSONFieldName(MultiBajajMgtEnum):
     grn_id = "GRN ID"
     invoice_id = "Invoice ID"
     order_id = "Order ID"
-    # Product list fields
+    # Product
     products = "Products"
     part_code = "ID"
     part_desc = "Name"

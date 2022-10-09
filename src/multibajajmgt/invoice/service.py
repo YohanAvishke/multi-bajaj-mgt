@@ -22,7 +22,24 @@ REINDEX_LIST = [JSONField.date, JSONField.status, JSONField.type, JSONField.invo
                 JSONField.grn_id, JSONField.products]
 
 
+def _reindex_df(df, index):
+    """ Reindex and remove nan values by empty string.
+
+    :param df: pandas dataframe,
+    :param index: list, columns for reindex
+    :return: pandas dataframe, restructured dataframe
+    """
+    return df \
+        .reindex(index, axis = "columns") \
+        .fillna("")
+
+
 def _enrich_with_metadata(row):
+    """ Enrich invoices with grn and order id.
+
+    :param row: pandas series, rows of a dataframe
+    :return: pandas series, enriched row
+    """
     invoice_type = row[JSONField.type]
     # Can-be invoice, order, mobile number
     default_id = row[JSONField.default_id]
@@ -66,19 +83,28 @@ def _enrich_with_metadata(row):
 
 
 def fetch_invoice_metadata():
+    """ Fetch, enrich and restructure invoices with advanced data.
+    """
     invoice_df = pd.read_json(BASE_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_metadata, axis = 1)
     historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
+    # Restructure dataframe by reordering and deleting columns
     invoice_df = invoice_df \
         .drop(JSONField.default_id, axis = 1)
-    invoice_df = restructure_df(invoice_df, REINDEX_LIST)
+    invoice_df = _reindex_df(invoice_df, REINDEX_LIST)
     write_to_json(historical_file, invoice_df.to_dict("records"))
 
 
 def _enrich_with_products(row):
+    """ Enrich invoices with the products.
+
+    :param row: pandas series, rows of a dataframe
+    :return: pandas series, enriched row
+    """
     invoice_status = row[JSONField.status]
     invoice_id = row[JSONField.invoice_id]
     grn_id = row[JSONField.grn_id]
+    # Filter invoices unsuccessful with fetching metadata
     if Status.success in invoice_status:
         try:
             product_data = dpmc_client.inquire_product_by_invoice(invoice_id, grn_id)
@@ -86,7 +112,9 @@ def _enrich_with_products(row):
             log.error(f"Product inquiry failed for Invoice {invoice_id}")
             row[JSONField.status] = Status.failed
             return row
+        # If grn id is used to fetch data payload will be different
         products = product_data["dsGRNDetails"]["Table"] if grn_id else product_data["dtGRNDetails"]
+        # Restructure dataframe by dropping unused columns and rename the rest
         products = pd \
             .DataFrame(products) \
             .drop([Field.ware_code, Field.loc_code, Field.rack_code, Field.bin_code, Field.sbin_code,
@@ -101,8 +129,10 @@ def _enrich_with_products(row):
 
 
 def fetch_products():
+    """ Fetch and enrich invoices with products.
+    """
     historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
-    invoice_df = restructure_df(invoice_df, REINDEX_LIST)
+    invoice_df = _reindex_df(invoice_df, REINDEX_LIST)
     write_to_json(historical_file, invoice_df.to_dict("records"))

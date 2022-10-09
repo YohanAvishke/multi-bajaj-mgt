@@ -108,15 +108,3 @@ def enrich_products_by_external_id(product_df, id_df):
     # Merge price list and external id list(by id)
     enrich_price_df = id_df.merge(product_df, on = "id", how = "inner")
     return enrich_price_df
-
-
-def restructure_df(df, reindex_cols):
-    """ Reindex and remove nan values by empty string
-
-    :param df: pandas dataframe,
-    :param reindex_cols: list, columns for reindex
-    :return: pandas dataframe, restructured dataframe
-    """
-    return df \
-        .reindex(reindex_cols, axis = "columns") \
-        .fillna("")
