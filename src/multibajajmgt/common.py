@@ -4,6 +4,8 @@ import logging
 import os
 import time
 
+from tabulate import tabulate
+
 log = logging.getLogger(__name__)
 
 
@@ -17,7 +19,7 @@ def write_to_csv(path, df, mode = "w", columns = None, header = True):
     :param columns: columns that are been written
     :param header: headers of the csv file
     """
-    log.info(f"Saving CSV file to {path}")
+    log.debug(f"Saving CSV file to {path}")
     df.to_csv(path, mode = mode, columns = columns, header = header, index = False)
 
 
@@ -30,6 +32,18 @@ def write_to_json(path, data):
     log.debug(f"Saving JSON file to {path}")
     with open(path, "w") as file:
         json.dump(data, file)
+
+
+def to_fwf(df, path, mode = "w"):
+    """ Write function for Pandas "read_fwf". Working with fixed-width files.
+
+    :param df: pandas dataframe, data to write
+    :param path: string, path of the file to be saved
+    :param mode: string, "w" to create and write, "a" to append to existing
+    """
+    log.debug(f"Saving fixed-width text file to {path}")
+    content = tabulate(df.values.tolist(), list(df.columns), tablefmt = "plain")
+    open(path, mode).write(content)
 
 
 def get_curr_dir(base_path):
