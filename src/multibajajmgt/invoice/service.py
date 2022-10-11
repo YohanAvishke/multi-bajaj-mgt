@@ -4,22 +4,36 @@ import multibajajmgt.clients.dpmc.client as dpmc_client
 import pandas as pd
 
 from multibajajmgt.common import *
-from multibajajmgt.config import DATA_DIR
+from multibajajmgt.config import INVOICE_BASE_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     InvoiceJSONFieldName as JSONField,
     InvoiceStatus as Status,
     InvoiceType as Type,
-    DocumentResourceType,
+    DocumentResourceType as DSType,
+    DocumentResourceExtension as DSExt,
     DPMCFieldName as Field
 )
 from multibajajmgt.exceptions import DataNotFoundError
 
 log = logging.getLogger(__name__)
+historical_dir = get_curr_dir(INVOICE_HISTORY_DIR)
+historical_base_file = mk_historical(historical_dir, get_now_file({DSExt.json}, {DSType.invoice_dpmc}))
 
-BASE_FILE = f"{DATA_DIR}/invoice/{DocumentResourceType.invoice_dpmc}"
-HISTORY_DIR = f"{DATA_DIR}/invoice/history"
-REINDEX_LIST = [JSONField.date, JSONField.status, JSONField.type, JSONField.invoice_id, JSONField.order_id,
-                JSONField.grn_id, JSONField.products]
+
+def get_h_dir():
+    """ Return curr_date dir
+
+    :return: string, dir path
+    """
+    return historical_dir
+
+
+def get_h_file():
+    """ Return "invoice_dpmc.json" in curr_date dir
+
+    :return: string, file path
+    """
+    return historical_base_file
 
 
 def _reindex_df(df, index):
@@ -34,7 +48,7 @@ def _reindex_df(df, index):
         .fillna("")
 
 
-def _enrich_with_metadata(row):
+def _enrich_with_advanced_data(row):
     """ Enrich invoices with grn and order id.
 
     :param row: pandas series, rows of a dataframe
@@ -82,17 +96,17 @@ def _enrich_with_metadata(row):
     return row
 
 
-def fetch_invoice_metadata():
+def fetch_invoice_data():
     """ Fetch, enrich and restructure invoices with advanced data.
     """
-    invoice_df = pd.read_json(BASE_FILE, orient = "records", convert_dates = False)
-    invoice_df = invoice_df.apply(_enrich_with_metadata, axis = 1)
-    historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
+    invoice_df = pd.read_json(INVOICE_BASE_FILE, orient = "records", convert_dates = False)
+    invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
     # Restructure dataframe by reordering and deleting columns
     invoice_df = invoice_df \
         .drop(JSONField.default_id, axis = 1)
-    invoice_df = _reindex_df(invoice_df, REINDEX_LIST)
-    write_to_json(historical_file, invoice_df.to_dict("records"))
+    invoice_df = _reindex_df(invoice_df, [JSONField.date, JSONField.status, JSONField.type, JSONField.invoice_id,
+                                          JSONField.order_id, JSONField.grn_id])
+    write_to_json(get_h_file(), invoice_df.to_dict("records"))
 
 
 def _enrich_with_products(row):
@@ -104,7 +118,7 @@ def _enrich_with_products(row):
     invoice_status = row[JSONField.status]
     invoice_id = row[JSONField.invoice_id]
     grn_id = row[JSONField.grn_id]
-    # Filter invoices unsuccessful with fetching metadata
+    # Filter invoices unsuccessful with fetching advanced data
     if Status.success in invoice_status:
         try:
             product_data = dpmc_client.inquire_product_by_invoice(invoice_id, grn_id)
@@ -131,8 +145,9 @@ def _enrich_with_products(row):
 def fetch_products():
     """ Fetch and enrich invoices with products.
     """
-    historical_file = mk_historical(get_curr_dir(HISTORY_DIR), DocumentResourceType.invoice_dpmc)
-    invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
+    file = get_h_file()
+    invoice_df = pd.read_json(file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
-    invoice_df = _reindex_df(invoice_df, REINDEX_LIST)
-    write_to_json(historical_file, invoice_df.to_dict("records"))
+    invoice_df = _reindex_df(invoice_df, [JSONField.date, JSONField.status, JSONField.type, JSONField.invoice_id,
+                                          JSONField.order_id, JSONField.grn_id, JSONField.products])
+    write_to_json(file, invoice_df.to_dict("records"))

@@ -29,6 +29,7 @@ dpmc_client.configure()
 # price_service.merge_historical_data()
 
 # update from dpmc invoices
-# stock_service.export_all_products()
-invoice_service.fetch_invoice_metadata()
+stock_service.export_all_products()
+invoice_service.fetch_invoice_data()
 invoice_service.fetch_products()
+stock_service.create_adjustment(invoice_service.get_h_dir(), invoice_service.get_h_file())

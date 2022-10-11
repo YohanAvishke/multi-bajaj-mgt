@@ -16,11 +16,14 @@ class EnvVariable(MultiBajajMgtEnum):
     dpmc_server_password = "DPMC_SERVER_PASSWORD"
 
 
+class DocumentResourceExtension(MultiBajajMgtEnum):
+    json = "json"
+    csv = "csv"
+
+
 class DocumentResourceType(MultiBajajMgtEnum):
-    price_dpmc_all = "price-dpmc-all.csv"
-    price_dpmc_available = "price-dpmc-available.csv"
-    stock_dpmc_all = "stock_dpmc_all.csv"
-    invoice_dpmc = "invoice_dpmc.json"
+    price_dpmc_all = "price-dpmc-all"
+    invoice_dpmc = "invoice_dpmc"
 
 
 class OdooCSVFieldName(MultiBajajMgtEnum):

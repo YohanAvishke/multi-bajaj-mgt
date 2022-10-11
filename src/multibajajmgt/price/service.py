@@ -8,9 +8,8 @@ import multibajajmgt.clients.dpmc.client as dpmc_client
 
 from pathlib import Path
 from multibajajmgt.common import *
-from multibajajmgt.config import DATA_DIR
+from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
-    DocumentResourceType,
     OdooCSVFieldName as CSVField,
     OdooDBFieldName as DBField,
     ProductPriceStatus as Status
@@ -18,9 +17,6 @@ from multibajajmgt.enums import (
 from multibajajmgt.exceptions import InvalidIdentityError
 
 log = logging.getLogger(__name__)
-
-BASE_FILE = f"{DATA_DIR}/price/{DocumentResourceType.price_dpmc_all}"
-HISTORY_DIR = f"{DATA_DIR}/price/history"
 
 
 def export_all_products():
@@ -37,7 +33,7 @@ def export_all_products():
     ex_id_df = drop_duplicates(ex_id_df, "res_id")
     # Merge prices with external ids
     enrich_price_df = enrich_products_by_external_id(price_df, ex_id_df)
-    write_to_csv(BASE_FILE, enrich_price_df,
+    write_to_csv(PRICE_BASE_DPMC_FILE, enrich_price_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.sales_price, DBField.cost],
                  header = [CSVField.external_id, CSVField.internal_id, "Old Sales Price", "Old Cost"])
 
@@ -92,7 +88,7 @@ def _save_price_info(info, df, file):
     df.at[index, CSVField.sales_price] = df.at[index, CSVField.cost] = price
     df.at[index, "Status"] = status
     # Save row to base csv file
-    write_to_csv(BASE_FILE, df)
+    write_to_csv(PRICE_BASE_DPMC_FILE, df)
     # Save row to historic csv file
     if status in (Status.up, Status.down):
         # Get the row as a series. Convert it to a df and flip the row and column
@@ -105,13 +101,13 @@ def _save_price_info(info, df, file):
 def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
-    price_df = pd.read_csv(BASE_FILE)
-    historical_file_path = mk_historical(get_curr_dir(HISTORY_DIR),
+    price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
+    historical_file_path = mk_historical(get_curr_dir(PRICE_HISTORY_DIR),
                                          get_now_file("csv", "price-dpmc-all"))
     # Add columns for updated prices and price fluctuation state
     if CSVField.sales_price not in price_df.columns:
         price_df[CSVField.sales_price] = price_df[CSVField.cost] = price_df["Status"] = None
-        write_to_csv(path = BASE_FILE, df = price_df)
+        write_to_csv(path = PRICE_BASE_DPMC_FILE, df = price_df)
     price_updatable_df = price_df[pd.isnull(price_df["Status"])]
     # Loop and fetch and save each product's updated price
     for price_row in price_updatable_df.itertuples():
@@ -124,7 +120,7 @@ def update_product_prices():
 def merge_historical_data():
     """ Merge timed files in a historical dir
     """
-    historical_dir = get_curr_dir(HISTORY_DIR)
+    historical_dir = get_curr_dir(PRICE_HISTORY_DIR)
     merged_file = f"{historical_dir}/price-dpmc-all.csv"
     # Remove existing merge file
     if os.path.isfile(merged_file):
