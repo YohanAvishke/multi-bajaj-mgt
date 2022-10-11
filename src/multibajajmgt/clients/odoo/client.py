@@ -74,7 +74,7 @@ def configure():
 
     Configure credentials and create a token file.
     """
-    log.debug("Configuring Odoo client.")
+    log.info("Configuring Odoo client")
     global user_id
     try:
         with open(f"{SOURCE_DIR}/clients/odoo/token.json", "r") as file:

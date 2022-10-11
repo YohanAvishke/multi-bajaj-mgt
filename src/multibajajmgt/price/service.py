@@ -10,6 +10,8 @@ from pathlib import Path
 from multibajajmgt.common import *
 from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
+    DocumentResourceType as DRType,
+    DocumentResourceExtension as DRExt,
     OdooCSVFieldName as CSVField,
     OdooDBFieldName as DBField,
     ProductPriceStatus as Status
@@ -17,6 +19,7 @@ from multibajajmgt.enums import (
 from multibajajmgt.exceptions import InvalidIdentityError
 
 log = logging.getLogger(__name__)
+curr_his_dir = get_curr_dir(PRICE_HISTORY_DIR)
 
 
 def export_all_products():
@@ -102,8 +105,7 @@ def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
     price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
-    historical_file_path = mk_historical(get_curr_dir(PRICE_HISTORY_DIR),
-                                         get_now_file("csv", "price-dpmc-all"))
+    historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRType.price_dpmc_all))
     # Add columns for updated prices and price fluctuation state
     if CSVField.sales_price not in price_df.columns:
         price_df[CSVField.sales_price] = price_df[CSVField.cost] = price_df["Status"] = None
@@ -120,15 +122,14 @@ def update_product_prices():
 def merge_historical_data():
     """ Merge timed files in a historical dir
     """
-    historical_dir = get_curr_dir(PRICE_HISTORY_DIR)
-    merged_file = f"{historical_dir}/price-dpmc-all.csv"
+    merged_file = f"{curr_his_dir}/{DRType.price_dpmc_all}.{DRExt.csv}"
     # Remove existing merge file
     if os.path.isfile(merged_file):
         os.remove(merged_file)
     # Read, sort, merge and save the new merge file
-    files = sorted(Path(historical_dir).glob("*.csv"))
+    files = sorted(Path(curr_his_dir).glob(f"*.{DRExt.csv}"))
     df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
-    write_to_csv(f"{historical_dir}/price-dpmc-all.csv", df)
+    write_to_csv(merged_file, df)
     # Remove timed files
     for f in files:
         os.remove(f)

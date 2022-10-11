@@ -69,8 +69,8 @@ def get_now_file(file_extension, base_name = None):
     return f"{now_time}.{file_extension}"
 
 
-def mk_historical(dir_path, file_path):
-    """ Create historical directory.
+def mk_dir(dir_path, file_path):
+    """ Create and return directory.
 
     :param dir_path: string, directory(date) path
     :param file_path: string, file(time) name
