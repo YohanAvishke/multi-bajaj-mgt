@@ -9,14 +9,14 @@ from multibajajmgt.enums import (
     InvoiceJSONFieldName as JSONField,
     InvoiceStatus as Status,
     InvoiceType as Type,
-    DocumentResourceType as DSType,
-    DocumentResourceExtension as DSExt,
+    DocumentResourceType as DRType,
+    DocumentResourceExtension as DRExt,
     DPMCFieldName as Field
 )
 from multibajajmgt.exceptions import DataNotFoundError
 
 log = logging.getLogger(__name__)
-curr_historical_dir = get_curr_dir(INVOICE_HISTORY_DIR)
+curr_historical_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 
 
 def _reindex_df(df, index):
@@ -82,7 +82,7 @@ def _enrich_with_advanced_data(row):
 def fetch_invoice_data():
     """ Fetch, enrich and restructure invoices with advanced data.
     """
-    historical_file = mk_dir(curr_historical_dir, f"{DSType.invoice_dpmc}.{DSExt.json}")
+    historical_file = mk_dir(curr_historical_dir, f"{DRType.invoice_dpmc}.{DRExt.json}")
     invoice_df = pd.read_json(INVOICE_BASE_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
     # Restructure dataframe by reordering and deleting columns
@@ -129,7 +129,7 @@ def _enrich_with_products(row):
 def fetch_products():
     """ Fetch and enrich invoices with products.
     """
-    historical_file = mk_dir(curr_historical_dir, f"{DSType.invoice_dpmc}.{DSExt.json}")
+    historical_file = mk_dir(curr_historical_dir, f"{DRType.invoice_dpmc}.{DRExt.json}")
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
     invoice_df = _reindex_df(invoice_df, [JSONField.date, JSONField.status, JSONField.type, JSONField.invoice_id,

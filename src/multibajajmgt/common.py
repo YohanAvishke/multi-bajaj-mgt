@@ -34,7 +34,7 @@ def write_to_json(path, data):
         json.dump(data, file)
 
 
-def to_fwf(df, path, mode = "w"):
+def write_to_fwf(df, path, mode = "w"):
     """ Write function for Pandas "read_fwf". Working with fixed-width files.
 
     :param df: pandas dataframe, data to write
@@ -46,14 +46,15 @@ def to_fwf(df, path, mode = "w"):
     open(path, mode).write(content)
 
 
-def get_curr_dir(base_path):
-    """ Get dir name depending on current date(yyyy-mm-dd).
+def get_dated_dir(base_path, date = time.time()):
+    """ Get dir name depending on date(yyyy-mm-dd).
 
     :param base_path: string, base suffix path for dir
+    :param date: int, timestamp use `time.mktime(datetime.datetime.strptime(2011-12-11, "%Y-%m-%d").timetuple())`
     :return: string, base combined with curr path
     """
-    now_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    return f"{base_path}/{now_date}"
+    date = time.strftime("%Y-%m-%d", time.localtime(date))
+    return f"{base_path}/{date}"
 
 
 def get_now_file(file_extension, base_name = None):

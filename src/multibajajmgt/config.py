@@ -26,7 +26,7 @@ INVOICE_BASE_FILE = f"{INVOICE_DIR}/{DSType.invoice_dpmc}.{DSExt.json}"
 INVOICE_HISTORY_DIR = f"{INVOICE_DIR}/history"
 # Stock
 STOCK_DIR = f"{DATA_DIR}/stock"
-STOCK_HISTORY_DIR = f"{STOCK_DIR}/history"
+ADJUSTMENT_DIR = f"{STOCK_DIR}/adjustments"
 
 
 def configure_env():

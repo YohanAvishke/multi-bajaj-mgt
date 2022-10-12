@@ -19,7 +19,7 @@ from multibajajmgt.enums import (
 from multibajajmgt.exceptions import InvalidIdentityError
 
 log = logging.getLogger(__name__)
-curr_his_dir = get_curr_dir(PRICE_HISTORY_DIR)
+curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
 def export_all_products():

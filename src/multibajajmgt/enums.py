@@ -22,16 +22,26 @@ class DocumentResourceExtension(MultiBajajMgtEnum):
 
 
 class DocumentResourceType(MultiBajajMgtEnum):
-    price_dpmc_all = "price-dpmc-all"
+    price_dpmc_all = "price_dpmc_all"
     invoice_dpmc = "invoice_dpmc"
+    stock_dpmc_all = "stock_dpmc_all"
+    adjustment_dpmc = "adjustment_dpmc"
 
 
 class OdooCSVFieldName(MultiBajajMgtEnum):
+    # Product
     external_id = "External ID"
     internal_id = "Internal Reference"
     sales_price = "Sales Price"
     cost = "Cost"
     qty_available = "Quantity On Hand"
+    # Adjustment
+    adj_name = "name"
+    adj_acc_date = "Accounting Date"
+    is_exh_products = "Include Exhausted Products"
+    adj_prod_external_id = "move_ids / product_tmpl_id / id"
+    adj_loc_id = "line_ids / location_id / id"
+    adj_prod_counted_qty = "line_ids / product_qty"
 
 
 class OdooDBFieldName(MultiBajajMgtEnum):
