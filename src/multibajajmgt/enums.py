@@ -48,6 +48,10 @@ class OdooCSVFieldName(MultiBajajMgtStrEnum):
     adj_prod_counted_qty = "line_ids / product_qty"
 
 
+class OdooCSVFieldValue(MultiBajajMgtStrEnum):
+    adj_loc_id = "stock.stock_location_stock"
+
+
 class OdooDBFieldName(MultiBajajMgtStrEnum):
     id = "id"
     res_id = "res_id"

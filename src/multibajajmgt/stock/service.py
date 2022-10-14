@@ -11,6 +11,7 @@ from multibajajmgt.enums import (
     InvoiceJSONFieldName as JSONField,
     InvoiceStatus as Status,
     OdooCSVFieldName as CSVField,
+    OdooCSVFieldValue as CSVFieldValue,
     OdooDBFieldName as DBField
 )
 
@@ -79,37 +80,70 @@ def export_all_products():
                  header = [CSVField.external_id, CSVField.internal_id, CSVField.qty_available])
 
 
-# .sort_values(by = [JSONField.date, JSONField.invoice_id])
+def _enrich_invoice_with_stock_info(row, stock_df):
+    """ Add basic info and stock data to each invoice.
+
+    :param row: itertuple, single invoice from invoices
+    :param stock_df: pandas dataframe, stock data
+    :return: pandas dataframe, enriched df
+    """
+    product_df = pd.json_normalize(row.Products)
+    # Create basic invoice columns which share common data within all products of an invoice
+    product_df[[CSVField.adj_name,
+                CSVField.adj_acc_date,
+                CSVField.is_exh_products,
+                CSVField.adj_loc_id]] = pd.DataFrame([[row[4],
+                                                       row[1],
+                                                       True,
+                                                       CSVFieldValue.adj_loc_id]], index = [0])
+    # Add columns from stock data to the products
+    product_df = product_df.merge(stock_df, how = "inner", left_on = JSONField.part_code,
+                                  right_on = CSVField.internal_id)
+    return product_df
+
+
+def _calculate_counted_qty(row, adjustment_df):
+    """ Calculate final quantities for each product in adjustment.
+
+    :param row: itertuple, product from adjustment
+    :param adjustment_df: pandas dataframe, all adjustments
+    """
+    diff_qty = row.Quantity
+    stock_qty = int(row[11])
+    counted_qty = stock_qty + diff_qty
+    adjustment_df.at[row.Index, CSVField.adj_prod_counted_qty] = counted_qty
+    # Log issues with the calculations due to invalid quantities from Odoo server
+    if stock_qty < 0:
+        # Product already has negative qty
+        log.warning(f"Initial quantity is negative for {row.ID}. "
+                    f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
+    elif counted_qty < 0:
+        # Negative difference is larger than existing product qty
+        log.warning(f"Final quantity is negative for {row.ID}. "
+                    f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
+
+
 def create_adjustment():
+    """ Retrieve information from data/invoice and create the appropriate adjustment.
+    """
     adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, DRType.adjustment_dpmc))
     adjustments = []
     stock_df = pd.read_csv(stock_file)
     invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
-    invoice_df = invoice_df[invoice_df[JSONField.status] == Status.success]
+    # Filter ans sort invoices with successful status
+    invoice_df = invoice_df[invoice_df[JSONField.status] == Status.success] \
+        .sort_values(by = [JSONField.date, JSONField.invoice_id])
+    # Break and add info to invoices and create an adjustment
     for invoice_row in invoice_df.itertuples():
-        invoice_product_df = pd.json_normalize(invoice_row.Products)
-        invoice_product_df[[CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products]] = \
-            pd.DataFrame([[invoice_row[4], invoice_row[1], True]], index = [0])
-        invoice_product_df = invoice_product_df.merge(stock_df, how = "inner",
-                                                      left_on = JSONField.part_code, right_on = CSVField.internal_id)
-        adjustments.append(invoice_product_df)
+        adjustments.append(_enrich_invoice_with_stock_info(invoice_row, stock_df))
+    # Append all adjustments into a dataframe
     adjustment_df = pd.concat(adjustments).reset_index(drop = True)
-    adjustment_df[CSVField.adj_loc_id] = "stock.stock_location_stock"
+    # Calculate final quantities for each product in adjustment
     for adjustment_row in adjustment_df.itertuples():
-        diff_qty = adjustment_row.Quantity
-        stock_qty = int(adjustment_row[11])
-        counted_qty = stock_qty + diff_qty
-        adjustment_df.at[adjustment_row.Index, CSVField.adj_prod_counted_qty] = counted_qty
-        if stock_qty < 0:
-            log.warning(f"Initial quantity is negative for {adjustment_row.ID}. "
-                        f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
-        elif counted_qty < 0:
-            log.warning(f"Final quantity is negative for {adjustment_row.ID}. "
-                        f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
+        _calculate_counted_qty(adjustment_row, adjustment_df)
+    # Save data
     write_to_csv(path = adjustment_file, df = adjustment_df,
                  columns = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products,
                             CSVField.external_id, CSVField.adj_loc_id, CSVField.adj_prod_counted_qty],
                  header = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products,
                            CSVField.adj_prod_external_id, CSVField.adj_loc_id, CSVField.adj_prod_counted_qty])
-
-# product.product doesnt get all need to do product.template after
