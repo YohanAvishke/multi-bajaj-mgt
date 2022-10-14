@@ -93,7 +93,7 @@ def _enrich_invoice_with_stock_info(row, stock_df):
                 CSVField.adj_acc_date,
                 CSVField.is_exh_products,
                 CSVField.adj_loc_id]] = pd.DataFrame([[row[4],
-                                                       row[1],
+                                                       row.Date,
                                                        True,
                                                        CSVFieldValue.adj_loc_id]], index = [0])
     # Add columns from stock data to the products
@@ -109,7 +109,7 @@ def _calculate_counted_qty(row, adjustment_df):
     :param adjustment_df: pandas dataframe, all adjustments
     """
     diff_qty = row.Quantity
-    stock_qty = int(row[11])
+    stock_qty = int(row[12])
     counted_qty = stock_qty + diff_qty
     adjustment_df.at[row.Index, CSVField.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
@@ -143,7 +143,7 @@ def create_adjustment():
         _calculate_counted_qty(adjustment_row, adjustment_df)
     # Save data
     write_to_csv(path = adjustment_file, df = adjustment_df,
-                 columns = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products,
+                 columns = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products, "ID",
                             CSVField.external_id, CSVField.adj_loc_id, CSVField.adj_prod_counted_qty],
-                 header = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products,
+                 header = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products, "product_id",
                            CSVField.adj_prod_external_id, CSVField.adj_loc_id, CSVField.adj_prod_counted_qty])
