@@ -27,7 +27,7 @@ def export_all_products():
     product_df = pd.DataFrame(products)
     ids = product_df["id"].tolist()
     # Fetch dpmc product's external id list
-    ex_ids = odoo_client.fetch_product_external_id(ids)
+    ex_ids = odoo_client.fetch_product_external_id(ids, "product.product")
     ex_id_df = pd.DataFrame(ex_ids)
     # Drop external ids duplicates, if any
     ex_id_df = drop_duplicates(ex_id_df, "res_id")
@@ -70,3 +70,5 @@ def create_adjustment():
                             CSVField.external_id, CSVField.adj_loc_id, CSVField.adj_prod_counted_qty],
                  header = [CSVField.adj_name, CSVField.adj_acc_date, CSVField.is_exh_products,
                            CSVField.adj_prod_external_id, CSVField.adj_loc_id, CSVField.adj_prod_counted_qty])
+
+# product.product doesnt get all need to do product.template after

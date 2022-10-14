@@ -87,17 +87,18 @@ def configure():
         _authenticate()
 
 
-def fetch_product_external_id(db_id_list, limit = 0):
+def fetch_product_external_id(db_id_list, model, limit = 0):
     """ Fetch External IDs for a list of product.template Primary Keys.
 
     External IDs are necessary for importing data to the products of the server.
 
     :param db_id_list: list, product.template primary keys
+    :param model: string, related model of data
     :param limit: int, limit the result count
     :return: pandas dataframe, a list of dicts with ir.model.data rows
     """
     log.info("Fetching product external ids from 'ir.model.data'")
-    domain = ["&", ["model", "=", "product.template"],
+    domain = ["&", ["model", "=", model],
               ["res_id", "in", db_id_list]]
     fields = ["res_id", "name", "module"]
     data = _call(

@@ -30,7 +30,7 @@ def export_all_products():
     price_df = pd.DataFrame(prices)
     ids = price_df["id"].tolist()
     # Fetch dpmc product's external id list
-    ex_ids = odoo_client.fetch_product_external_id(ids)
+    ex_ids = odoo_client.fetch_product_external_id(ids, "product.template")
     ex_id_df = pd.DataFrame(ex_ids)
     # Drop external ids duplicates, if any
     ex_id_df = drop_duplicates(ex_id_df, "res_id")
