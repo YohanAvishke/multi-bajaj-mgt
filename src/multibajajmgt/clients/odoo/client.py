@@ -97,7 +97,7 @@ def fetch_product_external_id(db_id_list, model, limit = 0):
     :param limit: int, limit the result count
     :return: pandas dataframe, a list of dicts with ir.model.data rows
     """
-    log.info("Fetching product external ids from 'ir.model.data'")
+    log.info(f"Fetching product ids from `ir.model.data` where model `{model}`")
     domain = ["&", ["model", "=", model],
               ["res_id", "in", db_id_list]]
     fields = ["res_id", "name", "module"]

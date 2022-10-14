@@ -21,18 +21,59 @@ invoice_file = f"{curr_invoice_dir}/{DRType.invoice_dpmc}.{DRExt.json}"
 stock_file = f"{STOCK_DIR}/{DRType.stock_dpmc_all}.{DRExt.csv}"
 
 
+def _format_id_df(df):
+    """ Create `external_id` column and drop and rename the rest of columns.
+
+    :param df: pandas dataframe
+    :return: pandas dataframe
+    """
+    df["external_id"] = df[["module", "name"]].agg(".".join, axis = 1)
+    df = df \
+        .drop(["id", "name", "module"], axis = 1) \
+        .rename({"res_id": "id"}, axis = 1)
+    return df
+
+
+def _enrich_products_by_id(product_df, ex_ids, prod_prod_ids):
+    """ Merge all three dfs together to fill external ids of every single product.
+
+    1. Merge `ex_ids` into `prod_prod_ids`
+    2. Merge result of step 1 into `product_df`
+
+    :param product_df: pandas dataframe, products data
+    :param ex_ids: pandas dataframe, ids fetched by `product.template`
+    :param prod_prod_ids: pandas dataframe, ids fetched by `product.product`
+    :return: pandas dataframe, finalised(merged) dataframe
+    """
+    ex_id_df = pd.DataFrame(ex_ids)
+    prod_prod_id_df = pd.DataFrame(prod_prod_ids)
+    # Aggregate `module and name`, drop and rename columns
+    ex_id_df = drop_duplicates(ex_id_df, DBField.res_id)
+    ex_id_df = _format_id_df(ex_id_df)
+    prod_prod_id_df = _format_id_df(prod_prod_id_df)
+    # Merge 2 different id dfs into one `prod_prod_id_df` gets priority
+    id_df = ex_id_df.merge(prod_prod_id_df, on = DBField.id, how = "outer")
+    id_df["external_id_y"].fillna(id_df["external_id_x"], inplace = True)
+    del id_df['external_id_x']
+    id_df.rename({"external_id_y": DBField.external_id}, axis = 1, inplace = True)
+    # Merger ids into product df
+    enrich_price_df = id_df.merge(product_df, on = DBField.id, how = "inner")
+    return enrich_price_df
+
+
 def export_all_products():
+    """ Fetch, process and save full DPMC stock.
+    """
     # Fetch dpmc stock
     products = odoo_client.fetch_all_dpmc_stock()
     product_df = pd.DataFrame(products)
-    ids = product_df["id"].tolist()
-    # Fetch dpmc product's external id list
-    ex_ids = odoo_client.fetch_product_external_id(ids, "product.product")
-    ex_id_df = pd.DataFrame(ex_ids)
-    # Drop external ids duplicates, if any
-    ex_id_df = drop_duplicates(ex_id_df, "res_id")
-    # Merge products with external ids
-    enrich_product_df = enrich_products_by_external_id(product_df, ex_id_df)
+    ids = product_df[DBField.id].tolist()
+    # Fetch dpmc product's external id lists
+    # Since `product.product` doesn't cover all products, it's necessary to fetch `product.template` ids as well
+    prod_prod_ids = odoo_client.fetch_product_external_id(ids, "product.product")
+    ex_ids = odoo_client.fetch_product_external_id(ids, "product.template")
+    # Merge 2 external id lists and then merge with product list
+    enrich_product_df = _enrich_products_by_id(product_df, ex_ids, prod_prod_ids)
     write_to_csv(stock_file, enrich_product_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.qty_available],
                  header = [CSVField.external_id, CSVField.internal_id, CSVField.qty_available])

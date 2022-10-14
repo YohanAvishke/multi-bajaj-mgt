@@ -98,28 +98,6 @@ def drop_duplicates(df, key):
     duplicate_df = df[df["is_duplicate"]]
     if duplicate_df.size > 0:
         log.warning(f"Filtering duplicates,\n {duplicate_df}")
-        df = df.drop_duplicates(subset = ["res_id"], keep = "first")
+        df = df.drop_duplicates(subset = ["res_id"], keep = "first", ignore_index = True)
     df = df.drop("is_duplicate", axis = 1)
     return df
-
-
-def enrich_products_by_external_id(product_df, id_df):
-    """ Add id dataframe to product dataframe.
-
-    * Build external id.
-    * Drop and rename columns.
-    * Merge price list and external id list(by id).
-
-    :param product_df: pandas dataframe, products
-    :param id_df: pandas dataframe, ids
-    :return: pandas dataframe, products merged with ids
-    """
-    # Build external id
-    id_df["external_id"] = id_df[["module", "name"]].agg(".".join, axis = 1)
-    # Drop and rename columns
-    id_df = id_df \
-        .drop(["id", "name", "module"], axis = 1) \
-        .rename({"res_id": "id"}, axis = 1)
-    # Merge price list and external id list(by id)
-    enrich_price_df = id_df.merge(product_df, on = "id", how = "inner")
-    return enrich_price_df

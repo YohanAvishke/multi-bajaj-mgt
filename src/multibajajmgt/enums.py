@@ -49,6 +49,8 @@ class OdooCSVFieldName(MultiBajajMgtStrEnum):
 
 
 class OdooDBFieldName(MultiBajajMgtStrEnum):
+    id = "id"
+    res_id = "res_id"
     external_id = "external_id"
     internal_id = "default_code"
     sales_price = "list_price"

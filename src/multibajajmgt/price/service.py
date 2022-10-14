@@ -22,6 +22,28 @@ log = logging.getLogger(__name__)
 curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
+def _enrich_products_by_external_id(product_df, id_df):
+    """ Add id dataframe to product dataframe.
+
+    * Build external id.
+    * Drop and rename columns.
+    * Merge price list and external id list(by id).
+
+    :param product_df: pandas dataframe, products
+    :param id_df: pandas dataframe, ids
+    :return: pandas dataframe, products merged with ids
+    """
+    # Build external id
+    id_df["external_id"] = id_df[["module", "name"]].agg(".".join, axis = 1)
+    # Drop and rename columns
+    id_df = id_df \
+        .drop(["id", "name", "module"], axis = 1) \
+        .rename({"res_id": "id"}, axis = 1)
+    # Merge price list and external id list(by id)
+    enrich_price_df = id_df.merge(product_df, on = "id", how = "inner")
+    return enrich_price_df
+
+
 def export_all_products():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices from Odoo server.
     """
@@ -35,7 +57,7 @@ def export_all_products():
     # Drop external ids duplicates, if any
     ex_id_df = drop_duplicates(ex_id_df, "res_id")
     # Merge prices with external ids
-    enrich_price_df = enrich_products_by_external_id(price_df, ex_id_df)
+    enrich_price_df = _enrich_products_by_external_id(price_df, ex_id_df)
     write_to_csv(PRICE_BASE_DPMC_FILE, enrich_price_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.sales_price, DBField.cost],
                  header = [CSVField.external_id, CSVField.internal_id, "Old Sales Price", "Old Cost"])
