@@ -40,24 +40,24 @@ def _enrich_with_advanced_data(row):
     invoice_type = row[JSONField.type]
     # Can-be invoice, order, mobile number
     default_id = row[JSONField.default_id]
-    # For column types used in the request
-    order_field = grn_field = None
+    # For column name used in the request
+    col_name = None
     # Setup payload fields depending on available info in base file
-    if Type.invoice in invoice_type:
-        order_field = grn_field = Field.invoice_no
-    elif Type.order in invoice_type:
-        order_field = Field.dlr_order_no
-        grn_field = Field.order_no
-    elif Type.mobile in invoice_type:
-        order_field = Field.mobile_no
+    # Incase Type.order is necessary which is not used currently
+    #   if Type.order in "Order":
+    #       order_field = "STR_DLR_ORD_NO"
+    #       grn_field = "STR_ORDER_NO"
+    if Type.invoice.val in invoice_type:
+        col_name = Type.invoice.col
+    elif Type.mobile.val in invoice_type:
+        col_name = Type.mobile.col
     # Fetch invoice data(invoice and GRN numbers) from DPMC server
     try:
-        invoice_data = dpmc_client.inquire_goodreceivenote_by_order_ref(order_field, default_id)
+        invoice_data = dpmc_client.inquire_goodreceivenote_by_order_ref(col_name, default_id)
     except DataNotFoundError:
         try:
-            # Usually happens when for older invoices since "inquire_goodreceivenote_by_order_ref"'s data expires
-            # fast
-            invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(grn_field, default_id)
+            # Usually happens for older invoices, since "inquire_goodreceivenote_by_order_ref"'s data expires fast
+            invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(col_name, default_id)
         except DataNotFoundError:
             log.error(f"Invoice retrieval failed for {default_id}")
             row[JSONField.status] = Status.failed
@@ -93,6 +93,44 @@ def fetch_invoice_data():
     write_to_json(historical_file, invoice_df.to_dict("records"))
 
 
+def _reformat_product_data(grn_id, product_data):
+    """ Setup drop and rename attributes of each product.
+
+    A condition(`if grn_id`) is necessary ,since there are 2 client functions to get product data.
+    Each returning a different payload.
+
+    :param grn_id: string | None, if string `..._by_grn_ref` is used else `..._by_order_ref` is used
+    :param product_data: list of dicts, data
+    :return: list of dicts, changed data
+    """
+    products = product_data["dsGRNDetails"]["Table"] if grn_id else product_data["dtGRNDetails"]
+    product_df = pd.DataFrame(products)
+    if grn_id:
+        product_df = product_df \
+            .drop([Field.ware_code.grn,
+                   Field.loc_code.grn,
+                   Field.rack_code.grn,
+                   Field.bin_code.grn,
+                   Field.sbin_code.grn,
+                   Field.serial_base.grn], axis = 1) \
+            .rename(columns = {Field.part_code.grn: JSONField.part_code,
+                               Field.part_desc.grn: JSONField.part_desc,
+                               Field.part_qty.grn: JSONField.part_qty,
+                               Field.unit_cost.grn: JSONField.unit_cost,
+                               Field.total.grn: JSONField.total})
+    else:
+        product_df = product_df \
+            .drop([Field.ware_code.order,
+                   Field.serial_base.order], axis = 1) \
+            .rename(columns = {Field.part_code.order: JSONField.part_code,
+                               Field.part_desc.order: JSONField.part_desc,
+                               Field.part_qty.order: JSONField.part_qty,
+                               Field.unit_cost.order: JSONField.unit_cost,
+                               Field.total.order: JSONField.total})
+    products = product_df.to_dict("records")
+    return products
+
+
 def _enrich_with_products(row):
     """ Enrich invoices with the products.
 
@@ -110,18 +148,7 @@ def _enrich_with_products(row):
             log.error(f"Product inquiry failed for Invoice {invoice_id}")
             row[JSONField.status] = Status.failed
             return row
-        # If grn id is used to fetch data payload will be different
-        products = product_data["dsGRNDetails"]["Table"] if grn_id else product_data["dtGRNDetails"]
-        # Restructure dataframe by dropping unused columns and rename the rest
-        products = pd \
-            .DataFrame(products) \
-            .drop([Field.ware_code, Field.loc_code, Field.rack_code, Field.bin_code, Field.sbin_code,
-                   Field.serial_base], axis = 1) \
-            .rename(columns = {Field.part_code: JSONField.part_code, Field.part_desc: JSONField.part_desc,
-                               Field.part_qty: JSONField.part_qty, Field.unit_cost: JSONField.unit_cost,
-                               Field.total: JSONField.total}) \
-            .to_dict("records")
-        row[JSONField.products] = products
+        row[JSONField.products] = _reformat_product_data(grn_id, product_data)
         logging.info(f"Product inquiry success for Invoice {invoice_id}")
     return row
 

@@ -31,5 +31,5 @@ dpmc_client.configure()
 # update from dpmc invoices
 # stock_service.export_all_products()
 # invoice_service.fetch_invoice_data()
-# invoice_service.fetch_products()
+invoice_service.fetch_products()
 stock_service.create_adjustment()
