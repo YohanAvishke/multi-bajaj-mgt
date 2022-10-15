@@ -20,16 +20,56 @@ class EnvVariable(MultiBajajMgtStrEnum):
     dpmc_server_password = "DPMC_SERVER_PASSWORD"
 
 
+class DocumentResourceName(MultiBajajMgtStrEnum):
+    price_dpmc_all = "price_dpmc_all"
+    invoice_dpmc = "invoice_dpmc"
+    stock_dpmc_all = "stock_dpmc_all"
+    adjustment_dpmc = "adjustment_dpmc"
+
+
 class DocumentResourceExtension(MultiBajajMgtStrEnum):
     json = "json"
     csv = "csv"
 
 
-class DocumentResourceType(MultiBajajMgtStrEnum):
-    price_dpmc_all = "price_dpmc_all"
-    invoice_dpmc = "invoice_dpmc"
-    stock_dpmc_all = "stock_dpmc_all"
-    adjustment_dpmc = "adjustment_dpmc"
+class ProductPriceStatus(MultiBajajMgtStrEnum):
+    none = "none"
+    up = "up"
+    down = "down"
+    equal = "equal"
+
+
+class InvoiceStatus(MultiBajajMgtStrEnum):
+    failed = "Failed"
+    success = "Success"
+    multiple = "Multiple"
+
+
+class InvoiceType(MultiBajajMgtTupleEnum):
+    def __init__(self, val, col):
+        self.val = val
+        self.col = col
+
+    invoice = ("Invoice", "STR_INVOICE_NO")
+    mobile = ("Mobile", "STR_MOBILE_INVOICE_NO")
+
+
+class BasicFieldName(MultiBajajMgtStrEnum):
+    # Invoice
+    date = "Date"
+    default_id = "Default ID"
+    status = "Status"
+    type = "Type"
+    grn_id = "GRN ID"
+    invoice_id = "Invoice ID"
+    order_id = "Order ID"
+    # Product
+    products = "Products"
+    part_code = "ID"
+    part_desc = "Name"
+    part_qty = "Quantity"
+    unit_cost = "Unit Cost"
+    total = "Total"
 
 
 class OdooCSVFieldName(MultiBajajMgtStrEnum):
@@ -49,24 +89,24 @@ class OdooCSVFieldName(MultiBajajMgtStrEnum):
 
 
 class OdooCSVFieldValue(MultiBajajMgtStrEnum):
+    # Adjustment
     adj_loc_id = "stock.stock_location_stock"
 
 
 class OdooDBFieldName(MultiBajajMgtStrEnum):
+    # Common Identifiers
     id = "id"
     res_id = "res_id"
+    tmpl_id = "product_tmpl_id"
+    # product_product
     external_id = "external_id"
     internal_id = "default_code"
     sales_price = "list_price"
     cost = "standard_price"
     qty_available = "qty_available"
-
-
-class ProductPriceStatus(MultiBajajMgtStrEnum):
-    none = "none"
-    up = "up"
-    down = "down"
-    equal = "equal"
+    # ir_model_data
+    ir_model_name = "name"
+    ir_model_module = "module"
 
 
 class DPMCFieldName(MultiBajajMgtTupleEnum):
@@ -74,6 +114,12 @@ class DPMCFieldName(MultiBajajMgtTupleEnum):
         self.grn = grn
         self.order = order
 
+    # Invoice Basic
+    grn_detail = ("dtGRNDetails", "dsGRNDetails")
+    invoice_no = ("Invoice No", "Invoice No")
+    order_no = ("STR_DLR_ORD_NO", "Order No")
+    grn_no = ("GRN No", None)
+    # Invoice Product
     part_code = ("STR_PART_CODE", "STR_PART_NO")
     part_desc = ("STR_DESC", "STR_DESC")
     part_qty = ("INT_QUANTITY", "INT_QUATITY")
@@ -85,36 +131,3 @@ class DPMCFieldName(MultiBajajMgtTupleEnum):
     bin_code = ("BIN_CODE", None)
     sbin_code = ("SUBBIN_CODE", None)
     serial_base = ("STR_SERIAL_BASE", "STR_SERIAL_STATUS")
-
-
-class InvoiceStatus(MultiBajajMgtStrEnum):
-    failed = "Failed"
-    success = "Success"
-    multiple = "Multiple"
-
-
-class InvoiceType(MultiBajajMgtTupleEnum):
-    def __init__(self, val, col):
-        self.val = val
-        self.col = col
-
-    invoice = ("Invoice", "STR_INVOICE_NO")
-    mobile = ("Mobile", "STR_MOBILE_INVOICE_NO")
-
-
-class InvoiceJSONFieldName(MultiBajajMgtStrEnum):
-    # Invoice
-    date = "Date"
-    default_id = "Default ID"
-    status = "Status"
-    type = "Type"
-    grn_id = "GRN ID"
-    invoice_id = "Invoice ID"
-    order_id = "Order ID"
-    # Product
-    products = "Products"
-    part_code = "ID"
-    part_desc = "Name"
-    part_qty = "Quantity"
-    unit_cost = "Unit Cost"
-    total = "Total"

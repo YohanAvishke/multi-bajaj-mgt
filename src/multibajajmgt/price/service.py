@@ -10,9 +10,9 @@ from pathlib import Path
 from multibajajmgt.common import *
 from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
-    DocumentResourceType as DRType,
+    DocumentResourceName as DRName,
     DocumentResourceExtension as DRExt,
-    OdooCSVFieldName as CSVField,
+    OdooCSVFieldName as Field,
     OdooDBFieldName as DBField,
     ProductPriceStatus as Status
 )
@@ -60,7 +60,7 @@ def export_all_products():
     enrich_price_df = _enrich_products_by_external_id(price_df, ex_id_df)
     write_to_csv(PRICE_BASE_DPMC_FILE, enrich_price_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.sales_price, DBField.cost],
-                 header = [CSVField.external_id, CSVField.internal_id, "Old Sales Price", "Old Cost"])
+                 header = [Field.external_id, Field.internal_id, "Old Sales Price", "Old Cost"])
 
 
 def _get_price_info(row):
@@ -110,7 +110,7 @@ def _save_price_info(info, df, file):
     price = info["updated_price"]
     status = info["price_status"]
     # Save price and status
-    df.at[index, CSVField.sales_price] = df.at[index, CSVField.cost] = price
+    df.at[index, Field.sales_price] = df.at[index, Field.cost] = price
     df.at[index, "Status"] = status
     # Save row to base csv file
     write_to_csv(PRICE_BASE_DPMC_FILE, df)
@@ -127,10 +127,10 @@ def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
     price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
-    historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRType.price_dpmc_all))
+    historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRName.price_dpmc_all))
     # Add columns for updated prices and price fluctuation state
-    if CSVField.sales_price not in price_df.columns:
-        price_df[CSVField.sales_price] = price_df[CSVField.cost] = price_df["Status"] = None
+    if Field.sales_price not in price_df.columns:
+        price_df[Field.sales_price] = price_df[Field.cost] = price_df["Status"] = None
         write_to_csv(path = PRICE_BASE_DPMC_FILE, df = price_df)
     price_updatable_df = price_df[pd.isnull(price_df["Status"])]
     # Loop and fetch and save each product's updated price
@@ -144,7 +144,7 @@ def update_product_prices():
 def merge_historical_data():
     """ Merge timed files in a historical dir
     """
-    merged_file = f"{curr_his_dir}/{DRType.price_dpmc_all}.{DRExt.csv}"
+    merged_file = f"{curr_his_dir}/{DRName.price_dpmc_all}.{DRExt.csv}"
     # Remove existing merge file
     if os.path.isfile(merged_file):
         os.remove(merged_file)

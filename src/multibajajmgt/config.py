@@ -3,7 +3,7 @@ import logging
 
 from dotenv import find_dotenv, load_dotenv
 from enums import (
-    DocumentResourceType as DSType,
+    DocumentResourceName as DRName,
     DocumentResourceExtension as DSExt,
     EnvVariable
 )
@@ -18,11 +18,11 @@ SOURCE_DIR = f"{ROOT_DIR}/src/multibajajmgt"
 DATA_DIR = f"{ROOT_DIR}/data"
 # Price
 PRICE_DIR = f"{DATA_DIR}/price"
-PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DSType.price_dpmc_all}.{DSExt.csv}"
+PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DRName.price_dpmc_all}.{DSExt.csv}"
 PRICE_HISTORY_DIR = f"{PRICE_DIR}/history"
 # Invoice
 INVOICE_DIR = f"{DATA_DIR}/invoice"
-INVOICE_BASE_FILE = f"{INVOICE_DIR}/{DSType.invoice_dpmc}.{DSExt.json}"
+INVOICE_BASE_FILE = f"{INVOICE_DIR}/{DRName.invoice_dpmc}.{DSExt.json}"
 INVOICE_HISTORY_DIR = f"{INVOICE_DIR}/history"
 # Stock
 STOCK_DIR = f"{DATA_DIR}/stock"
