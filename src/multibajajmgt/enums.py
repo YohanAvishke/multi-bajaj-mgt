@@ -63,6 +63,7 @@ class BasicFieldName(MultiBajajMgtStrEnum):
     grn_id = "GRN ID"
     invoice_id = "Invoice ID"
     order_id = "Order ID"
+    mobile_id = "Mobile ID"
     # Product
     products = "Products"
     part_code = "ID"
@@ -117,7 +118,8 @@ class DPMCFieldName(MultiBajajMgtTupleEnum):
     # Invoice Basic
     grn_detail = ("dtGRNDetails", "dsGRNDetails")
     invoice_no = ("Invoice No", "Invoice No")
-    order_no = ("STR_DLR_ORD_NO", "Order No")
+    order_no = ("Order No", "Order No")
+    mobile_no = (None, "Mobile Invoice No")
     grn_no = ("GRN No", None)
     # Invoice Product
     part_code = ("STR_PART_CODE", "STR_PART_NO")

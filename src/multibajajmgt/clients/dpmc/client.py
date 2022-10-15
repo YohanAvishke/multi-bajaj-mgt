@@ -99,7 +99,7 @@ def _authenticate():
 def configure():
     """ Validate and attach login session to request header
     """
-    log.debug("Configuring DPMC client")
+    log.info("Configuring DPMC client")
     global cookie
     try:
         with open(f"{SOURCE_DIR}/clients/dpmc/token.json", "r") as file:

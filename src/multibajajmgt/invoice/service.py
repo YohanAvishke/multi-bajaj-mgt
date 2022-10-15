@@ -69,14 +69,15 @@ def _enrich_with_advanced_data(row):
     else:
         invoice_data = invoice_data[0]
         row[Field.status] = Status.success
+        # common for both requests
         row[Field.invoice_id] = invoice_data[DPMCField.invoice_no.order]
-        # Available after a call to "inquire_goodreceivenote_by_grn_ref"
+        row[Field.order_id] = invoice_data[DPMCField.order_no.order]
         if DPMCField.grn_no.grn in invoice_data:
+            # Unique to "inquire_goodreceivenote_by_grn_ref"
             row[Field.grn_id] = invoice_data[DPMCField.grn_no.grn]
-        if DPMCField.grn_no.order in invoice_data:
-            row[Field.order_id] = invoice_data[DPMCField.grn_no.order]
-        elif DPMCField.grn_no.grn in invoice_data:
-            row[Field.order_id] = invoice_data[DPMCField.grn_no.grn]
+        else:
+            # Unique to "inquire_goodreceivenote_by_order_ref"
+            row[Field.mobile_id] = invoice_data[DPMCField.mobile_no.order]
     log.info(f"Invoice retrieval success for {default_id}")
     return row
 
@@ -91,7 +92,7 @@ def fetch_invoice_data():
     invoice_df = invoice_df \
         .drop(Field.default_id, axis = 1)
     invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.invoice_id,
-                                          Field.order_id, Field.grn_id])
+                                          Field.order_id, Field.mobile_id, Field.grn_id])
     write_to_json(historical_file, invoice_df.to_dict("records"))
 
 
@@ -162,5 +163,5 @@ def fetch_products():
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
     invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.invoice_id,
-                                          Field.order_id, Field.grn_id, Field.products])
+                                          Field.order_id, Field.mobile_id, Field.grn_id, Field.products])
     write_to_json(historical_file, invoice_df.to_dict("records"))

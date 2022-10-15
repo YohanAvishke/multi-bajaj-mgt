@@ -10,8 +10,8 @@ from multibajajmgt.enums import (
     DocumentResourceExtension as DRExt,
     BasicFieldName as Field,
     InvoiceStatus as Status,
-    OdooCSVFieldName as Field,
-    OdooCSVFieldValue as FieldVal,
+    OdooCSVFieldName as OdooField,
+    OdooCSVFieldValue as OdooFieldVal,
     OdooDBFieldName as DBField
 )
 
@@ -61,7 +61,7 @@ def export_all_products():
     enrich_product_df = _enrich_products_by_id(product_df, prod_prod_ids)
     write_to_csv(stock_file, enrich_product_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.qty_available],
-                 header = [Field.external_id, Field.internal_id, Field.qty_available])
+                 header = [OdooField.external_id, OdooField.internal_id, OdooField.qty_available])
 
 
 def _enrich_invoice_with_stock_info(row, stock_df):
@@ -74,16 +74,16 @@ def _enrich_invoice_with_stock_info(row, stock_df):
     product_df = pd.json_normalize(row.Products)
     # Create basic invoice columns which share common data within all products of an invoice
     # index should [0] to make sure common data is only stored in the first row of each adjustment
-    product_df[[Field.adj_name,
-                Field.adj_acc_date,
-                Field.is_exh_products]] = pd.DataFrame([[row[4],
-                                                         row.Date,
-                                                         True, ]], index = [0])
+    product_df[[OdooField.adj_name,
+                OdooField.adj_acc_date,
+                OdooField.is_exh_products]] = pd.DataFrame([[row[4],
+                                                             row.Date,
+                                                             True, ]], index = [0])
     # Set location id to all the products
-    product_df[Field.adj_loc_id] = FieldVal.adj_loc_id
+    product_df[OdooField.adj_loc_id] = OdooFieldVal.adj_loc_id
     # Add columns from stock data to the products
     product_df = product_df.merge(stock_df, how = "inner",
-                                  left_on = Field.part_code, right_on = Field.internal_id)
+                                  left_on = Field.part_code, right_on = OdooField.internal_id)
     return product_df
 
 
@@ -96,7 +96,7 @@ def _calculate_counted_qty(row, adjustment_df):
     diff_qty = row.Quantity
     stock_qty = int(row[12])
     counted_qty = stock_qty + diff_qty
-    adjustment_df.at[row.Index, Field.adj_prod_counted_qty] = counted_qty
+    adjustment_df.at[row.Index, OdooField.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
     if stock_qty < 0:
         # Product already has negative qty
@@ -128,7 +128,7 @@ def create_adjustment():
         _calculate_counted_qty(adjustment_row, adjustment_df)
     # Save data
     write_to_csv(path = adjustment_file, df = adjustment_df,
-                 columns = [Field.adj_name, Field.adj_acc_date, Field.is_exh_products, "ID",
-                            Field.external_id, Field.adj_loc_id, Field.adj_prod_counted_qty],
-                 header = [Field.adj_name, Field.adj_acc_date, Field.is_exh_products, "product_id",
-                           Field.adj_prod_external_id, Field.adj_loc_id, Field.adj_prod_counted_qty])
+                 columns = [OdooField.adj_name, OdooField.adj_acc_date, OdooField.is_exh_products, "ID",
+                            OdooField.external_id, OdooField.adj_loc_id, OdooField.adj_prod_counted_qty],
+                 header = [OdooField.adj_name, OdooField.adj_acc_date, OdooField.is_exh_products, "product_id",
+                           OdooField.adj_prod_external_id, OdooField.adj_loc_id, OdooField.adj_prod_counted_qty])
