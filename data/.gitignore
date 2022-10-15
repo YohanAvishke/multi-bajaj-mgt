@@ -1,0 +1,11 @@
+# Ignore everything
+*
+# Except following
+!.gitignore
+!invoice
+!invoice/history
+!price
+!price/history
+!stock
+!stock/adjustments
+!**/README.md
