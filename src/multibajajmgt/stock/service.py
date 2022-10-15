@@ -22,44 +22,22 @@ invoice_file = f"{curr_invoice_dir}/{DRType.invoice_dpmc}.{DRExt.json}"
 stock_file = f"{STOCK_DIR}/{DRType.stock_dpmc_all}.{DRExt.csv}"
 
 
-def _format_id_df(df):
-    """ Create `external_id` column and drop and rename the rest of columns.
-
-    :param df: pandas dataframe
-    :return: pandas dataframe
-    """
-    df["external_id"] = df[["module", "name"]].agg(".".join, axis = 1)
-    df = df \
-        .drop(["id", "name", "module"], axis = 1) \
-        .rename({"res_id": "id"}, axis = 1)
-    return df
-
-
-def _enrich_products_by_id(product_df, ex_ids, prod_prod_ids):
-    """ Merge all three dfs together to fill external ids of every single product.
-
-    1. Merge `ex_ids` into `prod_prod_ids`
-    2. Merge result of step 1 into `product_df`
+def _enrich_products_by_id(product_df, prod_prod_ids):
+    """ Merge the two dfs together, to add external id for each product.
 
     :param product_df: pandas dataframe, products data
-    :param ex_ids: pandas dataframe, ids fetched by `product.template`
     :param prod_prod_ids: pandas dataframe, ids fetched by `product.product`
     :return: pandas dataframe, finalised(merged) dataframe
     """
-    ex_id_df = pd.DataFrame(ex_ids)
     prod_prod_id_df = pd.DataFrame(prod_prod_ids)
     # Aggregate `module and name`, drop and rename columns
-    ex_id_df = drop_duplicates(ex_id_df, DBField.res_id)
-    ex_id_df = _format_id_df(ex_id_df)
-    prod_prod_id_df = _format_id_df(prod_prod_id_df)
-    # Merge 2 different id dfs into one `prod_prod_id_df` gets priority
-    id_df = ex_id_df.merge(prod_prod_id_df, on = DBField.id, how = "outer")
-    id_df["external_id_y"].fillna(id_df["external_id_x"], inplace = True)
-    del id_df['external_id_x']
-    id_df.rename({"external_id_y": DBField.external_id}, axis = 1, inplace = True)
-    # Merger ids into product df
-    enrich_price_df = id_df.merge(product_df, on = DBField.id, how = "inner")
-    return enrich_price_df
+    prod_prod_id_df["external_id"] = prod_prod_id_df[["module", "name"]].agg(".".join, axis = 1)
+    prod_prod_id_df = prod_prod_id_df \
+        .drop(["id", "name", "module"], axis = 1) \
+        .rename({"res_id": "id"}, axis = 1)
+    # Merge ids into product df
+    enriched_prod_df = product_df.merge(prod_prod_id_df, on = DBField.id, how = "inner")
+    return enriched_prod_df
 
 
 def export_all_products():
@@ -68,13 +46,19 @@ def export_all_products():
     # Fetch dpmc stock
     products = odoo_client.fetch_all_dpmc_stock()
     product_df = pd.DataFrame(products)
-    ids = product_df[DBField.id].tolist()
-    # Fetch dpmc product's external id lists
-    # Since `product.product` doesn't cover all products, it's necessary to fetch `product.template` ids as well
-    prod_prod_ids = odoo_client.fetch_product_external_id(ids, "product.product")
-    ex_ids = odoo_client.fetch_product_external_id(ids, "product.template")
-    # Merge 2 external id lists and then merge with product list
-    enrich_product_df = _enrich_products_by_id(product_df, ex_ids, prod_prod_ids)
+    # Extract tmpl_id and re-save it
+    tmpl_id_df = pd.DataFrame(product_df["product_tmpl_id"].tolist())[0]
+    product_df["product_tmpl_id"] = tmpl_id_df
+    # Fetch qty of each product in stock
+    qty_data = odoo_client.fetch_product_quantity(tmpl_id_df.to_list())
+    qty_df = pd.DataFrame(qty_data).rename(columns = {"id": "product_tmpl_id"})
+    # Merge qty with stock
+    product_df = product_df.merge(qty_df, on = "product_tmpl_id", how = "inner")
+    # Fetch product's external id lists
+    prod_prod_ids = odoo_client.fetch_product_external_id(product_df["id"].to_list(), "product.product")
+    prod_prod_id_df = pd.DataFrame(prod_prod_ids)
+    # Merge external ids with stock
+    enrich_product_df = _enrich_products_by_id(product_df, prod_prod_ids)
     write_to_csv(stock_file, enrich_product_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.qty_available],
                  header = [CSVField.external_id, CSVField.internal_id, CSVField.qty_available])

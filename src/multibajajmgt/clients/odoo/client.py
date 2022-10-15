@@ -83,7 +83,7 @@ def configure():
                 user_id = file_data["user-id"]
             else:
                 _authenticate()
-    except FileNotFoundError as error:
+    except FileNotFoundError:
         _authenticate()
 
 
@@ -167,9 +167,8 @@ def fetch_all_dpmc_stock(limit = 0):
     """ Fetch every single Product stock from DPMC POS category.
 
     :param limit: int, limit the result count
-    :return: pandas dataframe, a list of dicts with product.template rows containing quantity available
+    :return: dict, a list of dicts with product.template rows containing quantity available
     """
-    log.info("Fetching stock from 'product.template'")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -177,7 +176,24 @@ def fetch_all_dpmc_stock(limit = 0):
         ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
         ["pos_categ_id", "ilike", "qute"]
     ]
-    fields = ["id", "default_code", "qty_available"]
+    fields = ["id", "product_tmpl_id", "default_code"]
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "product.product", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
+
+
+def fetch_product_quantity(id_list, limit = 0):
+    """ Fetch available quantity for a list of product ids from template table.
+
+    :param id_list: list, product_product tables id(primary key) column
+    :param limit: int, limit the result count
+    :return: dict,
+    """
+    domain = [["id", "in", id_list]]
+    fields = ["qty_available"]
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
