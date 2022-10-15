@@ -44,7 +44,7 @@ ODOO_DATABASE_NAME = os.getenv(EnvVariable.odoo_database_name)
 DPMC_SERVER_URL = os.getenv(EnvVariable.dpmc_server_url)
 DPMC_SERVER_USERNAME = os.getenv(EnvVariable.dpmc_server_username)
 DPMC_SERVER_PASSWORD = os.getenv(EnvVariable.dpmc_server_password)
-DPMC_SESSION_LIFETIME = 5400  # 1 and 1/2 hours
+DPMC_SESSION_LIFETIME = 3600  # 1 hour
 
 DATETIME_FORMAT = "%c"
 DATETIME_FILE_FORMAT = "%Y-%m-%d_%H-%M-%S"

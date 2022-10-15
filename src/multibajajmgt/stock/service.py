@@ -73,16 +73,17 @@ def _enrich_invoice_with_stock_info(row, stock_df):
     """
     product_df = pd.json_normalize(row.Products)
     # Create basic invoice columns which share common data within all products of an invoice
+    # index should [0] to make sure common data is only stored in the first row of each adjustment
     product_df[[CSVField.adj_name,
                 CSVField.adj_acc_date,
-                CSVField.is_exh_products,
-                CSVField.adj_loc_id]] = pd.DataFrame([[row[4],
-                                                       row.Date,
-                                                       True,
-                                                       CSVFieldValue.adj_loc_id]], index = [0])
+                CSVField.is_exh_products]] = pd.DataFrame([[row[4],
+                                                            row.Date,
+                                                            True, ]], index = [0])
+    # Set location id to all the products
+    product_df[CSVField.adj_loc_id] = CSVFieldValue.adj_loc_id
     # Add columns from stock data to the products
-    product_df = product_df.merge(stock_df, how = "inner", left_on = JSONField.part_code,
-                                  right_on = CSVField.internal_id)
+    product_df = product_df.merge(stock_df, how = "inner",
+                                  left_on = JSONField.part_code, right_on = CSVField.internal_id)
     return product_df
 
 
