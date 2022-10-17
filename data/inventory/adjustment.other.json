@@ -6,216 +6,112 @@
       "Date": "2022-10-07",
       "Products": [
         {
-          "STR_PART_NO": "JW131801(YL)",
-          "INT_QUATITY": 3
-        },
-        {
-          "STR_PART_NO": "DS101365(YL)",
-          "INT_QUATITY": 20
-        },
-        {
-          "STR_PART_NO": "DU101041(YL)",
+          "STR_PART_NO": "36DZ2008(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DH102329(YL)",
+          "STR_PART_NO": "DJ151037(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DK101253(YL)",
-          "INT_QUATITY": 30
-        },
-        {
-          "STR_PART_NO": "DK101186(YL)",
-          "INT_QUATITY": 20
-        },
-        {
-          "STR_PART_NO": "36311014(YL)",
-          "INT_QUATITY": 30
-        },
-        {
-          "STR_PART_NO": "DG161224(YL)",
-          "INT_QUATITY": 40
-        },
-        {
-          "STR_PART_NO": "JW561206(YL)",
-          "INT_QUATITY": 20
-        },
-        {
-          "STR_PART_NO": "31101175(YL)",
-          "INT_QUATITY": 24
-        },
-        {
-          "STR_PART_NO": "DH121093(YL)",
+          "STR_PART_NO": "DJ151036(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DS121115(YL)",
+          "STR_PART_NO": "JV541208(YL)",
+          "INT_QUATITY": 4
+        },
+        {
+          "STR_PART_NO": "JN351604(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "DP171006(YL)",
+          "INT_QUATITY": 20
+        },
+        {
+          "STR_PART_NO": "JA531011(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "06101218(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "AB151091(YL)",
           "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "DD101097(YL)",
+          "STR_PART_NO": "DG161121(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DH102107(YL)",
-          "INT_QUATITY": 47
-        },
-        {
-          "STR_PART_NO": "DS121076(YL)",
-          "INT_QUATITY": 20
-        },
-        {
-          "STR_PART_NO": "JZ581210(YL)",
-          "INT_QUATITY": 20
-        },
-        {
-          "STR_PART_NO": "JH581003(YL)",
+          "STR_PART_NO": "36DS1002(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "JB131008(YL)",
+          "STR_PART_NO": "36311028(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "PF551433(YL)",
-          "INT_QUATITY": 4
+          "STR_PART_NO": "36PA0004(YL)",
+          "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "PF551436(YL)",
-          "INT_QUATITY": 4
-        },
-        {
-          "STR_PART_NO": "31101175(YL)",
+          "STR_PART_NO": "52JZ0264(YL)",
           "INT_QUATITY": 6
         },
         {
-          "STR_PART_NO": "36311014(YL)",
-          "INT_QUATITY": 8
-        },
-        {
-          "STR_PART_NO": "39215220(YL)",
-          "INT_QUATITY": 50
-        },
-        {
-          "STR_PART_NO": "39260120(YL)",
-          "INT_QUATITY": 9
-        },
-        {
-          "STR_PART_NO": "DH101064(YL)",
-          "INT_QUATITY": 3
-        },
-        {
-          "STR_PART_NO": "DH121093(YL)",
+          "STR_PART_NO": "36DS1201(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DJ151076(YL)",
-          "INT_QUATITY": 12
-        },
-        {
-          "STR_PART_NO": "DK101253(YL)",
+          "STR_PART_NO": "39240320(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DK101380(YL)",
+          "STR_PART_NO": "JA541018(YL)",
           "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "DK101725(YL)",
-          "INT_QUATITY": 10
+          "STR_PART_NO": "DJ101369(YL)",
+          "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "DS161125(YL)",
-          "INT_QUATITY": 10
-        },
-        {
-          "STR_PART_NO": "DS181015(YL)",
-          "INT_QUATITY": 7
-        },
-        {
-          "STR_PART_NO": "DU101057(YL)",
-          "INT_QUATITY": 30
-        },
-        {
-          "STR_PART_NO": "JA541034(YL)",
-          "INT_QUATITY": 10
-        },
-        {
-          "STR_PART_NO": "JA561207(YL)",
-          "INT_QUATITY": 10
-        },
-        {
-          "STR_PART_NO": "JA621001(YL)",
-          "INT_QUATITY": 6
-        },
-        {
-          "STR_PART_NO": "JA511204(YL)",
+          "STR_PART_NO": "36AA4050(YL)",
           "INT_QUATITY": 15
         },
         {
-          "STR_PART_NO": "JN581208(YL)",
-          "INT_QUATITY": 2
+          "STR_PART_NO": "36DU1205(YL)",
+          "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "JU511214(YL)",
-          "INT_QUATITY": 60
+          "STR_PART_NO": "DD201024(YL)",
+          "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "JW561206(YL)",
-          "INT_QUATITY": 50
+          "STR_PART_NO": "JD511008(YL)",
+          "INT_QUATITY": 10
         },
         {
-          "STR_PART_NO": "JZ511021(YL)",
+          "STR_PART_NO": "JA561400(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JF401400(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JF401401(YL)",
+          "INT_QUATITY": 10
+        },
+        {
+          "STR_PART_NO": "JB131017(YL)",
           "INT_QUATITY": 5
         },
         {
-          "STR_PART_NO": "JZ551207(YL)",
-          "INT_QUATITY": 2
-        },
-        {
-          "STR_PART_NO": "PD131803(YL)",
-          "INT_QUATITY": 50
-        },
-        {
-          "STR_PART_NO": "DS101096(YL)",
-          "INT_QUATITY": 50
-        },
-        {
-          "STR_PART_NO": "DS121137(YL)",
-          "INT_QUATITY": 4
-        },
-        {
-          "STR_PART_NO": "36JZ0199(YL)",
-          "INT_QUATITY": 20
-        },
-        {
-          "STR_PART_NO": "JD511202(YL)",
-          "INT_QUATITY": 5
-        },
-        {
-          "STR_PART_NO": "PF551436(YL)",
-          "INT_QUATITY": 2
-        },
-        {
-          "STR_PART_NO": "DD101063(YL)",
-          "INT_QUATITY": 5
-        },
-        {
-          "STR_PART_NO": "DK101135(YL)",
-          "INT_QUATITY": 50
-        },
-        {
-          "STR_PART_NO": "JD511211(YL)",
-          "INT_QUATITY": 5
-        },
-        {
-          "STR_PART_NO": "JH511016(YL)",
-          "INT_QUATITY": 16
-        },
-        {
-          "STR_PART_NO": "JL561409(YL)",
-          "INT_QUATITY": 20
+          "STR_PART_NO": "39104319(YL)",
+          "INT_QUATITY": 12
         }
       ]
     }
