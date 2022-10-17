@@ -65,12 +65,12 @@ def _enrich_with_advanced_data(row):
     if len(invoice_data) > 1:
         # If "id" is incomplete and matches parts of multiple invoice ids.
         row[Field.status] = Status.multiple
-        row[Field.invoice_id] = [invoice_data[n][DPMCField.invoice_no.order] for n in range(len(invoice_data))]
+        row[Field.default_id] = [invoice_data[n][DPMCField.invoice_no.order] for n in range(len(invoice_data))]
     else:
         invoice_data = invoice_data[0]
         row[Field.status] = Status.success
         # common for both requests
-        row[Field.invoice_id] = invoice_data[DPMCField.invoice_no.order]
+        row[Field.default_id] = invoice_data[DPMCField.invoice_no.order]
         row[Field.order_id] = invoice_data[DPMCField.order_no.order]
         if DPMCField.grn_no.grn in invoice_data:
             # Unique to "inquire_goodreceivenote_by_grn_ref"
@@ -89,9 +89,7 @@ def fetch_invoice_data():
     invoice_df = pd.read_json(INVOICE_BASE_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
     # Restructure dataframe by reordering and deleting columns
-    invoice_df = invoice_df \
-        .drop(Field.default_id, axis = 1)
-    invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.invoice_id,
+    invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.default_id,
                                           Field.order_id, Field.mobile_id, Field.grn_id])
     write_to_json(historical_file, invoice_df.to_dict("records"))
 
@@ -141,7 +139,7 @@ def _enrich_with_products(row):
     :return: pandas series, enriched row
     """
     invoice_status = row[Field.status]
-    invoice_id = row[Field.invoice_id]
+    invoice_id = row[Field.default_id]
     grn_id = row[Field.grn_id]
     # Filter invoices unsuccessful with fetching advanced data
     if Status.success in invoice_status:
@@ -162,6 +160,6 @@ def fetch_products():
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
-    invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.invoice_id,
+    invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.default_id,
                                           Field.order_id, Field.mobile_id, Field.grn_id, Field.products])
     write_to_json(historical_file, invoice_df.to_dict("records"))

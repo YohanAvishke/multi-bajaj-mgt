@@ -20,6 +20,18 @@ class EnvVariable(MultiBajajMgtStrEnum):
     dpmc_server_password = "DPMC_SERVER_PASSWORD"
 
 
+class POSCategory(MultiBajajMgtStrEnum):
+    all = "all"
+    dpmc = "dpmc"
+    other = "other"
+
+
+class QuantityAvailability(MultiBajajMgtStrEnum):
+    all = "all"
+    available = "available"
+    unavailable = "unavailable"
+
+
 class DocumentResourceName(MultiBajajMgtStrEnum):
     price_dpmc_all = "price_dpmc_all"
     invoice_dpmc = "invoice_dpmc"
@@ -57,11 +69,10 @@ class InvoiceType(MultiBajajMgtTupleEnum):
 class BasicFieldName(MultiBajajMgtStrEnum):
     # Invoice
     date = "Date"
-    default_id = "Default ID"
+    default_id = "ID"
     status = "Status"
     type = "Type"
     grn_id = "GRN ID"
-    invoice_id = "Invoice ID"
     order_id = "Order ID"
     mobile_id = "Mobile ID"
     # Product

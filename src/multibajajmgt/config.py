@@ -7,6 +7,7 @@ from enums import (
     DocumentResourceExtension as DSExt,
     EnvVariable
 )
+from multibajajmgt.app import App
 
 LOG_LEVEL = logging.INFO
 
@@ -30,7 +31,7 @@ ADJUSTMENT_DIR = f"{STOCK_DIR}/adjustments"
 
 
 def configure_env():
-    """Configure environment variables
+    """ Configure environment variables
     """
     log.debug("Configuring environment variables.")
     load_dotenv(find_dotenv(f"{ROOT_DIR}/.env"))
@@ -48,3 +49,16 @@ DPMC_SESSION_LIFETIME = 3600  # 1 hour
 
 DATETIME_FORMAT = "%c"
 DATETIME_FILE_FORMAT = "%Y-%m-%d_%H-%M-%S"
+
+app = None
+
+
+def configure_app(pos_categ, qty_limit):
+    """ Configure application
+
+    :param pos_categ: POSCategory string,
+    :param qty_limit: QuantityAvailability string,
+    :return: App object,
+    """
+    global app
+    app = App(pos_categ, qty_limit)

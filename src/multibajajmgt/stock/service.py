@@ -76,7 +76,7 @@ def _enrich_invoice_with_stock_info(row, stock_df):
     # index should [0] to make sure common data is only stored in the first row of each adjustment
     product_df[[OdooField.adj_name,
                 OdooField.adj_acc_date,
-                OdooField.is_exh_products]] = pd.DataFrame([[row[4],
+                OdooField.is_exh_products]] = pd.DataFrame([[row.ID,
                                                              row.Date,
                                                              True, ]], index = [0])
     # Set location id to all the products
@@ -117,7 +117,7 @@ def create_adjustment():
     invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Field.status] == Status.success] \
-        .sort_values(by = [Field.date, Field.invoice_id])
+        .sort_values(by = [Field.date, Field.default_id])
     # Break and add info to invoices and create an adjustment
     for invoice_row in invoice_df.itertuples():
         adjustments.append(_enrich_invoice_with_stock_info(invoice_row, stock_df))
