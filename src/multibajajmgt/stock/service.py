@@ -3,23 +3,41 @@ import logging
 import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
 
-from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.common import *
+from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR, app
 from multibajajmgt.enums import (
-    DocumentResourceName as DRName,
-    DocumentResourceExtension as DRExt,
     BasicFieldName as Field,
+    DocumentResourceExtension as DRExt,
+    DocumentResourceName as DRName,
     InvoiceStatus as Status,
     OdooCSVFieldName as OdooField,
     OdooCSVFieldValue as OdooFieldVal,
-    OdooDBFieldName as DBField
+    OdooDBFieldName as DBField,
+    POSParentCategory as POSCatg
 )
 
 log = logging.getLogger(__name__)
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
-invoice_file = f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}"
-stock_file = f"{STOCK_DIR}/{DRName.stock_dpmc_all}.{DRExt.csv}"
+
+
+def _evaluate_pos_category():
+    """ Map client fetching function for the pos_category.
+
+    :return: function, (func reference, stock file path, invoice file path)
+    """
+    categ = app.get_pos_categ()
+    if categ == POSCatg.dpmc:
+        return odoo_client.fetch_all_dpmc_stock, \
+               f"{STOCK_DIR}/{DRName.stock_dpmc_all}.{DRExt.csv}", \
+               f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}"
+
+    elif categ == POSCatg.other:
+        return odoo_client.fetch_all_thirdparty_stock, \
+               f"{STOCK_DIR}/{DRName.stock_other_all}.{DRExt.csv}", \
+               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}"
+    else:
+        return
 
 
 def _enrich_products_by_id(product_df, prod_prod_ids):
@@ -44,8 +62,9 @@ def _enrich_products_by_id(product_df, prod_prod_ids):
 def export_all_products():
     """ Fetch, process and save full DPMC stock.
     """
+    fetch_func_ref, stock_file, invoice_file = _evaluate_pos_category()
     # Fetch dpmc stock
-    products = odoo_client.fetch_all_dpmc_stock()
+    products = fetch_func_ref()
     product_df = pd.DataFrame(products)
     # Extract tmpl_id and re-save it
     tmpl_id_df = pd.DataFrame(product_df[DBField.tmpl_id].tolist())[0]
@@ -108,11 +127,12 @@ def _calculate_counted_qty(row, adjustment_df):
                     f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
 
 
-def create_adjustment():
+def create_dpmc_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
     adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, DRName.adjustment_dpmc))
     adjustments = []
+    fetch_func_ref, stock_file, invoice_file = _evaluate_pos_category()
     stock_df = pd.read_csv(stock_file)
     invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status

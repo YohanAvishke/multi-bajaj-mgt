@@ -20,7 +20,22 @@ class EnvVariable(MultiBajajMgtStrEnum):
     dpmc_server_password = "DPMC_SERVER_PASSWORD"
 
 
-class POSCategory(MultiBajajMgtStrEnum):
+class DocumentResourceName(MultiBajajMgtStrEnum):
+    price_dpmc_all = "price_dpmc_all"
+    invoice_dpmc = "invoice_dpmc"
+    invoice_sales = "invoice_sales"
+    stock_dpmc_all = "stock_dpmc_all"
+    stock_other_all = "stock_other_all"
+    adjustment_dpmc = "adjustment_dpmc"
+    adjustment_sales = "adjustment_sales"
+
+
+class DocumentResourceExtension(MultiBajajMgtStrEnum):
+    json = "json"
+    csv = "csv"
+
+
+class POSParentCategory(MultiBajajMgtStrEnum):
     all = "all"
     dpmc = "dpmc"
     other = "other"
@@ -30,19 +45,6 @@ class QuantityAvailability(MultiBajajMgtStrEnum):
     all = "all"
     available = "available"
     unavailable = "unavailable"
-
-
-class DocumentResourceName(MultiBajajMgtStrEnum):
-    price_dpmc_all = "price_dpmc_all"
-    invoice_dpmc = "invoice_dpmc"
-    invoice_sales = "invoice_sales"
-    stock_dpmc_all = "stock_dpmc_all"
-    adjustment_dpmc = "adjustment_dpmc"
-
-
-class DocumentResourceExtension(MultiBajajMgtStrEnum):
-    json = "json"
-    csv = "csv"
 
 
 class ProductPriceStatus(MultiBajajMgtStrEnum):

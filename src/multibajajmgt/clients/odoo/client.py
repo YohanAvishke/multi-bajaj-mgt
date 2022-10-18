@@ -173,8 +173,33 @@ def fetch_all_dpmc_stock(limit = 0):
         "&",
         ["available_in_pos", "=", True],
         "|", "|", "|",
-        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
+        ["pos_categ_id", "ilike", "bajaj"],
+        ["pos_categ_id", "ilike", "2w"],
+        ["pos_categ_id", "ilike", "3w"],
         ["pos_categ_id", "ilike", "qute"]
+    ]
+    fields = ["id", "product_tmpl_id", "default_code"]
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "product.product", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
+
+
+def fetch_all_thirdparty_stock(limit = 0):
+    """ Fetch every single Product stock from all other categories except DPMC.
+
+        :param limit: int, limit the result count
+        :return: dict, a list of dicts with product.template rows containing quantity available
+        """
+    domain = [
+        "&", "&", "&", "&",
+        ["available_in_pos", "=", True],
+        ["pos_categ_id", "not ilike", "bajaj"],
+        ["pos_categ_id", "not ilike", "2w"],
+        ["pos_categ_id", "not ilike", "3w"],
+        ["pos_categ_id", "not ilike", "qute"]
     ]
     fields = ["id", "product_tmpl_id", "default_code"]
     data = _call(
