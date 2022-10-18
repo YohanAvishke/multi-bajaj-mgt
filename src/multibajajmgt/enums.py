@@ -35,6 +35,7 @@ class QuantityAvailability(MultiBajajMgtStrEnum):
 class DocumentResourceName(MultiBajajMgtStrEnum):
     price_dpmc_all = "price_dpmc_all"
     invoice_dpmc = "invoice_dpmc"
+    invoice_sales = "invoice_sales"
     stock_dpmc_all = "stock_dpmc_all"
     adjustment_dpmc = "adjustment_dpmc"
 

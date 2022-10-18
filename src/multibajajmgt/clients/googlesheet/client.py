@@ -4,6 +4,7 @@ import pandas as pd
 import logging
 
 from datetime import date
+from typing import Any
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -15,6 +16,7 @@ from multibajajmgt.enums import (
 )
 
 log = logging.getLogger(__name__)
+service: Any
 
 CLIENT_DIR = f"{SOURCE_DIR}/clients/googlesheet"
 TOKEN_FILE = f"{CLIENT_DIR}/token.json"
@@ -26,6 +28,7 @@ RANGE_NAME = "A:D"
 
 def configure():
     credentials = None
+    global service
 
     if os.path.exists(TOKEN_FILE):
         credentials = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
@@ -36,10 +39,12 @@ def configure():
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIAL_FILE, SCOPES)
             credentials = flow.run_local_server(port = 0)
         write_to_json(TOKEN_FILE, json.loads(credentials.to_json()))
-    return build("sheets", "v4", credentials = credentials)
+    service = build("sheets", "v4", credentials = credentials)
 
 
-def fetch_sheet_data(service):
+def fetch_sheet_data():
+    if not service:
+        configure()
     sheet = service.spreadsheets()
     request = sheet.values().get(spreadsheetId = SPREADSHEET_ID, range = RANGE_NAME)
     response = request.execute()
@@ -51,6 +56,6 @@ def fetch_sheet_data(service):
         return pd.DataFrame(columns = [Field.part_code, Field.part_qty, Field.date, Field.status], data = values)
 
 
-s = configure()
-fetch_sheet_data(s)
+configure()
+fetch_sheet_data()
 print()
