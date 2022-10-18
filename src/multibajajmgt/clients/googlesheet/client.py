@@ -3,7 +3,6 @@ import os.path
 import pandas as pd
 import logging
 
-from datetime import date
 from typing import Any
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -27,9 +26,11 @@ RANGE_NAME = "A:D"
 
 
 def configure():
+    """ Validate credentials, fetch token and set service.
+    """
+    log.info("Configuring Google Sheet client")
     credentials = None
     global service
-
     if os.path.exists(TOKEN_FILE):
         credentials = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
     if not credentials or not credentials.valid:
@@ -42,20 +43,19 @@ def configure():
     service = build("sheets", "v4", credentials = credentials)
 
 
-def fetch_sheet_data():
+def inquire_sales_invoices():
+    """ Fetch sales data from the columns of the spreadsheet.
+
+    :return: pandas dataframe, column data
+    """
+    # If not already configured
     if not service:
         configure()
     sheet = service.spreadsheets()
     request = sheet.values().get(spreadsheetId = SPREADSHEET_ID, range = RANGE_NAME)
     response = request.execute()
     values = response.get("values", [])
-
-    if not values:
-        log.warning("No data found in the sheet")
-    else:
+    if values:
         return pd.DataFrame(columns = [Field.part_code, Field.part_qty, Field.date, Field.status], data = values)
-
-
-configure()
-fetch_sheet_data()
-print()
+    else:
+        log.warning("No data found in the sheet")

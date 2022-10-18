@@ -17,10 +17,13 @@ curr_historical_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 
 
 def fetch_invoice_data():
+    """ Fetch, enrich and restructure invoices with advanced data.
+    """
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_sales}.{DRExt.json}")
-    invoices = []
+    chunk_df_list = []
     enriched_invoices = []
-    data = sale_client.fetch_sheet_data()
+    data = sale_client.inquire_sales_invoices()
+    # Identify chunks(rows with a value to col `isUpdated`) in the data
     # Indexes of the rows containing the column names
     chunk_indexes = data.query(f"{Field.status} == 'False'").index.values.tolist()
     # [column indexes] +  index of last product in invoice
@@ -32,14 +35,15 @@ def fetch_invoice_data():
               .drop(columns = [Field.status])
               .to_dict("records")
               for n in range(len(chunks))]
-    # Combine all chunks to a single invoice dataframe
+    # Combine all chunks to a single dataframe
     for chunk in chunks:
-        invoices.append(pd.DataFrame(chunk))
-    chunk_df = pd.concat(invoices, ignore_index = True)
-    # Break invoices to be enriched by advance data
-    invoice_indexes = chunk_df.query(f"{Field.date} == {Field.date}").index.values.tolist()
-    boundaries = invoice_indexes + [len(chunk_df.index)]
-    invoices = [(chunk_df.iloc[boundaries[n]:boundaries[n + 1]]) for n in range(len(boundaries) - 1)]
+        chunk_df_list.append(pd.DataFrame(chunk))
+    chunks_df = pd.concat(chunk_df_list, ignore_index = True)
+    # Identify invoices(rows with value to date)
+    invoice_indexes = chunks_df.query(f"{Field.date} == {Field.date}").index.values.tolist()
+    boundaries = invoice_indexes + [len(chunks_df.index)]
+    invoices = [(chunks_df.iloc[boundaries[n]:boundaries[n + 1]]) for n in range(len(boundaries) - 1)]
+    # Enrich invoices
     for invoice_df in invoices:
         invoice_df.reset_index(drop = True, inplace = True)
         date = invoice_df[Field.date][0]
@@ -51,4 +55,4 @@ def fetch_invoice_data():
             Field.products: products,
         }
         enriched_invoices.append(invoice)
-        write_to_json(historical_file, enriched_invoices)
+    write_to_json(historical_file, enriched_invoices)
