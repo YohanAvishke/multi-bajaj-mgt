@@ -3,8 +3,9 @@ import logging
 import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
 
+from multibajajmgt.app import App
 from multibajajmgt.common import *
-from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR, app
+from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Field,
     DocumentResourceExtension as DRExt,
@@ -26,7 +27,7 @@ def _evaluate_pos_category():
 
     :return: function, (func reference, stock file path, invoice file path)
     """
-    categ = app.get_pos_categ()
+    categ = App().get_pos_categ()
     if categ == POSCatg.dpmc:
         return odoo_client.fetch_all_dpmc_stock, \
                f"{STOCK_DIR}/{DRName.stock_dpmc_all}.{DRExt.csv}", \
@@ -37,7 +38,9 @@ def _evaluate_pos_category():
                f"{STOCK_DIR}/{DRName.stock_other_all}.{DRExt.csv}", \
                f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}"
     else:
-        return
+        return odoo_client.fetch_all_stock, \
+               f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
+               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}"
 
 
 def _enrich_products_by_id(product_df, prod_prod_ids):
@@ -59,7 +62,7 @@ def _enrich_products_by_id(product_df, prod_prod_ids):
     return enriched_prod_df
 
 
-def export_all_products():
+def export_products():
     """ Fetch, process and save full DPMC stock.
     """
     fetch_func_ref, stock_file, invoice_file = _evaluate_pos_category()
@@ -112,8 +115,8 @@ def _calculate_counted_qty(row, adjustment_df):
     :param row: itertuple, product from adjustment
     :param adjustment_df: pandas dataframe, all adjustments
     """
-    diff_qty = row.Quantity
-    stock_qty = int(row[12])
+    diff_qty = int(row.Quantity)
+    stock_qty = row.QuantityOnHand
     counted_qty = stock_qty + diff_qty
     adjustment_df.at[row.Index, OdooField.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
@@ -127,12 +130,12 @@ def _calculate_counted_qty(row, adjustment_df):
                     f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
 
 
-def create_dpmc_adjustment():
+def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
     adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, DRName.adjustment_dpmc))
     adjustments = []
-    fetch_func_ref, stock_file, invoice_file = _evaluate_pos_category()
+    func, stock_file, invoice_file = _evaluate_pos_category()
     stock_df = pd.read_csv(stock_file)
     invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status

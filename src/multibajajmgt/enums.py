@@ -24,6 +24,7 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     price_dpmc_all = "price_dpmc_all"
     invoice_dpmc = "invoice_dpmc"
     invoice_sales = "invoice_sales"
+    stock_all = "stock_all"
     stock_dpmc_all = "stock_dpmc_all"
     stock_other_all = "stock_other_all"
     adjustment_dpmc = "adjustment_dpmc"
@@ -93,7 +94,7 @@ class OdooCSVFieldName(MultiBajajMgtStrEnum):
     internal_id = "Internal Reference"
     sales_price = "Sales Price"
     cost = "Cost"
-    qty_available = "Quantity On Hand"
+    qty_available = "QuantityOnHand"
     # Adjustment
     adj_name = "name"
     adj_acc_date = "Accounting Date"

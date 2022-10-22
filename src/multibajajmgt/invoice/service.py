@@ -5,7 +5,7 @@ import multibajajmgt.clients.googlesheet.client as sale_client
 import pandas as pd
 
 from multibajajmgt.common import *
-from multibajajmgt.config import INVOICE_BASE_FILE, INVOICE_HISTORY_DIR
+from multibajajmgt.config import INVOICE_RAW_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Field,
     DocumentResourceName as DRName,
@@ -87,7 +87,7 @@ def export_dpmc_invoice_data():
     """ Fetch, enrich and restructure DPMC invoices with advanced data.
     """
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
-    invoice_df = pd.read_json(INVOICE_BASE_FILE, orient = "records", convert_dates = False)
+    invoice_df = pd.read_json(INVOICE_RAW_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
     # Restructure dataframe by reordering and deleting columns
     invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.default_id,
