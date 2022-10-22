@@ -33,11 +33,11 @@ def _evaluate_pos_category():
                f"{STOCK_DIR}/{DRName.stock_dpmc_all}.{DRExt.csv}", \
                f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}"
 
-    elif categ == POSCatg.other:
-        return odoo_client.fetch_all_thirdparty_stock, \
-               f"{STOCK_DIR}/{DRName.stock_other_all}.{DRExt.csv}", \
-               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}"
-    else:
+    elif categ == POSCatg.tp:
+        return odoo_client.fetch_all_stock, \
+               f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
+               f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}"
+    elif categ == POSCatg.sales:
         return odoo_client.fetch_all_stock, \
                f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
                f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}"

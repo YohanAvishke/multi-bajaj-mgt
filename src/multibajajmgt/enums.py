@@ -24,6 +24,7 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     price_dpmc_all = "price_dpmc_all"
     invoice_dpmc = "invoice_dpmc"
     invoice_sales = "invoice_sales"
+    invoice_tp = "invoice_thirdparty"
     stock_all = "stock_all"
     stock_dpmc_all = "stock_dpmc_all"
     stock_other_all = "stock_other_all"
@@ -34,12 +35,14 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
 class DocumentResourceExtension(MultiBajajMgtStrEnum):
     json = "json"
     csv = "csv"
+    txt = "txt"
 
 
 class POSParentCategory(MultiBajajMgtStrEnum):
     all = "all"
     dpmc = "dpmc"
-    other = "other"
+    sales = "sales"
+    tp = "third_party"
 
 
 class QuantityAvailability(MultiBajajMgtStrEnum):

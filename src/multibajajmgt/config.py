@@ -23,7 +23,8 @@ PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DRName.price_dpmc_all}.{DSExt.csv}"
 PRICE_HISTORY_DIR = f"{PRICE_DIR}/history"
 # Invoice
 INVOICE_DIR = f"{DATA_DIR}/invoice"
-INVOICE_RAW_FILE = f"{DATA_DIR}/{DRName.invoice_dpmc}.{DSExt.json}"
+INVOICE_DPMC_FILE = f"{INVOICE_DIR}/{DRName.invoice_dpmc}.{DSExt.json}"
+INVOICE_TP_FILE = f"{INVOICE_DIR}/{DRName.invoice_tp}.{DSExt.txt}"
 INVOICE_HISTORY_DIR = f"{INVOICE_DIR}/history"
 # Stock
 STOCK_DIR = f"{DATA_DIR}/stock"

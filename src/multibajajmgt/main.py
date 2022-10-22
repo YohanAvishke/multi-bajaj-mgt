@@ -5,6 +5,7 @@ import multibajajmgt.clients.odoo.client as odoo_client
 import multibajajmgt.clients.dpmc.client as dpmc_client
 import multibajajmgt.clients.googlesheet.client as sheet_client
 import multibajajmgt.invoice.service as invoice_service
+import multibajajmgt.invoice.third_party as invoice_tp_service
 import multibajajmgt.price.service as price_service
 import multibajajmgt.stock.service as stock_service
 
@@ -26,12 +27,12 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-configure_app(Categ.all, QtyAva.all)
+configure_app(Categ.tp, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
 dpmc_client.configure()
-sheet_client.configure()
+# sheet_client.configure()
 
 # Update dpmc prices
 # price_service.export_all_products()
@@ -47,4 +48,8 @@ sheet_client.configure()
 # Update from sales invoices
 # stock_service.export_products()
 # invoice_service.export_sales_invoice_data()
-stock_service.create_adjustment()
+# stock_service.create_adjustment()
+
+# Update from third-party invoices
+# stock_service.export_products()
+invoice_tp_service.export_invoice_data()
