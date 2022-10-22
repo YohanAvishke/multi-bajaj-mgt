@@ -31,16 +31,18 @@ def _evaluate_pos_category():
     if categ == POSCatg.dpmc:
         return odoo_client.fetch_all_dpmc_stock, \
                f"{STOCK_DIR}/{DRName.stock_dpmc_all}.{DRExt.csv}", \
-               f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}"
-
+               f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
+               f"{DRName.adjustment_dpmc}"
     elif categ == POSCatg.tp:
         return odoo_client.fetch_all_stock, \
                f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
-               f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}"
+               f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
+               f"{DRName.adjustment_tp}"
     elif categ == POSCatg.sales:
         return odoo_client.fetch_all_stock, \
                f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
-               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}"
+               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
+               f"{DRName.adjustment_sales}"
 
 
 def _enrich_products_by_id(product_df, prod_prod_ids):
@@ -65,7 +67,9 @@ def _enrich_products_by_id(product_df, prod_prod_ids):
 def export_products():
     """ Fetch, process and save full DPMC stock.
     """
-    fetch_func_ref, stock_file, invoice_file = _evaluate_pos_category()
+    evaluations = _evaluate_pos_category()
+    fetch_func_ref = evaluations[0]
+    stock_file = evaluations[1]
     # Fetch dpmc stock
     products = fetch_func_ref()
     product_df = pd.DataFrame(products)
@@ -157,9 +161,12 @@ def _calculate_counted_qty(product, adjustment_df):
 def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
-    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, DRName.adjustment_dpmc))
+    evaluations = _evaluate_pos_category()
+    stock_file = evaluations[1]
+    invoice_file = evaluations[2]
+    adj_file = evaluations[3]
     adjustments = []
-    func, stock_file, invoice_file = _evaluate_pos_category()
+    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, adj_file))
     stock_df = pd.read_csv(stock_file)
     invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status

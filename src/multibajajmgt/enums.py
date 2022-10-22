@@ -30,6 +30,7 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     stock_other_all = "stock_other_all"
     adjustment_dpmc = "adjustment_dpmc"
     adjustment_sales = "adjustment_sales"
+    adjustment_tp = "adjustment_thirdparty"
 
 
 class DocumentResourceExtension(MultiBajajMgtStrEnum):

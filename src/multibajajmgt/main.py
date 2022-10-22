@@ -31,7 +31,7 @@ configure_app(Categ.tp, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
-dpmc_client.configure()
+# dpmc_client.configure()
 # sheet_client.configure()
 
 # Update dpmc prices
@@ -39,17 +39,18 @@ dpmc_client.configure()
 # price_service.update_product_prices()
 # price_service.merge_historical_data()
 
-# Update from dpmc invoices
+# Adjustment from dpmc invoices
 # stock_service.export_products()
 # invoice_service.export_dpmc_invoice_data()
 # invoice_service.export_products()
 # stock_service.create_adjustment()
 
-# Update from sales invoices
+# Adjustment from sales invoices
 # stock_service.export_products()
 # invoice_service.export_sales_invoice_data()
 # stock_service.create_adjustment()
 
-# Update from third-party invoices
+# Adjustment from third-party invoices
 # stock_service.export_products()
-invoice_tp_service.export_invoice_data()
+# invoice_tp_service.export_invoice_data()
+# stock_service.create_adjustment()
