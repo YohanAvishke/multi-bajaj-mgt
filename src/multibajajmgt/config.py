@@ -17,14 +17,13 @@ log = logging.getLogger(__name__)
 ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 SOURCE_DIR = f"{ROOT_DIR}/src/multibajajmgt"
 DATA_DIR = f"{ROOT_DIR}/data"
-RAW_DATA_DIR = f"{DATA_DIR}/.raw"
 # Price
 PRICE_DIR = f"{DATA_DIR}/price"
 PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DRName.price_dpmc_all}.{DSExt.csv}"
 PRICE_HISTORY_DIR = f"{PRICE_DIR}/history"
 # Invoice
 INVOICE_DIR = f"{DATA_DIR}/invoice"
-INVOICE_RAW_FILE = f"{RAW_DATA_DIR}/{DRName.invoice_dpmc}.{DSExt.json}"
+INVOICE_RAW_FILE = f"{DATA_DIR}/{DRName.invoice_dpmc}.{DSExt.json}"
 INVOICE_HISTORY_DIR = f"{INVOICE_DIR}/history"
 # Stock
 STOCK_DIR = f"{DATA_DIR}/stock"
