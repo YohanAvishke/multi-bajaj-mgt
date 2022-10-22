@@ -2,6 +2,7 @@
 *
 # Except following
 !.gitignore
+!.raw/
 !invoice
 !invoice/history
 !price
