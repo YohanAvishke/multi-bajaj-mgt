@@ -95,6 +95,7 @@ class OdooCSVFieldName(MultiBajajMgtStrEnum):
     sales_price = "Sales Price"
     cost = "Cost"
     qty_available = "QuantityOnHand"
+    found_in = "FoundIn"
     # Adjustment
     adj_name = "name"
     adj_acc_date = "Accounting Date"

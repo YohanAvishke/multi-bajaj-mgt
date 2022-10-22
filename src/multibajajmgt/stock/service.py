@@ -86,47 +86,71 @@ def export_products():
                  header = [OdooField.external_id, OdooField.internal_id, OdooField.qty_available])
 
 
-def _enrich_invoice_with_stock_info(row, stock_df):
+def _validate_products(products_df):
+    """ Product is marked as invalid if its ID doesn't exist in the stock_*_*.csv file.
+
+    :param products_df: pandas dataframe, products of an invoice
+    :return: pandas dataframe, validated data
+    """
+    for product in products_df.itertuples():
+        if product.FoundIn == "left_only":
+            products_df = products_df.drop(product.Index)
+            log.warning(f"Invalid product found with Id {product.ID}.")
+    products_df = products_df.drop(OdooField.found_in, axis = 1)
+    return products_df
+
+
+def _enrich_invoice(row, stock_df):
     """ Add basic info and stock data to each invoice.
+
+        1. Break invoice rows into product rows.
+            Currently, each specific invoice has a row with a column containing a list of its products. These products
+            need to have its own specific row for further calculations.
+        2. Add the necessary columns(like `name`, `Accounting Date`, etc.)
+        3. Add the stock data(identification data from Odoo server).
 
     :param row: itertuple, single invoice
     :param stock_df: pandas dataframe, stock data
     :return: pandas dataframe, enriched df
     """
     product_df = pd.json_normalize(row.Products)
+    # Add columns from stock data to the products
+    product_df = product_df.merge(stock_df, how = "left", indicator = OdooField.found_in,
+                                  left_on = Field.part_code, right_on = OdooField.internal_id)
+    # Validate the values in indicator and if all products of the invoice are invalid, then return None
+    products_df = _validate_products(product_df)
+    if len(products_df) == 0:
+        return
     # Create basic invoice columns which share common data within all products of an invoice
     # index should [0] to make sure common data is only stored in the first row of each adjustment
     product_df[[OdooField.adj_name,
                 OdooField.adj_acc_date,
                 OdooField.is_exh_products]] = pd.DataFrame([[row.ID,
                                                              row.Date,
-                                                             True, ]], index = [0])
+                                                             True]], index = [0])
     # Set location id to all the products
     product_df[OdooField.adj_loc_id] = OdooFieldVal.adj_loc_id
-    # Add columns from stock data to the products
-    product_df = product_df.merge(stock_df, how = "inner",
-                                  left_on = Field.part_code, right_on = OdooField.internal_id)
     return product_df
 
 
-def _calculate_counted_qty(row, adjustment_df):
+def _calculate_counted_qty(product, adjustment_df):
     """ Calculate final quantities for each product in adjustment.
 
-    :param row: itertuple, product from adjustment
+    :param product: itertuple, product from adjustment
     :param adjustment_df: pandas dataframe, all adjustments
     """
-    diff_qty = int(row.Quantity)
-    stock_qty = row.QuantityOnHand
+    diff_qty = int(product.Quantity)
+    stock_qty = product.QuantityOnHand
     counted_qty = stock_qty + diff_qty
-    adjustment_df.at[row.Index, OdooField.adj_prod_counted_qty] = counted_qty
+    adjustment_df.at[product.Index, OdooField.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
     if stock_qty < 0:
         # Product already has negative qty
-        log.warning(f"Initial quantity is negative for {row.ID}. "
+        log.warning(f"Initial quantity is negative for {product.ID}. "
                     f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
     elif counted_qty < 0:
         # Negative difference is larger than existing product qty
-        log.warning(f"Final quantity is negative for {row.ID}. "
+        log.warning(f"Final quantity is negative for {product.ID}. "
                     f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
 
 
@@ -141,14 +165,14 @@ def create_adjustment():
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Field.status] == Status.success] \
         .sort_values(by = [Field.date, Field.default_id])
-    # Break and add info to invoices and create an adjustment
     for invoice_row in invoice_df.itertuples():
-        adjustments.append(_enrich_invoice_with_stock_info(invoice_row, stock_df))
+        adjustments.append(_enrich_invoice(invoice_row, stock_df))
     # Append all adjustments into a dataframe
     adjustment_df = pd.concat(adjustments).reset_index(drop = True)
     # Calculate final quantities for each product in adjustment
-    for adjustment_row in adjustment_df.itertuples():
-        _calculate_counted_qty(adjustment_row, adjustment_df)
+    for row in adjustment_df.itertuples():
+        # _validate_product(row, adjustment_df)
+        _calculate_counted_qty(row, adjustment_df)
     # Save data
     write_to_csv(path = adjustment_file, df = adjustment_df,
                  columns = [OdooField.adj_name, OdooField.adj_acc_date, OdooField.is_exh_products, "ID",

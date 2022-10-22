@@ -46,5 +46,5 @@ sheet_client.configure()
 
 # Update from sales invoices
 # stock_service.export_products()
-invoice_service.export_sales_invoice_data()
+# invoice_service.export_sales_invoice_data()
 stock_service.create_adjustment()
