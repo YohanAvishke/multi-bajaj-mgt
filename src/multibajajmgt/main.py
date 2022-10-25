@@ -1,3 +1,5 @@
+# TODO - product fetching is broken :(
+# TODO - async price updates
 import os
 
 import multibajajmgt.clients.odoo.client as odoo_client
@@ -25,17 +27,17 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-app = configure_app(Categ.dpmc, QtyAva.all)
+app = configure_app(Categ.sales, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
 dpmc_client.configure()
-# sheet_client.configure()
+sheet_client.configure()
 
 # Update dpmc prices
 # price_service.export_all_products()
-price_service.update_product_prices()
-price_service.merge_historical_data()
+# price_service.update_product_prices()
+# price_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
 # stock_service.export_products()
@@ -45,12 +47,10 @@ price_service.merge_historical_data()
 
 # Adjustment from sales invoices
 # stock_service.export_products()
-# invoice_sale_service.export_invoice_data()
-# stock_service.create_adjustment()
+invoice_sale_service.export_invoice_data()
+stock_service.create_adjustment()
 
 # Adjustment from third-party invoices
 # stock_service.export_products()
 # invoice_tp_service.export_invoice_data()
 # stock_service.create_adjustment()
-
-# TODO - sales invo invalid prods are not removed

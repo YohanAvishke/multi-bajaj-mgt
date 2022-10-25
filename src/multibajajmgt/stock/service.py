@@ -94,7 +94,8 @@ def _validate_products(products_df):
         if product.FoundIn == "left_only":
             products_df = products_df.drop(product.Index)
             log.warning(f"Invalid product found with Id {product.ID}.")
-    products_df = products_df.drop(OdooField.found_in, axis = 1)
+    products_df.drop(OdooField.found_in, axis = 1, inplace = True)
+    products_df.reset_index(drop = True, inplace = True)
     return products_df
 
 
@@ -111,24 +112,24 @@ def _enrich_invoice(row, stock_df):
     :param stock_df: pandas dataframe, stock data
     :return: pandas dataframe, enriched df
     """
-    product_df = pd.json_normalize(row.Products)
+    products_df = pd.json_normalize(row.Products)
     # Add columns from stock data to the products
-    product_df = product_df.merge(stock_df, how = "left", indicator = OdooField.found_in,
-                                  left_on = Field.part_code, right_on = OdooField.internal_id)
+    products_df = products_df.merge(stock_df, how = "left", indicator = OdooField.found_in,
+                                    left_on = Field.part_code, right_on = OdooField.internal_id)
     # Validate the values in indicator and if all products of the invoice are invalid, then return None
-    products_df = _validate_products(product_df)
+    products_df = _validate_products(products_df)
     if len(products_df) == 0:
         return
     # Create basic invoice columns which share common data within all products of an invoice
     # index should [0] to make sure common data is only stored in the first row of each adjustment
-    product_df[[OdooField.adj_name,
-                OdooField.adj_acc_date,
-                OdooField.is_exh_products]] = pd.DataFrame([[row.ID,
-                                                             row.Date,
-                                                             True]], index = [0])
+    products_df[[OdooField.adj_name,
+                 OdooField.adj_acc_date,
+                 OdooField.is_exh_products]] = pd.DataFrame([[row.ID,
+                                                              row.Date,
+                                                              True]], index = [0])
     # Set location id to all the products
-    product_df[OdooField.adj_loc_id] = OdooFieldVal.adj_loc_id
-    return product_df
+    products_df[OdooField.adj_loc_id] = OdooFieldVal.adj_loc_id
+    return products_df
 
 
 def _calculate_counted_qty(product, adjustment_df):
