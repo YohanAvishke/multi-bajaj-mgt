@@ -1,10 +1,10 @@
-import logging
 import sys
 import requests
 import requests.exceptions as r_exceptions
 import json
 import time
 
+from loguru import logger as log
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import (
     DATETIME_FORMAT,
@@ -13,8 +13,6 @@ from multibajajmgt.config import (
     DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DPMC_SESSION_LIFETIME
 )
 from multibajajmgt.exceptions import *
-
-log = logging.getLogger(__name__)
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
 GET_HELP_URL = "https://erp.dpg.lk/Help/GetHelp"

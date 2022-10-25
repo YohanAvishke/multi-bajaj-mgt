@@ -1,12 +1,8 @@
-import logging
-import os
-import glob
-
 import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
 import multibajajmgt.clients.dpmc.client as dpmc_client
 
-from pathlib import Path
+from loguru import logger as log
 from multibajajmgt.common import *
 from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
@@ -17,8 +13,8 @@ from multibajajmgt.enums import (
     ProductPriceStatus as Status
 )
 from multibajajmgt.exceptions import InvalidIdentityError
+from pathlib import Path
 
-log = logging.getLogger(__name__)
 curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
@@ -120,7 +116,7 @@ def _save_price_info(info, df, file):
         row_transposed = df.loc[index].to_frame().T
         write_to_csv(path = file, df = row_transposed, mode = "a",
                      header = not os.path.exists(file))
-    logging.info(f"{index + 1} - {info['process_status']} - Product Number: {info['ref_id']}, Price: {price}")
+    log.info(f"{index + 1} - {info['process_status']} - Product Number: {info['ref_id']}, Price: {price}")
 
 
 def update_product_prices():

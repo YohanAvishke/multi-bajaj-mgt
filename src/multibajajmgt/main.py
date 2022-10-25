@@ -1,4 +1,3 @@
-import logging
 import os
 
 import multibajajmgt.clients.odoo.client as odoo_client
@@ -12,33 +11,31 @@ import multibajajmgt.stock.service as stock_service
 
 from app import App
 from config import configure_app, configure_env
-from logger import configure_logging
+from logger import configure_logger
 from multibajajmgt.enums import (
     POSParentCategory as Categ,
     QuantityAvailability as QtyAva
 )
 
-log = logging.getLogger(__name__)
-
 # Configure the logging level and format
-configure_logging()
+configure_logger()
 
 # Configure env variables
 if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-configure_app(Categ.tp, QtyAva.all)
+app = configure_app(Categ.dpmc, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
-# dpmc_client.configure()
+dpmc_client.configure()
 # sheet_client.configure()
 
 # Update dpmc prices
 # price_service.export_all_products()
-# price_service.update_product_prices()
-# price_service.merge_historical_data()
+price_service.update_product_prices()
+price_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
 # stock_service.export_products()
@@ -47,11 +44,13 @@ odoo_client.configure()
 # stock_service.create_adjustment()
 
 # Adjustment from sales invoices
-stock_service.export_products()
-invoice_sale_service.export_invoice_data()
-stock_service.create_adjustment()
+# stock_service.export_products()
+# invoice_sale_service.export_invoice_data()
+# stock_service.create_adjustment()
 
 # Adjustment from third-party invoices
 # stock_service.export_products()
 # invoice_tp_service.export_invoice_data()
 # stock_service.create_adjustment()
+
+# TODO - sales invo invalid prods are not removed

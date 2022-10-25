@@ -1,7 +1,6 @@
-import logging
-
 import pandas as pd
 
+from loguru import logger as log
 from multibajajmgt.common import *
 from multibajajmgt.config import INVOICE_TP_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
@@ -11,7 +10,6 @@ from multibajajmgt.enums import (
     InvoiceStatus as Status
 )
 
-log = logging.getLogger(__name__)
 curr_historical_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 
 

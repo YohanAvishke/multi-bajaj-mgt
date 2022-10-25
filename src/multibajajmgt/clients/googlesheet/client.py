@@ -1,20 +1,19 @@
 import json
 import os.path
 import pandas as pd
-import logging
 
-from typing import Any
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+from loguru import logger as log
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import SOURCE_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Field
 )
+from typing import Any
 
-log = logging.getLogger(__name__)
 service: Any
 
 CLIENT_DIR = f"{SOURCE_DIR}/clients/googlesheet"

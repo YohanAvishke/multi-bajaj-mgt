@@ -1,15 +1,50 @@
-import logging
-
 from config import LOG_LEVEL
+from sys import stdout
+from loguru import logger as log
 
 
-def configure_logging():
-    """Configure logging for the module
+def formatter(log: dict) -> str:
     """
-    level = LOG_LEVEL
-    if level == "DEBUG":
-        # log level:logged message:full module path:function invoked:line number of logging call
-        log_format = "%(levelname)s:%(message)s:%(pathname)s:%(funcName)s:%(lineno)d"
-        logging.basicConfig(level = level, format = log_format)
+    Format log colors based on level.
+    :param dict log: Dictionary containing log level, details, etc.
+    :returns: str
+    """
+    if log["level"].name == "INFO":
+        return (
+            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
+            "<fg #cfe2f3>{level}</fg #cfe2f3>: "
+            "<light-white>{message}</light-white> \n"
+        )
+    if log["level"].name == "SUCCESS":
+        return (
+            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
+            "<fg #85de83>{level}</fg #85de83>: "
+            "<light-white>{message}</light-white> \n"
+        )
+    if log["level"].name == "WARNING":
+        return (
+            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
+            "<light-yellow>{level}</light-yellow>: "
+            "<light-white>{message}</light-white> \n"
+        )
+    elif log["level"].name == "ERROR":
+        return (
+            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
+            "<light-red>{level}</light-red>: "
+            "<light-white>{message}</light-white> \n"
+        )
     else:
-        logging.basicConfig(level = level)
+        return (
+            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
+            "<fg #67c9c4>{level}</fg #67c9c4>: "
+            "<light-white>{message}</light-white> \n"
+        )
+
+
+def configure_logger() -> log:
+    """
+    Create custom logger.
+    :returns: custom_logger
+    """
+    log.remove()
+    log.add(stdout, level = LOG_LEVEL, colorize = True, format = formatter)

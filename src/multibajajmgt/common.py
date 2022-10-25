@@ -1,12 +1,10 @@
 import errno
 import json
-import logging
 import os
 import time
 
+from loguru import logger as log
 from tabulate import tabulate
-
-log = logging.getLogger(__name__)
 
 
 def write_to_csv(path, df, mode = "w", columns = None, header = True):

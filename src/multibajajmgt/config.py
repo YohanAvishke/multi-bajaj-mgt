@@ -7,11 +7,10 @@ from enums import (
     DocumentResourceExtension as DRExt,
     EnvVariable
 )
+from loguru import logger as log
 from multibajajmgt.app import App
 
 LOG_LEVEL = logging.INFO
-
-log = logging.getLogger(__name__)
 
 # Paths
 ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))

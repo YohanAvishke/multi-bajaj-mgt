@@ -1,8 +1,4 @@
-import logging
-
 from multibajajmgt.enums import POSParentCategory, QuantityAvailability
-
-log = logging.getLogger(__name__)
 
 
 class App:

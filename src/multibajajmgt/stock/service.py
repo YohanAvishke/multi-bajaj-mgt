@@ -1,8 +1,7 @@
-import logging
-
 import pandas as pd
 import multibajajmgt.clients.odoo.client as odoo_client
 
+from loguru import logger as log
 from multibajajmgt.app import App
 from multibajajmgt.common import *
 from multibajajmgt.config import STOCK_ALL_FILE, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
@@ -17,7 +16,6 @@ from multibajajmgt.enums import (
     POSParentCategory as POSCatg
 )
 
-log = logging.getLogger(__name__)
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
 

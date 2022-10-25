@@ -1,8 +1,8 @@
 import random
 import json
-import logging
 import requests
 
+from loguru import logger as log
 from multibajajmgt.config import (
     SOURCE_DIR,
     ODOO_SERVER_URL as SERVER_URL,
@@ -12,7 +12,6 @@ from multibajajmgt.config import (
 )
 from multibajajmgt.common import write_to_json
 
-log = logging.getLogger(__name__)
 user_id = None
 
 
@@ -239,5 +238,25 @@ def fetch_product_quantity(id_list, limit = 0):
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
             "product.template", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
+
+
+def list_reports(limit = 0):
+    domain = []
+    fields = ['name', 'model', 'report_name', 'report_type']
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "ir.actions.report", "search_read", [domain, fields], {"limit": limit}
+    )
+    return data
+
+
+def fetch_report(ids):
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "report", "render_report",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "ir.actions.report", ids
     )
     return data
