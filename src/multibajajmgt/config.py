@@ -4,7 +4,7 @@ import logging
 from dotenv import find_dotenv, load_dotenv
 from enums import (
     DocumentResourceName as DRName,
-    DocumentResourceExtension as DSExt,
+    DocumentResourceExtension as DRExt,
     EnvVariable
 )
 from multibajajmgt.app import App
@@ -19,15 +19,16 @@ SOURCE_DIR = f"{ROOT_DIR}/src/multibajajmgt"
 DATA_DIR = f"{ROOT_DIR}/data"
 # Price
 PRICE_DIR = f"{DATA_DIR}/price"
-PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DRName.price_dpmc_all}.{DSExt.csv}"
+PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DRName.price_dpmc_all}.{DRExt.csv}"
 PRICE_HISTORY_DIR = f"{PRICE_DIR}/history"
 # Invoice
 INVOICE_DIR = f"{DATA_DIR}/invoice"
-INVOICE_DPMC_FILE = f"{INVOICE_DIR}/{DRName.invoice_dpmc}.{DSExt.json}"
-INVOICE_TP_FILE = f"{INVOICE_DIR}/{DRName.invoice_tp}.{DSExt.txt}"
+INVOICE_DPMC_FILE = f"{INVOICE_DIR}/{DRName.invoice_dpmc}.{DRExt.json}"
+INVOICE_TP_FILE = f"{INVOICE_DIR}/{DRName.invoice_tp}.{DRExt.txt}"
 INVOICE_HISTORY_DIR = f"{INVOICE_DIR}/history"
 # Stock
 STOCK_DIR = f"{DATA_DIR}/stock"
+STOCK_ALL_FILE = f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}"
 ADJUSTMENT_DIR = f"{STOCK_DIR}/adjustments"
 
 

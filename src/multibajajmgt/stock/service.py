@@ -5,7 +5,7 @@ import multibajajmgt.clients.odoo.client as odoo_client
 
 from multibajajmgt.app import App
 from multibajajmgt.common import *
-from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
+from multibajajmgt.config import STOCK_ALL_FILE, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Field,
     DocumentResourceExtension as DRExt,
@@ -30,17 +30,14 @@ def _evaluate_pos_category():
     categ = App().get_pos_categ()
     if categ == POSCatg.dpmc:
         return odoo_client.fetch_all_dpmc_stock, \
-               f"{STOCK_DIR}/{DRName.stock_dpmc_all}.{DRExt.csv}", \
                f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
                f"{DRName.adjustment_dpmc}"
     elif categ == POSCatg.tp:
         return odoo_client.fetch_all_stock, \
-               f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
                f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
                f"{DRName.adjustment_tp}"
     elif categ == POSCatg.sales:
         return odoo_client.fetch_all_stock, \
-               f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}", \
                f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
                f"{DRName.adjustment_sales}"
 
@@ -69,7 +66,6 @@ def export_products():
     """
     evaluations = _evaluate_pos_category()
     fetch_func_ref = evaluations[0]
-    stock_file = evaluations[1]
     # Fetch dpmc stock
     products = fetch_func_ref()
     product_df = pd.DataFrame(products)
@@ -85,7 +81,7 @@ def export_products():
     prod_prod_ids = odoo_client.fetch_product_external_id(product_df[DBField.id].to_list(), "product.product")
     # Merge external ids with stock
     enrich_product_df = _enrich_products_by_id(product_df, prod_prod_ids)
-    write_to_csv(stock_file, enrich_product_df,
+    write_to_csv(STOCK_ALL_FILE, enrich_product_df,
                  columns = [DBField.external_id, DBField.internal_id, DBField.qty_available],
                  header = [OdooField.external_id, OdooField.internal_id, OdooField.qty_available])
 
@@ -162,12 +158,11 @@ def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
     evaluations = _evaluate_pos_category()
-    stock_file = evaluations[1]
-    invoice_file = evaluations[2]
-    adj_file = evaluations[3]
+    invoice_file = evaluations[1]
+    adj_file = evaluations[2]
     adjustments = []
     adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, adj_file))
-    stock_df = pd.read_csv(stock_file)
+    stock_df = pd.read_csv(STOCK_ALL_FILE)
     invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Field.status] == Status.success] \
