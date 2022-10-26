@@ -29,10 +29,10 @@ def _enrich_invoice(invoice_row):
 
     if raw_data[0] == "*":
         invoice_data = raw_data.split("*")[-1].split("&")
-    if invoice_data:
-        invoice_name = invoice_data[0]
-        invoice_number = invoice_data[1]
-        date = invoice_data[2]
+        if invoice_data:
+            invoice_name = invoice_data[0]
+            invoice_number = invoice_data[1]
+            date = invoice_data[2]
     else:
         raw_data = raw_data.split(" ")
         invoice_row.ProductName = str(" ".join(raw_data[0:-3]).title())
