@@ -1,6 +1,6 @@
 import pandas as pd
-import multibajajmgt.clients.odoo.client as odoo_client
-import multibajajmgt.clients.dpmc.client as dpmc_client
+import multibajajmgt.client.odoo.client as odoo_client
+import multibajajmgt.client.dpmc.client as dpmc_client
 
 from loguru import logger as log
 from multibajajmgt.common import *

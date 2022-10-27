@@ -16,7 +16,7 @@ from typing import Any
 
 service: Any
 
-CLIENT_DIR = f"{SOURCE_DIR}/clients/googlesheet"
+CLIENT_DIR = f"{SOURCE_DIR}/client/googlesheet"
 TOKEN_FILE = f"{CLIENT_DIR}/token.json"
 CREDENTIAL_FILE = f"{CLIENT_DIR}/credentials.json"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]

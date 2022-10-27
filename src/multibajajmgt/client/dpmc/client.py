@@ -91,7 +91,7 @@ def _authenticate():
         "created-at": session.cookies._now,
         "expires-at": session.cookies._now + DPMC_SESSION_LIFETIME
     }
-    write_to_json(F"{SOURCE_DIR}/clients/dpmc/token.json", token_data)
+    write_to_json(F"{SOURCE_DIR}/client/dpmc/token.json", token_data)
 
 
 def configure():
@@ -100,7 +100,7 @@ def configure():
     log.info("Configuring DPMC client")
     global cookie
     try:
-        with open(f"{SOURCE_DIR}/clients/dpmc/token.json", "r") as file:
+        with open(f"{SOURCE_DIR}/client/dpmc/token.json", "r") as file:
             file_data = json.load(file)
             # Does cookie exist in the data
             if ".AspNetCore.Session" in file_data:

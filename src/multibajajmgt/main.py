@@ -1,10 +1,8 @@
-# TODO - product fetching is broken :(
-# TODO - async price updates
 import os
 
-import multibajajmgt.clients.odoo.client as odoo_client
-import multibajajmgt.clients.dpmc.client as dpmc_client
-import multibajajmgt.clients.googlesheet.client as sheet_client
+import multibajajmgt.client.odoo.client as odoo_client
+import multibajajmgt.client.dpmc.client as dpmc_client
+import multibajajmgt.client.googlesheet.client as sheet_client
 import multibajajmgt.invoice.dpmc as invoice_dpmc_service
 import multibajajmgt.invoice.sale as invoice_sale_service
 import multibajajmgt.invoice.thirdparty as invoice_tp_service
@@ -27,17 +25,17 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-app = configure_app(Categ.sales, QtyAva.all)
+app = configure_app(Categ.tp, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
 dpmc_client.configure()
-sheet_client.configure()
+# sheet_client.configure()
 
 # Update dpmc prices
-# price_service.export_all_products()
-# price_service.update_product_prices()
-# price_service.merge_historical_data()
+price_service.export_all_products()
+price_service.update_product_prices()
+price_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
 # stock_service.export_products()
@@ -47,8 +45,8 @@ sheet_client.configure()
 
 # Adjustment from sales invoices
 # stock_service.export_products()
-invoice_sale_service.export_invoice_data()
-stock_service.create_adjustment()
+# invoice_sale_service.export_invoice_data()
+# stock_service.create_adjustment()
 
 # Adjustment from third-party invoices
 # stock_service.export_products()

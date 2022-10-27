@@ -1,4 +1,4 @@
-import multibajajmgt.clients.googlesheet.client as sale_client
+import multibajajmgt.client.googlesheet.client as sale_client
 import pandas as pd
 
 from loguru import logger as log

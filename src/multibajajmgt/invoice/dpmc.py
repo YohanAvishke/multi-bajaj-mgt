@@ -1,4 +1,4 @@
-import multibajajmgt.clients.dpmc.client as dpmc_client
+import multibajajmgt.client.dpmc.client as dpmc_client
 import pandas as pd
 
 from loguru import logger as log

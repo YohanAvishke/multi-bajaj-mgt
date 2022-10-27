@@ -65,7 +65,7 @@ def _authenticate():
     """
     log.info("Authenticating odoo-client and setting up the user-id")
     data = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
-    write_to_json(F"{SOURCE_DIR}/clients/odoo/token.json", {"user-id": data})
+    write_to_json(F"{SOURCE_DIR}/client/odoo/token.json", {"user-id": data})
 
 
 def configure():
@@ -76,7 +76,7 @@ def configure():
     log.info("Configuring Odoo client")
     global user_id
     try:
-        with open(f"{SOURCE_DIR}/clients/odoo/token.json", "r") as file:
+        with open(f"{SOURCE_DIR}/client/odoo/token.json", "r") as file:
             file_data = json.load(file)
             if "user-id" in file_data:
                 user_id = file_data["user-id"]
@@ -238,25 +238,5 @@ def fetch_product_quantity(id_list, limit = 0):
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
             "product.template", "search_read", [domain, fields], {"limit": limit}
-    )
-    return data
-
-
-def list_reports(limit = 0):
-    domain = []
-    fields = ['name', 'model', 'report_name', 'report_type']
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "ir.actions.report", "search_read", [domain, fields], {"limit": limit}
-    )
-    return data
-
-
-def fetch_report(ids):
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "report", "render_report",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "ir.actions.report", ids
     )
     return data
