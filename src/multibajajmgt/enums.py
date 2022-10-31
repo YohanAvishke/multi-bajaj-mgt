@@ -99,6 +99,7 @@ class OdooFieldName(MultiBajajMgtStrEnum):
     tmpl_id = "product_tmpl_id"
     # product_product
     external_id = "external_id"
+    prod_var_id = "product_variant_id/product_variant_id/id"
     internal_id = "default_code"
     sales_price = "list_price"
     cost = "standard_price"
@@ -111,6 +112,7 @@ class OdooFieldName(MultiBajajMgtStrEnum):
 class OdooFieldLabel(MultiBajajMgtStrEnum):
     # Product
     external_id = "External ID"
+    prod_var_id = "Product/Product/ID"
     internal_id = "Internal Reference"
     sales_price = "Sales Price"
     cost = "Cost"

@@ -24,10 +24,7 @@ def export_all_products():
     """
     # Fetch dpmc product's prices
     raw_data = odoo_client.fetch_all_dpmc_prices()
-    # Convert raw data to a acceptable object for pandas and convert it ot a df
-    price_df = pd.read_csv(StringIO(raw_data))
-    write_to_csv(PRICE_BASE_DPMC_FILE, price_df,
-                 header = [Label.external_id, OdooName.internal_id, "Old Sales Price", "Old Cost"])
+    write_to_csv(PRICE_BASE_DPMC_FILE, csvstr_to_df(raw_data))
 
 
 def _get_price_info(row):

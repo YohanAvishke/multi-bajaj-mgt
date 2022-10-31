@@ -24,64 +24,26 @@ curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
 def _evaluate_pos_category():
     """ Map client fetching function for the pos_category.
 
-    :return: function, (func reference, stock file path, invoice file path)
+    :return: function, (func reference, invoice file path, adjustment historical file path)
     """
     categ = App().get_pos_categ()
     if categ == POSCatg.dpmc:
-        return odoo_client.fetch_all_dpmc_stock, \
-               f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
+        return f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
                f"{DRName.adjustment_dpmc}"
     elif categ == POSCatg.tp:
-        return odoo_client.fetch_all_stock, \
-               f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
+        return f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
                f"{DRName.adjustment_tp}"
     elif categ == POSCatg.sales:
-        return odoo_client.fetch_all_stock, \
-               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
+        return f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
                f"{DRName.adjustment_sales}"
 
 
-def _enrich_products_by_id(product_df, prod_prod_ids):
-    """ Merge the two dfs together, to add external id for each product.
-
-    :param product_df: panda dataframe, product data
-    :param prod_prod_ids: pandas dataframe, ids fetched by `product.product`
-    :return: pandas dataframe, finalised(merged) dataframe
-    """
-    prod_prod_id_df = pd.DataFrame(prod_prod_ids)
-    # Aggregate `module and name`, drop and rename columns
-    prod_prod_id_df[OdooName.external_id] = \
-        prod_prod_id_df[[OdooName.ir_model_module, OdooName.ir_model_name]].agg(".".join, axis = 1)
-    prod_prod_id_df = prod_prod_id_df \
-        .drop([OdooName.id, OdooName.ir_model_name, OdooName.ir_model_module], axis = 1) \
-        .rename({OdooName.res_id: OdooName.id}, axis = 1)
-    # Merge ids into product df
-    enriched_prod_df = product_df.merge(prod_prod_id_df, on = OdooName.id, how = "inner")
-    return enriched_prod_df
-
-
 def export_products():
-    """ Fetch, process and save full DPMC stock.
+    """ Fetch, process and save stock.
     """
-    evaluations = _evaluate_pos_category()
-    fetch_func_ref = evaluations[0]
-    # Fetch dpmc stock
-    products = fetch_func_ref()
-    product_df = pd.DataFrame(products)
-    # Extract tmpl_id and re-save it
-    tmpl_id_df = pd.DataFrame(product_df[OdooName.tmpl_id].tolist())[0]
-    product_df[OdooName.tmpl_id] = tmpl_id_df
-    # Fetch qty of each product in stock
-    qty_data = odoo_client.fetch_product_quantity(tmpl_id_df.to_list())
-    qty_df = pd.DataFrame(qty_data).rename(columns = {OdooName.id: OdooName.tmpl_id})
-    # Merge qty with stock
-    product_df = product_df.merge(qty_df, on = OdooName.tmpl_id, how = "inner")
-    # Fetch product's external id lists
-    prod_prod_ids = odoo_client.fetch_product_external_id(product_df[OdooName.id].to_list(), "product.product")
-    # Merge external ids with stock
-    enrich_product_df = _enrich_products_by_id(product_df, prod_prod_ids)
-    write_to_csv(STOCK_ALL_FILE, enrich_product_df,
-                 columns = [OdooName.external_id, OdooName.internal_id, OdooName.qty_available],
+    raw_data = odoo_client.fetch_all_stock()
+    product_df = csvstr_to_df(raw_data)
+    write_to_csv(STOCK_ALL_FILE, product_df,
                  header = [OdooLabel.external_id, OdooLabel.internal_id, OdooMock.qty_available])
 
 
@@ -158,12 +120,10 @@ def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
     evaluations = _evaluate_pos_category()
-    invoice_file = evaluations[1]
-    adj_file = evaluations[2]
     adjustments = []
-    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, adj_file))
+    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, evaluations[1]))
     stock_df = pd.read_csv(STOCK_ALL_FILE)
-    invoice_df = pd.read_json(invoice_file, orient = 'records', convert_dates = False)
+    invoice_df = pd.read_json(evaluations[0], orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Field.status] == Status.success] \
         .sort_values(by = [Field.date, Field.default_id])

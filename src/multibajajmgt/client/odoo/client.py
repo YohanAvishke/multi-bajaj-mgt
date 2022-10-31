@@ -116,34 +116,12 @@ def configure():
         _authenticate()
 
 
-def fetch_product_external_id(db_id_list, model, limit = 0):
-    """ Fetch External IDs for a list of product.template Primary Keys.
-
-    External IDs are necessary for importing data to the products of the server.
-
-    :param db_id_list: list, product.template primary keys
-    :param model: string, related model of data
-    :param limit: int, limit the result count
-    :return: pandas dataframe, a list of dicts with ir.model.data rows
-    """
-    log.info(f"Fetching product ids from `ir.model.data` where model `{model}`")
-    domain = ["&", ["model", "=", model],
-              ["res_id", "in", db_id_list]]
-    fields = ["res_id", "name", "module", "write_date"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "ir.model.data", "search_read",
-            [domain, fields], {"limit": limit}
-    )
-    return data
-
-
 def fetch_all_dpmc_prices(product_ids = False):
     log.info("Fetching all dpmc product prices from 'product.template'")
     domain = [
-        "&", "|", "|", "|",
+        "&",
         ["available_in_pos", "=", True],
+        "|", "|", "|",
         ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
         ["pos_categ_id", "ilike", "qute"]
     ]
@@ -160,80 +138,20 @@ def fetch_all_dpmc_prices(product_ids = False):
     return data
 
 
-def fetch_all_stock(limit = 0):
+def fetch_all_stock():
     """ Fetch every single Product stock from all categories.
 
-    :param limit: int, limit the result count
     :return: dict, a list of dicts with product.template rows containing quantity available
     """
+    log.info("Fetching all stock from 'product.template'")
     domain = [["available_in_pos", "=", True]]
-    fields = ["id", "product_tmpl_id", "default_code"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.product", "search_read", [domain, fields], {"limit": limit}
-    )
-    return data
-
-
-def fetch_all_dpmc_stock(limit = 0):
-    """ Fetch every single Product stock from DPMC POS category.
-
-    :param limit: int, limit the result count
-    :return: dict, a list of dicts with product.template rows containing quantity available
-    """
-    domain = [
-        "&", "|", "|", "|",
-        ["available_in_pos", "=", True],
-        ["pos_categ_id", "ilike", "bajaj"],
-        ["pos_categ_id", "ilike", "2w"],
-        ["pos_categ_id", "ilike", "3w"],
-        ["pos_categ_id", "ilike", "qute"]
+    fields = [
+        {"name": "product_variant_id/product_variant_id/id", "label": "Product/Product/ID"},
+        {"name": "default_code", "label": "Internal Reference"},
+        {"name": "qty_available", "label": "Quantity On Hand"}
     ]
-    fields = ["id", "product_tmpl_id", "default_code"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.product", "search_read", [domain, fields], {"limit": limit}
-    )
-    return data
-
-
-def fetch_all_thirdparty_stock(limit = 0):
-    """ Fetch every single Product stock from all other categories except DPMC.
-
-        :param limit: int, limit the result count
-        :return: dict, a list of dicts with product.template rows containing quantity available
-        """
-    domain = [
-        "&", "&", "&", "&",
-        ["available_in_pos", "=", True],
-        ["pos_categ_id", "not ilike", "bajaj"],
-        ["pos_categ_id", "not ilike", "2w"],
-        ["pos_categ_id", "not ilike", "3w"],
-        ["pos_categ_id", "not ilike", "qute"]
-    ]
-    fields = ["id", "product_tmpl_id", "default_code"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.product", "search_read", [domain, fields], {"limit": limit}
-    )
-    return data
-
-
-def fetch_product_quantity(id_list, limit = 0):
-    """ Fetch available quantity for a list of product ids from template table.
-
-    :param id_list: list, product_product tables id(primary key) column
-    :param limit: int, limit the result count
-    :return: dict,
-    """
-    domain = [["id", "in", id_list]]
-    fields = ["qty_available"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.template", "search_read", [domain, fields], {"limit": limit}
+    data = _export_call(
+            f"{SERVER_URL}/web/export/csv",
+            "product.template", domain, False, fields
     )
     return data
