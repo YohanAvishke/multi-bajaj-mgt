@@ -28,7 +28,7 @@ if not os.getenv("ENV_FLAG"):
 app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
-odoo_client.configure()
+# odoo_client.configure()
 # dpmc_client.configure()
 # sheet_client.configure()
 
@@ -38,7 +38,7 @@ odoo_client.configure()
 # price_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
-# stock_service.export_products()
+stock_service.export_products()
 # invoice_dpmc_service.export_invoice_data()
 # invoice_dpmc_service.export_products()
 # stock_service.create_adjustment()

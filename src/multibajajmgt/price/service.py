@@ -9,8 +9,8 @@ from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
     DocumentResourceName as DRName,
     DocumentResourceExtension as DRExt,
-    OdooCSVFieldName as Field,
-    OdooDBFieldName as DBField,
+    OdooFieldLabel as Label,
+    OdooFieldName as OdooName,
     ProductPriceStatus as Status
 )
 from multibajajmgt.exceptions import InvalidIdentityError
@@ -27,7 +27,7 @@ def export_all_products():
     # Convert raw data to a acceptable object for pandas and convert it ot a df
     price_df = pd.read_csv(StringIO(raw_data))
     write_to_csv(PRICE_BASE_DPMC_FILE, price_df,
-                 header = [Field.external_id, DBField.internal_id, "Old Sales Price", "Old Cost"])
+                 header = [Label.external_id, OdooName.internal_id, "Old Sales Price", "Old Cost"])
 
 
 def _get_price_info(row):
@@ -37,8 +37,8 @@ def _get_price_info(row):
     :return: dict, necessary information for a price update to be completed
     """
     index = row.Index
-    ref_id = row[2]  # getattr(row, DBField.internal_id)
-    old_price = row[4]  # getattr(row, DBField.cost)
+    ref_id = row[2]  # getattr(row, OdooName.internal_id)
+    old_price = row[4]  # getattr(row, OdooName.cost)
     status = Status.none
     try:
         # Fetch new price
@@ -77,7 +77,7 @@ def _save_price_info(info, df, file):
     price = info["updated_price"]
     status = info["price_status"]
     # Save price and status
-    df.at[index, Field.sales_price] = df.at[index, Field.cost] = price
+    df.at[index, Label.sales_price] = df.at[index, Label.cost] = price
     df.at[index, "Status"] = status
     # Save row to base csv file
     write_to_csv(PRICE_BASE_DPMC_FILE, df)
@@ -96,8 +96,8 @@ def update_product_prices():
     price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
     historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRName.price_dpmc_all))
     # Add columns for updated prices and price fluctuation state
-    if Field.sales_price not in price_df.columns:
-        price_df[Field.sales_price] = price_df[Field.cost] = price_df["Status"] = None
+    if Label.sales_price not in price_df.columns:
+        price_df[Label.sales_price] = price_df[Label.cost] = price_df["Status"] = None
         write_to_csv(path = PRICE_BASE_DPMC_FILE, df = price_df)
     price_updatable_df = price_df[pd.isnull(price_df["Status"])]
     # Loop and fetch and save each product's updated price

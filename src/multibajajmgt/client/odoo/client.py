@@ -142,17 +142,16 @@ def fetch_product_external_id(db_id_list, model, limit = 0):
 def fetch_all_dpmc_prices(product_ids = False):
     log.info("Fetching all dpmc product prices from 'product.template'")
     domain = [
-        "&",
+        "&", "|", "|", "|",
         ["available_in_pos", "=", True],
-        "|", "|", "|",
         ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
         ["pos_categ_id", "ilike", "qute"]
     ]
     fields = [
-        {"name": "id", "label": "ID"},
+        {"name": "id", "label": "External ID"},
         {"name": "default_code", "label": "Internal Reference"},
-        {"name": "list_price", "label": "Sales Price"},
-        {"name": "standard_price", "label": "Cost"}
+        {"name": "list_price", "label": "Old Sales Price"},
+        {"name": "standard_price", "label": "Old Cost"}
     ]
     data = _export_call(
             f"{SERVER_URL}/web/export/csv",
@@ -184,9 +183,8 @@ def fetch_all_dpmc_stock(limit = 0):
     :return: dict, a list of dicts with product.template rows containing quantity available
     """
     domain = [
-        "&",
+        "&", "|", "|", "|",
         ["available_in_pos", "=", True],
-        "|", "|", "|",
         ["pos_categ_id", "ilike", "bajaj"],
         ["pos_categ_id", "ilike", "2w"],
         ["pos_categ_id", "ilike", "3w"],

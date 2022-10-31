@@ -10,9 +10,10 @@ from multibajajmgt.enums import (
     DocumentResourceExtension as DRExt,
     DocumentResourceName as DRName,
     InvoiceStatus as Status,
-    OdooCSVFieldName as OdooField,
-    OdooCSVFieldValue as OdooFieldVal,
-    OdooDBFieldName as DBField,
+    OdooFieldName as OdooName,
+    OdooFieldLabel as OdooLabel,
+    OdooFieldLabelMock as OdooMock,
+    OdooFieldValue as OdooValue,
     POSParentCategory as POSCatg
 )
 
@@ -49,13 +50,13 @@ def _enrich_products_by_id(product_df, prod_prod_ids):
     """
     prod_prod_id_df = pd.DataFrame(prod_prod_ids)
     # Aggregate `module and name`, drop and rename columns
-    prod_prod_id_df[DBField.external_id] = \
-        prod_prod_id_df[[DBField.ir_model_module, DBField.ir_model_name]].agg(".".join, axis = 1)
+    prod_prod_id_df[OdooName.external_id] = \
+        prod_prod_id_df[[OdooName.ir_model_module, OdooName.ir_model_name]].agg(".".join, axis = 1)
     prod_prod_id_df = prod_prod_id_df \
-        .drop([DBField.id, DBField.ir_model_name, DBField.ir_model_module], axis = 1) \
-        .rename({DBField.res_id: DBField.id}, axis = 1)
+        .drop([OdooName.id, OdooName.ir_model_name, OdooName.ir_model_module], axis = 1) \
+        .rename({OdooName.res_id: OdooName.id}, axis = 1)
     # Merge ids into product df
-    enriched_prod_df = product_df.merge(prod_prod_id_df, on = DBField.id, how = "inner")
+    enriched_prod_df = product_df.merge(prod_prod_id_df, on = OdooName.id, how = "inner")
     return enriched_prod_df
 
 
@@ -68,20 +69,20 @@ def export_products():
     products = fetch_func_ref()
     product_df = pd.DataFrame(products)
     # Extract tmpl_id and re-save it
-    tmpl_id_df = pd.DataFrame(product_df[DBField.tmpl_id].tolist())[0]
-    product_df[DBField.tmpl_id] = tmpl_id_df
+    tmpl_id_df = pd.DataFrame(product_df[OdooName.tmpl_id].tolist())[0]
+    product_df[OdooName.tmpl_id] = tmpl_id_df
     # Fetch qty of each product in stock
     qty_data = odoo_client.fetch_product_quantity(tmpl_id_df.to_list())
-    qty_df = pd.DataFrame(qty_data).rename(columns = {DBField.id: DBField.tmpl_id})
+    qty_df = pd.DataFrame(qty_data).rename(columns = {OdooName.id: OdooName.tmpl_id})
     # Merge qty with stock
-    product_df = product_df.merge(qty_df, on = DBField.tmpl_id, how = "inner")
+    product_df = product_df.merge(qty_df, on = OdooName.tmpl_id, how = "inner")
     # Fetch product's external id lists
-    prod_prod_ids = odoo_client.fetch_product_external_id(product_df[DBField.id].to_list(), "product.product")
+    prod_prod_ids = odoo_client.fetch_product_external_id(product_df[OdooName.id].to_list(), "product.product")
     # Merge external ids with stock
     enrich_product_df = _enrich_products_by_id(product_df, prod_prod_ids)
     write_to_csv(STOCK_ALL_FILE, enrich_product_df,
-                 columns = [DBField.external_id, DBField.internal_id, DBField.qty_available],
-                 header = [OdooField.external_id, OdooField.internal_id, OdooField.qty_available])
+                 columns = [OdooName.external_id, OdooName.internal_id, OdooName.qty_available],
+                 header = [OdooLabel.external_id, OdooLabel.internal_id, OdooMock.qty_available])
 
 
 def _validate_products(products_df):
@@ -94,7 +95,7 @@ def _validate_products(products_df):
         if product.FoundIn == "left_only":
             products_df = products_df.drop(product.Index)
             log.warning(f"Invalid product found with Id {product.ID}.")
-    products_df.drop(OdooField.found_in, axis = 1, inplace = True)
+    products_df.drop(OdooMock.found_in, axis = 1, inplace = True)
     products_df.reset_index(drop = True, inplace = True)
     return products_df
 
@@ -114,21 +115,21 @@ def _enrich_invoice(row, stock_df):
     """
     products_df = pd.json_normalize(row.Products)
     # Add columns from stock data to the products
-    products_df = products_df.merge(stock_df, how = "left", indicator = OdooField.found_in,
-                                    left_on = Field.part_code, right_on = OdooField.internal_id)
+    products_df = products_df.merge(stock_df, how = "left", indicator = OdooMock.found_in,
+                                    left_on = Field.part_code, right_on = OdooLabel.internal_id)
     # Validate the values in indicator and if all products of the invoice are invalid, then return None
     products_df = _validate_products(products_df)
     if len(products_df) == 0:
         return
     # Create basic invoice columns which share common data within all products of an invoice
     # index should [0] to make sure common data is only stored in the first row of each adjustment
-    products_df[[OdooField.adj_name,
-                 OdooField.adj_acc_date,
-                 OdooField.is_exh_products]] = pd.DataFrame([[row.ID,
+    products_df[[OdooLabel.adj_name,
+                 OdooLabel.adj_acc_date,
+                 OdooLabel.is_exh_products]] = pd.DataFrame([[row.ID,
                                                               row.Date,
                                                               True]], index = [0])
     # Set location id to all the products
-    products_df[OdooField.adj_loc_id] = OdooFieldVal.adj_loc_id
+    products_df[OdooLabel.adj_loc_id] = OdooValue.adj_loc_id
     return products_df
 
 
@@ -141,7 +142,7 @@ def _calculate_counted_qty(product, adjustment_df):
     diff_qty = int(product.Quantity)
     stock_qty = product.QuantityOnHand
     counted_qty = stock_qty + diff_qty
-    adjustment_df.at[product.Index, OdooField.adj_prod_counted_qty] = counted_qty
+    adjustment_df.at[product.Index, OdooLabel.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
     if stock_qty < 0:
         # Product already has negative qty
@@ -176,7 +177,7 @@ def create_adjustment():
         _calculate_counted_qty(row, adjustment_df)
     # Save data
     write_to_csv(path = adjustment_file, df = adjustment_df,
-                 columns = [OdooField.adj_name, OdooField.adj_acc_date, OdooField.is_exh_products, "ID",
-                            OdooField.external_id, OdooField.adj_loc_id, OdooField.adj_prod_counted_qty],
-                 header = [OdooField.adj_name, OdooField.adj_acc_date, OdooField.is_exh_products, "product_id",
-                           OdooField.adj_prod_external_id, OdooField.adj_loc_id, OdooField.adj_prod_counted_qty])
+                 columns = [OdooLabel.adj_name, OdooLabel.adj_acc_date, OdooLabel.is_exh_products, "ID",
+                            OdooLabel.external_id, OdooLabel.adj_loc_id, OdooLabel.adj_prod_counted_qty],
+                 header = [OdooLabel.adj_name, OdooLabel.adj_acc_date, OdooLabel.is_exh_products, "product_id",
+                           OdooLabel.adj_prod_external_id, OdooLabel.adj_loc_id, OdooLabel.adj_prod_counted_qty])

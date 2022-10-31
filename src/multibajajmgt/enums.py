@@ -92,29 +92,7 @@ class BasicFieldName(MultiBajajMgtStrEnum):
     total = "Total"
 
 
-class OdooCSVFieldName(MultiBajajMgtStrEnum):
-    # Product
-    external_id = "External ID"
-    internal_id = "Internal Reference"
-    sales_price = "Sales Price"
-    cost = "Cost"
-    qty_available = "QuantityOnHand"
-    found_in = "FoundIn"
-    # Adjustment
-    adj_name = "name"
-    adj_acc_date = "Accounting Date"
-    is_exh_products = "Include Exhausted Products"
-    adj_prod_external_id = "line_ids / product_id / id"
-    adj_loc_id = "line_ids / location_id / id"
-    adj_prod_counted_qty = "line_ids / product_qty"
-
-
-class OdooCSVFieldValue(MultiBajajMgtStrEnum):
-    # Adjustment
-    adj_loc_id = "stock.stock_location_stock"
-
-
-class OdooDBFieldName(MultiBajajMgtStrEnum):
+class OdooFieldName(MultiBajajMgtStrEnum):
     # Common Identifiers
     id = "id"
     res_id = "res_id"
@@ -128,6 +106,33 @@ class OdooDBFieldName(MultiBajajMgtStrEnum):
     # ir_model_data
     ir_model_name = "name"
     ir_model_module = "module"
+
+
+class OdooFieldLabel(MultiBajajMgtStrEnum):
+    # Product
+    external_id = "External ID"
+    internal_id = "Internal Reference"
+    sales_price = "Sales Price"
+    cost = "Cost"
+    qty_available = "Quantity On Hand"
+    # Adjustment
+    adj_name = "name"
+    adj_acc_date = "Accounting Date"
+    is_exh_products = "Include Exhausted Products"
+    adj_prod_external_id = "line_ids / product_id / id"
+    adj_loc_id = "line_ids / location_id / id"
+    adj_prod_counted_qty = "line_ids / product_qty"
+
+
+class OdooFieldValue(MultiBajajMgtStrEnum):
+    # Adjustment
+    adj_loc_id = "stock.stock_location_stock"
+
+
+class OdooFieldLabelMock(MultiBajajMgtStrEnum):
+    # Product
+    qty_available = "QuantityOnHand"
+    found_in = "FoundIn"
 
 
 class DPMCFieldName(MultiBajajMgtTupleEnum):
