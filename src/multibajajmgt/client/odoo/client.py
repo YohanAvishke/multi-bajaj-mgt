@@ -12,7 +12,7 @@ from multibajajmgt.config import (
 )
 from multibajajmgt.common import write_to_json
 
-user_id = None
+user_id, token, session_id, csrf_token = None, None, None, None
 
 
 def _json_rpc(url, method, params):
@@ -41,9 +41,28 @@ def _json_rpc(url, method, params):
             raise Exception(response["error"])
         return response["result"]
     except requests.exceptions.HTTPError as e:
-        log.error("Invalid response: ", e)
+        log.error("Invalid response: {}", e)
     except requests.exceptions.RequestException as e:
-        log.error("Something went wrong with the request: ", e)
+        log.error("Something went wrong with the request: {}", e)
+
+
+def _export_request(url, data):
+    payload = {
+        "data": json.dumps(data),
+        "token": token,
+        "csrf_token": csrf_token
+    }
+    try:
+        response = requests.get(url = url,
+                                headers = {"Cookie": f"fileToken={token}; tz=Asia/Colombo; frontend_lang=en_US; "
+                                                     f"session_id={session_id}"},
+                                data = payload)
+        response.raise_for_status()
+        return response.text
+    except requests.exceptions.HTTPError as e:
+        log.error("Invalid response: {}", e)
+    except requests.exceptions.RequestException as e:
+        log.error("Something went wrong with the request: {}", e)
 
 
 def _call(url, service, method, *args):
@@ -56,6 +75,11 @@ def _call(url, service, method, *args):
     :return: json dict, response body
     """
     return _json_rpc(url, "call", {"service": service, "method": method, "args": args})
+
+
+def _export_call(url, model, domain, ids, fields):
+    return _export_request(url, {"model": model, "domain": domain, "ids": ids, "fields": fields,
+                                 "import_compat": False})
 
 
 def _authenticate():
@@ -75,6 +99,9 @@ def configure():
     """
     log.info("Configuring Odoo client")
     global user_id
+    global token
+    global session_id
+    global csrf_token
     try:
         with open(f"{SOURCE_DIR}/client/odoo/token.json", "r") as file:
             file_data = json.load(file)
@@ -82,6 +109,9 @@ def configure():
                 user_id = file_data["user-id"]
             else:
                 _authenticate()
+            token = file_data["token"]
+            session_id = file_data["session-id"]
+            csrf_token = file_data["csrf-token"]
     except FileNotFoundError:
         _authenticate()
 
@@ -99,7 +129,7 @@ def fetch_product_external_id(db_id_list, model, limit = 0):
     log.info(f"Fetching product ids from `ir.model.data` where model `{model}`")
     domain = ["&", ["model", "=", model],
               ["res_id", "in", db_id_list]]
-    fields = ["res_id", "name", "module"]
+    fields = ["res_id", "name", "module", "write_date"]
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
@@ -109,16 +139,8 @@ def fetch_product_external_id(db_id_list, model, limit = 0):
     return data
 
 
-def fetch_all_dpmc_prices(limit = 0):
-    """ Fetch every single Product Prices from DPMC POS category.
-
-    If available_qty >= 0 or available_qty < 0 retrieve their prices.
-    All products should belonging to DPMC's POS categories (Bajaj, 2W, 3W, QUTE)
-
-    :param limit: int, limit the result count
-    :return: pandas dataframe, a list of dicts with product.template rows containing sales price and cost
-    """
-    log.info("Fetching all product prices from 'product.template'")
+def fetch_all_dpmc_prices(product_ids = False):
+    log.info("Fetching all dpmc product prices from 'product.template'")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -126,38 +148,15 @@ def fetch_all_dpmc_prices(limit = 0):
         ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
         ["pos_categ_id", "ilike", "qute"]
     ]
-    fields = ["id", "default_code", "list_price", "standard_price"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.template", "search_read", [domain, fields], {"limit": limit}
-    )
-    return data
-
-
-def fetch_available_dpmc_prices(limit = 0):
-    """ Fetch available Product's Prices from DPMC POS category.
-
-    Every product except available_qty = 0.
-    All products should belonging to DPMC's POS categories (Bajaj, 2W, 3W, QUTE)
-
-    :param limit: int, limit the result count
-    :return: pandas dataframe, a list of dicts with product.template rows containing sales price and cost
-    """
-    log.info("Fetching available product prices from 'product.template'")
-    domain = [
-        "&", "&",
-        ["available_in_pos", "=", True],
-        "|", "|", "|",
-        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
-        ["pos_categ_id", "ilike", "qute"],
-        ["qty_available", "!=", 0]
+    fields = [
+        {"name": "id", "label": "ID"},
+        {"name": "default_code", "label": "Internal Reference"},
+        {"name": "list_price", "label": "Sales Price"},
+        {"name": "standard_price", "label": "Cost"}
     ]
-    fields = ["id", "default_code", "list_price", "standard_price"]
-    data = _call(
-            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
-            DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.template", "search_read", [domain, fields], {"limit": limit}
+    data = _export_call(
+            f"{SERVER_URL}/web/export/csv",
+            "product.template", domain, product_ids, fields
     )
     return data
 

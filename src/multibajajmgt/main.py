@@ -25,17 +25,17 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-app = configure_app(Categ.tp, QtyAva.all)
+app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
-dpmc_client.configure()
+# dpmc_client.configure()
 # sheet_client.configure()
 
 # Update dpmc prices
-price_service.export_all_products()
-price_service.update_product_prices()
-price_service.merge_historical_data()
+# price_service.export_all_products()
+# price_service.update_product_prices()
+# price_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
 # stock_service.export_products()

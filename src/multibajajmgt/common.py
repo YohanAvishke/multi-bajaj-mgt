@@ -83,19 +83,3 @@ def mk_dir(dir_path, file_path):
         else:
             raise
     return f"{dir_path}/{file_path}"
-
-
-def drop_duplicates(df, key):
-    """ Filter duplicates by a column and drop the found rows.
-
-    :param df: pandas dataframe,
-    :param key: string, column name
-    :return: pandas dataframe,
-    """
-    df["is_duplicate"] = df.duplicated(subset = [key], keep = False)
-    duplicate_df = df[df["is_duplicate"]]
-    if duplicate_df.size > 0:
-        log.warning(f"Filtering duplicates,\n {duplicate_df}")
-        df = df.drop_duplicates(subset = ["res_id"], keep = "first", ignore_index = True)
-    df = df.drop("is_duplicate", axis = 1)
-    return df

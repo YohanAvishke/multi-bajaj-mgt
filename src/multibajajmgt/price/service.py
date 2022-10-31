@@ -2,6 +2,7 @@ import pandas as pd
 import multibajajmgt.client.odoo.client as odoo_client
 import multibajajmgt.client.dpmc.client as dpmc_client
 
+from io import StringIO
 from loguru import logger as log
 from multibajajmgt.common import *
 from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
@@ -18,45 +19,15 @@ from pathlib import Path
 curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
-def _enrich_products_by_external_id(product_df, id_df):
-    """ Add id dataframe to product dataframe.
-
-    * Build external id.
-    * Drop and rename columns.
-    * Merge price list and external id list(by id).
-
-    :param product_df: pandas dataframe, products
-    :param id_df: pandas dataframe, ids
-    :return: pandas dataframe, products merged with ids
-    """
-    # Build external id
-    id_df["external_id"] = id_df[["module", "name"]].agg(".".join, axis = 1)
-    # Drop and rename columns
-    id_df = id_df \
-        .drop(["id", "name", "module"], axis = 1) \
-        .rename({"res_id": "id"}, axis = 1)
-    # Merge price list and external id list(by id)
-    enrich_price_df = id_df.merge(product_df, on = "id", how = "inner")
-    return enrich_price_df
-
-
 def export_all_products():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices from Odoo server.
     """
-    # Fetch dpmc product's price list
-    prices = odoo_client.fetch_all_dpmc_prices()
-    price_df = pd.DataFrame(prices)
-    ids = price_df["id"].tolist()
-    # Fetch dpmc product's external id list
-    ex_ids = odoo_client.fetch_product_external_id(ids, "product.template")
-    ex_id_df = pd.DataFrame(ex_ids)
-    # Drop external ids duplicates, if any
-    ex_id_df = drop_duplicates(ex_id_df, "res_id")
-    # Merge prices with external ids
-    enrich_price_df = _enrich_products_by_external_id(price_df, ex_id_df)
-    write_to_csv(PRICE_BASE_DPMC_FILE, enrich_price_df,
-                 columns = [DBField.external_id, DBField.internal_id, DBField.sales_price, DBField.cost],
-                 header = [Field.external_id, Field.internal_id, "Old Sales Price", "Old Cost"])
+    # Fetch dpmc product's prices
+    raw_data = odoo_client.fetch_all_dpmc_prices()
+    # Convert raw data to a acceptable object for pandas and convert it ot a df
+    price_df = pd.read_csv(StringIO(raw_data))
+    write_to_csv(PRICE_BASE_DPMC_FILE, price_df,
+                 header = [Field.external_id, DBField.internal_id, "Old Sales Price", "Old Cost"])
 
 
 def _get_price_info(row):
