@@ -148,7 +148,7 @@ def _enrich_with_products(row):
             row[Field.status] = Status.failed
             return row
         row[Field.products] = _reformat_product_data(grn_id, product_data)
-        logging.info(f"Product inquiry success for Invoice {invoice_id}")
+        log.info(f"Product inquiry success for Invoice {invoice_id}")
     return row
 
 
