@@ -25,10 +25,10 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-app = configure_app(Categ.dpmc, QtyAva.all)
+# app = configure_app(Categ.dpmc, QtyAva.all)
 
 # Configure clients
-odoo_client.configure()
+# odoo_client.configure()
 # dpmc_client.configure()
 # sheet_client.configure()
 

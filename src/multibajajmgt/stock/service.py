@@ -6,15 +6,14 @@ from multibajajmgt.app import App
 from multibajajmgt.common import *
 from multibajajmgt.config import STOCK_ALL_FILE, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
-    BasicFieldName as Field,
+    BasicFieldName as Basic,
     DocumentResourceExtension as DRExt,
     DocumentResourceName as DRName,
+    InvoiceField as InvoField,
     InvoiceStatus as Status,
-    OdooFieldName as OdooName,
     OdooFieldLabel as OdooLabel,
-    OdooFieldLabelMock as OdooMock,
     OdooFieldValue as OdooValue,
-    POSParentCategory as POSCatg
+    POSParentCategory as POSCatg,
 )
 
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
@@ -43,8 +42,7 @@ def export_products():
     """
     raw_data = odoo_client.fetch_all_stock()
     product_df = csvstr_to_df(raw_data)
-    write_to_csv(STOCK_ALL_FILE, product_df,
-                 header = [OdooLabel.external_id, OdooLabel.internal_id, OdooMock.qty_available])
+    write_to_csv(STOCK_ALL_FILE, product_df)
 
 
 def _validate_products(products_df):
@@ -57,7 +55,7 @@ def _validate_products(products_df):
         if product.FoundIn == "left_only":
             products_df = products_df.drop(product.Index)
             log.warning(f"Invalid product found with Id {product.ID}.")
-    products_df.drop(OdooMock.found_in, axis = 1, inplace = True)
+    products_df.drop(Basic.found_in, axis = 1, inplace = True)
     products_df.reset_index(drop = True, inplace = True)
     return products_df
 
@@ -77,8 +75,8 @@ def _enrich_invoice(row, stock_df):
     """
     products_df = pd.json_normalize(row.Products)
     # Add columns from stock data to the products
-    products_df = products_df.merge(stock_df, how = "left", indicator = OdooMock.found_in,
-                                    left_on = Field.part_code, right_on = OdooLabel.internal_id)
+    products_df = products_df.merge(stock_df, how = "left", indicator = Basic.found_in,
+                                    left_on = InvoField.part_code, right_on = OdooLabel.internal_id)
     # Validate the values in indicator and if all products of the invoice are invalid, then return None
     products_df = _validate_products(products_df)
     if len(products_df) == 0:
@@ -125,8 +123,8 @@ def create_adjustment():
     stock_df = pd.read_csv(STOCK_ALL_FILE)
     invoice_df = pd.read_json(evaluations[0], orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status
-    invoice_df = invoice_df[invoice_df[Field.status] == Status.success] \
-        .sort_values(by = [Field.date, Field.default_id])
+    invoice_df = invoice_df[invoice_df[Basic.status] == Status.success] \
+        .sort_values(by = [InvoField.date, InvoField.default_id])
     for invoice_row in invoice_df.itertuples():
         adjustments.append(_enrich_invoice(invoice_row, stock_df))
     # Append all adjustments into a dataframe

@@ -75,38 +75,29 @@ class InvoiceType(MultiBajajMgtTupleEnum):
 
 
 class BasicFieldName(MultiBajajMgtStrEnum):
-    # Invoice
-    date = "Date"
-    default_id = "ID"
+    # Flags
     status = "Status"
+    found_in = "FoundIn"
+
+
+class InvoiceField(MultiBajajMgtStrEnum):
+    date = "Date"
     type = "Type"
+    default_id = "ID"
     grn_id = "GRN ID"
     order_id = "Order ID"
     mobile_id = "Mobile ID"
-    # Product
     products = "Products"
     part_code = "ID"
     part_desc = "Name"
     part_qty = "Quantity"
-    unit_cost = "Unit Cost"
+    unit_cost = "UnitCost"
     total = "Total"
 
 
-class OdooFieldName(MultiBajajMgtStrEnum):
-    # Common Identifiers
-    id = "id"
-    res_id = "res_id"
-    tmpl_id = "product_tmpl_id"
-    # product_product
-    external_id = "external_id"
-    prod_var_id = "product_variant_id/product_variant_id/id"
-    internal_id = "default_code"
-    sales_price = "list_price"
-    cost = "standard_price"
-    qty_available = "qty_available"
-    # ir_model_data
-    ir_model_name = "name"
-    ir_model_module = "module"
+class PriceField(MultiBajajMgtStrEnum):
+    price = "Sales Price"
+    cost = "Cost"
 
 
 class OdooFieldLabel(MultiBajajMgtStrEnum):
@@ -129,12 +120,6 @@ class OdooFieldLabel(MultiBajajMgtStrEnum):
 class OdooFieldValue(MultiBajajMgtStrEnum):
     # Adjustment
     adj_loc_id = "stock.stock_location_stock"
-
-
-class OdooFieldLabelMock(MultiBajajMgtStrEnum):
-    # Product
-    qty_available = "QuantityOnHand"
-    found_in = "FoundIn"
 
 
 class DPMCFieldName(MultiBajajMgtTupleEnum):

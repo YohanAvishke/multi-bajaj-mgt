@@ -4,9 +4,10 @@ from loguru import logger as log
 from multibajajmgt.common import *
 from multibajajmgt.config import INVOICE_TP_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
-    BasicFieldName as Field,
+    BasicFieldName as BaseField,
     DocumentResourceName as DRName,
     DocumentResourceExtension as DRExt,
+    InvoiceField as InvoField,
     InvoiceStatus as Status
 )
 
@@ -51,15 +52,16 @@ def _enrich_invoices(invoices):
         costs = raw_df.apply(lambda x: float(x[2])).to_list()
         # Create dict from all the product data lists
         products = [
-            {Field.part_code: code, Field.part_desc: name, Field.part_qty: quantity, Field.unit_cost: cost}
+            {InvoField.part_code: code, InvoField.part_desc: name, InvoField.part_qty: quantity,
+             InvoField.unit_cost: cost}
             for code, name, quantity, cost in zip(codes, names, quantities, costs)
         ]
         # Setup enriched invoice
         invoice = {
-            Field.date: info[-1],
-            Field.status: Status.success,
-            Field.default_id: info[0],
-            Field.products: products
+            InvoField.date: info[-1],
+            BaseField.status: Status.success,
+            InvoField.default_id: info[0],
+            InvoField.products: products
         }
         enriched_invoices.append(invoice)
     return enriched_invoices

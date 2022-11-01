@@ -2,15 +2,14 @@ import pandas as pd
 import multibajajmgt.client.odoo.client as odoo_client
 import multibajajmgt.client.dpmc.client as dpmc_client
 
-from io import StringIO
 from loguru import logger as log
 from multibajajmgt.common import *
 from multibajajmgt.config import PRICE_BASE_DPMC_FILE, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
+    BasicFieldName as BaseField,
     DocumentResourceName as DRName,
     DocumentResourceExtension as DRExt,
-    OdooFieldLabel as Label,
-    OdooFieldName as OdooName,
+    PriceField,
     ProductPriceStatus as Status
 )
 from multibajajmgt.exceptions import InvalidIdentityError
@@ -20,9 +19,8 @@ curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
 def export_all_products():
-    """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices from Odoo server.
+    """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices.
     """
-    # Fetch dpmc product's prices
     raw_data = odoo_client.fetch_all_dpmc_prices()
     write_to_csv(PRICE_BASE_DPMC_FILE, csvstr_to_df(raw_data))
 
@@ -34,7 +32,7 @@ def _get_price_info(row):
     :return: dict, necessary information for a price update to be completed
     """
     index = row.Index
-    ref_id = row[2]  # getattr(row, OdooName.internal_id)
+    ref_id = row.InternalReference  # getattr(row, OdooName.internal_id)
     old_price = row[4]  # getattr(row, OdooName.cost)
     status = Status.none
     try:
@@ -74,33 +72,32 @@ def _save_price_info(info, df, file):
     price = info["updated_price"]
     status = info["price_status"]
     # Save price and status
-    df.at[index, Label.sales_price] = df.at[index, Label.cost] = price
-    df.at[index, "Status"] = status
+    df.at[index, PriceField.price] = df.at[index, PriceField.cost] = price
+    df.at[index, BaseField.status] = status
     # Save row to base csv file
     write_to_csv(PRICE_BASE_DPMC_FILE, df)
     # Save row to historic csv file
     if status in (Status.up, Status.down):
         # Get the row as a series. Convert it to a df and flip the row and column
         row_transposed = df.loc[index].to_frame().T
-        write_to_csv(path = file, df = row_transposed, mode = "a",
-                     header = not os.path.exists(file))
+        write_to_csv(path = file, df = row_transposed, mode = "a", header = not os.path.exists(file))
     log.info(f"{index + 1} - {info['process_status']} - Product Number: {info['ref_id']}, Price: {price}")
 
 
 def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
-    price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
+    price_df = pd.read_csv(PRICE_BASE_DPMC_FILE, )
     historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRName.price_dpmc_all))
     # Add columns for updated prices and price fluctuation state
-    if Label.sales_price not in price_df.columns:
-        price_df[Label.sales_price] = price_df[Label.cost] = price_df["Status"] = None
+    if BaseField.status not in price_df.columns:
+        price_df[PriceField.price] = price_df[PriceField.cost] = price_df[BaseField.status] = None
         write_to_csv(path = PRICE_BASE_DPMC_FILE, df = price_df)
-    price_updatable_df = price_df[pd.isnull(price_df["Status"])]
+    price_updatable_df = price_df[pd.isnull(price_df[BaseField.status])]
     # Loop and fetch and save each product's updated price
     for price_row in price_updatable_df.itertuples():
         # Filter rows with non-updated price and status
-        if pd.isnull(price_row[7]):
+        if pd.isnull(price_row.Status):
             info = _get_price_info(price_row)
             _save_price_info(info, price_df, historical_file_path)
 

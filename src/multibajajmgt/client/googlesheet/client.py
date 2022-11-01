@@ -10,7 +10,8 @@ from loguru import logger as log
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import SOURCE_DIR
 from multibajajmgt.enums import (
-    BasicFieldName as Field
+    BasicFieldName as BaseField,
+    InvoiceField as InvoField
 )
 from typing import Any
 
@@ -55,6 +56,7 @@ def inquire_sales_invoices():
     response = request.execute()
     values = response.get("values", [])
     if values:
-        return pd.DataFrame(columns = [Field.part_code, Field.part_qty, Field.date, Field.status], data = values)
+        return pd.DataFrame(columns = [InvoField.part_code, InvoField.part_qty, InvoField.date, BaseField.status],
+                            data = values)
     else:
         log.warning("No data found in the sheet")

@@ -5,9 +5,10 @@ from loguru import logger as log
 from multibajajmgt.common import *
 from multibajajmgt.config import INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
-    BasicFieldName as Field,
+    BasicFieldName as BaseField,
     DocumentResourceName as DRName,
     DocumentResourceExtension as DRExt,
+    InvoiceField as InvoField,
     InvoiceStatus as Status,
 )
 
@@ -24,14 +25,14 @@ def _extract_chunks(data):
     """
     chunk_df_list = []
     # Indexes of the rows containing the column names
-    chunk_indexes = data.query(f"{Field.status} == 'False'").index.values.tolist()
+    chunk_indexes = data.query(f"{BaseField.status} == 'False'").index.values.tolist()
     # [column indexes] +  index of last product in invoice
     boundaries = chunk_indexes + [len(data.index)]
     # Get all data inbetween indexes(including the index)
     chunks = [(data.iloc[(boundaries[n] + 1):boundaries[n + 1]]) for n in range(len(boundaries) - 1)]
     chunks = [chunks[n]
               .apply(lambda x: x.str.strip())  # Remove all whitespaces
-              .drop(columns = [Field.status])
+              .drop(columns = [BaseField.status])
               .to_dict("records")
               for n in range(len(chunks))]
     # Combine all chunks to a single dataframe
@@ -51,19 +52,19 @@ def _extract_invoices(chunks_df):
     """
     enriched_invoices = []
     # Identify invoices(rows with value to date)
-    invoice_indexes = chunks_df.query(f"{Field.date} == {Field.date}").index.values.tolist()
+    invoice_indexes = chunks_df.query(f"{InvoField.date} == {InvoField.date}").index.values.tolist()
     boundaries = invoice_indexes + [len(chunks_df.index)]
     invoices = [(chunks_df.iloc[boundaries[n]:boundaries[n + 1]]) for n in range(len(boundaries) - 1)]
     # Enrich invoices
     for invoice_df in invoices:
         invoice_df.reset_index(drop = True, inplace = True)
-        date = invoice_df[Field.date][0]
-        products = invoice_df[[Field.part_code, Field.part_qty]].to_dict('records')
+        date = invoice_df[InvoField.date][0]
+        products = invoice_df[[InvoField.part_code, InvoField.part_qty]].to_dict('records')
         invoice = {
-            Field.date: date,
-            Field.status: Status.success,
-            Field.default_id: f"Sales of {date}",
-            Field.products: products,
+            InvoField.date: date,
+            BaseField.status: Status.success,
+            InvoField.default_id: f"Sales of {date}",
+            InvoField.products: products,
         }
         enriched_invoices.append(invoice)
     return enriched_invoices

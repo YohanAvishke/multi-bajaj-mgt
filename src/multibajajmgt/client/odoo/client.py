@@ -127,7 +127,7 @@ def fetch_all_dpmc_prices(product_ids = False):
     ]
     fields = [
         {"name": "id", "label": "External ID"},
-        {"name": "default_code", "label": "Internal Reference"},
+        {"name": "default_code", "label": "InternalReference"},
         {"name": "list_price", "label": "Old Sales Price"},
         {"name": "standard_price", "label": "Old Cost"}
     ]
@@ -147,7 +147,7 @@ def fetch_all_stock():
     domain = [["available_in_pos", "=", True]]
     fields = [
         {"name": "product_variant_id/product_variant_id/id", "label": "Product/Product/ID"},
-        {"name": "default_code", "label": "Internal Reference"},
+        {"name": "default_code", "label": "InternalReference"},
         {"name": "qty_available", "label": "Quantity On Hand"}
     ]
     data = _export_call(

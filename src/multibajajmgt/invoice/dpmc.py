@@ -9,6 +9,7 @@ from multibajajmgt.enums import (
     DocumentResourceName as DRName,
     DocumentResourceExtension as DRExt,
     DPMCFieldName as DPMCField,
+    InvoiceField as InvoField,
     InvoiceStatus as Status,
     InvoiceType as Type
 )
@@ -35,9 +36,9 @@ def _enrich_with_advanced_data(row):
     :param row: pandas series, rows of a dataframe
     :return: pandas series, enriched row
     """
-    invoice_type = row[Field.type]
+    invoice_type = row[InvoField.type]
     # Can-be invoice, order, mobile number
-    default_id = row[Field.default_id]
+    default_id = row[InvoField.default_id]
     # For column name used in the request
     col_name = None
     # Setup payload fields depending on available info in base file
@@ -63,19 +64,19 @@ def _enrich_with_advanced_data(row):
     if len(invoice_data) > 1:
         # If "id" is incomplete and matches parts of multiple invoice ids.
         row[Field.status] = Status.multiple
-        row[Field.default_id] = [invoice_data[n][DPMCField.invoice_no.order] for n in range(len(invoice_data))]
+        row[InvoField.default_id] = [invoice_data[n][DPMCField.invoice_no.order] for n in range(len(invoice_data))]
     else:
         invoice_data = invoice_data[0]
         row[Field.status] = Status.success
         # common for both requests
-        row[Field.default_id] = invoice_data[DPMCField.invoice_no.order]
-        row[Field.order_id] = invoice_data[DPMCField.order_no.order]
+        row[InvoField.default_id] = invoice_data[DPMCField.invoice_no.order]
+        row[InvoField.order_id] = invoice_data[DPMCField.order_no.order]
         if DPMCField.grn_no.grn in invoice_data:
             # Unique to "inquire_goodreceivenote_by_grn_ref"
-            row[Field.grn_id] = invoice_data[DPMCField.grn_no.grn]
+            row[InvoField.grn_id] = invoice_data[DPMCField.grn_no.grn]
         else:
             # Unique to "inquire_goodreceivenote_by_order_ref"
-            row[Field.mobile_id] = invoice_data[DPMCField.mobile_no.order]
+            row[InvoField.mobile_id] = invoice_data[DPMCField.mobile_no.order]
     log.info(f"Invoice retrieval success for {default_id}")
     return row
 
@@ -87,8 +88,8 @@ def export_invoice_data():
     invoice_df = pd.read_json(INVOICE_DPMC_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
     # Restructure dataframe by reordering and deleting columns
-    invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.default_id,
-                                          Field.order_id, Field.mobile_id, Field.grn_id])
+    invoice_df = _reindex_df(invoice_df, [InvoField.date, Field.status, InvoField.type, InvoField.default_id,
+                                          InvoField.order_id, InvoField.mobile_id, InvoField.grn_id])
     write_to_json(historical_file, invoice_df.to_dict("records"))
 
 
@@ -112,20 +113,20 @@ def _reformat_product_data(grn_id, product_data):
                    DPMCField.bin_code.grn,
                    DPMCField.sbin_code.grn,
                    DPMCField.serial_base.grn], axis = 1) \
-            .rename(columns = {DPMCField.part_code.grn: Field.part_code,
-                               DPMCField.part_desc.grn: Field.part_desc,
-                               DPMCField.part_qty.grn: Field.part_qty,
-                               DPMCField.unit_cost.grn: Field.unit_cost,
-                               DPMCField.total.grn: Field.total})
+            .rename(columns = {DPMCField.part_code.grn: InvoField.part_code,
+                               DPMCField.part_desc.grn: InvoField.part_desc,
+                               DPMCField.part_qty.grn: InvoField.part_qty,
+                               DPMCField.unit_cost.grn: InvoField.unit_cost,
+                               DPMCField.total.grn: InvoField.total})
     else:
         product_df = product_df \
             .drop([DPMCField.ware_code.order,
                    DPMCField.serial_base.order], axis = 1) \
-            .rename(columns = {DPMCField.part_code.order: Field.part_code,
-                               DPMCField.part_desc.order: Field.part_desc,
-                               DPMCField.part_qty.order: Field.part_qty,
-                               DPMCField.unit_cost.order: Field.unit_cost,
-                               DPMCField.total.order: Field.total})
+            .rename(columns = {DPMCField.part_code.order: InvoField.part_code,
+                               DPMCField.part_desc.order: InvoField.part_desc,
+                               DPMCField.part_qty.order: InvoField.part_qty,
+                               DPMCField.unit_cost.order: InvoField.unit_cost,
+                               DPMCField.total.order: InvoField.total})
     products = product_df.to_dict("records")
     return products
 
@@ -137,8 +138,8 @@ def _enrich_with_products(row):
     :return: pandas series, enriched row
     """
     invoice_status = row[Field.status]
-    invoice_id = row[Field.default_id]
-    grn_id = row[Field.grn_id]
+    invoice_id = row[InvoField.default_id]
+    grn_id = row[InvoField.grn_id]
     # Filter invoices unsuccessful with fetching advanced data
     if Status.success in invoice_status:
         try:
@@ -147,7 +148,7 @@ def _enrich_with_products(row):
             log.error(f"Product inquiry failed for Invoice {invoice_id}")
             row[Field.status] = Status.failed
             return row
-        row[Field.products] = _reformat_product_data(grn_id, product_data)
+        row[InvoField.products] = _reformat_product_data(grn_id, product_data)
         log.info(f"Product inquiry success for Invoice {invoice_id}")
     return row
 
@@ -158,6 +159,7 @@ def export_products():
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
-    invoice_df = _reindex_df(invoice_df, [Field.date, Field.status, Field.type, Field.default_id,
-                                          Field.order_id, Field.mobile_id, Field.grn_id, Field.products])
+    invoice_df = _reindex_df(invoice_df, [InvoField.date, Field.status, InvoField.type, InvoField.default_id,
+                                          InvoField.order_id, InvoField.mobile_id, InvoField.grn_id,
+                                          InvoField.products])
     write_to_json(historical_file, invoice_df.to_dict("records"))
