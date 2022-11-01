@@ -75,6 +75,7 @@ def _enrich_invoice(row, stock_df):
     """
     products_df = pd.json_normalize(row.Products)
     # Add columns from stock data to the products
+    # noinspection PyTypeChecker
     products_df = products_df.merge(stock_df, how = "left", indicator = Basic.found_in,
                                     left_on = InvoField.part_code, right_on = OdooLabel.internal_id)
     # Validate the values in indicator and if all products of the invoice are invalid, then return None

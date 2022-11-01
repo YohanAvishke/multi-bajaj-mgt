@@ -89,5 +89,6 @@ def mk_dir(dir_path, file_path):
 
 def csvstr_to_df(string):
     str_obj = StringIO(string)
+    # noinspection PyTypeChecker
     df = pd.read_csv(str_obj)
     return df

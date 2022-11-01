@@ -1,6 +1,6 @@
 from config import LOG_LEVEL
 from sys import stdout
-from loguru import logger as log
+from loguru import logger as custom_logger
 
 
 def formatter(log: dict) -> str:
@@ -41,10 +41,10 @@ def formatter(log: dict) -> str:
         )
 
 
-def configure_logger() -> log:
+def configure_logger() -> custom_logger:
     """
     Create custom logger.
     :returns: custom_logger
     """
-    log.remove()
-    log.add(stdout, level = LOG_LEVEL, colorize = True, format = formatter)
+    custom_logger.remove()
+    custom_logger.add(stdout, level = LOG_LEVEL, colorize = True, format = formatter)

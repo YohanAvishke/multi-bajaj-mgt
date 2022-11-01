@@ -22,7 +22,7 @@ def _breakdown_invoices(invoice_df):
     :param invoice_df: pandas dataframe, raw data
     :return: list, broken down invoices
     """
-    invoice_indexes = invoice_df.query(f"Invoices.str.contains('\*')").index.values.tolist()
+    invoice_indexes = invoice_df.query("Invoices.str.contains('\\*')").index.values.tolist()
     boundaries = invoice_indexes + [len(invoice_df.index)]
     invoices = [(invoice_df.iloc[boundaries[n]:boundaries[n + 1]]) for n in range(len(boundaries) - 1)]
     return invoices

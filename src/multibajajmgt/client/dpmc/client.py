@@ -87,6 +87,7 @@ def _authenticate():
     session = requests.Session()
     session.post(SERVER_URL, headers = headers, data = payload)
     token_data = session.cookies.get_dict()
+    # noinspection PyProtectedMember
     token_data |= {
         "created-at": session.cookies._now,
         "expires-at": session.cookies._now + DPMC_SESSION_LIFETIME

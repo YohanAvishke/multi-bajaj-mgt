@@ -66,7 +66,7 @@ def _export_request(url, data):
 
 
 def _call(url, service, method, *args):
-    """Method to setup JSON RPC call's Arguments.
+    """Method to set up JSON RPC call's Arguments.
 
     :param url: string, url of the endpoint
     :param service: string, final part of the subdirectory(of the url)
