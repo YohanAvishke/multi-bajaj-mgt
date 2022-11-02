@@ -22,7 +22,8 @@ def export_all_products():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices.
     """
     raw_data = odoo_client.fetch_all_dpmc_prices()
-    write_to_csv(PRICE_BASE_DPMC_FILE, csvstr_to_df(raw_data))
+    products = csvstr_to_df(raw_data)
+    write_to_csv(PRICE_BASE_DPMC_FILE, products)
 
 
 def _get_price_info(row):

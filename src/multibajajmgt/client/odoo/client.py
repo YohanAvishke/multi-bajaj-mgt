@@ -147,7 +147,7 @@ def fetch_all_stock():
     domain = [["available_in_pos", "=", True]]
     fields = [
         {"name": "product_variant_id/product_variant_id/id", "label": "Product/Product/ID"},
-        {"name": "default_code", "label": "InternalReference"},
+        {"name": "default_code", "label": "Internal Reference"},
         {"name": "qty_available", "label": "Quantity On Hand"}
     ]
     data = _export_call(

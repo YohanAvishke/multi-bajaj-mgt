@@ -33,7 +33,7 @@ dpmc_client.configure()
 sheet_client.configure()
 
 # Update dpmc prices
-# price_service.export_all_products()
+price_service.export_all_products()
 # price_service.update_product_prices()
 # price_service.merge_historical_data()
 
@@ -51,4 +51,4 @@ sheet_client.configure()
 # Adjustment from third-party invoices
 # stock_service.export_products()
 # invoice_tp_service.export_invoice_data()
-# stock_service.create_adjustment()
+stock_service.create_adjustment()

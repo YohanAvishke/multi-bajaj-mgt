@@ -101,7 +101,7 @@ def _calculate_counted_qty(product, adjustment_df):
     :param adjustment_df: pandas dataframe, all adjustments
     """
     diff_qty = int(product.Quantity)
-    stock_qty = product.QuantityOnHand
+    stock_qty = product[8]
     counted_qty = stock_qty + diff_qty
     adjustment_df.at[product.Index, OdooLabel.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
@@ -136,7 +136,8 @@ def create_adjustment():
         _calculate_counted_qty(row, adjustment_df)
     # Save data
     write_to_csv(path = adjustment_file, df = adjustment_df,
-                 columns = [OdooLabel.adj_name, OdooLabel.adj_acc_date, OdooLabel.is_exh_products, "ID",
-                            OdooLabel.external_id, OdooLabel.adj_loc_id, OdooLabel.adj_prod_counted_qty],
-                 header = [OdooLabel.adj_name, OdooLabel.adj_acc_date, OdooLabel.is_exh_products, "product_id",
+                 columns = [OdooLabel.adj_name, OdooLabel.adj_acc_date, OdooLabel.is_exh_products,
+                            OdooLabel.internal_id, OdooLabel.prod_var_id, OdooLabel.adj_loc_id,
+                            OdooLabel.adj_prod_counted_qty],
+                 header = [OdooLabel.adj_name, OdooLabel.adj_acc_date, OdooLabel.is_exh_products, "InternalReference",
                            OdooLabel.adj_prod_external_id, OdooLabel.adj_loc_id, OdooLabel.adj_prod_counted_qty])

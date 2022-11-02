@@ -91,7 +91,7 @@ class InvoiceField(MultiBajajMgtStrEnum):
     part_code = "ID"
     part_desc = "Name"
     part_qty = "Quantity"
-    unit_cost = "UnitCost"
+    unit_cost = "Unit Cost"
     total = "Total"
 
 

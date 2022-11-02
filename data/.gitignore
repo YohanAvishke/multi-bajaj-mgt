@@ -9,4 +9,9 @@
 !price/history
 !stock
 !stock/adjustments
+!product
+!product/templates/
+!product/templates/*
+!product/images/
+!product/images/*
 !**/README.md
