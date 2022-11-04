@@ -29,6 +29,10 @@ INVOICE_HISTORY_DIR = f"{INVOICE_DIR}/history"
 STOCK_DIR = f"{DATA_DIR}/stock"
 STOCK_ALL_FILE = f"{STOCK_DIR}/{DRName.stock_all}.{DRExt.csv}"
 ADJUSTMENT_DIR = f"{STOCK_DIR}/adjustments"
+# Product
+PRODUCT_DIR = f"{DATA_DIR}/product"
+PRODUCT_TMPL_DIR = f"{PRODUCT_DIR}/templates"
+PRODUCT_HISTORY_DIR = f"{PRODUCT_DIR}/history"
 
 
 def configure_env():

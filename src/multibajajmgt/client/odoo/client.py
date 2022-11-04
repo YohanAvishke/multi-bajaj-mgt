@@ -1,5 +1,7 @@
 import random
 import json
+import sys
+
 import requests
 
 from loguru import logger as log
@@ -11,6 +13,7 @@ from multibajajmgt.config import (
     ODOO_DATABASE_NAME as DATABASE_NAME
 )
 from multibajajmgt.common import write_to_json
+from multibajajmgt.product.models import Product
 
 user_id, token, session_id, csrf_token = None, None, None, None
 
@@ -154,4 +157,50 @@ def fetch_all_stock():
             f"{SERVER_URL}/web/export/csv",
             "product.template", domain, False, fields
     )
+    return data
+
+
+def fetch_pos_category(categ_name):
+    log.info("Fetching POS category from 'pos.category'")
+    domain = [["name", "=", categ_name]]
+    fields = ["name", "parent_id", "sequence"]
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "pos.category", "search_read",
+            [domain, fields])
+    if len(data) == 1:
+        return data
+    log.error(f"Invalid data {data} for category name {categ_name}")
+    sys.exit(0)
+
+
+def create_product(product: Product):
+    log.info("Creating product for 'product.template'")
+    data = _call(
+            f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+            DATABASE_NAME, user_id, SERVER_API_KEY,
+            "product.template", "create", [{
+                "type": "product",
+                "name": product.name,
+                "description": product.name,
+                "default_code": product.default_code,
+                "barcode": product.barcode,
+                "image_1920": product.image,
+                "attribute_line_ids": [],
+                # prices
+                "list_price": product.price,
+                "standard_price": product.price,
+                "taxes_id": [[6, False, []]],
+                # category
+                "categ_id": product.categ_id,
+                "pos_categ_id": product.pos_categ_id,
+                # flags
+                "sale_ok": True,
+                "purchase_ok": True,
+                "active": True,
+                "available_in_pos": True,
+                "to_weight": False,
+                "__last_update": False,
+            }])
     return data
