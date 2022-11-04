@@ -13,6 +13,7 @@ from multibajajmgt.config import (
     ODOO_DATABASE_NAME as DATABASE_NAME
 )
 from multibajajmgt.common import write_to_json
+from multibajajmgt.exceptions import InvalidDataFormatReceived
 from multibajajmgt.product.models import Product
 
 user_id, token, session_id, csrf_token = None, None, None, None
@@ -161,6 +162,11 @@ def fetch_all_stock():
 
 
 def fetch_pos_category(categ_name):
+    """ Fetch a pos category's information
+
+    :param categ_name: string, name of a category
+    :return: dict, a pos category data
+    """
     log.info("Fetching POS category from 'pos.category'")
     domain = [["name", "=", categ_name]]
     fields = ["name", "parent_id", "sequence"]
@@ -171,11 +177,17 @@ def fetch_pos_category(categ_name):
             [domain, fields])
     if len(data) == 1:
         return data
-    log.error(f"Invalid data {data} for category name {categ_name}")
-    sys.exit(0)
+    else:
+        message = f"Invalid data {data} for category name {categ_name}"
+        raise InvalidDataFormatReceived(message)
 
 
 def create_product(product: Product):
+    """ Create a product
+
+    :param product: Product, product data
+    :return: int, created product's database id
+    """
     log.info("Creating product for 'product.template'")
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
