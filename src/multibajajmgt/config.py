@@ -32,7 +32,7 @@ ADJUSTMENT_DIR = f"{STOCK_DIR}/adjustments"
 # Product
 PRODUCT_DIR = f"{DATA_DIR}/product"
 PRODUCT_TMPL_DIR = f"{PRODUCT_DIR}/templates"
-PRODUCT_HISTORY_DIR = f"{PRODUCT_DIR}/history"
+PRODUCT_HISTORY_FILE = f"{PRODUCT_DIR}/product_history.csv"
 
 
 def configure_env():

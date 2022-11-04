@@ -10,7 +10,6 @@ import multibajajmgt.product.service as product_service
 import multibajajmgt.price.service as price_service
 import multibajajmgt.stock.service as stock_service
 
-from app import App
 from config import configure_app, configure_env
 from logger import configure_logger
 from multibajajmgt.enums import (
@@ -52,5 +51,5 @@ odoo_client.configure()
 # Adjustment from third-party invoices
 # stock_service.export_products()
 # invoice_tp_service.export_invoice_data()
-# product_service.create_products()
+product_service.create_missing_products()
 # stock_service.create_adjustment()
