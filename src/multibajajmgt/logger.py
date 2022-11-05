@@ -4,10 +4,10 @@ from loguru import logger as custom_logger
 
 
 def formatter(log: dict) -> str:
-    """
-    Format log colors based on level.
-    :param dict log: Dictionary containing log level, details, etc.
-    :returns: str
+    """ Format log colors based on level.
+
+    :param dict log: dict, containing log level, details, etc.
+    :returns: str,
     """
     if log["level"].name == "INFO":
         return (
@@ -42,9 +42,9 @@ def formatter(log: dict) -> str:
 
 
 def configure_logger() -> custom_logger:
-    """
-    Create custom logger.
-    :returns: custom_logger
+    """ Create custom logger.
+
+    :returns: Logger,
     """
     custom_logger.remove()
     custom_logger.add(stdout, level = LOG_LEVEL, colorize = True, format = formatter)

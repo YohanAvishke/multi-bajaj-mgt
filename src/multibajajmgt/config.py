@@ -37,7 +37,7 @@ PRODUCT_HISTORY_FILE = f"{PRODUCT_DIR}/product_history.csv"
 
 
 def configure_env():
-    """ Configure environment variables
+    """ Configure environment variables.
     """
     log.debug("Configuring environment variables.")
     load_dotenv(find_dotenv(f"{ROOT_DIR}/.env"))
@@ -58,7 +58,7 @@ DATETIME_FILE_FORMAT = "%Y-%m-%d_%H-%M-%S"
 
 
 def configure_app(pos_categ, qty_limit):
-    """ Configure application
+    """ Configure application.
 
     :param pos_categ: POSCategory string,
     :param qty_limit: QuantityAvailability string,

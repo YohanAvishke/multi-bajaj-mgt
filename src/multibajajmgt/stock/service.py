@@ -40,6 +40,7 @@ def _evaluate_pos_category():
 def export_products():
     """ Fetch, process and save stock.
     """
+    log.info("Exporting the entire stock from odoo server")
     raw_data = odoo_client.fetch_all_stock()
     product_df = csvstr_to_df(raw_data)
     write_to_csv(STOCK_ALL_FILE, product_df)
@@ -101,7 +102,7 @@ def _calculate_counted_qty(product, adjustment_df):
     :param adjustment_df: pandas dataframe, all adjustments
     """
     diff_qty = int(product.Quantity)
-    stock_qty = product[8]
+    stock_qty = product.Quantity_On_Hand
     counted_qty = stock_qty + diff_qty
     adjustment_df.at[product.Index, OdooLabel.adj_prod_counted_qty] = counted_qty
     # Log issues with the calculations due to invalid quantities from Odoo server
@@ -118,6 +119,7 @@ def _calculate_counted_qty(product, adjustment_df):
 def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
+    log.info("Create importable adjustment with extracted invoice data")
     evaluations = _evaluate_pos_category()
     adjustments = []
     adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, evaluations[1]))

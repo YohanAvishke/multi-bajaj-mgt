@@ -41,7 +41,7 @@ headers = {
 
 
 def _call(url, referer, payload = None):
-    """ Base function for requests to the DPMC server
+    """ Base function for requests to the DPMC server.
 
     :param url: string, url for the request
     :param referer: string, base url
@@ -75,9 +75,9 @@ def _call(url, referer, payload = None):
 
 
 def _authenticate():
-    """ Fetch and store(in token.json) cookie for DPMC server
+    """ Fetch and store(in token.json) cookie for DPMC server.
     """
-    log.info("Authenticating DPMC-ERP Client and setting up the Cookie")
+    log.debug("Authenticating DPMC-ERP Client and setting up the Cookie")
     global headers
     headers |= {"referer": SERVER_URL}
     payload = {
@@ -96,9 +96,9 @@ def _authenticate():
 
 
 def configure():
-    """ Validate and attach login session to request header
+    """ Validate and attach login session to request header.
     """
-    log.info("Configuring DPMC client")
+    log.debug("Configuring DPMC client")
     global cookie
     try:
         with open(f"{SOURCE_DIR}/client/dpmc/token.json", "r") as file:
@@ -121,14 +121,15 @@ def configure():
 
 
 def _refresh_token():
-    """ Wrapper for fetch,save and configure session
+    """ Wrapper for fetch, save and configure session.
     """
+    log.debug("Refreshing the expired user token")
     _authenticate()
     configure()
 
 
 def _retry_request(request_func, *args):
-    """ Retry a failed reqeust(eg: closed by peer)
+    """ Retry a failed reqeust (eg: closed by peer).
 
     :param request_func: function, function pointer to be retired
     :param args: tuple, parameters for the request_func
@@ -151,6 +152,7 @@ def inquire_product_by_id(ref_id):
     :param ref_id: string, product's part number
     :return: dict, data
     """
+    log.debug("Fetching product data by internal reference")
     payload = {
         "strPartNo_PAItemInq": ref_id,
         "strFuncType": "INVENTORYDATA",
@@ -184,6 +186,7 @@ def inquire_product_by_invoice(invoice, grn):
     :param grn: string, grn id
     :return: dict, data
     """
+    log.debug("Fetching products of a invoice")
     # Payload should be altered depending on the availability of grn id
     # If grn and invoice id exists:
     #   "strMode" = "GRN", "STR_FUNCTION_ID" = "IQ"
@@ -217,7 +220,7 @@ def inquire_product_by_invoice(invoice, grn):
 
 
 def _inquire_goodreceivenote(referer, payload):
-    """ Base function to fetch invoice advanced data
+    """ Base function to fetch invoice advanced data.
 
     :param referer: string, url
     :param payload: dict,
@@ -250,12 +253,13 @@ def _inquire_goodreceivenote(referer, payload):
 
 
 def inquire_goodreceivenote_by_grn_ref(col, ref_id):
-    """ Fetch invoice advanced data by grn
+    """ Fetch invoice advanced data by grn.
 
     :param col: string, DPMCFieldName depending on @ref_id
     :param ref_id: string, either invoice/order id
     :return: dict, data
     """
+    log.debug("Fetching invoice data using GRN references")
     try:
         return _inquire_goodreceivenote(
                 f"{SERVER_URL}/Application/Home/PADEALER",
@@ -272,12 +276,13 @@ def inquire_goodreceivenote_by_grn_ref(col, ref_id):
 
 
 def inquire_goodreceivenote_by_order_ref(col, ref_id):
-    """ Fetch invoice advanced data by order
+    """ Fetch invoice advanced data by order.
 
         :param col: string, DPMCFieldName depending on @ref_id
         :param ref_id: string, either invoice/order/mobile id
         :return: dict, data
         """
+    log.debug("Fetching invoice data using Order references")
     try:
         return _inquire_goodreceivenote(
                 SERVER_URL,

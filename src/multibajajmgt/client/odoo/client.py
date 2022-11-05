@@ -1,6 +1,5 @@
 import random
 import json
-import sys
 
 import requests
 
@@ -20,14 +19,14 @@ user_id, token, session_id, csrf_token = None, None, None, None
 
 
 def _json_rpc(url, method, params):
-    """Create Requests to Odoo's JSON-RPC server.
+    """ Create Requests to Odoo's JSON-RPC server.
 
     Common wrapper method for all calls.
 
     :param url: string, url of the endpoint
     :param method: string
     :param params: list, params for the payload of the request
-    :return: json dict, response body
+    :return: dict, response body
     """
     data = {
         "jsonrpc": "2.0",
@@ -51,6 +50,14 @@ def _json_rpc(url, method, params):
 
 
 def _export_request(url, data):
+    """ Create request to export CSV data from Odoo server.
+
+    Common wrapper method for all calls.
+
+    :param url: string, url of the endpoint
+    :param data: dict, to filter exporting data
+    :return: dict, response body
+    """
     payload = {
         "data": json.dumps(data),
         "token": token,
@@ -70,18 +77,27 @@ def _export_request(url, data):
 
 
 def _call(url, service, method, *args):
-    """Method to set up JSON RPC call's Arguments.
+    """ Function to set up JSON RPC call's arguments.
 
     :param url: string, url of the endpoint
     :param service: string, final part of the subdirectory(of the url)
     :param method: string, method to be executed on the request
     :param args: tuple, args for the payload's params of the request(authentication info, module name, etc.)
-    :return: json dict, response body
+    :return: dict, response body
     """
     return _json_rpc(url, "call", {"service": service, "method": method, "args": args})
 
 
 def _export_call(url, model, domain, ids, fields):
+    """ Function to set up Odoo export call's arguments.
+
+    :param url: string, url of the endpoint
+    :param model: string, table model name
+    :param domain: list, filtering conditions
+    :param ids: list, product's db id list for filtering
+    :param fields: list, table columns to be returned
+    :return: dict, response body
+    """
     return _export_request(url, {"model": model, "domain": domain, "ids": ids, "fields": fields,
                                  "import_compat": False})
 
@@ -91,7 +107,7 @@ def _authenticate():
 
     Save the User-ID for future Requests from the Client.
     """
-    log.info("Authenticating odoo-client and setting up the user-id")
+    log.debug("Authenticating odoo-client and setting up the user-id")
     data = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
     write_to_json(F"{SOURCE_DIR}/client/odoo/token.json", {"user-id": data})
 
@@ -101,7 +117,7 @@ def configure():
 
     Configure credentials and create a token file.
     """
-    log.info("Configuring Odoo client")
+    log.debug("Configuring Odoo client")
     global user_id
     global token
     global session_id
@@ -121,6 +137,12 @@ def configure():
 
 
 def _fetch_prices(domain, product_ids):
+    """ Basic function to fetch prices.
+
+    :param domain: list, filtering conditions
+    :param product_ids: list, product's db id list for filtering
+    :return: dict, price data
+    """
     fields = [
         {"name": "id", "label": "External ID"},
         {"name": "default_code", "label": "Internal Reference"},
@@ -135,7 +157,12 @@ def _fetch_prices(domain, product_ids):
 
 
 def fetch_all_dpmc_prices(product_ids = False):
-    log.info("Fetching all dpmc product prices from 'product.template'")
+    """ Fetch all product prices from DPMC POS category.
+
+    :param product_ids: list, product's db id list for filtering
+    :return: dict, dpmc price data
+    """
+    log.debug("Fetching all dpmc product prices from 'product.template'")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -148,7 +175,12 @@ def fetch_all_dpmc_prices(product_ids = False):
 
 
 def fetch_all_thirdparty_prices(product_ids = False):
-    log.info("Fetching all third-party product prices from 'product.template'")
+    """ Fetch all product prices from all POS category except DPMC.
+
+    :param product_ids: list, product's db id list for filtering
+    :return: dict, third-party price data
+    """
+    log.debug("Fetching all third-party product prices from 'product.template'")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -165,12 +197,12 @@ def fetch_all_stock():
 
     :return: dict, a list of dicts with product.template rows containing quantity available
     """
-    log.info("Fetching all stock from 'product.template'")
+    log.debug("Fetching all stock from 'product.template'")
     domain = [["available_in_pos", "=", True]]
     fields = [
         {"name": "product_variant_id/product_variant_id/id", "label": "Product/Product/ID"},
         {"name": "default_code", "label": "Internal Reference"},
-        {"name": "qty_available", "label": "Quantity On Hand"}
+        {"name": "qty_available", "label": "Quantity_On_Hand"}
     ]
     data = _export_call(
             f"{SERVER_URL}/web/export/csv",
@@ -180,12 +212,12 @@ def fetch_all_stock():
 
 
 def fetch_pos_category(categ_name):
-    """ Fetch a pos category's information
+    """ Fetch a pos category's information.
 
     :param categ_name: string, name of a category
     :return: dict, a pos category data
     """
-    log.info("Fetching POS category from 'pos.category'")
+    log.debug("Fetching POS category from 'pos.category'")
     domain = [["name", "=", categ_name]]
     fields = ["name", "parent_id", "sequence"]
     data = _call(
@@ -201,12 +233,12 @@ def fetch_pos_category(categ_name):
 
 
 def create_product(product: Product):
-    """ Create a product
+    """ Create a product.
 
     :param product: Product, product data
     :return: int, created product's database id
     """
-    log.info("Creating product for 'product.template'")
+    log.debug("Creating product for 'product.template'")
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,

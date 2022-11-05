@@ -2,7 +2,6 @@ import multibajajmgt.client.dpmc.client as dpmc_client
 import pandas as pd
 
 from loguru import logger as log
-
 from multibajajmgt.common import get_dated_dir, mk_dir, write_to_json
 from multibajajmgt.config import INVOICE_DPMC_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
@@ -85,6 +84,7 @@ def _enrich_with_advanced_data(row):
 def export_invoice_data():
     """ Fetch, enrich and restructure DPMC invoices with advanced data.
     """
+    log.info("Exporting DPMC invoices enriched by advanced data")
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
     invoice_df = pd.read_json(INVOICE_DPMC_FILE, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
@@ -157,6 +157,7 @@ def _enrich_with_products(row):
 def export_products():
     """ Fetch and enrich invoices with products.
     """
+    log.info("Exporting porducts of an invoice")
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)

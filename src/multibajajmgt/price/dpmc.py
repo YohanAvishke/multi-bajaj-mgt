@@ -22,6 +22,7 @@ curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 def export_prices():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices.
     """
+    log.info("Exporting DPMC prices from odoo server")
     raw_data = odoo_client.fetch_all_dpmc_prices()
     products = csvstr_to_df(raw_data)
     write_to_csv(PRICE_BASE_DPMC_FILE, products)
@@ -89,6 +90,7 @@ def _save_price_info(info, df, file):
 def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
+    log.info("Updating DPMC product's prices")
     price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
     historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRName.price_dpmc_all))
     # Add columns for updated prices and price fluctuation state
@@ -107,6 +109,7 @@ def update_product_prices():
 def merge_historical_data():
     """ Merge timed files in a historical dir
     """
+    log.info("Merging historical files of today")
     merged_file = f"{curr_his_dir}/{DRName.price_dpmc_all}.{DRExt.csv}"
     # Remove existing merge file
     if os.path.isfile(merged_file):

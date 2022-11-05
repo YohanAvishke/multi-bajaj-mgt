@@ -1,5 +1,6 @@
 import pandas as pd
 
+from loguru import logger as log
 from multibajajmgt.common import get_dated_dir, mk_dir, write_to_json
 from multibajajmgt.config import INVOICE_TP_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
@@ -69,6 +70,7 @@ def _enrich_invoices(invoices):
 def export_invoice_data():
     """ Get raw invoice data, convert and save it in a historical file.
     """
+    log.info("Exporting third-party invoices enriched by advanced data")
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_tp}.{DRExt.json}")
     invoice_df = pd.read_csv(INVOICE_TP_FILE, header = None, names = ["Invoices"])
     # Find and break each invoice into a different object

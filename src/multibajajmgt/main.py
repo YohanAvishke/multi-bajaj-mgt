@@ -7,7 +7,7 @@ import multibajajmgt.invoice.dpmc as invoice_dpmc_service
 import multibajajmgt.invoice.sale as invoice_sale_service
 import multibajajmgt.invoice.thirdparty as invoice_tp_service
 import multibajajmgt.product.service as product_service
-import multibajajmgt.price.service as price_service
+import multibajajmgt.price.dpmc as price_dpmc_service
 import multibajajmgt.price.thirdparty as price_tp_service
 import multibajajmgt.stock.service as stock_service
 
@@ -26,35 +26,37 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-app = configure_app(Categ.all, QtyAva.all)
+app = configure_app(Categ.dpmc, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
 dpmc_client.configure()
-# sheet_client.configure()
+sheet_client.configure()
 
 # Update dpmc prices
-# price_service.export_prices()
-# price_service.update_product_prices()
-price_service.merge_historical_data()
+# price_dpmc_service.export_prices()
+# price_dpmc_service.update_product_prices()
+# price_dpmc_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
-# stock_service.export_products()
 # invoice_dpmc_service.export_invoice_data()
 # invoice_dpmc_service.export_products()
+# stock_service.export_products()
 # stock_service.create_adjustment()
 
 # Adjustment from sales invoices
-# stock_service.export_products()
 # invoice_sale_service.export_invoice_data()
+# stock_service.export_products()
 # stock_service.create_adjustment()
 
 # Adjustment from third-party invoices
-# stock_service.export_products()
-#   Create products
-# product_service.create_missing_products()
-# stock_service.export_products()
+#   Setup
 # invoice_tp_service.export_invoice_data()
+#   Create products
+# stock_service.export_products()
+# product_service.create_missing_products()
+#   Create adjustment
+# stock_service.export_products()
 # stock_service.create_adjustment()
 #   Price update
 # price_tp_service.export_prices()

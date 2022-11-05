@@ -1,6 +1,7 @@
 import multibajajmgt.client.googlesheet.client as sale_client
 import pandas as pd
 
+from loguru import logger as log
 from multibajajmgt.common import get_dated_dir, mk_dir, write_to_json
 from multibajajmgt.config import INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
@@ -72,6 +73,7 @@ def _extract_invoices(chunks_df):
 def export_invoice_data():
     """ Fetch, enrich and restructure Sales invoices with advanced data.
     """
+    log.info("Exporting sales invoices enriched by advanced data")
     historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_sales}.{DRExt.json}")
     data = sale_client.inquire_sales_invoices()
     # Identify chunks(rows with a value to col `isUpdated`) in the data

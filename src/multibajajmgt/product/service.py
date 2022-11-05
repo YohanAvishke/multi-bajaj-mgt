@@ -81,9 +81,9 @@ def _compare_invo_stock_prods(invo_row):
 def create_missing_products():
     """ Create records for invalid products from third-party invoices
     """
+    log.info("Creating unavailable products in the invoice")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
-    prod_categ_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/product.category.csv")
     invoices_df = pd.read_json(f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():

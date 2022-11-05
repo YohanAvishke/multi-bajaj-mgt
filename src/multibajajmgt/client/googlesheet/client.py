@@ -31,7 +31,7 @@ RANGE_NAME = "A:D"
 def configure():
     """ Validate credentials, fetch token and set service.
     """
-    log.info("Configuring Google Sheet client")
+    log.debug("Configuring Google Sheet client")
     credentials = None
     global service
     if os.path.exists(TOKEN_FILE):
@@ -51,6 +51,7 @@ def inquire_sales_invoices():
 
     :return: pandas dataframe, column data
     """
+    log.debug("Fetching non uploaded sales invoices")
     # If not already configured
     if not service:
         configure()

@@ -88,6 +88,11 @@ def mk_dir(dir_path, file_path):
 
 
 def csvstr_to_df(string):
+    """ Convert string to dataframe.
+
+    :param string: str, valid string
+    :return: pandas dataframe,
+    """
     str_obj = StringIO(string)
     # noinspection PyTypeChecker
     df = pd.read_csv(str_obj)
