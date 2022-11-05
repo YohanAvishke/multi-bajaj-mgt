@@ -2,7 +2,7 @@ import multibajajmgt.client.googlesheet.client as sale_client
 import pandas as pd
 
 from loguru import logger as log
-from multibajajmgt.common import get_dated_dir, mk_dir, write_to_json
+from multibajajmgt.common import get_dated_dir, merge_duplicates, mk_dir, write_to_json
 from multibajajmgt.config import INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as BaseField,
@@ -38,7 +38,9 @@ def _extract_chunks(data):
     # Combine all chunks to a single dataframe
     for chunk in chunks:
         chunk_df_list.append(pd.DataFrame(chunk))
-    chunks_df = pd.concat(chunk_df_list, ignore_index = True)
+    chunks_df = pd \
+        .concat(chunk_df_list, ignore_index = True) \
+        .astype({InvoField.part_qty: int})
     return chunks_df
 
 
@@ -60,6 +62,7 @@ def _extract_invoices(chunks_df):
         invoice_df.reset_index(drop = True, inplace = True)
         date = invoice_df[InvoField.date][0]
         products = invoice_df[[InvoField.part_code, InvoField.part_qty]].to_dict('records')
+        products = merge_duplicates(products)
         invoice = {
             InvoField.date: date,
             BaseField.status: Status.success,

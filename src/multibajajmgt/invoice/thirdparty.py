@@ -1,7 +1,7 @@
 import pandas as pd
 
 from loguru import logger as log
-from multibajajmgt.common import get_dated_dir, mk_dir, write_to_json
+from multibajajmgt.common import get_dated_dir, merge_duplicates, mk_dir, write_to_json
 from multibajajmgt.config import INVOICE_TP_FILE, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as BaseField,
@@ -56,6 +56,8 @@ def _enrich_invoices(invoices):
              InvoField.unit_cost: cost}
             for code, name, quantity, cost in zip(codes, names, quantities, costs)
         ]
+        # Merge duplicates
+        products = merge_duplicates(products)
         # Setup enriched invoice
         invoice = {
             InvoField.date: info[-1],

@@ -97,3 +97,15 @@ def csvstr_to_df(string):
     # noinspection PyTypeChecker
     df = pd.read_csv(str_obj)
     return df
+
+
+def merge_duplicates(products):
+    """ Merge and drop duplicate product quantities.
+
+    :param products: list, products
+    :return: list, updated products
+    """
+    df = pd.DataFrame(products)
+    df["Quantity"] = df.groupby(["ID"])["Quantity"].transform('sum')
+    df.drop_duplicates(["ID"], keep = "last", inplace = True)
+    return df.to_dict('records')

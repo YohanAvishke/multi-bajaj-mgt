@@ -26,7 +26,7 @@ if not os.getenv("ENV_FLAG"):
     configure_env()
 
 # Configure application execution details
-app = configure_app(Categ.dpmc, QtyAva.all)
+app = configure_app(Categ.tp, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
@@ -45,7 +45,7 @@ sheet_client.configure()
 # stock_service.create_adjustment()
 
 # Adjustment from sales invoices
-# invoice_sale_service.export_invoice_data()
+invoice_sale_service.export_invoice_data()
 # stock_service.export_products()
 # stock_service.create_adjustment()
 
