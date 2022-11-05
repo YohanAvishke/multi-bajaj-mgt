@@ -120,6 +120,20 @@ def configure():
         _authenticate()
 
 
+def _fetch_prices(domain, product_ids):
+    fields = [
+        {"name": "id", "label": "External ID"},
+        {"name": "default_code", "label": "Internal Reference"},
+        {"name": "list_price", "label": "Old Sales Price"},
+        {"name": "standard_price", "label": "Old Cost"}
+    ]
+    data = _export_call(
+            f"{SERVER_URL}/web/export/csv",
+            "product.template", domain, product_ids, fields
+    )
+    return data
+
+
 def fetch_all_dpmc_prices(product_ids = False):
     log.info("Fetching all dpmc product prices from 'product.template'")
     domain = [
@@ -129,16 +143,20 @@ def fetch_all_dpmc_prices(product_ids = False):
         ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
         ["pos_categ_id", "ilike", "qute"]
     ]
-    fields = [
-        {"name": "id", "label": "External ID"},
-        {"name": "default_code", "label": "InternalReference"},
-        {"name": "list_price", "label": "Old Sales Price"},
-        {"name": "standard_price", "label": "Old Cost"}
+    data = _fetch_prices(domain, product_ids)
+    return data
+
+
+def fetch_all_thirdparty_prices(product_ids = False):
+    log.info("Fetching all third-party product prices from 'product.template'")
+    domain = [
+        "&",
+        ["available_in_pos", "=", True],
+        "&", "&", "&",
+        ["pos_categ_id", "not ilike", "bajaj"], ["pos_categ_id", "not ilike", "2w"],
+        ["pos_categ_id", "not ilike", "3w"], ["pos_categ_id", "not ilike", "qute"]
     ]
-    data = _export_call(
-            f"{SERVER_URL}/web/export/csv",
-            "product.template", domain, product_ids, fields
-    )
+    data = _fetch_prices(domain, product_ids)
     return data
 
 

@@ -19,6 +19,7 @@ DATA_DIR = f"{ROOT_DIR}/data"
 # Price
 PRICE_DIR = f"{DATA_DIR}/price"
 PRICE_BASE_DPMC_FILE = f"{PRICE_DIR}/{DRName.price_dpmc_all}.{DRExt.csv}"
+PRICE_BASE_TP_FILE = f"{PRICE_DIR}/{DRName.price_tp}.{DRExt.csv}"
 PRICE_HISTORY_DIR = f"{PRICE_DIR}/history"
 # Invoice
 INVOICE_DIR = f"{DATA_DIR}/invoice"

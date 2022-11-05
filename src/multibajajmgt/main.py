@@ -8,6 +8,7 @@ import multibajajmgt.invoice.sale as invoice_sale_service
 import multibajajmgt.invoice.thirdparty as invoice_tp_service
 import multibajajmgt.product.service as product_service
 import multibajajmgt.price.service as price_service
+import multibajajmgt.price.thirdparty as price_tp_service
 import multibajajmgt.stock.service as stock_service
 
 from config import configure_app, configure_env
@@ -29,13 +30,13 @@ app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
 odoo_client.configure()
-# dpmc_client.configure()
+dpmc_client.configure()
 # sheet_client.configure()
 
 # Update dpmc prices
-# price_service.export_all_products()
+# price_service.export_prices()
 # price_service.update_product_prices()
-# price_service.merge_historical_data()
+price_service.merge_historical_data()
 
 # Adjustment from dpmc invoices
 # stock_service.export_products()
@@ -50,6 +51,11 @@ odoo_client.configure()
 
 # Adjustment from third-party invoices
 # stock_service.export_products()
+#   Create products
+# product_service.create_missing_products()
+# stock_service.export_products()
 # invoice_tp_service.export_invoice_data()
-product_service.create_missing_products()
 # stock_service.create_adjustment()
+#   Price update
+# price_tp_service.export_prices()
+# price_tp_service.update_product_prices()

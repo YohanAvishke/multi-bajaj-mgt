@@ -22,6 +22,7 @@ class EnvVariable(MultiBajajMgtStrEnum):
 
 class DocumentResourceName(MultiBajajMgtStrEnum):
     price_dpmc_all = "price_dpmc_all"
+    price_tp = "price_tp"
     invoice_dpmc = "invoice_dpmc"
     invoice_sales = "invoice_sales"
     invoice_tp = "invoice_thirdparty"

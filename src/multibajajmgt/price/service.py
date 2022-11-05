@@ -19,7 +19,7 @@ from pathlib import Path
 curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
-def export_all_products():
+def export_prices():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices.
     """
     raw_data = odoo_client.fetch_all_dpmc_prices()
@@ -34,7 +34,7 @@ def _get_price_info(row):
     :return: dict, necessary information for a price update to be completed
     """
     index = row.Index
-    ref_id = row.InternalReference  # getattr(row, OdooName.internal_id)
+    ref_id = row[2]  # getattr(row, OdooName.internal_id)
     old_price = row[4]  # getattr(row, OdooName.cost)
     status = Status.none
     try:
@@ -89,7 +89,7 @@ def _save_price_info(info, df, file):
 def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
-    price_df = pd.read_csv(PRICE_BASE_DPMC_FILE, )
+    price_df = pd.read_csv(PRICE_BASE_DPMC_FILE)
     historical_file_path = mk_dir(curr_his_dir, get_now_file(DRExt.csv, DRName.price_dpmc_all))
     # Add columns for updated prices and price fluctuation state
     if BaseField.status not in price_df.columns:
@@ -112,7 +112,7 @@ def merge_historical_data():
     if os.path.isfile(merged_file):
         os.remove(merged_file)
     # Read, sort, merge and save the new merge file
-    files = sorted(Path(curr_his_dir).glob(f"*.{DRExt.csv}"))
+    files = sorted(Path(curr_his_dir).glob(f"price_dpmc_all_*.{DRExt.csv}"))
     df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
     write_to_csv(merged_file, df)
     # Remove timed files
