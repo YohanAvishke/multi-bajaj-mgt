@@ -239,30 +239,62 @@ def create_product(product: Product):
     :return: int, created product's database id
     """
     log.debug("Creating product for 'product.template'")
+    data_upload = {
+        "type": "product",
+        "name": product.name,
+        "description": product.name,
+        "default_code": product.default_code,
+        "barcode": product.barcode,
+        "image_1920": product.image,
+        "attribute_line_ids": [],
+        # prices
+        "list_price": product.price,
+        "standard_price": product.price,
+        "taxes_id": [[6, False, []]],
+        # category
+        "categ_id": product.categ_id,
+        "pos_categ_id": product.pos_categ_id,
+        # flags
+        "sale_ok": True,
+        "purchase_ok": True,
+        "active": True,
+        "available_in_pos": True,
+        "to_weight": False,
+        "__last_update": False,
+    }
     data = _call(
             f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
             DATABASE_NAME, user_id, SERVER_API_KEY,
-            "product.template", "create", [{
-                "type": "product",
-                "name": product.name,
-                "description": product.name,
-                "default_code": product.default_code,
-                "barcode": product.barcode,
-                "image_1920": product.image,
-                "attribute_line_ids": [],
-                # prices
-                "list_price": product.price,
-                "standard_price": product.price,
-                "taxes_id": [[6, False, []]],
-                # category
-                "categ_id": product.categ_id,
-                "pos_categ_id": product.pos_categ_id,
-                # flags
-                "sale_ok": True,
-                "purchase_ok": True,
-                "active": True,
-                "available_in_pos": True,
-                "to_weight": False,
-                "__last_update": False,
-            }])
+            "product.template", "create", [data_upload])
+    return data
+
+
+def fetch_sale_report(from_date,
+                      to_date = None,
+                      offset = 0,
+                      limit = None,
+                      order_by = False) -> dict:
+    """ Fetch sales report of product's order quantity grouped by date.
+
+    Since Odoo server uses Time zone: Etc/UTC (UTC, +0000).
+    Args from_date and to_date should be altered accordingly.
+
+    :param from_date: string, filter start date
+    :param to_date: string, filter end date
+    :param offset: int, dp start row
+    :param limit: None/int, row count
+    :param order_by: False/string, row ordering
+    :return: dict, data
+    """
+    log.debug("Fetching ordered products from 'sale.report'")
+    domain = [["date", ">", from_date]]
+    if to_date:
+        domain.insert(0, "&")
+        domain.append(["date", "<=", to_date])
+    fields = ["product_uom_qty:sum"]
+    group_by = ["product_id", "date:day"]
+    lazy = False
+    data = _call(f"{SERVER_URL}/jsonrpc", "object", "execute_kw",
+                 DATABASE_NAME, user_id, SERVER_API_KEY, "sale.report", "read_group",
+                 [domain, fields, group_by, offset, limit, order_by, lazy])
     return data
