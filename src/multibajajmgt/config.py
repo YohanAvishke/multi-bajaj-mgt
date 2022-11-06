@@ -10,7 +10,7 @@ from enums import (
 from loguru import logger as log
 from multibajajmgt.app import App
 
-LOG_LEVEL = logging.INFO
+LOG_LEVEL = logging.DEBUG
 
 # Paths
 ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
@@ -34,6 +34,8 @@ ADJUSTMENT_DIR = f"{STOCK_DIR}/adjustments"
 PRODUCT_DIR = f"{DATA_DIR}/product"
 PRODUCT_TMPL_DIR = f"{PRODUCT_DIR}/templates"
 PRODUCT_HISTORY_FILE = f"{PRODUCT_DIR}/product_history.csv"
+# Sale
+SALE_DIR = f"{DATA_DIR}/sale"
 
 
 def configure_env():
