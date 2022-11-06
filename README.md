@@ -1,9 +1,20 @@
-# Multi Bajaj POS System
-Scripts and Data files used for converting, formatting and enriching data persisted in the Odoo POS system.
+# About
 
-# TODO
-1. Create a script to update unit prices
-   1. Send `CURL` requests with a buffer(5 sec) to retreive unit prices for a list of part numbers.
-   2. Filter about 300 parts from `current_price.csv` and send 400 requests per day.
-   3. Maybe break down the request into 100 packets per hour.
-2. Check the discount in the stupid report(ERP) 
+### What's MultiBajaj Mgt?
+MultiBajaj management is to manage products, stock, etc. data of the server
+t-incident reviews; allowing you to focus on actually fixing the issue!
+
+## Project resources
+* [Source Code](https://github.com/YohanAvishke/multibajajmgt)
+
+
+## Prerequisites
+* python >= 3.10
+* pip
+* pip-tools
+
+## Supporting clients
+### Google Sheets
+Check following link to find how to setup the client credentials
+https://developers.google.com/sheets/api/quickstart/python#enable_the_api
+Above setup is necessary for any functionality linked to sheet's API to work.
