@@ -27,13 +27,16 @@ def _evaluate_pos_category():
     """
     categ = App().get_pos_categ()
     if categ == POSCatg.dpmc:
-        return f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
+        return odoo_client.fetch_dpmc_stock, \
+               f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
                f"{DRName.adjustment_dpmc}"
     elif categ == POSCatg.tp:
-        return f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
+        return odoo_client.fetch_all_stock, \
+               f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
                f"{DRName.adjustment_tp}"
     elif categ == POSCatg.sales:
-        return f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
+        return odoo_client.fetch_all_stock, \
+               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
                f"{DRName.adjustment_sales}"
 
 
@@ -41,7 +44,8 @@ def export_products():
     """ Fetch, process and save stock.
     """
     log.info("Exporting the entire stock from odoo server")
-    raw_data = odoo_client.fetch_all_stock()
+    categ_eval = _evaluate_pos_category()
+    raw_data = categ_eval[0]()
     product_df = csvstr_to_df(raw_data)
     write_to_csv(STOCK_ALL_FILE, product_df)
 
@@ -120,11 +124,11 @@ def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
     log.info("Create importable adjustment with extracted invoice data")
-    evaluations = _evaluate_pos_category()
+    categ_eval = _evaluate_pos_category()
     adjustments = []
-    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, evaluations[1]))
+    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, categ_eval[2]))
     stock_df = pd.read_csv(STOCK_ALL_FILE)
-    invoice_df = pd.read_json(evaluations[0], orient = 'records', convert_dates = False)
+    invoice_df = pd.read_json(categ_eval[1], orient = 'records', convert_dates = False)
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Basic.status] == Status.success] \
         .sort_values(by = [InvoField.date, InvoField.default_id])
