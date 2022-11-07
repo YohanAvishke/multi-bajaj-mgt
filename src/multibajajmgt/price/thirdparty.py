@@ -3,12 +3,13 @@ import pandas as pd
 import multibajajmgt.client.odoo.client as odoo_client
 
 from loguru import logger as log
+
+from multibajajmgt.app import App
 from multibajajmgt.common import csvstr_to_df, get_dated_dir, mk_dir, write_to_csv
-from multibajajmgt.config import INVOICE_HISTORY_DIR, PRICE_BASE_TP_FILE, PRICE_HISTORY_DIR
+from multibajajmgt.config import INVOICE_HISTORY_DIR, PRICE_DIR, PRICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
-    DocumentResourceName as DRName,
-    DocumentResourceExtension as DRExt,
+    DocumentResourceExtension as DocExt,
     InvoiceStatus as InvoStatus,
     InvoiceField as InvoField,
     OdooFieldLabel as OdooLabel,
@@ -17,6 +18,9 @@ from multibajajmgt.enums import (
 
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
+file_names = App().eval_file_names()
+price_file = f"{file_names[0]}.{DocExt.csv}"
+invoice_file = f"{file_names[1]}.{DocExt.json}"
 
 
 def export_prices():
@@ -25,7 +29,7 @@ def export_prices():
     log.info("Exporting third-party prices from odoo server")
     raw_price = odoo_client.fetch_all_thirdparty_prices()
     price_df = csvstr_to_df(raw_price)
-    write_to_csv(PRICE_BASE_TP_FILE, price_df)
+    write_to_csv(f"{PRICE_DIR}/{price_file}", price_df)
 
 
 def _extract_invoice_products():
@@ -33,7 +37,7 @@ def _extract_invoice_products():
 
     :return: pandas dataframe, all products
     """
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", convert_dates = False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{invoice_file}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == InvoStatus.success]
     chunks = [row.Products for row in invoices_df.itertuples()]
     products = list(itertools.chain.from_iterable(chunks))
@@ -76,8 +80,8 @@ def update_product_prices():
     """ Update prices in price-tp.csv file to be able to imported to the Odoo server.
     """
     log.info("Updating third-party product's prices")
-    historical_file_path = mk_dir(curr_his_dir, f"{DRName.price_tp}.{DRExt.csv}")
-    price_df = pd.read_csv(PRICE_BASE_TP_FILE)
+    historical_file_path = mk_dir(curr_his_dir, f"{price_file}")
+    price_df = pd.read_csv(f"{PRICE_DIR}/{price_file}")
     products_df = _extract_invoice_products()
     enriched_df = _enrich_product_prices(price_df, products_df)
     enriched_df = enriched_df.apply(_calculate_status, axis = 1)

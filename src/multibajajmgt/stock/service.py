@@ -1,53 +1,34 @@
 import pandas as pd
-import multibajajmgt.client.odoo.client as odoo_client
 
 from loguru import logger as log
 from multibajajmgt.app import App
 from multibajajmgt.common import csvstr_to_df, get_dated_dir, get_now_file, mk_dir, write_to_csv
-from multibajajmgt.config import STOCK_ALL_FILE, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
+from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
-    DocumentResourceExtension as DRExt,
-    DocumentResourceName as DRName,
+    DocumentResourceExtension as DocExt,
     InvoiceField as InvoField,
     InvoiceStatus as Status,
     OdooFieldLabel as OdooLabel,
     OdooFieldValue as OdooValue,
-    POSParentCategory as POSCatg,
 )
 
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
-
-
-def _evaluate_pos_category():
-    """ Map client fetching function for the pos_category.
-
-    :return: function, (func reference, invoice file path, adjustment historical file path)
-    """
-    categ = App().get_pos_categ()
-    if categ == POSCatg.dpmc:
-        return odoo_client.fetch_dpmc_stock, \
-               f"{curr_invoice_dir}/{DRName.invoice_dpmc}.{DRExt.json}", \
-               f"{DRName.adjustment_dpmc}"
-    elif categ == POSCatg.tp:
-        return odoo_client.fetch_all_stock, \
-               f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", \
-               f"{DRName.adjustment_tp}"
-    elif categ == POSCatg.sales:
-        return odoo_client.fetch_all_stock, \
-               f"{curr_invoice_dir}/{DRName.invoice_sales}.{DRExt.json}", \
-               f"{DRName.adjustment_sales}"
+app = App()
+fetch_func = app.eval_stock_fetcher()
+file_names = app.eval_file_names()
+invoice_file = f"{file_names[1]}.{DocExt.json}"
+stock_file = f"{file_names[2]}.{DocExt.csv}"
 
 
 def export_products():
     """ Fetch, process and save stock.
     """
     log.info("Exporting the entire stock from odoo server")
-    categ_eval = _evaluate_pos_category()
-    raw_data = categ_eval[0]()
+    raw_data = fetch_func()
     product_df = csvstr_to_df(raw_data)
-    write_to_csv(STOCK_ALL_FILE, product_df)
+    write_to_csv(f"{STOCK_DIR}/{stock_file}", product_df)
 
 
 def _validate_products(products_df):
@@ -124,11 +105,11 @@ def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
     log.info("Create importable adjustment with extracted invoice data")
-    categ_eval = _evaluate_pos_category()
     adjustments = []
-    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DRExt.csv, categ_eval[2]))
-    stock_df = pd.read_csv(STOCK_ALL_FILE)
-    invoice_df = pd.read_json(categ_eval[1], orient = 'records', convert_dates = False)
+    stock_df = pd.read_csv(f"{STOCK_DIR}/{stock_file}")
+    invoice_df = pd.read_json(f"{curr_invoice_dir}/{invoice_file}", orient = 'records',
+                              convert_dates = False)
+    adjustment_file = mk_dir(curr_adj_dir, get_now_file(DocExt.csv, file_names[3]))
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Basic.status] == Status.success] \
         .sort_values(by = [InvoField.date, InvoField.default_id])

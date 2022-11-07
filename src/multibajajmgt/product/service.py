@@ -6,14 +6,13 @@ import time
 import re
 
 from loguru import logger as log
+from multibajajmgt.app import App
 from multibajajmgt.common import get_dated_dir, write_to_csv
-from multibajajmgt.config import (
-    INVOICE_HISTORY_DIR, PRICE_HISTORY_DIR, PRODUCT_HISTORY_FILE, PRODUCT_TMPL_DIR, STOCK_ALL_FILE
-)
+from multibajajmgt.config import INVOICE_HISTORY_DIR, PRICE_HISTORY_DIR, PRODUCT_DIR, PRODUCT_TMPL_DIR, STOCK_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
-    DocumentResourceExtension as DRExt,
-    DocumentResourceName as DRName,
+    DocumentResourceExtension as DocExt,
+    DocumentResourceName as DocName,
     InvoiceField as InvoField,
     InvoiceStatus as Status,
     OdooFieldLabel as OdooLabel,
@@ -24,6 +23,10 @@ from multibajajmgt.product.models import Product
 cur_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_price_dir = get_dated_dir(PRICE_HISTORY_DIR)
+file_names = App().eval_file_names()
+invoice_file = f"{file_names[1]}.{DocExt.json}"
+stock_file = f"{file_names[2]}.{DocExt.csv}"
+product_history_file = f"{DocName.product_history}.{DocExt.csv}"
 
 
 def _save_historical_data(product_ids):
@@ -31,11 +34,11 @@ def _save_historical_data(product_ids):
 
     :param product_ids: list, created products
     """
-    products_his_df = pd.read_csv(PRODUCT_HISTORY_FILE)
+    products_his_df = pd.read_csv(f"{PRODUCT_DIR}/{product_history_file}")
     # Add newly created products to history
     product_ids_df = pd.DataFrame(product_ids)
     products_his_df = pd.concat([products_his_df, product_ids_df])
-    write_to_csv(PRODUCT_HISTORY_FILE, products_his_df)
+    write_to_csv(f"{PRODUCT_DIR}/{product_history_file}", products_his_df)
 
 
 def _form_product_obj(prod_row, pos_code, pos_categ_df):
@@ -69,7 +72,7 @@ def _compare_invo_stock_prods(invo_row):
     :param invo_row: itertuple row, invoice with product data
     :return: pandas dataframe, non-existing products
     """
-    stock_df = pd.read_csv(STOCK_ALL_FILE)
+    stock_df = pd.read_csv(f"{STOCK_DIR}/{stock_file}")
     df = pd.json_normalize(invo_row.Products)
     # noinspection PyTypeChecker
     df = df.merge(stock_df, how = "left", indicator = Basic.found_in,
@@ -84,7 +87,7 @@ def create_missing_products():
     log.info("Creating unavailable products in the invoice")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", convert_dates = False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{invoice_file}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():
         # Filter missing products

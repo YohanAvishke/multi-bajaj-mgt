@@ -26,15 +26,16 @@ configure_logger()
 if not os.getenv("ENV_FLAG"):
     configure_env()
 
-# Configure application execution details
-app = configure_app(Categ.dpmc, QtyAva.all)
+# Configure application
+app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
-odoo_client.configure()
+# odoo_client.configure()
 # dpmc_client.configure()
 # sheet_client.configure()
 
-# Update dpmc prices
+# Update DPMC prices
+# app.set_pos_categ(Categ.dpmc)
 # price_dpmc_service.export_prices()
 # price_dpmc_service.update_product_prices()
 # price_dpmc_service.merge_historical_data()
@@ -42,18 +43,21 @@ odoo_client.configure()
 # Sales report
 # sale_service.export_sales_report("2022-11-03 18:30:00")
 
-# Adjustment from dpmc invoices
+# Adjustment DPMC invoices
+# app.set_pos_categ(Categ.dpmc)
 # invoice_dpmc_service.export_invoice_data()
 # invoice_dpmc_service.export_products()
 # stock_service.export_products()
 # stock_service.create_adjustment()
 
-# Adjustment from sales invoices
+# Adjustment Sale invoices
+# app.set_pos_categ(Categ.sales)
 # invoice_sale_service.export_invoice_data()
 # stock_service.export_products()
 # stock_service.create_adjustment()
 
-# Adjustment from third-party invoices
+# Adjustment Third Party invoices
+# app.set_pos_categ(Categ.tp)
 #   Setup
 # invoice_tp_service.export_invoice_data()
 #   Create products
@@ -65,3 +69,7 @@ odoo_client.configure()
 #   Price update
 # price_tp_service.export_prices()
 # price_tp_service.update_product_prices()
+
+# Update Barcode
+# app.set_pos_categ(Categ.dpmc)
+# stock_service.export_products()

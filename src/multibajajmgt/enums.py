@@ -22,16 +22,17 @@ class EnvVariable(MultiBajajMgtStrEnum):
 
 class DocumentResourceName(MultiBajajMgtStrEnum):
     price_dpmc_all = "price_dpmc_all"
-    price_tp = "price_tp"
+    price_tp = "price_thirdparty"
     invoice_dpmc = "invoice_dpmc"
     invoice_sales = "invoice_sales"
     invoice_tp = "invoice_thirdparty"
     stock_all = "stock_all"
     stock_dpmc_all = "stock_dpmc_all"
-    stock_other_all = "stock_other_all"
+    stock_tp_all = "stock_thirdparty_all"
     adjustment_dpmc = "adjustment_dpmc"
     adjustment_sales = "adjustment_sales"
     adjustment_tp = "adjustment_thirdparty"
+    product_history = "product_history"
 
 
 class DocumentResourceExtension(MultiBajajMgtStrEnum):

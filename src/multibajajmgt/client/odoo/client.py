@@ -230,8 +230,24 @@ def fetch_dpmc_stock():
         "&",
         ["available_in_pos", "=", True],
         "|", "|", "|",
-        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"], ["pos_categ_id", "ilike", "3w"],
-        ["pos_categ_id", "ilike", "qute"]
+        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"],
+        ["pos_categ_id", "ilike", "3w"], ["pos_categ_id", "ilike", "qute"]
+    ]
+    return _fetch_stock(domain)
+
+
+def fetch_thirdparty_stock():
+    """ Fetch product stock from non DPMC POS categories.
+
+    :return: dict, dict of list with product data
+    """
+    log.debug("Fetching Third Party stock from 'product.template'")
+    domain = [
+        "&",
+        ["available_in_pos", "=", True],
+        "&", "&", "&",
+        ["pos_categ_id", "not ilike", "bajaj"], ["pos_categ_id", "not ilike", "2w"],
+        ["pos_categ_id", "not ilike", "3w"], ["pos_categ_id", "not ilike", "qute"]
     ]
     return _fetch_stock(domain)
 

@@ -1,17 +1,20 @@
 import pandas as pd
 
 from loguru import logger as log
+
+from multibajajmgt.app import App
 from multibajajmgt.common import get_dated_dir, merge_duplicates, mk_dir, write_to_json
-from multibajajmgt.config import INVOICE_TP_FILE, INVOICE_HISTORY_DIR
+from multibajajmgt.config import INVOICE_DIR, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as BaseField,
-    DocumentResourceName as DRName,
-    DocumentResourceExtension as DRExt,
+    DocumentResourceExtension as DocExt,
     InvoiceField as InvoField,
     InvoiceStatus as Status
 )
 
 curr_historical_dir = get_dated_dir(INVOICE_HISTORY_DIR)
+file_names = App().eval_file_names()
+invoice_file = f"{file_names[1]}.{DocExt.json}"
 
 
 def _breakdown_invoices(invoice_df):
@@ -73,8 +76,8 @@ def export_invoice_data():
     """ Get raw invoice data, convert and save it in a historical file.
     """
     log.info("Exporting third-party invoices enriched by advanced data")
-    historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_tp}.{DRExt.json}")
-    invoice_df = pd.read_csv(INVOICE_TP_FILE, header = None, names = ["Invoices"])
+    historical_file = mk_dir(curr_historical_dir, invoice_file)
+    invoice_df = pd.read_csv(f"{INVOICE_DIR}/{invoice_file}", header = None, names = ["Invoices"])
     # Find and break each invoice into a different object
     invoices = _breakdown_invoices(invoice_df)
     # Enrich invoices with advance data and product data
