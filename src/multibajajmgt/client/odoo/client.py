@@ -192,13 +192,12 @@ def fetch_all_thirdparty_prices(product_ids = False):
     return data
 
 
-def fetch_all_stock():
-    """ Fetch every single Product stock from all categories.
+def _fetch_stock(domain):
+    """ Base method to fetch stock
 
-    :return: dict, a list of dicts with product.template rows containing quantity available
+    :param domain: list, pos category filter
+    :return: dict, dict of list with product data
     """
-    log.debug("Fetching all stock from 'product.template'")
-    domain = [["available_in_pos", "=", True]]
     fields = [
         {"name": "product_variant_id/product_variant_id/id", "label": "Product/Product/ID"},
         {"name": "default_code", "label": "Internal Reference"},
@@ -209,6 +208,48 @@ def fetch_all_stock():
             "product.template", domain, False, fields
     )
     return data
+
+
+def fetch_all_stock():
+    """ Fetch product stock from all POS categories.
+
+    :return: dict, dict of list with product data
+    """
+    log.debug("Fetching all stock from 'product.template'")
+    domain = [["available_in_pos", "=", True]]
+    return _fetch_stock(domain)
+
+
+def fetch_dpmc_stock():
+    """ Fetch product stock from DPMC POS category.
+
+    :return: dict, dict of list with product data
+    """
+    log.debug("Fetching DPMC stock from 'product.template'")
+    domain = [
+        "&",
+        ["available_in_pos", "=", True],
+        "|", "|", "|",
+        ["pos_categ_id", "ilike", "bajaj"], ["pos_categ_id", "ilike", "2w"],
+        ["pos_categ_id", "ilike", "3w"], ["pos_categ_id", "ilike", "qute"]
+    ]
+    return _fetch_stock(domain)
+
+
+def fetch_thirdparty_stock():
+    """ Fetch product stock from non DPMC POS categories.
+
+    :return: dict, dict of list with product data
+    """
+    log.debug("Fetching Third Party stock from 'product.template'")
+    domain = [
+        "&",
+        ["available_in_pos", "=", True],
+        "&", "&", "&",
+        ["pos_categ_id", "not ilike", "bajaj"], ["pos_categ_id", "not ilike", "2w"],
+        ["pos_categ_id", "not ilike", "3w"], ["pos_categ_id", "not ilike", "qute"]
+    ]
+    return _fetch_stock(domain)
 
 
 def fetch_pos_category(categ_name):

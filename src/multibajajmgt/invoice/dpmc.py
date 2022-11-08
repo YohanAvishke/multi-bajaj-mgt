@@ -2,12 +2,11 @@ import multibajajmgt.client.dpmc.client as dpmc_client
 import pandas as pd
 
 from loguru import logger as log
-from multibajajmgt.common import get_dated_dir, mk_dir, write_to_json
-from multibajajmgt.config import INVOICE_DPMC_FILE, INVOICE_HISTORY_DIR
+from multibajajmgt.common import get_dated_dir, get_files, mk_dir, write_to_json
+from multibajajmgt.config import INVOICE_DIR, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Field,
-    DocumentResourceName as DRName,
-    DocumentResourceExtension as DRExt,
+    DocumentResourceExtension as DocExt,
     DPMCFieldName as DPMCField,
     InvoiceField as InvoField,
     InvoiceStatus as Status,
@@ -85,8 +84,9 @@ def export_invoice_data():
     """ Fetch, enrich and restructure DPMC invoices with advanced data.
     """
     log.info("Exporting DPMC invoices enriched by advanced data")
-    historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
-    invoice_df = pd.read_json(INVOICE_DPMC_FILE, orient = "records", convert_dates = False)
+    invoice_file = f"{get_files().get_invoice()}.{DocExt.json}"
+    historical_file = mk_dir(curr_historical_dir, invoice_file)
+    invoice_df = pd.read_json(f"{INVOICE_DIR}/{invoice_file}", orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_advanced_data, axis = 1)
     # Restructure dataframe by reordering and deleting columns
     invoice_df = _reindex_df(invoice_df, [InvoField.date, Field.status, InvoField.type, InvoField.default_id,
@@ -157,8 +157,8 @@ def _enrich_with_products(row):
 def export_products():
     """ Fetch and enrich invoices with products.
     """
-    log.info("Exporting porducts of an invoice")
-    historical_file = mk_dir(curr_historical_dir, f"{DRName.invoice_dpmc}.{DRExt.json}")
+    log.info("Exporting products of an invoice")
+    historical_file = mk_dir(curr_historical_dir, f"{get_files().get_invoice()}.{DocExt.json}")
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
     invoice_df = _reindex_df(invoice_df, [InvoField.date, Field.status, InvoField.type, InvoField.default_id,

@@ -1,19 +1,17 @@
+import re
 import sys
+import time
 
 import multibajajmgt.client.odoo.client as odoo_client
 import pandas as pd
-import time
-import re
 
 from loguru import logger as log
-from multibajajmgt.common import get_dated_dir, write_to_csv
-from multibajajmgt.config import (
-    INVOICE_HISTORY_DIR, PRICE_HISTORY_DIR, PRODUCT_HISTORY_FILE, PRODUCT_TMPL_DIR, STOCK_ALL_FILE
-)
+from multibajajmgt.common import get_dated_dir, get_files, write_to_csv
+from multibajajmgt.config import INVOICE_HISTORY_DIR, PRICE_HISTORY_DIR, PRODUCT_DIR, PRODUCT_TMPL_DIR, STOCK_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
-    DocumentResourceExtension as DRExt,
-    DocumentResourceName as DRName,
+    DocumentResourceExtension as DocExt,
+    DocumentResourceName as DocName,
     InvoiceField as InvoField,
     InvoiceStatus as Status,
     OdooFieldLabel as OdooLabel,
@@ -31,11 +29,12 @@ def _save_historical_data(product_ids):
 
     :param product_ids: list, created products
     """
-    products_his_df = pd.read_csv(PRODUCT_HISTORY_FILE)
+    product_history_file = f"{DocName.product_history}.{DocExt.csv}"
+    products_his_df = pd.read_csv(f"{PRODUCT_DIR}/{product_history_file}")
     # Add newly created products to history
     product_ids_df = pd.DataFrame(product_ids)
     products_his_df = pd.concat([products_his_df, product_ids_df])
-    write_to_csv(PRODUCT_HISTORY_FILE, products_his_df)
+    write_to_csv(f"{PRODUCT_DIR}/{product_history_file}", products_his_df)
 
 
 def _form_product_obj(prod_row, pos_code, pos_categ_df):
@@ -69,7 +68,7 @@ def _compare_invo_stock_prods(invo_row):
     :param invo_row: itertuple row, invoice with product data
     :return: pandas dataframe, non-existing products
     """
-    stock_df = pd.read_csv(STOCK_ALL_FILE)
+    stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     df = pd.json_normalize(invo_row.Products)
     # noinspection PyTypeChecker
     df = df.merge(stock_df, how = "left", indicator = Basic.found_in,
@@ -84,7 +83,7 @@ def create_missing_products():
     log.info("Creating unavailable products in the invoice")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{DRName.invoice_tp}.{DRExt.json}", convert_dates = False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():
         # Filter missing products
@@ -121,3 +120,22 @@ def create_missing_products():
                 log.warning(f"Found original Bajaj product for {internal_ref}")
                 continue
     _save_historical_data(created_product_ids)
+
+
+def update_barcode_nomenclature():
+    """ Update DPMC products barcodes.
+    """
+    log.info("Creating a new barcode nomenclature")
+    stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
+    barcode_df = stock_df.drop(["Product/Product/ID", "Quantity_On_Hand"], axis = 1)
+    barcode_df.at[0, "Barcode Nomenclature"] = f"DPMC Nomenclature {cur_date}"
+    barcode_df = barcode_df.assign(**{"Rules/Rule Name": barcode_df["Internal Reference"],
+                                      "Rules/Type": "Alias",
+                                      "Rules/Alias": barcode_df["Internal Reference"],
+                                      "Rules/Barcode Pattern": barcode_df["Internal Reference"] + "-{N}",
+                                      "Rules/Sequence": "1"})
+    barcode_df.drop(["Internal Reference"], axis = 1, inplace = True)
+    barcode_df.loc[len(barcode_df)] = ["", "All Products", "Unit Product", "0", ".*", "2"]
+    write_to_csv(f"{PRODUCT_DIR}/{DocName.product_barcode}.{DocExt.csv}", barcode_df,
+                 header = ["Barcode Nomenclature", "Rules/Rule Name", "Rules/Type", "Rules/Alias",
+                           "Rules/Barcode Pattern", "Rules/Sequence"])
