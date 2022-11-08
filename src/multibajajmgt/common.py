@@ -8,6 +8,8 @@ from io import StringIO
 from loguru import logger as log
 from tabulate import tabulate
 
+from multibajajmgt.app import App
+
 
 def write_to_csv(path, df, mode = "w", columns = None, header = True):
     """ Save data to a CSV file.
@@ -109,3 +111,7 @@ def merge_duplicates(products):
     df["Quantity"] = df.groupby(["ID"])["Quantity"].transform('sum')
     df.drop_duplicates(["ID"], keep = "last", inplace = True)
     return df.to_dict('records')
+
+
+def get_files():
+    return App.get_app().get_file_handler()

@@ -6,8 +6,7 @@ import time
 import re
 
 from loguru import logger as log
-from multibajajmgt.app import App
-from multibajajmgt.common import get_dated_dir, write_to_csv
+from multibajajmgt.common import get_dated_dir, get_files, write_to_csv
 from multibajajmgt.config import INVOICE_HISTORY_DIR, PRICE_HISTORY_DIR, PRODUCT_DIR, PRODUCT_TMPL_DIR, STOCK_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
@@ -23,10 +22,6 @@ from multibajajmgt.product.models import Product
 cur_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
 curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_price_dir = get_dated_dir(PRICE_HISTORY_DIR)
-file_names = App().eval_file_names()
-invoice_file = f"{file_names[1]}.{DocExt.json}"
-stock_file = f"{file_names[2]}.{DocExt.csv}"
-product_history_file = f"{DocName.product_history}.{DocExt.csv}"
 
 
 def _save_historical_data(product_ids):
@@ -34,6 +29,7 @@ def _save_historical_data(product_ids):
 
     :param product_ids: list, created products
     """
+    product_history_file = f"{DocName.product_history}.{DocExt.csv}"
     products_his_df = pd.read_csv(f"{PRODUCT_DIR}/{product_history_file}")
     # Add newly created products to history
     product_ids_df = pd.DataFrame(product_ids)
@@ -72,7 +68,7 @@ def _compare_invo_stock_prods(invo_row):
     :param invo_row: itertuple row, invoice with product data
     :return: pandas dataframe, non-existing products
     """
-    stock_df = pd.read_csv(f"{STOCK_DIR}/{stock_file}")
+    stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     df = pd.json_normalize(invo_row.Products)
     # noinspection PyTypeChecker
     df = df.merge(stock_df, how = "left", indicator = Basic.found_in,
@@ -87,7 +83,7 @@ def create_missing_products():
     log.info("Creating unavailable products in the invoice")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{invoice_file}", convert_dates = False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():
         # Filter missing products
@@ -124,3 +120,8 @@ def create_missing_products():
                 log.warning(f"Found original Bajaj product for {internal_ref}")
                 continue
     _save_historical_data(created_product_ids)
+
+
+def update_barcode_nomenclature():
+    df = pd.DataFrame(f"{get_files().get_stock()}.{DocExt.csv}")
+    return

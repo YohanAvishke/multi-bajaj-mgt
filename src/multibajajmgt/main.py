@@ -30,7 +30,7 @@ if not os.getenv("ENV_FLAG"):
 app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
-# odoo_client.configure()
+odoo_client.configure()
 # dpmc_client.configure()
 # sheet_client.configure()
 
@@ -71,5 +71,6 @@ app = configure_app(Categ.all, QtyAva.all)
 # price_tp_service.update_product_prices()
 
 # Update Barcode
-# app.set_pos_categ(Categ.dpmc)
-# stock_service.export_products()
+app.set_pos_categ(Categ.dpmc)
+stock_service.export_products()
+product_service.update_barcode_nomenclature()

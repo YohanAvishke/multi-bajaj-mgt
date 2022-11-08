@@ -59,4 +59,5 @@ def configure_app(pos_categ, qty_limit):
     app = App()
     app.set_pos_categ(pos_categ)
     app.set_qty_limit(qty_limit)
+    app.set_file_handler(pos_categ)
     return app
