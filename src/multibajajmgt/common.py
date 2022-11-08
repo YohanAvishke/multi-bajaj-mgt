@@ -114,4 +114,8 @@ def merge_duplicates(products):
 
 
 def get_files():
+    """ Get corresponding data file names of the application.
+
+    :return: list, of file names
+    """
     return App.get_app().get_file_handler()

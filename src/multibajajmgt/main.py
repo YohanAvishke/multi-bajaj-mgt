@@ -71,6 +71,6 @@ odoo_client.configure()
 # price_tp_service.update_product_prices()
 
 # Update Barcode
-app.set_pos_categ(Categ.dpmc)
-stock_service.export_products()
-product_service.update_barcode_nomenclature()
+# app.set_pos_categ(Categ.dpmc)
+# stock_service.export_products()
+# product_service.update_barcode_nomenclature()

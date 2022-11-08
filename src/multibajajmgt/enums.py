@@ -33,6 +33,7 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     adjustment_sales = "adjustment_sales"
     adjustment_tp = "adjustment_thirdparty"
     product_history = "product_history"
+    product_barcode = "product_barcode"
 
 
 class DocumentResourceExtension(MultiBajajMgtStrEnum):

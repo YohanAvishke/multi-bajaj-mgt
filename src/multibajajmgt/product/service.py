@@ -1,9 +1,9 @@
+import re
 import sys
+import time
 
 import multibajajmgt.client.odoo.client as odoo_client
 import pandas as pd
-import time
-import re
 
 from loguru import logger as log
 from multibajajmgt.common import get_dated_dir, get_files, write_to_csv
@@ -123,5 +123,19 @@ def create_missing_products():
 
 
 def update_barcode_nomenclature():
-    df = pd.DataFrame(f"{get_files().get_stock()}.{DocExt.csv}")
-    return
+    """ Update DPMC products barcodes.
+    """
+    log.info("Creating a new barcode nomenclature")
+    stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
+    barcode_df = stock_df.drop(["Product/Product/ID", "Quantity_On_Hand"], axis = 1)
+    barcode_df.at[0, "Barcode Nomenclature"] = f"DPMC Nomenclature {cur_date}"
+    barcode_df = barcode_df.assign(**{"Rules/Rule Name": barcode_df["Internal Reference"],
+                                      "Rules/Type": "Alias",
+                                      "Rules/Alias": barcode_df["Internal Reference"],
+                                      "Rules/Barcode Pattern": barcode_df["Internal Reference"] + "-{N}",
+                                      "Rules/Sequence": "1"})
+    barcode_df.drop(["Internal Reference"], axis = 1, inplace = True)
+    barcode_df.loc[len(barcode_df)] = ["", "All Products", "Unit Product", "0", ".*", "2"]
+    write_to_csv(f"{PRODUCT_DIR}/{DocName.product_barcode}.{DocExt.csv}", barcode_df,
+                 header = ["Barcode Nomenclature", "Rules/Rule Name", "Rules/Type", "Rules/Alias",
+                           "Rules/Barcode Pattern", "Rules/Sequence"])
