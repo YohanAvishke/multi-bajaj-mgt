@@ -1,9 +1,11 @@
+import asyncio
 import sys
 import requests
 import requests.exceptions as r_exceptions
 import json
 import time
 
+from aiohttp import ClientError, ClientResponseError, ClientSession
 from loguru import logger as log
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import (
@@ -13,6 +15,7 @@ from multibajajmgt.config import (
     DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DPMC_SESSION_LIFETIME
 )
 from multibajajmgt.exceptions import *
+from typing import List, Dict
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
 GET_HELP_URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -20,7 +23,7 @@ CONN_RETRY_MAX = 5
 
 retry_count = 0
 cookie = None
-headers = {
+base_headers = {
     "authority": "erp.dpg.lk",
     "sec-ch-ua": "'Google Chrome';v='93', ' Not;A Brand';v='99', 'Chromium';v='93'",
     "accept": "application/json, text/javascript, */*; q=0.01",
@@ -48,11 +51,7 @@ def _call(url, referer, payload = None):
     :param payload: dict, None or data to be created/updated
     :return: dict, json response payload
     """
-    global headers
-    headers |= {
-        "referer": referer,
-        "cookie": cookie
-    }
+    headers = base_headers | {"referer": referer, "cookie": cookie}
     try:
         response = requests.post(url = url,
                                  headers = headers,
@@ -74,12 +73,49 @@ def _call(url, referer, payload = None):
         return response.json()
 
 
+async def _async_call(session: ClientSession,
+                      url: str,
+                      ref_id: str,
+                      total_count: int,
+                      i: int):
+    payload = {
+        "strPartNo_PAItemInq": ref_id,
+        "strFuncType": "INVENTORYDATA",
+        "strPADealerCode_PAItemInq": "AC2011063676",
+        "STR_FORM_ID": "00602",
+        "STR_FUNCTION_ID": "IQ",
+        "STR_PREMIS": "KGL",
+        "STR_INSTANT": "DLR",
+        "STR_APP_ID": "00011"
+    }
+    try:
+        async with session.post(url, data = payload) as response:
+            log.info(f"Fetched URL {i} of {total_count}: {ref_id}")
+            resp_data = await response.text()
+            resp_data = json.loads(resp_data)
+            if resp_data["STATE"] == "FALSE":
+                log.error("Invalid data, for reference: {}", ref_id)
+            else:
+                product_data = resp_data["DATA"]
+            if not product_data["dblSellingPrice"]:
+                log.error("Invalid data, for expired reference: {}", ref_id)
+            else:
+                print(product_data)
+    except ClientResponseError as e:
+        log.error("Invalid Response Status received: {}", e)
+        sys.exit(0)
+    except ClientError as e:
+        raise r_exceptions.ConnectionError("Connection issue occurred", e)
+    except Exception as e:
+        log.error("Unexpected error occurred: {}", e)
+        sys.exit(0)
+
+
 def _authenticate():
     """ Fetch and store(in token.json) cookie for DPMC server.
     """
     log.info("Authenticating DPMC-ERP Client and setting up the Cookie")
-    global headers
-    headers |= {"referer": SERVER_URL}
+    headers = base_headers | {"referer": SERVER_URL}
     payload = {
         "strUserName": SERVER_USERNAME,
         "strPassword": SERVER_PASSWORD
@@ -167,8 +203,6 @@ def inquire_product_by_id(ref_id):
     except r_exceptions.ConnectionError:
         # Retry each request for maximum of 5 times
         _retry_request(inquire_product_by_id, ref_id)
-    except ProductRefExpired as e:
-        raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
     else:
         if response["STATE"] == "FALSE":
             raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", response)
@@ -176,6 +210,22 @@ def inquire_product_by_id(ref_id):
         if not product_data["dblSellingPrice"]:
             raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
         return product_data
+
+
+async def inquire_batch_products(ref_ids: List):
+    """ Fetch batch of products by s list of internal ids.
+
+    :param ref_ids: list, products' internal id list
+    """
+    tasks = []
+    headers = base_headers | {"referer": f"{SERVER_URL}/Application/Home/PADEALER", "cookie": cookie}
+    async with ClientSession(headers = headers, raise_for_status = True) as session:
+        for idx, ref_id in enumerate(ref_ids):
+            task = asyncio.create_task(
+                    _async_call(session, PRODUCT_INQUIRY_URL, ref_id, len(ref_ids), idx)
+            )
+            tasks.append(task)
+        await asyncio.gather(*tasks)
 
 
 def inquire_product_by_invoice(invoice, grn):

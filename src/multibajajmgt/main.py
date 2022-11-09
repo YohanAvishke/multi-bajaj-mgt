@@ -1,3 +1,4 @@
+import asyncio
 import os
 
 import multibajajmgt.client.odoo.client as odoo_client
@@ -30,14 +31,15 @@ if not os.getenv("ENV_FLAG"):
 app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
-odoo_client.configure()
-# dpmc_client.configure()
+# odoo_client.configure()
+dpmc_client.configure()
 # sheet_client.configure()
 
 # Update DPMC prices
 # app.set_pos_categ(Categ.dpmc)
 # price_dpmc_service.export_prices()
-# price_dpmc_service.update_product_prices()
+# main
+asyncio.run(price_dpmc_service.test())
 # price_dpmc_service.merge_historical_data()
 
 # Sales report

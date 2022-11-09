@@ -86,6 +86,7 @@ def _save_price_info(info, df, file):
     log.info(f"{index + 1} - {info['process_status']} - Product Number: {info['ref_id']}, Price: {price}")
 
 
+# __init__ + tasks
 def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
@@ -104,6 +105,12 @@ def update_product_prices():
         if pd.isnull(price_row.Status):
             info = _get_price_info(price_row)
             _save_price_info(info, price_df, historical_file_path)
+
+
+async def test():
+    ref_ids = ["KADA0620", "JY181279"]
+    data = await dpmc_client.inquire_batch_products(ref_ids)
+    print(data)
 
 
 def merge_historical_data():
