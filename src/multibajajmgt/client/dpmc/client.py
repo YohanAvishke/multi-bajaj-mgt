@@ -77,7 +77,7 @@ def _call(url, referer, payload = None):
 def _authenticate():
     """ Fetch and store(in token.json) cookie for DPMC server.
     """
-    log.debug("Authenticating DPMC-ERP Client and setting up the Cookie")
+    log.info("Authenticating DPMC-ERP Client and setting up the Cookie")
     global headers
     headers |= {"referer": SERVER_URL}
     payload = {
@@ -98,7 +98,7 @@ def _authenticate():
 def configure():
     """ Validate and attach login session to request header.
     """
-    log.debug("Configuring DPMC client")
+    log.info("Configuring DPMC client")
     global cookie
     try:
         with open(f"{SOURCE_DIR}/client/dpmc/token.json", "r") as file:
@@ -110,9 +110,8 @@ def configure():
                 if "expires-at" in file_data and now < file_data["expires-at"]:
                     cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
                 else:
-                    log.warning(
-                            f"Cookie expired at "
-                            f"{time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at']))}")
+                    log.warning("Cookie expired at {}",
+                                time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at'])))
                     _refresh_token()
             else:
                 _refresh_token()
@@ -123,7 +122,7 @@ def configure():
 def _refresh_token():
     """ Wrapper for fetch, save and configure session.
     """
-    log.debug("Refreshing the expired user token")
+    log.info("Refreshing the expired user token")
     _authenticate()
     configure()
 

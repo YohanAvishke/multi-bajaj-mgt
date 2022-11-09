@@ -107,7 +107,7 @@ def _authenticate():
 
     Save the User-ID for future Requests from the Client.
     """
-    log.debug("Authenticating odoo-client and setting up the user-id")
+    log.info("Authenticating odoo-client and setting up the user-id")
     data = _call(f"{SERVER_URL}/jsonrpc", "common", "login", DATABASE_NAME, SERVER_USERNAME, SERVER_API_KEY)
     write_to_json(F"{SOURCE_DIR}/client/odoo/token.json", {"user-id": data})
 
@@ -117,7 +117,7 @@ def configure():
 
     Configure credentials and create a token file.
     """
-    log.debug("Configuring Odoo client")
+    log.info("Configuring Odoo client")
     global user_id
     global token
     global session_id
