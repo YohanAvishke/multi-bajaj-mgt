@@ -15,7 +15,7 @@ from multibajajmgt.config import (
     DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DPMC_SESSION_LIFETIME
 )
 from multibajajmgt.exceptions import *
-from typing import List, Dict
+from typing import Any, Dict, List
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
 GET_HELP_URL = "https://erp.dpg.lk/Help/GetHelp"
@@ -111,8 +111,11 @@ async def _async_call(session: ClientSession,
         sys.exit(0)
 
 
-def _authenticate():
+
+def _authenticate() -> Dict[str, Any]:
     """ Fetch and store(in token.json) cookie for DPMC server.
+
+    :return: dict, authenticated data
     """
     log.info("Authenticating DPMC-ERP Client and setting up the Cookie")
     headers = base_headers | {"referer": SERVER_URL}
@@ -129,6 +132,7 @@ def _authenticate():
         "expires-at": session.cookies._now + DPMC_SESSION_LIFETIME
     }
     write_to_json(F"{SOURCE_DIR}/client/dpmc/token.json", token_data)
+    return token_data
 
 
 def configure():
@@ -136,31 +140,15 @@ def configure():
     """
     log.info("Configuring DPMC client")
     global cookie
-    try:
-        with open(f"{SOURCE_DIR}/client/dpmc/token.json", "r") as file:
-            file_data = json.load(file)
-            # Does cookie exist in the data
-            if ".AspNetCore.Session" in file_data:
-                # is the cookie expired
-                now = int(time.time())
-                if "expires-at" in file_data and now < file_data["expires-at"]:
-                    cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
-                else:
-                    log.warning("Cookie expired at {}",
-                                time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at'])))
-                    _refresh_token()
-            else:
-                _refresh_token()
-    except FileNotFoundError:
-        _refresh_token()
-
-
-def _refresh_token():
-    """ Wrapper for fetch, save and configure session.
-    """
-    log.info("Refreshing the expired user token")
-    _authenticate()
-    configure()
+    with open(f"{SOURCE_DIR}/client/dpmc/token.json", "r") as file:
+        file_data = json.load(file)
+        expires_at = file_data["expires-at"]
+        if "expires-at" in file_data and int(time.time()) < expires_at:
+            cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
+        else:
+            log.warning("Cookie expired at {}", time.strftime(DATETIME_FORMAT, time.localtime(expires_at)))
+            auth = _authenticate()
+            cookie = f".AspNetCore.Session={auth['.AspNetCore.Session']}"
 
 
 def _retry_request(request_func, *args):
