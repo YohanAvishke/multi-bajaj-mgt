@@ -90,26 +90,24 @@ async def _async_call(session: ClientSession,
     }
     try:
         async with session.post(url, data = payload) as response:
-            log.info(f"Fetched URL {i} of {total_count}: {ref_id}")
+            # log.info(f"Fetched URL {i} of {total_count}: {ref_id}")
             resp_data = await response.text()
-            resp_data = json.loads(resp_data)
-            if resp_data["STATE"] == "FALSE":
-                log.error("Invalid data, for reference: {}", ref_id)
-            else:
-                product_data = resp_data["DATA"]
-            if not product_data["dblSellingPrice"]:
-                log.error("Invalid data, for expired reference: {}", ref_id)
-            else:
-                print(product_data)
+            if response.text == "LOGOUT":
+                # Refresh token
+                log.warning("Session expired")
+                sys.exit(0)
+            return json.loads(resp_data)
     except ClientResponseError as e:
+        # End program gracefully
         log.error("Invalid Response Status received: {}", e)
         sys.exit(0)
     except ClientError as e:
-        raise r_exceptions.ConnectionError("Connection issue occurred", e)
+        # Retry (Use Tenacity)
+        log.error("Connection issue occurred", e)
     except Exception as e:
+        # End program gracefully
         log.error("Unexpected error occurred: {}", e)
         sys.exit(0)
-
 
 
 def _authenticate() -> Dict[str, Any]:
@@ -213,7 +211,7 @@ async def inquire_batch_products(ref_ids: List):
                     _async_call(session, PRODUCT_INQUIRY_URL, ref_id, len(ref_ids), idx)
             )
             tasks.append(task)
-        await asyncio.gather(*tasks)
+        return await asyncio.gather(*tasks)
 
 
 def inquire_product_by_invoice(invoice, grn):

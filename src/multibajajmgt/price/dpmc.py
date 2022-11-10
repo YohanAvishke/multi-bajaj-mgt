@@ -1,7 +1,9 @@
+import aiofiles
 import os
-import pandas as pd
+
 import multibajajmgt.client.odoo.client as odoo_client
 import multibajajmgt.client.dpmc.client as dpmc_client
+import pandas as pd
 
 from loguru import logger as log
 from multibajajmgt.common import csvstr_to_df, get_dated_dir, get_files, get_now_file, mk_dir, write_to_csv
@@ -107,12 +109,6 @@ def update_product_prices():
             _save_price_info(info, price_df, historical_file_path)
 
 
-async def test():
-    ref_ids = ["KADA0620", "JY181279"]
-    data = await dpmc_client.inquire_batch_products(ref_ids)
-    print(data)
-
-
 def merge_historical_data():
     """ Merge timed files in a historical dir
     """
@@ -128,3 +124,30 @@ def merge_historical_data():
     # Remove timed files
     for f in files:
         os.remove(f)
+
+
+async def test():
+    # TODO
+    # 1. Break df into chunks of 100 rows
+    # 2. Fetch data of each chunk(in a second)
+    #   call: await dpmc_client.inquire_batch_products(chunk)
+    # 3. Append the chunk to a temp file
+    # 4. Repeat step 2 until done
+    # 5. Create the importable file
+
+    # Validity checks for each row
+    # STATUS == "TRUE
+    # dblSellingPrice != None
+
+    # Issues:
+    # 1. How to create the historical file
+    # 2. Will DPMC ERP notice due the high network traffic
+    ref_ids = ["KADA0620", "JY181279", "JG351005", "36AA4105", "GF121041", "52DJ0555", "39097804", "39213421",
+               "39173621", "39175421", "39185821", "JL151038", "39182321", "DK101340", "JA351602", "CB101181",
+               "24201327", "39075301", "AA101050", "06111085", "JZ401802", "22101121", "06100706", "19101014",
+               "AA101051", "24100705", "06101098", "JW181407", "AA101052", "JL233003", "JL233004", "DT233079",
+               "DT233097", "PD233002", "PD233003", "JL233239", "06100708", "24100704", "06101099", "DZ73103Q",
+               "AA101053", "24100703", "JZ233178", "JD233004", "JD233006", "JD233005", "JD233007", "JD233016",
+               "JD233017", "24101049"]
+    data = await dpmc_client.inquire_batch_products(ref_ids)
+    print(data)
