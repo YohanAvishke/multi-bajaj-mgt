@@ -32,7 +32,7 @@ def _extract_invoice_products():
 
     :return: pandas dataframe, all products
     """
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice}.{DocExt.json}", convert_dates = False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == InvoStatus.success]
     chunks = [row.Products for row in invoices_df.itertuples()]
     products = list(itertools.chain.from_iterable(chunks))

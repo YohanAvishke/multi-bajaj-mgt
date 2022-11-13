@@ -72,9 +72,9 @@ def export_invoice_data():
     """ Get raw invoice data, convert and save it in a historical file.
     """
     log.info("Exporting third-party invoices enriched by advanced data")
-    invoice_file = f"{get_files().get_invoice()}.{DocExt.json}"
-    historical_file = mk_dir(curr_historical_dir, invoice_file)
-    invoice_df = pd.read_csv(f"{INVOICE_DIR}/{invoice_file}", header = None, names = ["Invoices"])
+    historical_file = mk_dir(curr_historical_dir, f"{get_files().get_invoice()}.{DocExt.json}")
+    invoice_df = pd.read_csv(f"{INVOICE_DIR}/{get_files().get_invoice()}.{DocExt.txt}", header = None,
+                             names = ["Invoices"])
     # Find and break each invoice into a different object
     invoices = _breakdown_invoices(invoice_df)
     # Enrich invoices with advance data and product data
