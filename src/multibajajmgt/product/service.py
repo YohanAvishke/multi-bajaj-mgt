@@ -62,7 +62,7 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
         return product
 
 
-def _compare_invo_stock_prods(invo_row):
+def _find_invalid_products(invo_row):
     """ Identify non-existing products in the odoo stock
 
     :param invo_row: itertuple row, invoice with product data
@@ -80,18 +80,18 @@ def _compare_invo_stock_prods(invo_row):
 def create_missing_products():
     """ Create records for invalid products from third-party invoices
     """
-    log.info("Creating unavailable products in the invoice")
+    log.info("Creating invalid products from the invoice")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
     invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():
         # Filter missing products
-        products_df = _compare_invo_stock_prods(invo_row)
-        if len(products_df) == 0:
+        invalids_df = _find_invalid_products(invo_row)
+        if len(invalids_df) == 0:
             # No missing products
             continue
-        for prod_row in products_df.itertuples():
+        for prod_row in invalids_df.itertuples():
             # Extract pos categ from product
             internal_ref = prod_row.ID
             find = re.search(r"\((\w+)\)", internal_ref)

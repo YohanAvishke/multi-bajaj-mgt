@@ -145,13 +145,58 @@ def _retry_request(request_func, *args):
         sys.exit(0)
 
 
-def inquire_product_by_id(ref_id):
-    """ Fetch product by product id.
+def inquire_product(ref_id):
+    """ Fetch a product.
 
     :param ref_id: string, product's part number
     :return: dict, data
     """
-    log.debug("Fetching product data by internal reference")
+    log.debug("Fetching product for {}", ref_id)
+    payload = {
+        "strDealerCode_PADLROrder": "AC2011063676",
+        "strPADealerShipCat_PADLROrder": "KDLR",
+        "strPartCode_PADLROrder": ref_id,
+        "strInstanceId_PADLROrder": "BAJ",
+        "strInqType_PADLROrder": "PARTPRICE",
+        "STR_FORM_ID": "00596",
+        "STR_FUNCTION_ID": "CR",
+        "STR_PREMIS": "KGL",
+        "STR_INSTANT": "DLR",
+        "STR_APP_ID": "00011"
+    }
+    try:
+        data = _call(f"{SERVER_URL}/PADealer/PADLROrder/Inquire", "https://erp.dpg.lk/Application/Home/PADEALER",
+                     payload)
+    except r_exceptions.ConnectionError:
+        _retry_request(inquire_product, ref_id)
+    else:
+        if data["STATE"] == "FALSE":
+            raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", data)
+        data = data["DATA"]
+        product = {
+            "STR_PART_CODE": data["strPartCode_PADLROrder"],
+            "INT_UNIT_COST": data["dblRetailPrice_PADLROrder"]
+        }
+        vehicle = None
+        for elem in data['lstPADLRProductlineDetails_PADLROrder']:
+            if elem["strMakeCode"] == "BAJ":
+                vehicle = {
+                    "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
+                    "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
+                    "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
+                    "STR_VEHICLE_MODEL": elem["strModelDesc"],
+                }
+                break
+        return product | vehicle
+
+
+def inquire_product_price(ref_id):
+    """ Fetch price of a product.
+
+    :param ref_id: string, product's part number
+    :return: dict, data
+    """
+    log.debug("Fetching product price for {}", ref_id)
     payload = {
         "strPartNo_PAItemInq": ref_id,
         "strFuncType": "INVENTORYDATA",
@@ -166,19 +211,53 @@ def inquire_product_by_id(ref_id):
         response = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
     except r_exceptions.ConnectionError:
         # Retry each request for maximum of 5 times
-        _retry_request(inquire_product_by_id, ref_id)
+        _retry_request(inquire_product_price, ref_id)
     except ProductRefExpired as e:
         raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
     else:
         if response["STATE"] == "FALSE":
             raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", response)
-        product_data = response["DATA"]
-        if not product_data["dblSellingPrice"]:
+        product = response["DATA"]
+        if not product["dblSellingPrice"]:
             raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", response)
-        return product_data
+        price = {
+            "STR_PART_CODE": product["strPartNo_PAItemInq"],
+            "INT_UNIT_COST": float(product["dblSellingPrice"])
+        }
+        return price
 
 
-def inquire_product_by_invoice(invoice, grn):
+def inquire_product_category(ref_id):
+    """ Fetch category of a product
+
+    :param ref_id: string, product's part number
+    :return: dict, data
+    """
+    log.debug("Fetching product category for {}", ref_id)
+    payload = {
+        "strInstance": "DLR",
+        "strPremises": "KGL",
+        "strAppID": "00011",
+        "strFORMID": "00596",
+        "strHELP_TITEL": "Part Details",
+        "arrFIELD_NAME": ["STR_PART_NO", "STR_CAT_CODE", "STR_PROD_HIER_CODE"],
+        "arrDISPLAY_NAME": ["STR_PART_CODE", "STR_CAT_CODE", "STR_PROD_HIER_CODE"],
+        "arrSEARCH_TEXT": ["STR_PART_NO", ref_id],
+        "strLIMIT": "0",
+        "strARCHIVE": "TRUE",
+        "strAPI_URL": "api/Modules/PADealer/PADLROrder/PartList"
+    }
+    try:
+        category = _call(f"{SERVER_URL}/Help/EnterPress",
+                         "https://erp.dpg.lk/Application/Home/PADEALER",
+                         payload)
+        category = json.loads(category)[0]
+        return category
+    except r_exceptions.ConnectionError:
+        _retry_request(inquire_product_category, ref_id)
+
+
+def inquire_products_by_invoice(invoice, grn):
     """ Fetch products by invoice data.
 
     :param invoice: string, invoice id
