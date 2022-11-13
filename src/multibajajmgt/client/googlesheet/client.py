@@ -1,6 +1,7 @@
 import json
 import os.path
 import pandas as pd
+from google.auth.exceptions import RefreshError
 
 # noinspection PyPackageRequirements
 from googleapiclient.discovery import build
@@ -31,14 +32,21 @@ RANGE_NAME = "A:D"
 def configure():
     """ Validate credentials, fetch token and set service.
     """
-    log.info("Configuring Google Sheet client")
+    log.info("Configuring Google Sheet client.")
     credentials = None
     global service
     if os.path.exists(TOKEN_FILE):
         credentials = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
     if not credentials or not credentials.valid:
         if credentials and credentials.expired and credentials.refresh_token:
-            credentials.refresh(Request())
+            try:
+                credentials.refresh(Request())
+            except RefreshError:
+                log.warning("Refresh token expired or revoked. Deleting token file.")
+                os.remove(TOKEN_FILE)
+                log.debug("Retrying configuration.")
+                configure()
+                return
         else:
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIAL_FILE, SCOPES)
             credentials = flow.run_local_server(port = 0)
