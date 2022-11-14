@@ -6,7 +6,7 @@ from enums import EnvVariable
 from loguru import logger as log
 from multibajajmgt.app import App
 
-LOG_LEVEL = logging.DEBUG
+LOG_LEVEL = logging.INFO
 
 # Paths
 ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
@@ -59,5 +59,4 @@ def configure_app(pos_categ, qty_limit):
     app = App()
     app.set_pos_categ(pos_categ)
     app.set_qty_limit(qty_limit)
-    app.set_file_handler(pos_categ)
     return app

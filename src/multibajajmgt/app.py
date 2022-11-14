@@ -46,7 +46,7 @@ class FileHandler:
         all_filenames = [None, None, DocName.stock_all, None]
         dpmc_filenames = [DocName.price_dpmc_all, DocName.invoice_dpmc, DocName.stock_dpmc_all, DocName.adjustment_dpmc]
         sale_filenames = [None, DocName.invoice_sales, DocName.stock_all, DocName.adjustment_sales]
-        tp_filenames = [DocName.price_tp, DocName.invoice_tp, DocName.stock_tp_all, DocName.adjustment_tp]
+        tp_filenames = [DocName.price_tp, DocName.invoice_tp, DocName.stock_all, DocName.adjustment_tp]
         if pos_categ == POSCateg.all:
             self.set_filenames(all_filenames)
         elif pos_categ == POSCateg.dpmc:

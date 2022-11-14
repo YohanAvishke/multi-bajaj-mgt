@@ -71,7 +71,10 @@ def _call(url, referer, payload = None):
             log.warning("Session expired")
             configure()
             return _call(url, referer, payload)
-        return response.json()
+        try:
+            return response.json()
+        except JSONDecodeError:
+            return None
 
 
 def _authenticate():
@@ -168,26 +171,38 @@ def inquire_product(ref_id):
         data = _call(f"{SERVER_URL}/PADealer/PADLROrder/Inquire", "https://erp.dpg.lk/Application/Home/PADEALER",
                      payload)
     except r_exceptions.ConnectionError:
-        _retry_request(inquire_product, ref_id)
+        return _retry_request(inquire_product, ref_id)
     else:
-        if data["STATE"] == "FALSE":
-            raise InvalidIdentityError(f"Inquiring data failed, for incorrect Reference ID: {ref_id}", data)
+        if not data or data["STATE"] == "FALSE":
+            raise InvalidIdentityError(f"Inquiring product failed, for incorrect Reference ID: {ref_id}", data)
         data = data["DATA"]
         product = {
             "STR_PART_CODE": data["strPartCode_PADLROrder"],
             "INT_UNIT_COST": data["dblRetailPrice_PADLROrder"]
         }
-        vehicle = None
-        for elem in data['lstPADLRProductlineDetails_PADLROrder']:
-            if elem["strMakeCode"] == "BAJ":
-                vehicle = {
-                    "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
-                    "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
-                    "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
-                    "STR_VEHICLE_MODEL": elem["strModelDesc"],
-                }
-                break
-        return product | vehicle
+        # Get line from either Bajaj or KTM (for expired products)
+        product_lines = data['lstPADLRProductlineDetails_PADLROrder']
+        if len(product_lines) == 1:
+            line = product_lines[0]
+            line = {
+                "STR_PROD_HIER_CODE": line["strMakeCode"],
+                "STR_VEHICLE_TYPE_CODE": line["strProductlineCode"],
+                "STR_VEHICLE_TYPE": line["strProductlineDesc"],
+                "STR_VEHICLE_MODEL_CODE": line["strModelCode"],
+                "STR_VEHICLE_MODEL": line["strModelDesc"],
+            }
+        else:
+            for elem in data['lstPADLRProductlineDetails_PADLROrder']:
+                if elem["strMakeCode"] == "BAJ":
+                    line = {
+                        "STR_PROD_HIER_CODE": elem["strMakeCode"],
+                        "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
+                        "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
+                        "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
+                        "STR_VEHICLE_MODEL": elem["strModelDesc"],
+                    }
+                    break
+        return product | line
 
 
 def inquire_product_price(ref_id):
@@ -211,7 +226,7 @@ def inquire_product_price(ref_id):
         response = _call(PRODUCT_INQUIRY_URL, f"{SERVER_URL}/Application/Home/PADEALER", payload)
     except r_exceptions.ConnectionError:
         # Retry each request for maximum of 5 times
-        _retry_request(inquire_product_price, ref_id)
+        return _retry_request(inquire_product_price, ref_id)
     except ProductRefExpired as e:
         raise InvalidIdentityError(f"Inquiring data failed, for expired Reference ID: {ref_id}", e)
     else:
@@ -251,10 +266,20 @@ def inquire_product_category(ref_id):
         category = _call(f"{SERVER_URL}/Help/EnterPress",
                          "https://erp.dpg.lk/Application/Home/PADEALER",
                          payload)
-        category = json.loads(category)[0]
+        if category == "NO DATA FOUND":
+            return
+            raise InvalidIdentityError(f"Inquiring category failed, for incorrect Reference ID: {ref_id}", category)
+        categories = json.loads(category)
+        if len(categories) == 1:
+            category = categories[0]
+        else:
+            for elem in categories:
+                if elem["STR_PROD_HIER_CODE"] == "BAJ":
+                    category = elem
+                    break
         return category
     except r_exceptions.ConnectionError:
-        _retry_request(inquire_product_category, ref_id)
+        return _retry_request(inquire_product_category, ref_id)
 
 
 def inquire_products_by_invoice(invoice, grn):

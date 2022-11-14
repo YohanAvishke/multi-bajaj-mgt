@@ -2,6 +2,7 @@ import re
 import sys
 import time
 
+import multibajajmgt.client.dpmc.client as dpmc_client
 import multibajajmgt.client.odoo.client as odoo_client
 import pandas as pd
 
@@ -16,7 +17,7 @@ from multibajajmgt.enums import (
     InvoiceStatus as Status,
     OdooFieldLabel as OdooLabel,
 )
-from multibajajmgt.exceptions import InvalidDataFormatReceived, ProductCreationFailed
+from multibajajmgt.exceptions import InvalidDataFormatReceived, InvalidIdentityError, ProductCreationFailed
 from multibajajmgt.product.models import Product
 
 cur_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
@@ -37,6 +38,16 @@ def _save_historical_data(product_ids):
     write_to_csv(f"{PRODUCT_DIR}/{product_history_file}", products_his_df)
 
 
+def _fetch_dpmc_product_data(id):
+    try:
+        category = dpmc_client.inquire_product_category(id)
+        product = dpmc_client.inquire_product(id)
+    except InvalidIdentityError as e:
+        log.warning("Fetching dpmc product: {} failed with: {}", id, e.args)
+        return
+
+
+
 def _form_product_obj(prod_row, pos_code, pos_categ_df):
     """ Fetch and create a product object to be created in Odoo server
 
@@ -53,13 +64,20 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
     except InvalidDataFormatReceived as e:
         raise ProductCreationFailed("Failed to retrieve POS category", e)
     else:
+        if pos_code == "BAJAJ" or pos_code == "YL":
+            _fetch_dpmc_product_data(prod_row.ID)
+        else:
+            name = f"{pos_code} {prod_row.Name}"
+
         image_code = pos_categ_data["Image"]
-        # TODO Yellow Label's should fetch data from DPMC client
-        name = f"{pos_code} {prod_row.Name}"
         price = prod_row[4]
         product = Product(name, prod_row.ID, price = price, image = image_code, categ_id = 1,
                           pos_categ_id = pos_categ_id)
         return product
+
+
+def _form_dpmc_product_obj(prod_data, pos_code, pos_categ_df):
+    return
 
 
 def _find_invalid_products(invo_row):
@@ -95,29 +113,23 @@ def create_missing_products():
             # Extract pos categ from product
             internal_ref = prod_row.ID
             find = re.search(r"\((\w+)\)", internal_ref)
-            if find:
-                # Third-party product
-                pos_code = find.group(1)
-                pos_categ_df = pos_categories_df.loc[pos_categories_df["Code"] == pos_code]
-                if len(pos_categ_df) != 0:
-                    # Create product from the category and product data
-                    try:
-                        product = _form_product_obj(prod_row, pos_code, pos_categ_df)
-                    except ProductCreationFailed as e:
-                        log.error("Product creation failed {}", e)
-                        _save_historical_data(created_product_ids)
-                        sys.exit(0)
-                    else:
-                        # Upload product
-                        odoo_client.create_product(product)
-                        created_product_ids.append({"Date": cur_date, "Internal Reference": internal_ref})
+            #  if: Third-party else: Bajaj product
+            pos_code = find.group(1) if find else "BAJAJ"
+            pos_categ_df = pos_categories_df.loc[pos_categories_df["Code"] == pos_code]
+            if len(pos_categ_df) != 0:
+                # Create product from the category and product data
+                try:
+                    product = _form_product_obj(prod_row, pos_code, pos_categ_df)
+                except ProductCreationFailed as e:
+                    log.error("Product creation failed {}", e)
+                    _save_historical_data(created_product_ids)
+                    sys.exit(0)
                 else:
-                    log.warning(f"Invalid POS category {pos_code} for {internal_ref}")
-                    continue
+                    # Upload product
+                    odoo_client.create_product(product)
+                    created_product_ids.append({"Date": cur_date, "Internal Reference": internal_ref})
             else:
-                # Original Bajaj product
-                # Todo call bajaj prod creation after impl
-                log.warning(f"Found original Bajaj product for {internal_ref}")
+                log.warning(f"Invalid POS category {pos_code} for {internal_ref}")
                 continue
     _save_historical_data(created_product_ids)
 

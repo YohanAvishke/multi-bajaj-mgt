@@ -28,7 +28,6 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     invoice_tp = "invoice_thirdparty"
     stock_all = "stock_all"
     stock_dpmc_all = "stock_dpmc_all"
-    stock_tp_all = "stock_thirdparty_all"
     adjustment_dpmc = "adjustment_dpmc"
     adjustment_sales = "adjustment_sales"
     adjustment_tp = "adjustment_thirdparty"
