@@ -269,8 +269,7 @@ def fetch_pos_category(categ_name):
     if len(data) == 1:
         return data
     else:
-        message = f"Invalid data {data} for category name {categ_name}"
-        raise InvalidDataFormatReceived(message)
+        raise InvalidDataFormatReceived(f"Invalid data {data} for category name {categ_name}")
 
 
 def create_product(product: Product):

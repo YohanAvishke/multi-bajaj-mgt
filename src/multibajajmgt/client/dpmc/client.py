@@ -148,63 +148,6 @@ def _retry_request(request_func, *args):
         sys.exit(0)
 
 
-def inquire_product(ref_id):
-    """ Fetch a product.
-
-    :param ref_id: string, product's part number
-    :return: dict, data
-    """
-    log.debug("Fetching product for {}", ref_id)
-    payload = {
-        "strDealerCode_PADLROrder": "AC2011063676",
-        "strPADealerShipCat_PADLROrder": "KDLR",
-        "strPartCode_PADLROrder": ref_id,
-        "strInstanceId_PADLROrder": "BAJ",
-        "strInqType_PADLROrder": "PARTPRICE",
-        "STR_FORM_ID": "00596",
-        "STR_FUNCTION_ID": "CR",
-        "STR_PREMIS": "KGL",
-        "STR_INSTANT": "DLR",
-        "STR_APP_ID": "00011"
-    }
-    try:
-        data = _call(f"{SERVER_URL}/PADealer/PADLROrder/Inquire", "https://erp.dpg.lk/Application/Home/PADEALER",
-                     payload)
-    except r_exceptions.ConnectionError:
-        return _retry_request(inquire_product, ref_id)
-    else:
-        if not data or data["STATE"] == "FALSE":
-            raise InvalidIdentityError(f"Inquiring product failed, for incorrect Reference ID: {ref_id}", data)
-        data = data["DATA"]
-        product = {
-            "STR_PART_CODE": data["strPartCode_PADLROrder"],
-            "INT_UNIT_COST": data["dblRetailPrice_PADLROrder"]
-        }
-        # Get line from either Bajaj or KTM (for expired products)
-        product_lines = data['lstPADLRProductlineDetails_PADLROrder']
-        if len(product_lines) == 1:
-            line = product_lines[0]
-            line = {
-                "STR_PROD_HIER_CODE": line["strMakeCode"],
-                "STR_VEHICLE_TYPE_CODE": line["strProductlineCode"],
-                "STR_VEHICLE_TYPE": line["strProductlineDesc"],
-                "STR_VEHICLE_MODEL_CODE": line["strModelCode"],
-                "STR_VEHICLE_MODEL": line["strModelDesc"],
-            }
-        else:
-            for elem in data['lstPADLRProductlineDetails_PADLROrder']:
-                if elem["strMakeCode"] == "BAJ":
-                    line = {
-                        "STR_PROD_HIER_CODE": elem["strMakeCode"],
-                        "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
-                        "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
-                        "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
-                        "STR_VEHICLE_MODEL": elem["strModelDesc"],
-                    }
-                    break
-        return product | line
-
-
 def inquire_product_price(ref_id):
     """ Fetch price of a product.
 
@@ -242,6 +185,64 @@ def inquire_product_price(ref_id):
         return price
 
 
+def inquire_product_line(ref_id):
+    """ Fetch a product.
+
+    :param ref_id: string, product's part number
+    :return: dict, data
+    """
+    log.debug("Fetching product for {}", ref_id)
+    payload = {
+        "strDealerCode_PADLROrder": "AC2011063676",
+        "strPADealerShipCat_PADLROrder": "KDLR",
+        "strPartCode_PADLROrder": ref_id,
+        "strInstanceId_PADLROrder": "BAJ",
+        "strInqType_PADLROrder": "PARTPRICE",
+        "STR_FORM_ID": "00596",
+        "STR_FUNCTION_ID": "CR",
+        "STR_PREMIS": "KGL",
+        "STR_INSTANT": "DLR",
+        "STR_APP_ID": "00011"
+    }
+    try:
+        data = _call(f"{SERVER_URL}/PADealer/PADLROrder/Inquire", "https://erp.dpg.lk/Application/Home/PADEALER",
+                     payload)
+    except r_exceptions.ConnectionError:
+        return _retry_request(inquire_product_line, ref_id)
+    else:
+        if not data or data["STATE"] == "FALSE":
+            raise InvalidIdentityError(f"Inquiring product failed, for incorrect Reference ID: {ref_id}", data)
+        data = data["DATA"]
+        product = {
+            "STR_PART_CODE": data["strPartCode_PADLROrder"],
+            "INT_UNIT_COST": data["dblRetailPrice_PADLROrder"]
+        }
+        # Get line from either Bajaj or KTM (for expired products)
+        product_lines = data['lstPADLRProductlineDetails_PADLROrder']
+        line = None
+        if len(product_lines) == 1:
+            line = product_lines[0]
+            line = {
+                "STR_PROD_HIER_CODE": line["strMakeCode"],
+                "STR_VEHICLE_TYPE_CODE": line["strProductlineCode"],
+                "STR_VEHICLE_TYPE": line["strProductlineDesc"],
+                "STR_VEHICLE_MODEL_CODE": line["strModelCode"],
+                "STR_VEHICLE_MODEL": line["strModelDesc"],
+            }
+        else:
+            for elem in data['lstPADLRProductlineDetails_PADLROrder']:
+                if elem["strMakeCode"] == "BAJ":
+                    line = {
+                        "STR_PROD_HIER_CODE": elem["strMakeCode"],
+                        "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
+                        "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
+                        "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
+                        "STR_VEHICLE_MODEL": elem["strModelDesc"],
+                    }
+                    break
+        return product | line
+
+
 def inquire_product_category(ref_id):
     """ Fetch category of a product
 
@@ -255,8 +256,8 @@ def inquire_product_category(ref_id):
         "strAppID": "00011",
         "strFORMID": "00596",
         "strHELP_TITEL": "Part Details",
-        "arrFIELD_NAME": ["STR_PART_NO", "STR_CAT_CODE", "STR_PROD_HIER_CODE"],
-        "arrDISPLAY_NAME": ["STR_PART_CODE", "STR_CAT_CODE", "STR_PROD_HIER_CODE"],
+        "arrFIELD_NAME": ["STR_PART_NO", "STR_DESC", "STR_CAT_CODE", "STR_PROD_HIER_CODE"],
+        "arrDISPLAY_NAME": ["STR_PART_CODE", "STR_DESC", "STR_CAT_CODE", "STR_PROD_HIER_CODE"],
         "arrSEARCH_TEXT": ["STR_PART_NO", ref_id],
         "strLIMIT": "0",
         "strARCHIVE": "TRUE",
@@ -267,7 +268,6 @@ def inquire_product_category(ref_id):
                          "https://erp.dpg.lk/Application/Home/PADEALER",
                          payload)
         if category == "NO DATA FOUND":
-            return
             raise InvalidIdentityError(f"Inquiring category failed, for incorrect Reference ID: {ref_id}", category)
         categories = json.loads(category)
         if len(categories) == 1:
