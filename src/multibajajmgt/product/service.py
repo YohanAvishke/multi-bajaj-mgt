@@ -26,6 +26,12 @@ curr_price_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
 def _save_historical_data(product_ids):
+    """ Keep a list of products that are created.
+
+    Store Creation Date and Internal Reference in a csv file.
+
+    :param product_ids: list, created products
+    """
     product_history_file = f"{DocName.product_history}.{DocExt.csv}"
     products_his_df = pd.read_csv(f"{PRODUCT_DIR}/{product_history_file}")
     # Add newly created products to history
@@ -35,6 +41,11 @@ def _save_historical_data(product_ids):
 
 
 def _fetch_dpmc_product_data(ref_id):
+    """ Fetch product's category and line information.
+
+    :param ref_id: string, product's id
+    :return: dict, category + line data
+    """
     try:
         category = dpmc_client.inquire_product_category(ref_id)
         line = dpmc_client.inquire_product_line(ref_id)
@@ -44,6 +55,13 @@ def _fetch_dpmc_product_data(ref_id):
 
 
 def _form_product_obj(prod_row, pos_code, pos_categ_df):
+    """ Fetch and create a product object to be created in the Odoo server.
+
+    :param prod_row: itertuple row, basic product data
+    :param pos_code: string, code to identify pos category
+    :param pos_categ_df: pandas dataframe, advanced category information
+    :return: Product, creatable product
+    """
     pos_categ_data = pos_categ_df.iloc[0]
     if pos_code == "BAJAJ" or pos_code == "YL":
         ref_id = prod_row.ID.strip("(YL)")
@@ -86,6 +104,11 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
 
 
 def _find_invalid_products(invo_row):
+    """ Identify non-existing products in the odoo stock.
+
+    :param invo_row: itertuple row, invoice with product data
+    :return: pandas dataframe, non-existing products
+    """
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     df = pd.json_normalize(invo_row.Products)
     # noinspection PyTypeChecker
