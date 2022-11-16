@@ -3,7 +3,8 @@ import pandas as pd
 
 from loguru import logger as log
 from multibajajmgt.app import App
-from multibajajmgt.common import csvstr_to_df, get_dated_dir, get_files, get_now_file, mk_dir, write_to_csv
+from multibajajmgt.common import (csvstr_to_df, get_dated_dir, get_files, get_now_file, merge_duplicates, mk_dir,
+                                  write_to_csv)
 from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
@@ -58,7 +59,8 @@ def _enrich_invoice(row, stock_df):
     :param stock_df: pandas dataframe, stock data
     :return: pandas dataframe, enriched df
     """
-    products_df = pd.json_normalize(row.Products)
+    # Merge product duplicates
+    products_df = merge_duplicates(row.Products)
     # Add columns from stock data to the products
     # noinspection PyTypeChecker
     products_df = products_df.merge(stock_df, how = "left", indicator = Basic.found_in,
@@ -112,6 +114,8 @@ def create_adjustment():
     # Filter and sort invoices with successful status
     invoice_df = invoice_df[invoice_df[Basic.status] == Status.success] \
         .sort_values(by = [InvoField.date, InvoField.default_id])
+    # Merge invoice duplicates
+    invoice_df = invoice_df.groupby(["Date", "ID"], as_index = False).sum()
     for invoice_row in invoice_df.itertuples():
         adjustments.append(_enrich_invoice(invoice_row, stock_df))
     # Append all adjustments into a dataframe
