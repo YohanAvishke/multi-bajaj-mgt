@@ -39,13 +39,13 @@ def _get_price_info(row):
     status = Status.none
     try:
         # Fetch new price
-        product_data = dpmc_client.inquire_product_by_id(ref_id)
+        product_data = dpmc_client.inquire_product_price(ref_id)
     except InvalidIdentityError:
         # Duplicate existing price since the data fetching failed
         price = old_price
         process_status = "Failed"
     else:
-        price = float(product_data["dblSellingPrice"])
+        price = product_data["INT_UNIT_COST"]
         # Calculate and save status
         if price > old_price:
             status = Status.up

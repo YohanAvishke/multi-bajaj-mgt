@@ -144,7 +144,7 @@ def _enrich_with_products(row):
     # Filter invoices unsuccessful with fetching advanced data
     if Status.success in invoice_status:
         try:
-            product_data = dpmc_client.inquire_product_by_invoice(invoice_id, grn_id)
+            product_data = dpmc_client.inquire_products_by_invoice(invoice_id, grn_id)
         except DataNotFoundError:
             log.error(f"Product inquiry failed for Invoice {invoice_id}")
             row[Field.status] = Status.failed

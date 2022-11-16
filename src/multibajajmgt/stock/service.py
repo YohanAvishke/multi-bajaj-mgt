@@ -19,22 +19,13 @@ curr_invoice_dir = get_dated_dir(INVOICE_HISTORY_DIR)
 curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
 
 
-def _eval_stock_fetcher():
-    app = App.get_app()
-    if app.get_pos_categ() == POSCateg.dpmc:
-        return odoo_client.fetch_dpmc_stock
-    elif app.get_pos_categ == POSCateg.tp:
-        return odoo_client.fetch_thirdparty_stock
-    else:
-        return odoo_client.fetch_all_stock
-
-
 def export_products():
     """ Fetch, process and save stock.
     """
     log.info("Exporting the entire stock from odoo server")
-    fetch_func = _eval_stock_fetcher()
-    raw_data = fetch_func()
+    pos_categ = App.get_app().get_pos_categ()
+    # Fetch function depends on app's configured POS category
+    raw_data = odoo_client.fetch_dpmc_stock() if pos_categ == POSCateg.dpmc else odoo_client.fetch_all_stock()
     product_df = csvstr_to_df(raw_data)
     write_to_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}", product_df)
 

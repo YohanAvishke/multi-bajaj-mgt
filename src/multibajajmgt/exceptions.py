@@ -5,10 +5,6 @@ class InvalidIdentityError(Exception):
     pass
 
 
-class ProductCreationFailed(Exception):
-    pass
-
-
 class DataNotFoundError(RequestException):
     pass
 
@@ -18,4 +14,13 @@ class InvalidDataFormatReceived(RequestException):
 
 
 class ProductRefExpired(DataNotFoundError):
+    pass
+
+
+# Product Exceptions
+class ProductInitException(Exception):
+    pass
+
+
+class ProductInquiryException(Exception):
     pass

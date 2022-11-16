@@ -1,7 +1,7 @@
 import re
-import sys
 import time
 
+import multibajajmgt.client.dpmc.client as dpmc_client
 import multibajajmgt.client.odoo.client as odoo_client
 import pandas as pd
 
@@ -16,7 +16,8 @@ from multibajajmgt.enums import (
     InvoiceStatus as Status,
     OdooFieldLabel as OdooLabel,
 )
-from multibajajmgt.exceptions import InvalidDataFormatReceived, ProductCreationFailed
+from multibajajmgt.exceptions import (InvalidDataFormatReceived, InvalidIdentityError, ProductInitException,
+                                      ProductInquiryException)
 from multibajajmgt.product.models import Product
 
 cur_date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
@@ -25,7 +26,9 @@ curr_price_dir = get_dated_dir(PRICE_HISTORY_DIR)
 
 
 def _save_historical_data(product_ids):
-    """ Store products that are just created with their creation date
+    """ Keep a list of products that are created.
+
+    Store Creation Date and Internal Reference in a csv file.
 
     :param product_ids: list, created products
     """
@@ -37,8 +40,22 @@ def _save_historical_data(product_ids):
     write_to_csv(f"{PRODUCT_DIR}/{product_history_file}", products_his_df)
 
 
+def _fetch_dpmc_product_data(ref_id):
+    """ Fetch product's category and line information.
+
+    :param ref_id: string, product's id
+    :return: dict, category + line data
+    """
+    try:
+        category = dpmc_client.inquire_product_category(ref_id)
+        line = dpmc_client.inquire_product_line(ref_id)
+        return category | line
+    except InvalidIdentityError as e:
+        raise ProductInquiryException(f"Failed to fetch DPMC product's category and line of: {ref_id}.", e)
+
+
 def _form_product_obj(prod_row, pos_code, pos_categ_df):
-    """ Fetch and create a product object to be created in Odoo server
+    """ Fetch and create a product object to be created in the Odoo server.
 
     :param prod_row: itertuple row, basic product data
     :param pos_code: string, code to identify pos category
@@ -46,24 +63,50 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
     :return: Product, creatable product
     """
     pos_categ_data = pos_categ_df.iloc[0]
-    # Gather data to create the product
-    pos_categ_name = pos_categ_data["Display Name"].split(" / ")[-1]
+    barcode = False
+    if pos_code == "BAJAJ" or pos_code == "YL":
+        ref_id = prod_row.ID.strip("(YL)")
+        # Get DPMC product name, POS category and product category
+        try:
+            data = _fetch_dpmc_product_data(ref_id)
+        except ProductInquiryException as e:
+            raise ProductInitException(f"Data not found for {ref_id}.", e)
+        # Figure pos code using vehicle code
+        vehicle_code = data["STR_VEHICLE_TYPE_CODE"]
+        if vehicle_code == "001":
+            pos_categ_name = "2W"
+        elif vehicle_code == "003":
+            pos_categ_name = "3W"
+        elif vehicle_code == "065":
+            pos_categ_name = "QUTE"
+        else:
+            log.warning(f"Invalid vehicle code for: {ref_id}. Using default POS category.\n"
+                        f"Vehicle data: {vehicle_code} - {data['STR_VEHICLE_TYPE']}.")
+            pos_categ_name = "Bajaj"
+        # Figure product name
+        name = data["STR_DESC"].title()
+        if pos_code == "YL":
+            name = f"{pos_code} {name}"
+        else:
+            barcode = ref_id
+    else:
+        name = f"{pos_code} {prod_row.Name}"
+        pos_categ_name = pos_categ_data["Display Name"].split(" / ")[-1]
     try:
+        # Get Odoo POS category data
         pos_categ_id = odoo_client.fetch_pos_category(pos_categ_name)[0]["id"]
     except InvalidDataFormatReceived as e:
-        raise ProductCreationFailed("Failed to retrieve POS category", e)
-    else:
-        image_code = pos_categ_data["Image"]
-        # TODO Yellow Label's should fetch data from DPMC client
-        name = f"{pos_code} {prod_row.Name}"
-        price = prod_row[4]
-        product = Product(name, prod_row.ID, price = price, image = image_code, categ_id = 1,
-                          pos_categ_id = pos_categ_id)
-        return product
+        raise ProductInitException(f"Failed fetching POS category for: {pos_categ_name}.", e)
+    # Create product obj
+    image_code = pos_categ_data["Image"]
+    price = prod_row[4]
+    product = Product(name, prod_row.ID, barcode = barcode, price = price, image = image_code, categ_id = 1,
+                      pos_categ_id = pos_categ_id)
+    return product
 
 
-def _compare_invo_stock_prods(invo_row):
-    """ Identify non-existing products in the odoo stock
+def _find_invalid_products(invo_row):
+    """ Identify non-existing products in the odoo stock.
 
     :param invo_row: itertuple row, invoice with product data
     :return: pandas dataframe, non-existing products
@@ -80,44 +123,37 @@ def _compare_invo_stock_prods(invo_row):
 def create_missing_products():
     """ Create records for invalid products from third-party invoices
     """
-    log.info("Creating unavailable products in the invoice")
+    log.info("Creating missing products of an invoice.")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice}.{DocExt.json}", convert_dates = False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():
         # Filter missing products
-        products_df = _compare_invo_stock_prods(invo_row)
-        if len(products_df) == 0:
+        invalids_df = _find_invalid_products(invo_row)
+        if len(invalids_df) == 0:
             # No missing products
             continue
-        for prod_row in products_df.itertuples():
+        for prod_row in invalids_df.itertuples():
             # Extract pos categ from product
             internal_ref = prod_row.ID
             find = re.search(r"\((\w+)\)", internal_ref)
-            if find:
-                # Third-party product
-                pos_code = find.group(1)
-                pos_categ_df = pos_categories_df.loc[pos_categories_df["Code"] == pos_code]
-                if len(pos_categ_df) != 0:
-                    # Create product from the category and product data
-                    try:
-                        product = _form_product_obj(prod_row, pos_code, pos_categ_df)
-                    except ProductCreationFailed as e:
-                        log.error("Product creation failed {}", e)
-                        _save_historical_data(created_product_ids)
-                        sys.exit(0)
-                    else:
-                        # Upload product
-                        odoo_client.create_product(product)
-                        created_product_ids.append({"Date": cur_date, "Internal Reference": internal_ref})
-                else:
-                    log.warning(f"Invalid POS category {pos_code} for {internal_ref}")
+            #  if: Third-party else: Bajaj product
+            pos_code = find.group(1) if find else "BAJAJ"
+            pos_categ_df = pos_categories_df.loc[pos_categories_df["Code"] == pos_code]
+            if len(pos_categ_df) != 0:
+                # Create product from the category and product data
+                try:
+                    product = _form_product_obj(prod_row, pos_code, pos_categ_df)
+                except ProductInitException as e:
+                    log.warning("Failed to initialize product object: {}, due to: {}.", internal_ref, e)
                     continue
+                else:
+                    # Upload product
+                    odoo_client.create_product(product)
+                    created_product_ids.append({"Date": cur_date, "Internal Reference": internal_ref})
             else:
-                # Original Bajaj product
-                # Todo call bajaj prod creation after impl
-                log.warning(f"Found original Bajaj product for {internal_ref}")
+                log.warning("Failed to create product: {}, due to invalid: {} POS category.", internal_ref, pos_code)
                 continue
     _save_historical_data(created_product_ids)
 
@@ -125,7 +161,7 @@ def create_missing_products():
 def update_barcode_nomenclature():
     """ Update DPMC products barcodes.
     """
-    log.info("Creating a new barcode nomenclature")
+    log.info("Creating a new barcode nomenclature.")
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     barcode_df = stock_df.drop(["Product/Product/ID", "Quantity_On_Hand"], axis = 1)
     barcode_df.at[0, "Barcode Nomenclature"] = f"DPMC Nomenclature {cur_date}"
