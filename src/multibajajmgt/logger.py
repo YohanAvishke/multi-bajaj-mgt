@@ -6,7 +6,7 @@ from loguru import logger as custom_logger
 def formatter(log: dict) -> str:
     """ Format log colors based on level.
 
-    :param dict log: dict, containing log level, details, etc.
+    :param log: dict, containing log level, details, etc.
     :returns: str,
     """
     if log["level"].name == "INFO":
