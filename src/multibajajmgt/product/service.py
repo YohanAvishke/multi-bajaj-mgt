@@ -63,6 +63,7 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
     :return: Product, creatable product
     """
     pos_categ_data = pos_categ_df.iloc[0]
+    barcode = False
     if pos_code == "BAJAJ" or pos_code == "YL":
         ref_id = prod_row.ID.strip("(YL)")
         # Get DPMC product name, POS category and product category
@@ -74,7 +75,7 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
         vehicle_code = data["STR_VEHICLE_TYPE_CODE"]
         if vehicle_code == "109":
             pos_categ_name = "Bajaj"
-        elif vehicle_code == "002":
+        elif vehicle_code == "001" or vehicle_code == "002":
             pos_categ_name = "2W"
         elif vehicle_code == "003":
             pos_categ_name = "3W"
@@ -87,6 +88,8 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
         name = data["STR_DESC"].title()
         if pos_code == "YL":
             name = f"{pos_code} {name}"
+        else:
+            barcode = ref_id
     else:
         name = f"{pos_code} {prod_row.Name}"
         pos_categ_name = pos_categ_data["Display Name"].split(" / ")[-1]
@@ -98,7 +101,7 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
     # Create product obj
     image_code = pos_categ_data["Image"]
     price = prod_row[4]
-    product = Product(name, prod_row.ID, price = price, image = image_code, categ_id = 1,
+    product = Product(name, prod_row.ID, barcode = barcode, price = price, image = image_code, categ_id = 1,
                       pos_categ_id = pos_categ_id)
     return product
 
