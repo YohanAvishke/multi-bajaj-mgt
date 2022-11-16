@@ -46,6 +46,10 @@ app = configure_app(Categ.all, QtyAva.all)
 # Adjustment DPMC invoices
 # app.set_pos_categ(Categ.dpmc)
 # invoice_dpmc_service.export_invoice_data()
+#   Create products
+# stock_service.export_products()
+# product_service.create_missing_products()
+#   Create adjustment
 # invoice_dpmc_service.export_products()
 # stock_service.export_products()
 # stock_service.create_adjustment()
