@@ -55,8 +55,6 @@ def _enrich_invoices(invoices):
              InvoField.unit_cost: cost}
             for code, name, quantity, cost in zip(codes, names, quantities, costs)
         ]
-        # Merge duplicates
-        products = merge_duplicates(products)
         # Setup enriched invoice
         invoice = {
             InvoField.date: info[-1],

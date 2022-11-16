@@ -61,7 +61,6 @@ def _extract_invoices(chunks_df):
         invoice_df.reset_index(drop = True, inplace = True)
         date = invoice_df[InvoField.date][0]
         products = invoice_df[[InvoField.part_code, InvoField.part_qty]].to_dict('records')
-        products = merge_duplicates(products)
         invoice = {
             InvoField.date: date,
             BaseField.status: Status.success,
