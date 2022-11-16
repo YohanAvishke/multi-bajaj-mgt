@@ -73,17 +73,16 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
             raise ProductInitException(f"Data not found for {ref_id}.", e)
         # Figure pos code using vehicle code
         vehicle_code = data["STR_VEHICLE_TYPE_CODE"]
-        if vehicle_code == "109":
-            pos_categ_name = "Bajaj"
-        elif vehicle_code == "001" or vehicle_code == "002":
+        if vehicle_code == "001":
             pos_categ_name = "2W"
         elif vehicle_code == "003":
             pos_categ_name = "3W"
         elif vehicle_code == "065":
             pos_categ_name = "QUTE"
         else:
-            raise ProductInitException(f"Failed product initialisation for: {ref_id}. "
-                                       f"Due to unknown vehicle info: {vehicle_code} - {data['STR_VEHICLE_TYPE']}.")
+            log.warning(f"Invalid vehicle code for: {ref_id}. Using default POS category.\n"
+                        f"Vehicle data: {vehicle_code} - {data['STR_VEHICLE_TYPE']}.")
+            pos_categ_name = "Bajaj"
         # Figure product name
         name = data["STR_DESC"].title()
         if pos_code == "YL":
