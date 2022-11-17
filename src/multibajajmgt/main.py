@@ -31,7 +31,7 @@ app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
 # odoo_client.configure()
-# dpmc_client.configure()
+dpmc_client.configure()
 # sheet_client.configure()
 
 # Update DPMC prices

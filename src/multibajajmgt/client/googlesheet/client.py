@@ -32,7 +32,7 @@ RANGE_NAME = "A:D"
 def configure():
     """ Validate credentials, fetch token and set service.
     """
-    log.info("Configuring Google Sheet client.")
+    log.info("Configure Google Sheet client.")
     credentials = None
     global service
     if os.path.exists(TOKEN_FILE):
@@ -44,9 +44,8 @@ def configure():
             except RefreshError:
                 log.warning("Refresh token expired or revoked. Deleting token file.")
                 os.remove(TOKEN_FILE)
-                log.debug("Retrying configuration.")
-                configure()
-                return
+                log.debug("Retry configuration.")
+                return configure()
         else:
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIAL_FILE, SCOPES)
             credentials = flow.run_local_server(port = 0)
@@ -57,9 +56,9 @@ def configure():
 def inquire_sales_invoices():
     """ Fetch sales data from the columns of the spreadsheet.
 
-    :return: pandas dataframe, column data
+    :return: pandas dataframe, column data.
     """
-    log.debug("Fetching non uploaded sales invoices")
+    log.debug("Fetch Sales Invoices.")
     # If not already configured
     if not service:
         configure()
@@ -71,4 +70,4 @@ def inquire_sales_invoices():
         return pd.DataFrame(columns = [InvoField.part_code, InvoField.part_qty, InvoField.date, BaseField.status],
                             data = values)
     else:
-        log.warning("No data found in the sheet")
+        log.warning("No data found in the sheet.")
