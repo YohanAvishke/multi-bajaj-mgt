@@ -317,9 +317,6 @@ def fetch_sale_report(from_date,
                       order_by = False) -> dict:
     """ Fetch sales report of product's order quantity grouped by date.
 
-    Since Odoo server uses Time zone: Etc/UTC (UTC, +0000).
-    Args from_date and to_date should be altered accordingly.
-
     :param from_date: str, filter start date.
     :param to_date: str, filter end date.
     :param offset: int, dp start row.

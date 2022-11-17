@@ -31,7 +31,7 @@ app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
 # odoo_client.configure()
-dpmc_client.configure()
+# dpmc_client.configure()
 # sheet_client.configure()
 
 # Update DPMC prices
@@ -41,7 +41,7 @@ dpmc_client.configure()
 # price_dpmc_service.merge_historical_data()
 
 # Sales report
-# sale_service.export_sales_report("2022-11-03 18:30:00")
+# sale_service.export_sales_report("2022-11-04 00:00:00")
 
 # Adjustment DPMC invoices
 # app.set_pos_categ(Categ.dpmc)

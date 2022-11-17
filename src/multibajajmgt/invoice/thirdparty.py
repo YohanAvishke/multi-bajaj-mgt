@@ -1,7 +1,7 @@
 import pandas as pd
 
 from loguru import logger as log
-from multibajajmgt.common import get_dated_dir, get_files, merge_duplicates, mk_dir, write_to_json
+from multibajajmgt.common import get_dated_dir, get_files, mk_dir, write_to_json
 from multibajajmgt.config import INVOICE_DIR, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     BasicFieldName as BaseField,
@@ -18,8 +18,8 @@ def _breakdown_invoices(invoice_df):
 
     Each invoice is identified by the `*` char. Which should be in the 0the index of a row's data.
 
-    :param invoice_df: pandas dataframe, raw data
-    :return: list, broken down invoices
+    :param invoice_df: pandas dataframe, raw data.
+    :return: list, broken down invoices.
     """
     invoice_indexes = invoice_df.query("Invoices.str.contains('\\*')").index.values.tolist()
     boundaries = invoice_indexes + [len(invoice_df.index)]
@@ -28,10 +28,10 @@ def _breakdown_invoices(invoice_df):
 
 
 def _enrich_invoices(invoices):
-    """ Get basic invoice data and product data, extracted from raw data
+    """ Get basic invoice data and product data, extracted from raw data.
 
-    :param invoices: list, raw data
-    :return: list, enriched data
+    :param invoices: list, raw data.
+    :return: list, enriched data.
     """
     enriched_invoices = []
     for invoice_df in invoices:
@@ -69,7 +69,7 @@ def _enrich_invoices(invoices):
 def export_invoice_data():
     """ Get raw invoice data, convert and save it in a historical file.
     """
-    log.info("Exporting third-party invoices enriched by advanced data")
+    log.info("Export Third-Party Invoice data.")
     historical_file = mk_dir(curr_historical_dir, f"{get_files().get_invoice()}.{DocExt.json}")
     invoice_df = pd.read_csv(f"{INVOICE_DIR}/{get_files().get_invoice()}.{DocExt.txt}", header = None,
                              names = ["Invoices"])

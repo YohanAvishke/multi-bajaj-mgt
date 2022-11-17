@@ -1,4 +1,5 @@
 import itertools
+
 import pandas as pd
 import multibajajmgt.client.odoo.client as odoo_client
 
@@ -21,7 +22,7 @@ curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 def export_prices():
     """ Fetch and Save all(qty >= 0 and qty < 0) non DPMC product prices.
     """
-    log.info("Exporting third-party prices from odoo server")
+    log.info("Export Third-Party prices.")
     raw_price = odoo_client.fetch_all_thirdparty_prices()
     price_df = csvstr_to_df(raw_price)
     write_to_csv(f"{PRICE_DIR}/{get_files().get_price()}.{DocExt.csv}", price_df)
@@ -30,7 +31,7 @@ def export_prices():
 def _extract_invoice_products():
     """ Combine all products of each successful invoice.
 
-    :return: pandas dataframe, all products
+    :return: pandas dataframe, all products.
     """
     invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == InvoStatus.success]
@@ -43,9 +44,9 @@ def _extract_invoice_products():
 def _enrich_product_prices(price_df, products_df):
     """ Add prices to the products list.
 
-    :param price_df: pandas dataframe, prices from odoo server
-    :param products_df: pandas dataframe, products of invoices
-    :return: pandas dataframe, combined dataframes
+    :param price_df: pandas dataframe, prices from odoo server.
+    :param products_df: pandas dataframe, products of invoices.
+    :return: pandas dataframe, combined dataframes.
     """
     df = products_df.merge(price_df, how = "left", indicator = Basic.found_in, left_on = InvoField.part_code,
                            right_on = OdooLabel.internal_id)
@@ -56,8 +57,8 @@ def _enrich_product_prices(price_df, products_df):
 def _calculate_status(row):
     """ Calculate price fluctuations of each product.
 
-    :param row: pandas series, each product
-    :return: pandas series, updated product
+    :param row: pandas series, each product.
+    :return: pandas series, updated product.
     """
     price = row["Unit Cost"]
     old_price = row["Old Sales Price"]
@@ -74,7 +75,7 @@ def _calculate_status(row):
 def update_product_prices():
     """ Update prices in price-tp.csv file to be able to imported to the Odoo server.
     """
-    log.info("Updating third-party product's prices")
+    log.info("Update Third-Party product prices.")
     price_file = f"{get_files().get_price()}.{DocExt.csv}"
     historical_file_path = mk_dir(curr_his_dir, f"{price_file}")
     price_df = pd.read_csv(f"{PRICE_DIR}/{price_file}")

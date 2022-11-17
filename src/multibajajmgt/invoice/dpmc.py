@@ -21,8 +21,8 @@ def _reindex_df(df, index):
     """ Reindex and remove nan values by empty string.
 
     :param df: pandas dataframe,
-    :param index: list, columns for reindex
-    :return: pandas dataframe, restructured dataframe
+    :param index: list, columns for reindex.
+    :return: pandas dataframe, restructured dataframe.
     """
     return df \
         .reindex(index, axis = "columns") \
@@ -32,8 +32,8 @@ def _reindex_df(df, index):
 def _enrich_with_advanced_data(row):
     """ Enrich invoices with grn and order id.
 
-    :param row: pandas series, rows of a dataframe
-    :return: pandas series, enriched row
+    :param row: pandas series, rows of a dataframe.
+    :return: pandas series, enriched row.
     """
     invoice_type = row[InvoField.type]
     # Can-be invoice, order, mobile number
@@ -57,7 +57,7 @@ def _enrich_with_advanced_data(row):
             # Usually happens for older invoices, since "inquire_goodreceivenote_by_order_ref"'s data expires fast
             invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(col_name, default_id)
         except DataNotFoundError:
-            log.error(f"Invoice retrieval failed for {default_id}")
+            log.error("Failed to retrieve Invoice: {}.", default_id)
             row[Field.status] = Status.failed
             return row
     if len(invoice_data) > 1:
@@ -76,14 +76,14 @@ def _enrich_with_advanced_data(row):
         else:
             # Unique to "inquire_goodreceivenote_by_order_ref"
             row[InvoField.mobile_id] = invoice_data[DPMCField.mobile_no.order]
-    log.info(f"Invoice retrieval success for {default_id}")
+    log.info("Retrieved Invoice: {} reference data.", default_id)
     return row
 
 
 def export_invoice_data():
     """ Fetch, enrich and restructure DPMC invoices with advanced data.
     """
-    log.info("Exporting DPMC invoices enriched by advanced data")
+    log.info("Export DPMC Invoice reference data.")
     invoice_file = f"{get_files().get_invoice()}.{DocExt.json}"
     historical_file = mk_dir(curr_historical_dir, invoice_file)
     invoice_df = pd.read_json(f"{INVOICE_DIR}/{invoice_file}", orient = "records", convert_dates = False)
@@ -100,9 +100,9 @@ def _reformat_product_data(grn_id, product_data):
     A condition(`if grn_id`) is necessary ,since there are 2 client functions to get product data.
     Each returning a different payload.
 
-    :param grn_id: string | None, if string `..._by_grn_ref` is used else `..._by_order_ref` is used
-    :param product_data: list of dicts, data
-    :return: list of dicts, changed data
+    :param grn_id: string | None, if string `..._by_grn_ref` is used else `..._by_order_ref` is used.
+    :param product_data: list of dicts, data.
+    :return: list of dicts, changed data.
     """
     products = product_data[DPMCField.grn_detail.order]["Table"] if grn_id else product_data[DPMCField.grn_detail.grn]
     product_df = pd.DataFrame(products)
@@ -135,8 +135,8 @@ def _reformat_product_data(grn_id, product_data):
 def _enrich_with_products(row):
     """ Enrich invoices with the products.
 
-    :param row: pandas series, rows of a dataframe
-    :return: pandas series, enriched row
+    :param row: pandas series, rows of a dataframe.
+    :return: pandas series, enriched row.
     """
     invoice_status = row[Field.status]
     invoice_id = row[InvoField.default_id]
@@ -146,18 +146,18 @@ def _enrich_with_products(row):
         try:
             product_data = dpmc_client.inquire_products_by_invoice(invoice_id, grn_id)
         except DataNotFoundError:
-            log.error(f"Product inquiry failed for Invoice {invoice_id}")
+            log.error("Failed to fetch Products of Invoice: {}.", invoice_id)
             row[Field.status] = Status.failed
             return row
         row[InvoField.products] = _reformat_product_data(grn_id, product_data)
-        log.info(f"Product inquiry success for Invoice {invoice_id}")
+        log.info("Retrieved Invoice {} products data.", invoice_id)
     return row
 
 
 def export_products():
     """ Fetch and enrich invoices with products.
     """
-    log.info("Exporting products of an invoice")
+    log.info("Export DPMC Invoice products data.")
     historical_file = mk_dir(curr_historical_dir, f"{get_files().get_invoice()}.{DocExt.json}")
     invoice_df = pd.read_json(historical_file, orient = "records", convert_dates = False)
     invoice_df = invoice_df.apply(_enrich_with_products, axis = 1)
