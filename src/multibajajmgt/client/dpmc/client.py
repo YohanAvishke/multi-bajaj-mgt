@@ -1,26 +1,29 @@
-import sys
-import requests
-import requests.exceptions as r_exceptions
 import json
+import requests
+import sys
 import time
+
+import requests.exceptions as r_exceptions
 
 from loguru import logger as log
 from multibajajmgt.common import write_to_json
 from multibajajmgt.config import (
     DATETIME_FORMAT,
+    DPMC_SESSION_LIFETIME,
+    DPMC_SERVER_PASSWORD as SERVER_PASSWORD,
     DPMC_SERVER_URL as SERVER_URL,
     DPMC_SERVER_USERNAME as SERVER_USERNAME,
-    DPMC_SERVER_PASSWORD as SERVER_PASSWORD, SOURCE_DIR, DPMC_SESSION_LIFETIME
+    SOURCE_DIR
 )
-from multibajajmgt.exceptions import *
+from multibajajmgt.exceptions import DataNotFoundError, InvalidIdentityError, JSONDecodeError, ProductRefExpired
 
 PRODUCT_INQUIRY_URL = f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire"
 GET_HELP_URL = "https://erp.dpg.lk/Help/GetHelp"
 CONN_RETRY_MAX = 5
+TOKEN_FILE = f"{SOURCE_DIR}/client/dpmc/token.json"
 
 retry_count = 0
-cookie = None
-headers = {
+base_headers = {
     "authority": "erp.dpg.lk",
     "sec-ch-ua": "'Google Chrome';v='93', ' Not;A Brand';v='99', 'Chromium';v='93'",
     "accept": "application/json, text/javascript, */*; q=0.01",
@@ -41,22 +44,18 @@ headers = {
 
 
 def _call(url, referer, payload = None):
-    """ Base function for requests to the DPMC server.
+    """ Base function to send requests to the DPMC server.
 
-    :param url: string, url for the request
-    :param referer: string, base url
+    :param url: str, url for the request
+    :param referer: str, base url
     :param payload: dict, None or data to be created/updated
     :return: dict, json response payload
     """
-    global headers
-    headers |= {
-        "referer": referer,
-        "cookie": cookie
-    }
+    with open(TOKEN_FILE, "r") as file:
+        token = json.load(file)
+    headers = base_headers | {"referer": referer, "cookie": token["cookie"]}
     try:
-        response = requests.post(url = url,
-                                 headers = headers,
-                                 data = payload)
+        response = requests.post(url = url, headers = headers, data = payload)
         response.raise_for_status()
     except r_exceptions.HTTPError as e:
         log.error("Invalid Response Status received: ", e)
@@ -80,54 +79,42 @@ def _call(url, referer, payload = None):
 def _authenticate():
     """ Fetch and store(in token.json) cookie for DPMC server.
     """
-    log.info("Authenticating DPMC-ERP Client and setting up the Cookie")
-    global headers
-    headers |= {"referer": SERVER_URL}
+    log.info("Authenticating DPMC client to setup a session.")
+    headers = base_headers | {"referer": SERVER_URL}
     payload = {
         "strUserName": SERVER_USERNAME,
         "strPassword": SERVER_PASSWORD
     }
     session = requests.Session()
-    session.post(SERVER_URL, headers = headers, data = payload)
-    token_data = session.cookies.get_dict()
-    # noinspection PyProtectedMember
-    token_data |= {
-        "created-at": session.cookies._now,
-        "expires-at": session.cookies._now + DPMC_SESSION_LIFETIME
-    }
-    write_to_json(F"{SOURCE_DIR}/client/dpmc/token.json", token_data)
+    try:
+        session.post(SERVER_URL, headers = headers, data = payload)
+        cookie = session.cookies
+        # noinspection PyProtectedMember
+        token = {
+            "cookie": f".AspNetCore.Session={cookie.get_dict()['.AspNetCore.Session']}",
+            "created_at": cookie._now,
+            "expires_at": cookie._now + DPMC_SESSION_LIFETIME
+        }
+        write_to_json(TOKEN_FILE, token)
+    except Exception:
+        log.critical("Failed to authenticate while fetching a session.")
 
 
 def configure():
-    """ Validate and attach login session to request header.
+    """ Validate and if expired renew the session cookie.
     """
-    log.info("Configuring DPMC client")
-    global cookie
+    log.info("Configuring DPMC client session.")
     try:
-        with open(f"{SOURCE_DIR}/client/dpmc/token.json", "r") as file:
+        with open(TOKEN_FILE, "r") as file:
             file_data = json.load(file)
-            # Does cookie exist in the data
-            if ".AspNetCore.Session" in file_data:
-                # is the cookie expired
-                now = int(time.time())
-                if "expires-at" in file_data and now < file_data["expires-at"]:
-                    cookie = f".AspNetCore.Session={file_data['.AspNetCore.Session']}"
-                else:
-                    log.warning("Cookie expired at {}",
-                                time.strftime(DATETIME_FORMAT, time.localtime(file_data['expires-at'])))
-                    _refresh_token()
-            else:
-                _refresh_token()
+        if "cookie" not in file_data or "expires_at" not in file_data:
+            return _authenticate()
+        expired_at = file_data["expires_at"]
+        if int(time.time()) >= expired_at:
+            log.warning("Cookie expired at {}.", time.strftime(DATETIME_FORMAT, time.localtime(expired_at)))
+            return _authenticate()
     except FileNotFoundError:
-        _refresh_token()
-
-
-def _refresh_token():
-    """ Wrapper for fetch, save and configure session.
-    """
-    log.info("Refreshing the expired user token")
-    _authenticate()
-    configure()
+        return _authenticate()
 
 
 def _retry_request(request_func, *args):
