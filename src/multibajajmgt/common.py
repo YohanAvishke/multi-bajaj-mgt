@@ -1,71 +1,60 @@
 import errno
 import json
 import os
-import pandas as pd
+import sys
 import time
+
+import pandas as pd
 
 from io import StringIO
 from loguru import logger as log
-from tabulate import tabulate
-
 from multibajajmgt.app import App
 
 
 def write_to_csv(path, df, mode = "w", columns = None, header = True):
     """ Save data to a CSV file.
 
-    :param header:
-    :param mode:
-    :param path: file path
-    :param df: dataframe object
-    :param columns: columns that are been written
-    :param header: headers of the csv file
+    :param mode: str, `w` to write, `a` to append.
+    :param path: str, file path.
+    :param df: pandas dataframe, data to be written.
+    :param columns: None/list, columns of the csv data.
+    :param header: True/list, header of the csv file.
     """
-    log.debug(f"Saving CSV file to {path}")
+    log.debug("Save CSV file to {}.", path)
     df.to_csv(path, mode = mode, columns = columns, header = header, index = False)
 
 
 def write_to_json(path, data):
-    """ Save data to JSON file.
+    """ Save data to a JSON file.
 
-    :param path: string, file path
-    :param data: dictionary, json data
+    :param path: string, file path.
+    :param data: dict, data.
     """
-    log.debug(f"Saving JSON file to {path}")
+    log.debug("Save JSON file to {}.", path)
     with open(path, "w") as file:
         json.dump(data, file)
 
 
-def write_to_fwf(df, path, mode = "w"):
-    """ Write function for Pandas "read_fwf". Working with fixed-width files.
-
-    :param df: pandas dataframe, data to write
-    :param path: string, path of the file to be saved
-    :param mode: string, "w" to create and write, "a" to append to existing
-    """
-    log.debug(f"Saving fixed-width text file to {path}")
-    content = tabulate(df.values.tolist(), list(df.columns), tablefmt = "plain")
-    open(path, mode).write(content)
-
-
 def get_dated_dir(base_path, date = time.time()):
-    """ Get dir name depending on date(yyyy-mm-dd).
+    """ Get Dir named by the current date (yyyy-mm-dd).
 
-    :param base_path: string, base suffix path for dir
-    :param date: int, timestamp use `time.mktime(datetime.datetime.strptime(2011-12-11, "%Y-%m-%d").timetuple())`
-    :return: string, base combined with curr path
+    :param base_path: str, base suffix path for dir.
+    :param date: int, timestamp formed by `time.mktime(datetime.datetime.strptime(2011-12-11, "%Y-%m-%d").timetuple())`.
+    :return: str, base + curr dir path.
     """
+    log.debug("Get a dated directory for base path: {}.", base_path)
     date = time.strftime("%Y-%m-%d", time.localtime(date))
     return f"{base_path}/{date}"
 
 
 def get_now_file(file_extension, base_name = None):
-    """ Get file name  depending on current time(hh-mm-ss).
+    """ Get file named by current time (hh-mm-ss).
 
-    :param file_extension: string, files' extension type(eg: csv, json)
-    :param base_name:  string, base suffix name for file
-    :return: string, base combined with curr name
+    :param file_extension: str, a file extension type (eg: csv, json).
+    :param base_name:  str, base suffix name for file.
+    :return: str, base + curr file name.
     """
+    log.debug("Get a now file for base name: {} and extension: {}.", base_name, file_extension)
     now_time = time.strftime("%H-%M-%S", time.localtime(time.time()))
     if base_name:
         return f"{base_name}_{now_time}.{file_extension}"
@@ -73,28 +62,31 @@ def get_now_file(file_extension, base_name = None):
 
 
 def mk_dir(dir_path, file_path):
-    """ Create and return directory.
+    """ Create and get the directory's name.
 
-    :param dir_path: string, directory(date) path
-    :param file_path: string, file(time) name
-    :return: string, combination of dir path and file name
+    :param dir_path: str, directory path.
+    :param file_path: str, file name.
+    :return: str, dir_path + file_path.
     """
+    log.debug("Create dir for: {} (if doesn't exist), and get file path.", dir_path)
     try:
         os.makedirs(dir_path)
     except OSError as exc:
         if exc.errno == errno.EEXIST and os.path.isdir(dir_path):
             pass
         else:
-            raise
+            log.critical("Failed to retrieve existing dir: {}", dir_path)
+            sys.exit(0)
     return f"{dir_path}/{file_path}"
 
 
 def csvstr_to_df(string):
-    """ Convert string to dataframe.
+    """ Convert CSV String to Dataframe.
 
-    :param string: str, valid string
-    :return: pandas dataframe,
+    :param string: str, valid CSV string.
+    :return: pandas dataframe, converted dataframe.
     """
+    log.debug("Convert a CSV supported String to a Dataframe.")
     str_obj = StringIO(string)
     # noinspection PyTypeChecker
     df = pd.read_csv(str_obj)
@@ -102,11 +94,12 @@ def csvstr_to_df(string):
 
 
 def merge_duplicates(products):
-    """ Merge and drop duplicate product quantities.
+    """ Merge Quantities, and drop duplicate Products.
 
-    :param products: list, products
-    :return: pandas dataframe, updated products
+    :param products: list, products.
+    :return: pandas dataframe, products without duplicates.
     """
+    log.debug("Remove duplicate products.")
     df = pd.DataFrame(products)
     df["Quantity"] = df.groupby(["ID"])["Quantity"].transform('sum')
     df.drop_duplicates(["ID"], keep = "last", inplace = True)
@@ -114,8 +107,9 @@ def merge_duplicates(products):
 
 
 def get_files():
-    """ Get corresponding data file names of the application.
+    """ Get the filehandler to find corresponding file names for exporting/importing data.
 
-    :return: list, of file names
+    :return: list, of file names.
     """
+    log.debug("Retrieve the file handler.")
     return App.get_app().get_file_handler()

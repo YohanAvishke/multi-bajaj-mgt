@@ -23,7 +23,7 @@ curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
 def export_products():
     """ Fetch, process and save stock.
     """
-    log.info("Exporting the entire stock from odoo server")
+    log.info("Export the entire Stock.")
     pos_categ = App.get_app().get_pos_categ()
     # Fetch function depends on app's configured POS category
     raw_data = odoo_client.fetch_dpmc_stock() if pos_categ == POSCateg.dpmc else odoo_client.fetch_all_stock()
@@ -34,13 +34,13 @@ def export_products():
 def _validate_products(products_df):
     """ Product is marked as invalid if its ID doesn't exist in the stock_*_*.csv file.
 
-    :param products_df: pandas dataframe, products of an invoice
-    :return: pandas dataframe, validated data
+    :param products_df: pandas dataframe, products of an invoice.
+    :return: pandas dataframe, validated data.
     """
     for product in products_df.itertuples():
         if product.FoundIn == "left_only":
             products_df = products_df.drop(product.Index)
-            log.warning(f"Invalid product found with Id {product.ID}.")
+            log.warning("Invalid product found for Id: {}.", product.ID)
     products_df.drop(Basic.found_in, axis = 1, inplace = True)
     products_df.reset_index(drop = True, inplace = True)
     return products_df
@@ -55,9 +55,9 @@ def _enrich_invoice(row, stock_df):
         2. Add the necessary columns(like `name`, `Accounting Date`, etc.)
         3. Add the stock data(identification data from Odoo server).
 
-    :param row: itertuple, single invoice
-    :param stock_df: pandas dataframe, stock data
-    :return: pandas dataframe, enriched df
+    :param row: itertuple, single invoice.
+    :param stock_df: pandas dataframe, stock data.
+    :return: pandas dataframe, enriched df.
     """
     # Merge product duplicates
     products_df = merge_duplicates(row.Products)
@@ -84,8 +84,8 @@ def _enrich_invoice(row, stock_df):
 def _calculate_counted_qty(product, adjustment_df):
     """ Calculate final quantities for each product in adjustment.
 
-    :param product: itertuple, product from adjustment
-    :param adjustment_df: pandas dataframe, all adjustments
+    :param product: itertuple, product from adjustment.
+    :param adjustment_df: pandas dataframe, all adjustments.
     """
     diff_qty = int(product.Quantity)
     stock_qty = product.Quantity_On_Hand
@@ -94,18 +94,18 @@ def _calculate_counted_qty(product, adjustment_df):
     # Log issues with the calculations due to invalid quantities from Odoo server
     if stock_qty < 0:
         # Product already has negative qty
-        log.warning(f"Initial quantity is negative for {product.ID}. "
-                    f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
+        log.warning("Initial quantity is negative for {}. Stock: {}. Difference: {}. Counted: {}.",
+                    product.ID, stock_qty, diff_qty, counted_qty)
     elif counted_qty < 0:
         # Negative difference is larger than existing product qty
-        log.warning(f"Final quantity is negative for {product.ID}. "
-                    f"Stock: {stock_qty}. Difference: {diff_qty}. Counted: {counted_qty}.")
+        log.warning("Final quantity is negative for {}. Stock: {}. Difference: {}. Counted: {}.",
+                    product.ID, stock_qty, diff_qty, counted_qty)
 
 
 def create_adjustment():
     """ Retrieve information from data/invoice and create the appropriate adjustment.
     """
-    log.info("Create importable adjustment with extracted invoice data")
+    log.info("Create adjustments.")
     adjustments = []
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     invoice_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", orient = 'records',

@@ -1,7 +1,8 @@
 import os
-import pandas as pd
+
 import multibajajmgt.client.odoo.client as odoo_client
 import multibajajmgt.client.dpmc.client as dpmc_client
+import pandas as pd
 
 from loguru import logger as log
 from multibajajmgt.common import csvstr_to_df, get_dated_dir, get_files, get_now_file, mk_dir, write_to_csv
@@ -21,7 +22,7 @@ curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 def export_prices():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices.
     """
-    log.info("Exporting DPMC prices from odoo server")
+    log.info("Export DPMC product's prices.")
     raw_data = odoo_client.fetch_all_dpmc_prices()
     products = csvstr_to_df(raw_data)
     write_to_csv(f"{PRICE_DIR}/{get_files().get_price()}.{DocExt.csv}", products)
@@ -30,8 +31,8 @@ def export_prices():
 def _get_price_info(row):
     """ Fetch price data from DPMC server.
 
-    :param row: iter-tuples obj, each row of price df
-    :return: dict, necessary information for a price update to be completed
+    :param row: iter-tuples obj, each row of price df.
+    :return: dict, necessary information for a price update to be completed.
     """
     index = row.Index
     ref_id = row[2]  # getattr(row, OdooName.internal_id)
@@ -66,9 +67,9 @@ def _get_price_info(row):
 def _save_price_info(info, df, file):
     """ Save new price information to price-dpmc-all.csv(base file) and time based historical file.
 
-    :param info: dict, necessary information for a price update to be completed
-    :param df: pandas dataframe, dataframe with data of base file
-    :param file: string, historical file
+    :param info: dict, necessary information for a price update to be completed.
+    :param df: pandas dataframe, dataframe with data of base file.
+    :param file: string, historical file.
     """
     index = info["index"]
     price = info["updated_price"]
@@ -89,7 +90,7 @@ def _save_price_info(info, df, file):
 def update_product_prices():
     """ Update prices in price-dpmc-all.csv file to be able to imported to the Odoo server.
     """
-    log.info("Updating DPMC product's prices")
+    log.info("Update DPMC product prices.")
     price_file = f"{get_files().get_price()}.{DocExt.csv}"
     price_df = pd.read_csv(f"{PRICE_DIR}/{price_file}")
     historical_file_path = mk_dir(curr_his_dir, get_now_file(DocExt.csv, get_files().get_price()))
@@ -107,9 +108,9 @@ def update_product_prices():
 
 
 def merge_historical_data():
-    """ Merge timed files in a historical dir
+    """ Merge timed files in a historical dir.
     """
-    log.info("Merging historical files of today")
+    log.info("Merge historical price files.")
     merged_file = f"{curr_his_dir}/{get_files().get_price()}.{DocExt.csv}"
     # Remove existing merge file
     if os.path.isfile(merged_file):

@@ -30,7 +30,7 @@ def _save_historical_data(product_ids):
 
     Store Creation Date and Internal Reference in a csv file.
 
-    :param product_ids: list, created products
+    :param product_ids: list, created products.
     """
     product_history_file = f"{DocName.product_history}.{DocExt.csv}"
     products_his_df = pd.read_csv(f"{PRODUCT_DIR}/{product_history_file}")
@@ -43,24 +43,24 @@ def _save_historical_data(product_ids):
 def _fetch_dpmc_product_data(ref_id):
     """ Fetch product's category and line information.
 
-    :param ref_id: string, product's id
-    :return: dict, category + line data
+    :param ref_id: str, product's id.
+    :return: dict, category + line data.
     """
     try:
         category = dpmc_client.inquire_product_category(ref_id)
         line = dpmc_client.inquire_product_line(ref_id)
         return category | line
     except InvalidIdentityError as e:
-        raise ProductInquiryException(f"Failed to fetch DPMC product's category and line of: {ref_id}.", e)
+        raise ProductInquiryException(f"Failed to fetch category and line of: {ref_id}", e)
 
 
 def _form_product_obj(prod_row, pos_code, pos_categ_df):
     """ Fetch and create a product object to be created in the Odoo server.
 
-    :param prod_row: itertuple row, basic product data
-    :param pos_code: string, code to identify pos category
-    :param pos_categ_df: pandas dataframe, advanced category information
-    :return: Product, creatable product
+    :param prod_row: itertuple row, basic product data.
+    :param pos_code: str, code to identify pos category.
+    :param pos_categ_df: pandas dataframe, advanced category information.
+    :return: Product, creatable product.
     """
     pos_categ_data = pos_categ_df.iloc[0]
     barcode = False
@@ -80,8 +80,8 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
         elif vehicle_code == "065":
             pos_categ_name = "QUTE"
         else:
-            log.warning(f"Invalid vehicle code for: {ref_id}. Using default POS category.\n"
-                        f"Vehicle data: {vehicle_code} - {data['STR_VEHICLE_TYPE']}.")
+            log.warning("Invalid vehicle code for: {}. Using default POS category.\n"
+                        "Vehicle data: {} - {}.", ref_id, vehicle_code, data["STR_VEHICLE_TYPE"])
             pos_categ_name = "Bajaj"
         # Figure product name
         name = data["STR_DESC"].title()
@@ -96,7 +96,7 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
         # Get Odoo POS category data
         pos_categ_id = odoo_client.fetch_pos_category(pos_categ_name)[0]["id"]
     except InvalidDataFormatReceived as e:
-        raise ProductInitException(f"Failed fetching POS category for: {pos_categ_name}.", e)
+        raise ProductInitException(f"Failed fetching POS category: {pos_categ_name}.", e)
     # Create product obj
     image_code = pos_categ_data["Image"]
     price = prod_row[4]
@@ -108,8 +108,8 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
 def _find_invalid_products(invo_row):
     """ Identify non-existing products in the odoo stock.
 
-    :param invo_row: itertuple row, invoice with product data
-    :return: pandas dataframe, non-existing products
+    :param invo_row: itertuple row, invoice with product data.
+    :return: pandas dataframe, non-existing products.
     """
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     df = pd.json_normalize(invo_row.Products)
@@ -121,9 +121,9 @@ def _find_invalid_products(invo_row):
 
 
 def create_missing_products():
-    """ Create records for invalid products from third-party invoices
+    """ Create records for invalid products from third-party invoices.
     """
-    log.info("Creating missing products of an invoice.")
+    log.info("Create missing products of an invoice.")
     created_product_ids = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
     invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
