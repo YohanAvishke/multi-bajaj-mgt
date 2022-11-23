@@ -74,15 +74,14 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
         # Figure pos code using vehicle code
         vehicle_code = data["STR_VEHICLE_TYPE_CODE"]
         if vehicle_code == "001":
-            pos_categ_name = "2W"
+            pos_code = "2W"
         elif vehicle_code == "003":
-            pos_categ_name = "3W"
+            pos_code = "3W"
         elif vehicle_code == "065":
-            pos_categ_name = "QUTE"
+            pos_code = "QUTE"
         else:
             log.warning("Invalid vehicle code for: {}. Using default POS category.\n"
                         "Vehicle data: {} - {}.", ref_id, vehicle_code, data["STR_VEHICLE_TYPE"])
-            pos_categ_name = "Bajaj"
         # Figure product name
         name = data["STR_DESC"].title()
         if pos_code == "YL":
@@ -91,12 +90,12 @@ def _form_product_obj(prod_row, pos_code, pos_categ_df):
             barcode = ref_id
     else:
         name = f"{pos_code} {prod_row.Name}"
-        pos_categ_name = pos_categ_data["Display Name"].split(" / ")[-1]
     try:
         # Get Odoo POS category data
+        pos_categ_name = pos_categ_data["Display Name"].split(" / ")[-1]
         pos_categ_id = odoo_client.fetch_pos_category(pos_categ_name)[0]["id"]
     except InvalidDataFormatReceived as e:
-        raise ProductInitException(f"Failed fetching POS category: {pos_categ_name}.", e)
+        raise ProductInitException(f"Failed fetching POS category: {pos_code}.", e)
     # Create product obj
     image_code = pos_categ_data["Image"]
     price = prod_row[4]
