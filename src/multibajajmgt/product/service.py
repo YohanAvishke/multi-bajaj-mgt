@@ -54,53 +54,59 @@ def _fetch_dpmc_product_data(ref_id):
         raise ProductInquiryException(f"Failed to fetch category and line of: {ref_id}", e)
 
 
-def _form_product_obj(prod_row, pos_code, pos_categ_df):
+def _form_product_obj(prod_row, code, categ_df):
     """ Fetch and create a product object to be created in the Odoo server.
 
     :param prod_row: itertuple row, basic product data.
-    :param pos_code: str, code to identify pos category.
-    :param pos_categ_df: pandas dataframe, advanced category information.
+    :param code: str, code to identify pos category.
+    :param categ_df: pandas dataframe, advanced category information.
     :return: Product, creatable product.
     """
-    pos_categ_data = pos_categ_df.iloc[0]
+    categ_data = categ_df.iloc[0]
+    display_name = categ_data["Display Name"]
+    display_code = categ_data["Display Code"]
     barcode = False
-    if pos_code == "BAJAJ" or pos_code == "YL":
+    if code == "BAJAJ" or code == "YL":
         ref_id = prod_row.ID.strip("(YL)")
         # Get DPMC product name, POS category and product category
         try:
-            data = _fetch_dpmc_product_data(ref_id)
+            dpmc_data = _fetch_dpmc_product_data(ref_id)
         except ProductInquiryException as e:
             raise ProductInitException(f"Data not found for {ref_id}.", e)
-        # Figure pos code using vehicle code
-        vehicle_code = data["STR_VEHICLE_TYPE_CODE"]
-        if vehicle_code == "001":
-            pos_code = "2W"
-        elif vehicle_code == "003":
-            pos_code = "3W"
-        elif vehicle_code == "065":
-            pos_code = "QUTE"
-        else:
-            log.warning("Invalid vehicle code for: {}. Using default POS category.\n"
-                        "Vehicle data: {} - {}.", ref_id, vehicle_code, data["STR_VEHICLE_TYPE"])
         # Figure product name
-        name = data["STR_DESC"].title()
-        if pos_code == "YL":
-            name = f"{pos_code} {name}"
-        else:
+        name = dpmc_data['STR_DESC'].title()
+        if code == "BAJAJ":
+            # Figure pos code using vehicle code
+            vehicle_code = dpmc_data["STR_VEHICLE_TYPE_CODE"]
+            if vehicle_code == "001":
+                categ_name = "2W"
+            elif vehicle_code == "003":
+                categ_name = "3W"
+            elif vehicle_code == "065":
+                categ_name = "QUTE"
+            else:
+                categ_name = "Bajaj"
+                log.warning("Invalid vehicle code for: {}. Using Bajaj POS category.\n"
+                            "Vehicle data: {} - {}.", ref_id, vehicle_code, dpmc_data["STR_VEHICLE_TYPE"])
             barcode = ref_id
+        else:
+            categ_name = display_name.split(" / ")[-1]
+            name = f"{display_code} {name}"
     else:
-        name = f"{pos_code} {prod_row.Name}"
+        name = prod_row.Name.title()
+        if display_code:
+            name = f"{display_code} {name}"
+        categ_name = display_name.split(" / ")[-1]
     try:
-        # Get Odoo POS category data
-        pos_categ_name = pos_categ_data["Display Name"].split(" / ")[-1]
-        pos_categ_id = odoo_client.fetch_pos_category(pos_categ_name)[0]["id"]
+        # Fetch Odoo POS category data
+        categ_id = odoo_client.fetch_pos_category(categ_name)[0]["id"]
     except InvalidDataFormatReceived as e:
-        raise ProductInitException(f"Failed fetching POS category: {pos_code}.", e)
+        raise ProductInitException(f"Failed fetching POS category: {categ_name}.", e)
     # Create product obj
-    image_code = pos_categ_data["Image"]
+    image_code = categ_data["Image"]
     price = prod_row[4]
     product = Product(name, prod_row.ID, barcode = barcode, price = price, image = image_code, categ_id = 1,
-                      pos_categ_id = pos_categ_id)
+                      pos_categ_id = categ_id)
     return product
 
 
@@ -149,6 +155,7 @@ def create_missing_products():
                     continue
                 else:
                     # Upload product
+                    log.info("Created missing product. ID: {}, Name: {}.", product.default_code, product.name)
                     odoo_client.create_product(product)
                     created_product_ids.append({"Date": cur_date, "Internal Reference": internal_ref})
             else:
