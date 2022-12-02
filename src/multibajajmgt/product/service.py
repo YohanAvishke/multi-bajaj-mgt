@@ -129,7 +129,7 @@ def create_missing_products():
     """ Create records for invalid products from third-party invoices.
     """
     log.info("Create missing products of an invoice.")
-    created_product_ids = []
+    created_prods = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
     invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
@@ -142,26 +142,30 @@ def create_missing_products():
         for prod_row in invalids_df.itertuples():
             # Extract pos categ from product
             internal_ref = prod_row.ID
-            find = re.search(r"\((\w+)\)", internal_ref)
-            #  if: Third-party else: Bajaj product
-            pos_code = find.group(1) if find else "BAJAJ"
-            pos_categ_df = pos_categories_df.loc[pos_categories_df["Code"] == pos_code]
-            if len(pos_categ_df) != 0:
-                # Create product from the category and product data
-                try:
-                    product = _form_product_obj(prod_row, pos_code, pos_categ_df)
-                except ProductInitException as e:
-                    log.warning("Failed to initialize product object: {}, due to: {}.", internal_ref, e)
-                    continue
+            # To stop duplicates from been created multiple times
+            # Works for duplicates in an invoice and within multiple invoices
+            is_created = next((True for prod in created_prods if prod["Internal Reference"] == internal_ref), False)
+            if not is_created:
+                find = re.search(r"\((\w+)\)", internal_ref)
+                #  if: Third-party else: Bajaj product
+                pos_code = find.group(1) if find else "BAJAJ"
+                pos_categ_df = pos_categories_df.loc[pos_categories_df["Code"] == pos_code]
+                if len(pos_categ_df) != 0:
+                    # Create product from the category and product data
+                    try:
+                        product = _form_product_obj(prod_row, pos_code, pos_categ_df)
+                    except ProductInitException as e:
+                        log.warning("Failed to initialize product object: {}, due to: {}.", internal_ref, e)
+                        continue
+                    else:
+                        # Upload product
+                        log.info("Created missing product. ID: {}, Name: {}.", product.default_code, product.name)
+                        odoo_client.create_product(product)
+                        created_prods.append({"Date": cur_date, "Internal Reference": internal_ref})
                 else:
-                    # Upload product
-                    log.info("Created missing product. ID: {}, Name: {}.", product.default_code, product.name)
-                    odoo_client.create_product(product)
-                    created_product_ids.append({"Date": cur_date, "Internal Reference": internal_ref})
-            else:
-                log.warning("Failed to create product: {}, due to invalid: {} POS category.", internal_ref, pos_code)
-                continue
-    _save_historical_data(created_product_ids)
+                    log.warning("Failed to create product: {}, due to invalid: {} POS category.", internal_ref, pos_code)
+                    continue
+    _save_historical_data(created_prods)
 
 
 def update_barcode_nomenclature():

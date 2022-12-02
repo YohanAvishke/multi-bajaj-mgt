@@ -31,10 +31,8 @@ app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
 # odoo_client.configure()
-dpmc_client.configure()
+# dpmc_client.configure()
 # sheet_client.configure()
-
-product_service._fetch_dpmc_product_data("JG531031")
 
 # Update DPMC prices
 # app.set_pos_categ(Categ.dpmc)
