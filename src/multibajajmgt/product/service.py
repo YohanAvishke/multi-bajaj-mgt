@@ -67,7 +67,7 @@ def _form_product_obj(prod_row, code, categ_df):
     display_code = categ_data["Display Code"]
     barcode = False
     if code == "BAJAJ" or code == "YL":
-        ref_id = prod_row.ID.strip("(YL)")
+        ref_id = prod_row.ID.removesuffix("(YL)")
         # Get DPMC product name, POS category and product category
         try:
             dpmc_data = _fetch_dpmc_product_data(ref_id)
