@@ -163,8 +163,11 @@ def create_missing_products():
                         odoo_client.create_product(product)
                         created_prods.append({"Date": cur_date, "Internal Reference": internal_ref})
                 else:
-                    log.warning("Failed to create product: {}, due to invalid: {} POS category.", internal_ref, pos_code)
+                    log.warning("Failed to create product: {}, due to invalid: {} POS category.", internal_ref,
+                                pos_code)
                     continue
+            else:
+                log.warning("Product ID: {} is already created.", internal_ref)
     _save_historical_data(created_prods)
 
 
