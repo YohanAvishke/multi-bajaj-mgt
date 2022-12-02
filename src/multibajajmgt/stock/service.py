@@ -3,8 +3,7 @@ import pandas as pd
 
 from loguru import logger as log
 from multibajajmgt.app import App
-from multibajajmgt.common import (csvstr_to_df, get_dated_dir, get_files, get_now_file, merge_duplicates, mk_dir,
-                                  write_to_csv)
+from multibajajmgt.common import csvstr_to_df, get_dated_dir, get_files, get_now_file, mk_dir, write_to_csv
 from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
@@ -46,6 +45,19 @@ def _validate_products(products_df):
     return products_df
 
 
+def _merge_duplicates(products):
+    """ Merge Quantities, and drop duplicate Products.
+
+    :param products: list, products.
+    :return: pandas dataframe, products without duplicates.
+    """
+    log.debug("Remove duplicate products.")
+    df = pd.DataFrame(products)
+    df["Quantity"] = df.groupby(["ID"])["Quantity"].transform('sum')
+    df.drop_duplicates(["ID"], keep = "last", inplace = True)
+    return df
+
+
 def _enrich_invoice(row, stock_df):
     """ Add basic info and stock data to each invoice.
 
@@ -60,7 +72,7 @@ def _enrich_invoice(row, stock_df):
     :return: pandas dataframe, enriched df.
     """
     # Merge product duplicates
-    products_df = merge_duplicates(row.Products)
+    products_df = _merge_duplicates(row.Products)
     # Add columns from stock data to the products
     # noinspection PyTypeChecker
     products_df = products_df.merge(stock_df, how = "left", indicator = Basic.found_in,
