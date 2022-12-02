@@ -93,19 +93,6 @@ def csvstr_to_df(string):
     return df
 
 
-def merge_duplicates(products):
-    """ Merge Quantities, and drop duplicate Products.
-
-    :param products: list, products.
-    :return: pandas dataframe, products without duplicates.
-    """
-    log.debug("Remove duplicate products.")
-    df = pd.DataFrame(products)
-    df["Quantity"] = df.groupby(["ID"])["Quantity"].transform('sum')
-    df.drop_duplicates(["ID"], keep = "last", inplace = True)
-    return df
-
-
 def get_files():
     """ Get the filehandler to find corresponding file names for exporting/importing data.
 

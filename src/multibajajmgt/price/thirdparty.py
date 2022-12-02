@@ -28,6 +28,21 @@ def export_prices():
     write_to_csv(f"{PRICE_DIR}/{get_files().get_price()}.{DocExt.csv}", price_df)
 
 
+def _drop_duplicates(df, search_key):
+    """ Drop duplicate products.
+
+    :param df: pandas dataframe, data.
+    :param search_key: string, key to filter duplicates by.
+    :return: pandas dataframe, data.
+    """
+    df["is_duplicate"] = df.duplicated(subset = [search_key], keep = False)
+    duplicate_df = df[df["is_duplicate"]]
+    if duplicate_df.size > 0:
+        log.warning(f"Found duplicates,\n {duplicate_df}")
+        df.drop_duplicates([search_key], keep = "first", inplace = True)
+    return df
+
+
 def _extract_invoice_products():
     """ Combine all products of each successful invoice.
 
@@ -38,6 +53,8 @@ def _extract_invoice_products():
     chunks = [row.Products for row in invoices_df.itertuples()]
     products = list(itertools.chain.from_iterable(chunks))
     products_df = pd.DataFrame(products).drop(["Name", "Quantity"], axis = 1)
+    # Remove duplicate products
+    products_df = _drop_duplicates(products_df, "ID")
     return products_df
 
 
@@ -82,6 +99,8 @@ def update_product_prices():
     products_df = _extract_invoice_products()
     enriched_df = _enrich_product_prices(price_df, products_df)
     enriched_df = enriched_df.apply(_calculate_status, axis = 1)
+    # Filter products with price fluctuations
+    enriched_df = enriched_df[enriched_df["Status"] != "equal"]
     write_to_csv(historical_file_path, enriched_df,
                  columns = ["External ID", "Internal Reference", "Old Sales Price", "Old Cost", "Unit Cost",
                             "Unit Cost", "Status"],

@@ -214,15 +214,16 @@ def inquire_product_line(ref_id):
                 "STR_VEHICLE_MODEL": line["strModelDesc"],
             }
         else:
+            # if `strMakeCode` == `BAJ` get value, else get `data['lstPADLRProductlineDetails_PADLROrder'][-1]`
             for elem in data['lstPADLRProductlineDetails_PADLROrder']:
+                line = {
+                    "STR_PROD_HIER_CODE": elem["strMakeCode"],
+                    "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
+                    "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
+                    "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
+                    "STR_VEHICLE_MODEL": elem["strModelDesc"],
+                }
                 if elem["strMakeCode"] == "BAJ":
-                    line = {
-                        "STR_PROD_HIER_CODE": elem["strMakeCode"],
-                        "STR_VEHICLE_TYPE_CODE": elem["strProductlineCode"],
-                        "STR_VEHICLE_TYPE": elem["strProductlineDesc"],
-                        "STR_VEHICLE_MODEL_CODE": elem["strModelCode"],
-                        "STR_VEHICLE_MODEL": elem["strModelDesc"],
-                    }
                     break
         return product | line
 
@@ -255,9 +256,10 @@ def inquire_product_category(ref_id):
         if len(categories) == 1:
             category = categories[0]
         else:
+            # if `STR_PROD_HIER_CODE` == `BAJ` get value, else get `categories[-1]`
             for elem in categories:
+                category = elem
                 if elem["STR_PROD_HIER_CODE"] == "BAJ":
-                    category = elem
                     break
         return category
     except r_exceptions.ConnectionError:
