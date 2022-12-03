@@ -1,8 +1,10 @@
 import json
 import os.path
-import pandas as pd
-from google.auth.exceptions import RefreshError
+import sys
 
+import pandas as pd
+
+from google.auth.exceptions import RefreshError
 # noinspection PyPackageRequirements
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -17,6 +19,7 @@ from multibajajmgt.enums import (
     BasicFieldName as BaseField,
     InvoiceField as InvoField
 )
+from tenacity import retry, retry_if_exception_type, stop_after_attempt
 from typing import Any
 
 service: Any
@@ -29,6 +32,9 @@ SPREADSHEET_ID = "18kz-I9F90_vL60zHbGmtl8LMiAnJzy2nN_2DHzjJMIw"
 RANGE_NAME = "A:D"
 
 
+@retry(retry = retry_if_exception_type(RefreshError),
+       reraise = True,
+       stop = stop_after_attempt(1))
 def configure():
     """ Validate credentials, fetch token and set service.
     """
@@ -45,7 +51,6 @@ def configure():
                 log.warning("Refresh token expired or revoked. Deleting token file.")
                 os.remove(TOKEN_FILE)
                 log.debug("Retry configuration.")
-                return configure()
         else:
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIAL_FILE, SCOPES)
             credentials = flow.run_local_server(port = 0)
@@ -61,7 +66,11 @@ def inquire_sales_invoices():
     log.debug("Fetch Sales Invoices.")
     # If not already configured
     if not service:
-        configure()
+        try:
+            configure()
+        except RefreshError as e:
+            log.error("Failed to refresh expired token due to: {}", e)
+            sys.exit(0)
     sheet = service.spreadsheets()
     request = sheet.values().get(spreadsheetId = SPREADSHEET_ID, range = RANGE_NAME)
     response = request.execute()
