@@ -1,7 +1,7 @@
 import random
-import json
-
 import requests
+import json
+import sys
 
 from loguru import logger as log
 from multibajajmgt.config import (
@@ -42,12 +42,15 @@ def _json_rpc(url, method, params):
         response.raise_for_status()
         response = response.json()
         if "error" in response:
-            raise Exception(response["error"])
+            log.error("Error occurred: {}", response["error"])
+            sys.exit(0)
         return response["result"]
     except requests.exceptions.HTTPError as e:
         log.error("Invalid response: {}", e)
+        sys.exit(0)
     except requests.exceptions.RequestException as e:
         log.error("Something went wrong with the request: {}", e)
+        sys.exit(0)
 
 
 def _export_request(url, data):
@@ -74,8 +77,10 @@ def _export_request(url, data):
         return response.text
     except requests.exceptions.HTTPError as e:
         log.error("Invalid response: {}", e)
+        sys.exit(0)
     except requests.exceptions.RequestException as e:
         log.error("Something went wrong with the request: {}", e)
+        sys.exit(0)
 
 
 def _call(url, service, method, *args):
