@@ -9,8 +9,7 @@ from multibajajmgt.enums import (
     DocumentResourceExtension as DocExt,
     DPMCFieldName as DPMCField,
     InvoiceField as InvoField,
-    InvoiceStatus as Status,
-    InvoiceType as Type
+    InvoiceStatus as Status
 )
 from multibajajmgt.exceptions import DataNotFoundError
 
@@ -29,37 +28,52 @@ def _reindex_df(df, index):
         .fillna("")
 
 
+def _fetch_advanced_data(invoice_type, invoice_id):
+    """ Setup and Fetch data accordingly to passed parameters.
+
+    :param invoice_type: str, Could be Invoice/Mobile/Order.
+    :param invoice_id: str, identification.
+    :return: dict, fetched data.
+    """
+    # Setup payload fields depending on available info in base file
+    col_name = "STR_INVOICE_NO"
+    # Fetch invoice data(invoice and GRN numbers) from DPMC server
+    try:
+        if "Order" in invoice_type:
+            col_name = "STR_DLR_ORD_NO"
+        elif "Mobile" in invoice_type:
+            col_name = "STR_MOBILE_INVOICE_NO"
+        data = dpmc_client.inquire_goodreceivenote_by_order_ref(col_name, invoice_id)
+    except DataNotFoundError:
+        try:
+            # Usually used for older invoices, since "inquire_goodreceivenote_by_order_ref"'s data expires fast
+            if "Order" in invoice_type:
+                col_name = "STR_ORDER_NO"
+            elif "Mobile" in invoice_type:
+                # Mobile invoice ID fetch no longer works
+                log.error("Failed to retrieve Invoice: {}, Mobile Invoice ID expired.", invoice_id)
+                return
+            data = dpmc_client.inquire_goodreceivenote_by_grn_ref(col_name, invoice_id)
+        except DataNotFoundError:
+            log.error("Failed to retrieve Invoice: {}.", invoice_id)
+            return
+    return data
+
+
 def _enrich_with_advanced_data(row):
     """ Enrich invoices with grn and order id.
 
     :param row: pandas series, rows of a dataframe.
     :return: pandas series, enriched row.
     """
-    invoice_type = row[InvoField.type]
     # Can-be invoice, order, mobile number
     default_id = row[InvoField.default_id]
-    # For column name used in the request
-    col_name = None
-    # Setup payload fields depending on available info in base file
-    # Incase Type.order is necessary which is not used currently
-    #   if Type.order in "Order":
-    #       order_field = "STR_DLR_ORD_NO"
-    #       grn_field = "STR_ORDER_NO"
-    if Type.invoice.val in invoice_type:
-        col_name = Type.invoice.col
-    elif Type.mobile.val in invoice_type:
-        col_name = Type.mobile.col
-    # Fetch invoice data(invoice and GRN numbers) from DPMC server
-    try:
-        invoice_data = dpmc_client.inquire_goodreceivenote_by_order_ref(col_name, default_id)
-    except DataNotFoundError:
-        try:
-            # Usually happens for older invoices, since "inquire_goodreceivenote_by_order_ref"'s data expires fast
-            invoice_data = dpmc_client.inquire_goodreceivenote_by_grn_ref(col_name, default_id)
-        except DataNotFoundError:
-            log.error("Failed to retrieve Invoice: {}.", default_id)
-            row[Field.status] = Status.failed
-            return row
+    # Configure and get data
+    invoice_data = _fetch_advanced_data(row[InvoField.type], default_id)
+    # If getting data didn't work properly
+    if not invoice_data:
+        row[Field.status] = Status.failed
+        return row
     if len(invoice_data) > 1:
         # If "id" is incomplete and matches parts of multiple invoice ids.
         row[Field.status] = Status.multiple

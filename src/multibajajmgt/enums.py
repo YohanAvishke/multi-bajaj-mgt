@@ -67,15 +67,6 @@ class InvoiceStatus(MultiBajajMgtStrEnum):
     multiple = "Multiple"
 
 
-class InvoiceType(MultiBajajMgtTupleEnum):
-    def __init__(self, val, col):
-        self.val = val
-        self.col = col
-
-    invoice = ("Invoice", "STR_INVOICE_NO")
-    mobile = ("Mobile", "STR_MOBILE_INVOICE_NO")
-
-
 class BasicFieldName(MultiBajajMgtStrEnum):
     # Flags
     status = "Status"
