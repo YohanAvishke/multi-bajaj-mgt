@@ -13,11 +13,11 @@ from multibajajmgt.config import (
     DPMC_SERVER_PASSWORD as SERVER_PASSWORD,
     DPMC_SERVER_URL as SERVER_URL,
     DPMC_SERVER_USERNAME as SERVER_USERNAME,
-    SOURCE_DIR
+    MAX_RETRY_COUNT, SOURCE_DIR
 )
 from multibajajmgt.exceptions import DataNotFoundError, InvalidIdentityError, JSONDecodeError
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, stop_after_delay
 
-CONN_RETRY_MAX = 5
 GET_HELP_URL = f"{SERVER_URL}/Help/GetHelp"
 
 TOKEN_FILE = f"{SOURCE_DIR}/client/dpmc/token.json"
@@ -84,6 +84,9 @@ def configure():
         return _authenticate()
 
 
+@retry(retry = retry_if_exception_type(r_exceptions.ConnectionError),
+       reraise = True,
+       stop = stop_after_attempt(MAX_RETRY_COUNT))
 def _call(url, payload = None):
     """ Base function to send requests to the DPMC server.
 
@@ -118,23 +121,6 @@ def _call(url, payload = None):
             return None
 
 
-def _retry_request(request_func, *args):
-    """ Retry a failed reqeust (eg: closed by peer).
-
-    :param request_func: function ref, function pointer to be retired.
-    :param args: tuple, parameters for the request_func.
-    :return: function call,
-    """
-    log.warning("Connection timed out for: {} Retrying Request.", args)
-    global retry_count
-    retry_count = retry_count + 1
-    if retry_count <= CONN_RETRY_MAX:
-        return request_func(*args)
-    else:
-        log.error("Connection retried for {} times, but still failed.", retry_count)
-        sys.exit(0)
-
-
 def inquire_product_price(ref_id):
     """ Fetch price of a product.
 
@@ -155,8 +141,8 @@ def inquire_product_price(ref_id):
     try:
         response = _call(f"{SERVER_URL}/PADEALER/PADLRItemInquiry/Inquire", payload)
     except r_exceptions.ConnectionError:
-        # Retry each request for maximum of 5 times
-        return _retry_request(inquire_product_price, ref_id)
+        log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
+        sys.exit(0)
     else:
         if response["STATE"] == "FALSE":
             raise InvalidIdentityError("Failed to fetch price. Incorrect ID: {}, Response: {}.", ref_id, response)
@@ -192,7 +178,8 @@ def inquire_product_line(ref_id):
     try:
         data = _call(f"{SERVER_URL}/PADealer/PADLROrder/Inquire", payload)
     except r_exceptions.ConnectionError:
-        return _retry_request(inquire_product_line, ref_id)
+        log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
+        sys.exit(0)
     else:
         if not data or data["STATE"] == "FALSE":
             raise InvalidIdentityError("Failed to fetch line. Incorrect ID: {}, Response: {}.", ref_id, data)
@@ -263,7 +250,8 @@ def inquire_product_category(ref_id):
                     break
         return category
     except r_exceptions.ConnectionError:
-        return _retry_request(inquire_product_category, ref_id)
+        log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
+        sys.exit(0)
 
 
 def inquire_products_by_invoice(invoice, grn):
@@ -296,7 +284,7 @@ def inquire_products_by_invoice(invoice, grn):
     try:
         response = _call(f"{SERVER_URL}/PADEALER/PADLRGOODRECEIVENOTE/Inquire", payload)
     except r_exceptions.ConnectionError as e:
-        log.error(e)
+        log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
         sys.exit(0)
     else:
         if response["STATE"] == "FALSE":
@@ -328,7 +316,7 @@ def _inquire_goodreceivenote(payload):
     try:
         response_data = _call(GET_HELP_URL, payload)
     except r_exceptions.ConnectionError as e:
-        log.error(e)
+        log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
         sys.exit(0)
     else:
         if response_data == "NO DATA FOUND":

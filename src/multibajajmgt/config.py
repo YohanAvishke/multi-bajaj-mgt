@@ -48,6 +48,8 @@ DPMC_SESSION_LIFETIME = 3600  # 1 hour
 # date time based configurations
 DATETIME_FORMAT = "%c"
 DATETIME_FILE_FORMAT = "%Y-%m-%d_%H-%M-%S"
+# Request configurations
+MAX_RETRY_COUNT = 5
 
 
 def configure_app(pos_categ, qty_limit):
