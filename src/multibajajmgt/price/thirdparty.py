@@ -22,7 +22,7 @@ curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 def export_prices():
     """ Fetch and Save all(qty >= 0 and qty < 0) non DPMC product prices.
     """
-    log.info("Export Third-Party prices.")
+    log.info("Export ThirdParty product prices.")
     raw_price = odoo_client.fetch_all_thirdparty_prices()
     price_df = csvstr_to_df(raw_price)
     write_to_csv(f"{PRICE_DIR}/{get_files().get_price()}.{DocExt.csv}", price_df)
@@ -38,7 +38,7 @@ def _drop_duplicates(df, search_key):
     df["is_duplicate"] = df.duplicated(subset = [search_key], keep = False)
     duplicate_df = df[df["is_duplicate"]]
     if duplicate_df.size > 0:
-        log.warning(f"Found duplicates,\n {duplicate_df}")
+        log.info(f"Drop duplicates:\n {duplicate_df}")
         df.drop_duplicates([search_key], keep = "first", inplace = True)
     return df
 
@@ -67,7 +67,6 @@ def _enrich_product_prices(price_df, products_df):
     """
     df = products_df.merge(price_df, how = "left", indicator = Basic.found_in, left_on = InvoField.part_code,
                            right_on = OdooLabel.internal_id)
-    df = df[df[Basic.found_in] == "both"]
     return df
 
 
@@ -77,8 +76,12 @@ def _calculate_status(row):
     :param row: pandas series, each product.
     :return: pandas series, updated product.
     """
+    index = row.name + 1
     price = row["Unit Cost"]
     old_price = row["Old Sales Price"]
+    if row.FoundIn == "left_only":
+        log.warning("{} - Failed  - Number: {} | Price: {}.", index, row.ID, price)
+        return row
     if price > old_price:
         status = PriceStatus.up
     elif price < old_price:
@@ -86,21 +89,22 @@ def _calculate_status(row):
     else:
         status = PriceStatus.equal
     row["Status"] = status
+    log.success("{} - Success - Number: {} | Price: {} | Status: {}.", index, row.ID, price, status)
     return row
 
 
 def update_product_prices():
     """ Update prices in price-tp.csv file to be able to imported to the Odoo server.
     """
-    log.info("Update Third-Party product prices.")
+    log.info("Update ThirdParty product prices.")
     price_file = f"{get_files().get_price()}.{DocExt.csv}"
     historical_file_path = mk_dir(curr_his_dir, f"{price_file}")
     price_df = pd.read_csv(f"{PRICE_DIR}/{price_file}")
     products_df = _extract_invoice_products()
     enriched_df = _enrich_product_prices(price_df, products_df)
     enriched_df = enriched_df.apply(_calculate_status, axis = 1)
-    # Filter products with price fluctuations
-    enriched_df = enriched_df[enriched_df["Status"] != "equal"]
+    # Filter products that are valid and have price fluctuations
+    enriched_df.query("FoundIn == 'both' and Status != 'equal'", inplace = True)
     write_to_csv(historical_file_path, enriched_df,
                  columns = ["External ID", "Internal Reference", "Old Sales Price", "Old Cost", "Unit Cost",
                             "Unit Cost", "Status"],

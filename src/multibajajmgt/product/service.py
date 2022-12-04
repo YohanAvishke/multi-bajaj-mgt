@@ -32,6 +32,7 @@ def _save_historical_data(product_ids):
 
     :param product_ids: list, created products.
     """
+    log.info("Update product creation history file.")
     product_history_file = f"{DocName.product_history}.{DocExt.csv}"
     products_his_df = pd.read_csv(f"{PRODUCT_DIR}/{product_history_file}")
     # Add newly created products to history
@@ -128,7 +129,7 @@ def _find_invalid_products(invo_row):
 def create_missing_products():
     """ Create records for invalid products from third-party invoices.
     """
-    log.info("Create missing products of an invoice.")
+    log.info("Create missing products.")
     created_prods = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
     invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
@@ -159,7 +160,7 @@ def create_missing_products():
                         continue
                     else:
                         # Upload product
-                        log.info("Created missing product. ID: {}, Name: {}.", product.default_code, product.name)
+                        log.success("Created missing product. ID: {}, Name: {}.", product.default_code, product.name)
                         odoo_client.create_product(product)
                         created_prods.append({"Date": cur_date, "Internal Reference": internal_ref})
                 else:
@@ -167,14 +168,14 @@ def create_missing_products():
                                 pos_code)
                     continue
             else:
-                log.warning("Product ID: {} is already created.", internal_ref)
+                log.warning("Failed to create product: {}, already created.", internal_ref)
     _save_historical_data(created_prods)
 
 
 def update_barcode_nomenclature():
     """ Update DPMC products barcodes.
     """
-    log.info("Creating a new barcode nomenclature.")
+    log.info("Create a barcode nomenclature.")
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     barcode_df = stock_df.drop(["Product/Product/ID", "Quantity_On_Hand"], axis = 1)
     barcode_df.at[0, "Barcode Nomenclature"] = f"DPMC Nomenclature {cur_date}"

@@ -1,3 +1,4 @@
+from loguru import logger as log
 from multibajajmgt.enums import (
     DocumentResourceName as DocName,
     POSParentCategory as POSCateg,
@@ -76,6 +77,7 @@ class App:
         return self._pos_categ
 
     def set_pos_categ(self, pos_categ):
+        log.debug("Setup POS category: {} for App.", pos_categ)
         self._pos_categ = pos_categ
         self.set_file_handler(pos_categ)
 

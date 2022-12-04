@@ -31,7 +31,7 @@ SALE_DIR = f"{DATA_DIR}/sale"
 def configure_env():
     """ Configure Environment variables.
     """
-    log.debug("Configure Environment variables.")
+    log.debug("Setup Environment variables.")
     load_dotenv(find_dotenv(f"{ROOT_DIR}/.env"))
 
 
@@ -59,7 +59,7 @@ def configure_app(pos_categ, qty_limit):
     :param qty_limit: str,
     :return: app,
     """
-    log.debug("Setup application.")
+    log.debug("Setup MultiBajajMGT Application.")
     app = App()
     app.set_pos_categ(pos_categ)
     app.set_qty_limit(qty_limit)

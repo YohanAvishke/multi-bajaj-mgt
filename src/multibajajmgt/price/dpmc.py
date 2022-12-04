@@ -22,7 +22,7 @@ curr_his_dir = get_dated_dir(PRICE_HISTORY_DIR)
 def export_prices():
     """ Fetch and Save all(qty >= 0 and qty < 0) DPMC product prices.
     """
-    log.info("Export DPMC product's prices.")
+    log.info("Export DPMC product prices.")
     raw_data = odoo_client.fetch_all_dpmc_prices()
     products = csvstr_to_df(raw_data)
     write_to_csv(f"{PRICE_DIR}/{get_files().get_price()}.{DocExt.csv}", products)
@@ -45,6 +45,7 @@ def _get_price_info(row):
         # Duplicate existing price since the data fetching failed
         price = old_price
         process_status = "Failed"
+        log.warning("{} - {}  - Number: {} | Price: {}.", (index + 1), process_status, ref_id, price)
     else:
         price = product_data["INT_UNIT_COST"]
         # Calculate and save status
@@ -55,6 +56,8 @@ def _get_price_info(row):
         else:
             status = Status.equal
         process_status = "Success"
+        log.success("{} - {} - Number: {} | Price: {} | Status: {}.",
+                    (index + 1), process_status, ref_id, price, status)
     return {
         "index": index,
         "ref_id": ref_id,
@@ -84,7 +87,6 @@ def _save_price_info(info, df, file):
         # Get the row as a series. Convert it to a df and flip the row and column
         row_transposed = df.loc[index].to_frame().T
         write_to_csv(path = file, df = row_transposed, mode = "a", header = not os.path.exists(file))
-    log.info(f"{index + 1} - {info['process_status']} - Product Number: {info['ref_id']}, Price: {price}")
 
 
 def update_product_prices():
@@ -110,13 +112,13 @@ def update_product_prices():
 def merge_historical_data():
     """ Merge timed files in a historical dir.
     """
-    log.info("Merge historical price files.")
     merged_file = f"{curr_his_dir}/{get_files().get_price()}.{DocExt.csv}"
     # Remove existing merge file
     if os.path.isfile(merged_file):
         os.remove(merged_file)
     # Read, sort, merge and save the new merge file
     files = sorted(Path(curr_his_dir).glob(f"price_dpmc_all_*.{DocExt.csv}"))
+    log.info("Merge historical price files: {}.", files)
     df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
     write_to_csv(merged_file, df)
     # Remove timed files

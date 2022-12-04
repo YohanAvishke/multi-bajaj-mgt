@@ -31,6 +31,7 @@ def _fix_time_diff(from_date, to_date):
     :param to_date: str,
     :return: tuple,
     """
+    log.debug("Fix time difference between local time and Odoo server time.")
     time_diff = timedelta(hours = 5, minutes = 30)
     from_date = datetime.strptime(from_date, "%Y-%m-%d %H:%M:%S") - time_diff
     from_date = f"{from_date}"
@@ -46,7 +47,7 @@ def export_sales_report(from_date, to_date = None):
     :param from_date: str,
     :param to_date: str,
     """
-    log.info("Export sales report from: {} to: {}", from_date, to_date)
+    log.info("Export sales report from: {} to: {}.", from_date, to_date)
     # Fix time difference of the Odoo server
     from_date, to_date = _fix_time_diff(from_date, to_date)
     # Fetch report

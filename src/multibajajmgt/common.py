@@ -68,14 +68,14 @@ def mk_dir(dir_path, file_path):
     :param file_path: str, file name.
     :return: str, dir_path + file_path.
     """
-    log.debug("Create dir for: {} (if doesn't exist), and get file path.", dir_path)
+    log.debug("Create directory for: {} (if doesn't exist), and get file path.", dir_path)
     try:
         os.makedirs(dir_path)
     except OSError as exc:
         if exc.errno == errno.EEXIST and os.path.isdir(dir_path):
             pass
         else:
-            log.critical("Failed to retrieve existing dir: {}", dir_path)
+            log.critical("Failed to retrieve existing dir: {}.", dir_path)
             sys.exit(0)
     return f"{dir_path}/{file_path}"
 
@@ -86,7 +86,7 @@ def csvstr_to_df(string):
     :param string: str, valid CSV string.
     :return: pandas dataframe, converted dataframe.
     """
-    log.debug("Convert a CSV supported String to a Dataframe.")
+    log.debug("Convert a CSV String to a Dataframe.")
     str_obj = StringIO(string)
     # noinspection PyTypeChecker
     df = pd.read_csv(str_obj)

@@ -40,10 +40,12 @@ def _enrich_invoices(invoices):
         info = invoice_df.loc[0].values.all()
         # Break invoice data into groups
         info = info.split("*")[-1].split("&")
+        invo_id = info[0]
         # Break product data into separate lists
         raw_df = invoice_df[1:].apply(lambda x: x.Invoices.split(" "), axis = 1)
         # Skip the rest if no products are available in the invoice
         if len(raw_df) == 0:
+            log.warning("Failed to enrich Invoice: {} products. None found.", invo_id)
             continue
         names = raw_df.apply(lambda x: str(" ".join(x[3:]))).to_list()
         codes = raw_df.apply(lambda x: x[0]).to_list()
@@ -59,17 +61,18 @@ def _enrich_invoices(invoices):
         invoice = {
             InvoField.date: info[-1],
             BaseField.status: Status.success,
-            InvoField.default_id: info[0],
+            InvoField.default_id: invo_id,
             InvoField.products: products
         }
         enriched_invoices.append(invoice)
+        log.success("Enriched Invoice: {}.", invo_id)
     return enriched_invoices
 
 
 def export_invoice_data():
     """ Get raw invoice data, convert and save it in a historical file.
     """
-    log.info("Export Third-Party Invoice data.")
+    log.info("Export ThirdParty Invoice.")
     historical_file = mk_dir(curr_historical_dir, f"{get_files().get_invoice()}.{DocExt.json}")
     invoice_df = pd.read_csv(f"{INVOICE_DIR}/{get_files().get_invoice()}.{DocExt.txt}", header = None,
                              names = ["Invoices"])

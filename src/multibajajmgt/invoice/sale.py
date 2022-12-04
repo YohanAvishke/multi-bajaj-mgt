@@ -60,21 +60,23 @@ def _extract_invoices(chunks_df):
     for invoice_df in invoices:
         invoice_df.reset_index(drop = True, inplace = True)
         date = invoice_df[InvoField.date][0]
+        invo_id = f"Sales of {date}"
         products = invoice_df[[InvoField.part_code, InvoField.part_qty]].to_dict('records')
         invoice = {
             InvoField.date: date,
             BaseField.status: Status.success,
-            InvoField.default_id: f"Sales of {date}",
+            InvoField.default_id: invo_id,
             InvoField.products: products,
         }
         enriched_invoices.append(invoice)
+        log.success("Enriched Invoice: {}.", invo_id)
     return enriched_invoices
 
 
 def export_invoice_data():
     """ Fetch, enrich and restructure Sales invoices with advanced data.
     """
-    log.info("Export Sales Invoice data.")
+    log.info("Export Sales Invoice.")
     historical_file = mk_dir(curr_historical_dir, f"{get_files().get_invoice()}.{DocExt.json}")
     data = sale_client.inquire_sales_invoices()
     # Identify chunks(rows with a value to col `isUpdated`) in the data

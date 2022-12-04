@@ -57,3 +57,4 @@ def configure_logger() -> logger:
     """
     logger.remove()
     logger.add(stdout, level=LOG_LEVEL, colorize=True, format=formatter)
+    logger.debug("Setup logger for logging.")

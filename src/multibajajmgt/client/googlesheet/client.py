@@ -38,7 +38,7 @@ RANGE_NAME = "A:D"
 def configure():
     """ Validate credentials, fetch token and set service.
     """
-    log.info("Configure Google Sheet client.")
+    log.info("Setup Google-Sheet client.")
     credentials = None
     global service
     if os.path.exists(TOKEN_FILE):
