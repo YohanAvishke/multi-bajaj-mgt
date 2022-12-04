@@ -124,7 +124,7 @@ def configure():
 
     Configure credentials and create a token file.
     """
-    log.info("Configure Odoo client.")
+    log.info("Setup Odoo Server client.")
     global user_id
     global token
     global session_id
@@ -168,7 +168,7 @@ def fetch_all_dpmc_prices(product_ids = False):
     :param product_ids: list, product's db id list for filtering.
     :return: dict, dpmc price data.
     """
-    log.debug("Fetch DPMC product prices from `export/csv`.")
+    log.debug("Fetch DPMC product prices through <export/csv>.")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -221,7 +221,7 @@ def fetch_all_stock():
 
     :return: dict, dict of list with product data.
     """
-    log.debug("Fetch all stock from `export/csv`.")
+    log.debug("Fetch all stock from <export/csv>.")
     domain = [["available_in_pos", "=", True]]
     return _fetch_stock(domain)
 
@@ -231,7 +231,7 @@ def fetch_dpmc_stock():
 
     :return: dict, dict of list with product data.
     """
-    log.debug("Fetch DPMC stock from `export/csv`.")
+    log.debug("Fetch DPMC stock from <export/csv>.")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -247,7 +247,7 @@ def fetch_thirdparty_stock():
 
     :return: dict, dict of list with product data.
     """
-    log.debug("Fetch Third-Party stock from `export/csv`.")
+    log.debug("Fetch Third-Party stock from <export/csv>`.")
     domain = [
         "&",
         ["available_in_pos", "=", True],
@@ -284,7 +284,7 @@ def create_product(product: Product):
     :param product: Product, product data.
     :return: int, created product's database id.
     """
-    log.debug("Create product on to `product.template`.")
+    log.debug("Create product on to <product.template>.")
     data_upload = {
         "type": "product",
         "name": product.name,
@@ -329,7 +329,7 @@ def fetch_sale_report(from_date,
     :param order_by: False/str, row ordering.
     :return: dict, data.
     """
-    log.debug("Fetch ordered products from `sale.report`.")
+    log.debug("Fetch sold products from <sale.report>.")
     domain = [["date", ">", from_date]]
     if to_date:
         domain.insert(0, "&")

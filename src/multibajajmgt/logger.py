@@ -1,6 +1,6 @@
 from config import LOG_LEVEL
+from loguru import logger
 from sys import stdout
-from loguru import logger as custom_logger
 
 
 def formatter(log: dict) -> str:
@@ -9,42 +9,52 @@ def formatter(log: dict) -> str:
     :param log: dict, containing log level, details, etc.
     :returns: str,
     """
+    if log["level"].name == "DEBUG":
+        return (
+            "<fg #f8ffe5>{time:HH:mm:ss A} | </fg #f8ffe5>"
+            "<fg #1b9aaa>{level}</fg #1b9aaa>    | "
+            "<fg #f8ffe5>{file}:{function}:{line} | </fg #f8ffe5>"
+            "{message}\n"
+        )
     if log["level"].name == "INFO":
         return (
-            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
-            "<fg #cfe2f3>{level}</fg #cfe2f3>: "
-            "<light-white>{message}</light-white> \n"
+            "<fg #f8ffe5>{time:HH:mm:ss A} | </fg #f8ffe5>"
+            "{level}     | "
+            "{message}\n"
         )
     if log["level"].name == "SUCCESS":
         return (
-            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
-            "<fg #8aa88a>{level}</fg #8aa88a>: "
-            "<light-white>{message}</light-white> \n"
+            "<fg #f8ffe5>{time:HH:mm:ss A} | </fg #f8ffe5>"
+            "<fg #06d6a0>{level}</fg #06d6a0>  | "
+            "{message}\n"
         )
     if log["level"].name == "WARNING":
         return (
-            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
-            "<fg #ffe900>{level}</fg #ffe900>: "
-            "<light-white>{message}</light-white> \n"
+            "<fg #f8ffe5>{time:HH:mm:ss A} | </fg #f8ffe5>"
+            "<fg #ffc43d>{level}</fg #ffc43d>  | "
+            "{message}\n"
         )
-    elif log["level"].name == "ERROR":
+    if log["level"].name == "ERROR":
         return (
-            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
-            "<fg #9e5757>{level}</fg #9e5757>: "
-            "<light-white>{message}</light-white> \n"
+            "<fg #f8ffe5>{time:HH:mm:ss A} | </fg #f8ffe5>"
+            "<fg #ef476f>{level}</fg #ef476f>    | "
+            "<fg #f8ffe5>{file}:{function}:{line} | </fg #f8ffe5>"
+            "{message}\n"
         )
-    else:
+    if log["level"].name == "CRITICAL":
         return (
-            "<fg #aad1f7>{time:HH:mm:ss A}</fg #aad1f7> | "
-            "<fg #67c9c4>{level}</fg #67c9c4>: "
-            "<light-white>{message}</light-white> \n"
+            "<fg #f8ffe5>{time:HH:mm:ss A} | </fg #f8ffe5>"
+            "<bg #ef476f>{level}</bg #ef476f> | "
+            "<fg #f8ffe5>{file}:{function}:{line} | </fg #f8ffe5>"
+            "{message}\n"
         )
 
 
-def configure_logger() -> custom_logger:
+def configure_logger() -> logger:
     """ Create custom logger.
 
     :returns: Logger,
     """
-    custom_logger.remove()
-    custom_logger.add(stdout, level = LOG_LEVEL, colorize = True, format = formatter)
+    logger.remove()
+    logger.add(stdout, level=LOG_LEVEL, colorize=True, format=formatter)
+    logger.debug("Setup logger for logging.")

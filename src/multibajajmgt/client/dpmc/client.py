@@ -70,7 +70,7 @@ def _authenticate():
 def configure():
     """ Validate and if expired renew the session cookie.
     """
-    log.info("Configure DPMC client session.")
+    log.info("Setup DPMC server client.")
     try:
         with open(TOKEN_FILE, "r") as file:
             file_data = json.load(file)
@@ -283,7 +283,7 @@ def inquire_products_by_invoice(invoice, grn):
         payload["strGRNno"] = grn
     try:
         response = _call(f"{SERVER_URL}/PADEALER/PADLRGOODRECEIVENOTE/Inquire", payload)
-    except r_exceptions.ConnectionError as e:
+    except r_exceptions.ConnectionError:
         log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
         sys.exit(0)
     else:
@@ -315,7 +315,7 @@ def _inquire_goodreceivenote(payload):
     payload = base_payload | payload
     try:
         response_data = _call(GET_HELP_URL, payload)
-    except r_exceptions.ConnectionError as e:
+    except r_exceptions.ConnectionError:
         log.error("Failed connection. Retry statistics: {}.", _call.retry.statistics)
         sys.exit(0)
     else:

@@ -3,7 +3,7 @@ import pandas as pd
 
 from loguru import logger as log
 from multibajajmgt.app import App
-from multibajajmgt.common import csvstr_to_df, get_dated_dir, get_files, get_now_file, mk_dir, write_to_csv
+from multibajajmgt.common import (csvstr_to_df, get_dated_dir, get_files, get_now_file, mk_dir, write_to_csv)
 from multibajajmgt.config import STOCK_DIR, INVOICE_HISTORY_DIR, ADJUSTMENT_DIR
 from multibajajmgt.enums import (
     BasicFieldName as Basic,
@@ -22,8 +22,8 @@ curr_adj_dir = get_dated_dir(ADJUSTMENT_DIR)
 def export_products():
     """ Fetch, process and save stock.
     """
-    log.info("Export the entire Stock.")
     pos_categ = App.get_app().get_pos_categ()
+    log.info("Export stock: {}.", pos_categ)
     # Fetch function depends on app's configured POS category
     raw_data = odoo_client.fetch_dpmc_stock() if pos_categ == POSCateg.dpmc else odoo_client.fetch_all_stock()
     product_df = csvstr_to_df(raw_data)
@@ -39,7 +39,7 @@ def _validate_products(products_df):
     for product in products_df.itertuples():
         if product.FoundIn == "left_only":
             products_df = products_df.drop(product.Index)
-            log.warning("Invalid product found for Id: {}.", product.ID)
+            log.warning("Failed to validate product: {}.", product.ID)
     products_df.drop(Basic.found_in, axis = 1, inplace = True)
     products_df.reset_index(drop = True, inplace = True)
     return products_df
