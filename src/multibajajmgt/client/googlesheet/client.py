@@ -34,7 +34,7 @@ RANGE_NAME = "A:D"
 
 @retry(retry = retry_if_exception_type(RefreshError),
        reraise = True,
-       stop = stop_after_attempt(1))
+       stop = stop_after_attempt(2))
 def configure():
     """ Validate credentials, fetch token and set service.
     """
@@ -51,6 +51,7 @@ def configure():
                 log.warning("Refresh token expired or revoked. Deleting token file.")
                 os.remove(TOKEN_FILE)
                 log.debug("Retry configuration.")
+                raise RefreshError()
         else:
             flow = InstalledAppFlow.from_client_secrets_file(CREDENTIAL_FILE, SCOPES)
             credentials = flow.run_local_server(port = 0)
