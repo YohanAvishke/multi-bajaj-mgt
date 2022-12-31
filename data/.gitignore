@@ -1,18 +1,25 @@
-# Ignore everything
+### Ignore everything ###
 *
-# Except following
+
+### Except following ###
 !.gitignore
 !.raw/
+
 !invoice
 !invoice/history
+
 !price
 !price/history
+
 !sale
+
 !stock
 !stock/adjustments
+
 !product
 !product/templates/
 !product/templates/*
 !product/images/
 !product/images/*
+
 !**/README.md
