@@ -79,7 +79,7 @@ def _form_product_obj(prod_row, code, categ_df):
         if code == "BAJAJ":
             # Figure pos code using vehicle code
             vehicle_code = dpmc_data["STR_VEHICLE_TYPE_CODE"]
-            if vehicle_code == "001":
+            if vehicle_code == "001" or vehicle_code == "123":
                 categ_name = "2W"
             elif vehicle_code == "003":
                 categ_name = "3W"
