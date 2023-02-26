@@ -16,7 +16,8 @@ from config import configure_app, configure_env
 from logger import configure_logger
 from multibajajmgt.enums import (
     POSParentCategory as Categ,
-    QuantityAvailability as QtyAva
+    QuantityAvailability as QtyAva,
+    ProductEnrichmentCategories as ProdEnrichCateg
 )
 
 # Configure the logging level and format
@@ -30,9 +31,9 @@ if not os.getenv("ENV_FLAG"):
 app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
-# odoo_client.configure()
-# dpmc_client.configure()
-# sheet_client.configure()
+odoo_client.configure()
+dpmc_client.configure()
+sheet_client.configure()
 
 # Update DPMC prices
 # app.set_pos_categ(Categ.dpmc)
@@ -78,3 +79,9 @@ app = configure_app(Categ.all, QtyAva.all)
 # app.set_pos_categ(Categ.dpmc)
 # stock_service.export_products()
 # product_service.update_barcode_nomenclature()
+
+# Product Data Addon
+app.set_pos_categ(Categ.all)
+# stock_service.export_products()
+product_service.enrich(ProdEnrichCateg.dpmc_stock,
+                       ProdEnrichCateg.yl_stock)
