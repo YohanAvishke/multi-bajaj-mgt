@@ -7,6 +7,7 @@ import multibajajmgt.invoice.dpmc as invoice_dpmc_service
 import multibajajmgt.invoice.sale as invoice_sale_service
 import multibajajmgt.invoice.thirdparty as invoice_tp_service
 import multibajajmgt.product.service as product_service
+import multibajajmgt.product.reports as product_reporter
 import multibajajmgt.price.dpmc as price_dpmc_service
 import multibajajmgt.price.thirdparty as price_tp_service
 import multibajajmgt.sale.service as sale_service
@@ -83,5 +84,5 @@ sheet_client.configure()
 # Product Data Addon
 app.set_pos_categ(Categ.all)
 # stock_service.export_products()
-product_service.enrich(ProdEnrichCateg.dpmc_stock,
-                       ProdEnrichCateg.yl_stock)
+product_reporter.enrich(ProdEnrichCateg.dpmc_stock,
+                        ProdEnrichCateg.yl_stock)
