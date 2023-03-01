@@ -128,7 +128,7 @@ def get_latest_adjustment_cost_report():
     report_df = adj_df.merge(cost_df, on = ["Invoice", "Product Number"], how = "left")
     # Drop duplicate products except the latest
     report_df.sort_values(by = ["Product Number", "Date"], inplace = True)
-    report_df.drop_duplicates(["Product Number"], keep = "first", inplace = True)
+    report_df.drop_duplicates(["Product Number"], keep = "last", inplace = True)
     # Filter products
     report_df = filter_df.merge(report_df, how = "left", on = "Product Number")
     # Save Report
