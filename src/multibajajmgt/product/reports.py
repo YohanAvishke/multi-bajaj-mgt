@@ -2,7 +2,7 @@ import pandas as pd
 
 from loguru import logger as log
 from multibajajmgt.common import get_files, write_to_csv
-from multibajajmgt.config import PRODUCT_DIR, STOCK_DIR, ADJUSTMENT_DIR
+from multibajajmgt.config import PRODUCT_DIR, STOCK_DIR, ADJUSTMENT_DIR, INVOICE_HISTORY_DIR
 from multibajajmgt.enums import (
     DocumentResourceExtension as DocExt,
     DocumentResourceName as DocName,
@@ -16,7 +16,7 @@ def enrich(*enrichments: ProdEnrichCateg):
     log.info(f"Enrich products from {enrichments}.")
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     stock_df = stock_df.drop("Product/Product/ID", axis = 1)
-    product_df = pd.read_csv(f"{PRODUCT_DIR}/{DocName.product}.{DocExt.csv}")
+    product_df = pd.read_csv(f"{PRODUCT_DIR}/{DocName.product_report}.{DocExt.csv}")
     enriched_df = product_df \
         .merge(stock_df, how = "left", on = OdooLabel.internal_id) \
         .rename(columns = {"Quantity_On_Hand": "Bajaj"})
@@ -26,10 +26,10 @@ def enrich(*enrichments: ProdEnrichCateg):
         .rename(columns = {"Internal Reference_x": "Internal Reference", "Quantity_On_Hand": "YL"}) \
         .drop(["YL ref", "Internal Reference_y"], axis = 1) \
         .fillna(0)
-    write_to_csv(f"{PRODUCT_DIR}/{DocName.product}.{DocExt.csv}", enriched_df)
+    write_to_csv(f"{PRODUCT_DIR}/{DocName.product_report}.{DocExt.csv}", enriched_df)
 
 
-def get_past_adjustments():
+def get_adjustment_history():
     invalid_files = [
         "adjustment-21:04:29,30.csv",
         "adjustment-21:05:12.csv",
@@ -43,11 +43,11 @@ def get_past_adjustments():
         "adjustment-2021-06-20.csv",
         "adjustment-2021-06-22.csv"
     ]
-    # Read all adjustments except the ones in invalid_files.
+    # Read all adjustments except the ones in invalid_files
     files = sorted(Path(ADJUSTMENT_DIR).rglob("*.csv"))
     files = [f for f in files if f.name not in invalid_files]
     # Create the Dataframe
-    df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
+    df = pd.concat((pd.read_csv(f) for f in files), ignore_index = True)
     # Drop unwanted columns
     df.drop([
         "Include Exhausted Products",
@@ -74,7 +74,7 @@ def get_past_adjustments():
     # Finalise the dataframe
     df.drop_duplicates(inplace = True)
     df.drop([
-        "reference", "product_id", "InternalReference", "filename"
+        "reference", "product_id", "InternalReference"
     ], axis = 1, inplace = True)
     df.rename(columns = {
         "name": "Invoice",
@@ -83,6 +83,43 @@ def get_past_adjustments():
     return df
 
 
+def _extract_product_df(row):
+    try:
+        # Create product columns
+        df = pd.json_normalize(row.Products)
+        df = df.assign(**{"Invoice": row.ID, "Date": row.Date})
+        # Finalise dataframe
+        df.rename(columns = {"ID": "Product", "Unit Cost": "Cost"}, inplace = True)
+        return df
+    except Exception as e:
+        log.warning("Failed to extract products of: {}, due to: {}", row.ID, e)
+        return pd.DataFrame()
+
+
+def get_cost_history():
+    # Read all invoices
+    files = sorted(Path(INVOICE_HISTORY_DIR).rglob("*_dpmc.json"))
+    # Create the Dataframe
+    df = pd.concat(
+        (
+            pd.read_json(f, convert_dates = False) for f in files
+        ),
+        ignore_index = True)
+    # Filter successful invoices
+    df.query("Status == 'Success'", inplace = True)
+    # Merge duplicates and Sort
+    df = df.groupby(["Date", "ID"], as_index = False).sum()
+    df.sort_values(by = ["Date", "ID"], inplace = True)
+    # Extract products into a Dataframe from the Column
+    df = pd.concat([_extract_product_df(row) for row in df.itertuples()], ignore_index = True)
+    # Finalise the dataframe
+    df.drop(
+        ["Name", "Quantity", "Total"],
+        axis = 1, inplace = True)
+    return df
+
+
 def generate_latest_adjustment_cost():
-    adj_df = get_past_adjustments()
+    adj_df = get_adjustment_history()
+    cost_df = get_cost_history()
     return

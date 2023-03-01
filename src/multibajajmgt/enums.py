@@ -31,9 +31,9 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     adjustment_dpmc = "adjustment_dpmc"
     adjustment_sales = "adjustment_sales"
     adjustment_tp = "adjustment_thirdparty"
-    product = "product"
     product_history = "product_history"
     product_barcode = "product_barcode"
+    product_report = "product_report"
 
 
 class DocumentResourceExtension(MultiBajajMgtStrEnum):
