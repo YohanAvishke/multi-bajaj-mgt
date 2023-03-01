@@ -14,7 +14,7 @@ from multibajajmgt.enums import (
     DocumentResourceName as DocName,
     InvoiceField as InvoField,
     InvoiceStatus as Status,
-    OdooFieldLabel as OdooLabel,
+    OdooFieldLabel as OdooLabel
 )
 from multibajajmgt.exceptions import (InvalidDataFormatReceived, InvalidIdentityError, ProductInitException,
                                       ProductInquiryException)
@@ -106,8 +106,8 @@ def _form_product_obj(prod_row, code, categ_df):
     # Create product obj
     image_code = categ_data["Image"]
     price = prod_row[4]
-    product = Product(name, prod_row.ID, barcode=barcode, price=price, image=image_code, categ_id=1,
-                      pos_categ_id=categ_id)
+    product = Product(name, prod_row.ID, barcode = barcode, price = price, image = image_code, categ_id = 1,
+                      pos_categ_id = categ_id)
     return product
 
 
@@ -120,8 +120,8 @@ def _find_invalid_products(invo_row):
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
     df = pd.json_normalize(invo_row.Products)
     # noinspection PyTypeChecker
-    df = df.merge(stock_df, how="left", indicator=Basic.found_in,
-                  left_on=InvoField.part_code, right_on=OdooLabel.internal_id)
+    df = df.merge(stock_df, how = "left", indicator = Basic.found_in,
+                  left_on = InvoField.part_code, right_on = OdooLabel.internal_id)
     df = df[df[Basic.found_in] == "left_only"]
     return df
 
@@ -132,7 +132,7 @@ def create_missing_products():
     log.info("Create missing products.")
     created_prods = []
     pos_categories_df = pd.read_csv(f"{PRODUCT_TMPL_DIR}/pos.category.csv")
-    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates=False)
+    invoices_df = pd.read_json(f"{curr_invoice_dir}/{get_files().get_invoice()}.{DocExt.json}", convert_dates = False)
     invoices_df = invoices_df[invoices_df[Basic.status] == Status.success]
     for invo_row in invoices_df.itertuples():
         # Filter missing products
@@ -177,15 +177,15 @@ def update_barcode_nomenclature():
     """
     log.info("Create a barcode nomenclature.")
     stock_df = pd.read_csv(f"{STOCK_DIR}/{get_files().get_stock()}.{DocExt.csv}")
-    barcode_df = stock_df.drop(["Product/Product/ID", "Quantity_On_Hand"], axis=1)
+    barcode_df = stock_df.drop(["Product/Product/ID", "Quantity_On_Hand"], axis = 1)
     barcode_df.at[0, "Barcode Nomenclature"] = f"DPMC Nomenclature {cur_date}"
     barcode_df = barcode_df.assign(**{"Rules/Rule Name": barcode_df["Internal Reference"],
                                       "Rules/Type": "Alias",
                                       "Rules/Alias": barcode_df["Internal Reference"],
                                       "Rules/Barcode Pattern": barcode_df["Internal Reference"] + "-{N}",
                                       "Rules/Sequence": "1"})
-    barcode_df.drop(["Internal Reference"], axis=1, inplace=True)
+    barcode_df.drop(["Internal Reference"], axis = 1, inplace = True)
     barcode_df.loc[len(barcode_df)] = ["", "All Products", "Unit Product", "0", ".*", "2"]
     write_to_csv(f"{PRODUCT_DIR}/{DocName.product_barcode}.{DocExt.csv}", barcode_df,
-                 header=["Barcode Nomenclature", "Rules/Rule Name", "Rules/Type", "Rules/Alias",
-                         "Rules/Barcode Pattern", "Rules/Sequence"])
+                 header = ["Barcode Nomenclature", "Rules/Rule Name", "Rules/Type", "Rules/Alias",
+                           "Rules/Barcode Pattern", "Rules/Sequence"])

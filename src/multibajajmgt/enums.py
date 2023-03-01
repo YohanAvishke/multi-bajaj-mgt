@@ -33,12 +33,14 @@ class DocumentResourceName(MultiBajajMgtStrEnum):
     adjustment_tp = "adjustment_thirdparty"
     product_history = "product_history"
     product_barcode = "product_barcode"
+    product_report = "product_report"
 
 
 class DocumentResourceExtension(MultiBajajMgtStrEnum):
     json = "json"
     csv = "csv"
     txt = "txt"
+    xlsx = "xlsx"
 
 
 class POSParentCategory(MultiBajajMgtStrEnum):
@@ -138,3 +140,8 @@ class DPMCFieldName(MultiBajajMgtTupleEnum):
     bin_code = ("BIN_CODE", None)
     sbin_code = ("SUBBIN_CODE", None)
     serial_base = ("STR_SERIAL_BASE", "STR_SERIAL_STATUS")
+
+
+class ProductEnrichmentCategories(MultiBajajMgtStrEnum):
+    dpmc_stock = "DPMC Stock Enrichment"
+    yl_stock = "YL Stock Enrichment"

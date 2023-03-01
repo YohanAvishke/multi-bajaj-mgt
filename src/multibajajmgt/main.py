@@ -7,6 +7,7 @@ import multibajajmgt.invoice.dpmc as invoice_dpmc_service
 import multibajajmgt.invoice.sale as invoice_sale_service
 import multibajajmgt.invoice.thirdparty as invoice_tp_service
 import multibajajmgt.product.service as product_service
+import multibajajmgt.product.reports as product_reporter
 import multibajajmgt.price.dpmc as price_dpmc_service
 import multibajajmgt.price.thirdparty as price_tp_service
 import multibajajmgt.sale.service as sale_service
@@ -16,7 +17,8 @@ from config import configure_app, configure_env
 from logger import configure_logger
 from multibajajmgt.enums import (
     POSParentCategory as Categ,
-    QuantityAvailability as QtyAva
+    QuantityAvailability as QtyAva,
+    ProductEnrichmentCategories as ProdEnrichCateg
 )
 
 # Configure the logging level and format
@@ -78,3 +80,6 @@ app = configure_app(Categ.all, QtyAva.all)
 # app.set_pos_categ(Categ.dpmc)
 # stock_service.export_products()
 # product_service.update_barcode_nomenclature()
+
+# Reports
+# product_reporter.get_latest_adjustment_cost_report()
