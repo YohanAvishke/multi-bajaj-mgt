@@ -32,9 +32,9 @@ if not os.getenv("ENV_FLAG"):
 app = configure_app(Categ.all, QtyAva.all)
 
 # Configure clients
-odoo_client.configure()
-dpmc_client.configure()
-sheet_client.configure()
+# odoo_client.configure()
+# dpmc_client.configure()
+# sheet_client.configure()
 
 # Update DPMC prices
 # app.set_pos_categ(Categ.dpmc)
@@ -81,8 +81,5 @@ sheet_client.configure()
 # stock_service.export_products()
 # product_service.update_barcode_nomenclature()
 
-# Product Data Addon
-# app.set_pos_categ(Categ.all)
-# stock_service.export_products()
-# product_reporter.enrich(ProdEnrichCateg.dpmc_stock,ProdEnrichCateg.yl_stock)
-product_reporter.generate_latest_adjustment_cost()
+# Reports
+# product_reporter.get_latest_adjustment_cost_report()

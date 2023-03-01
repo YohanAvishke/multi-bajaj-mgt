@@ -120,8 +120,10 @@ def get_cost_history():
     return df
 
 
-def generate_latest_adjustment_cost():
+def get_latest_adjustment_cost_report():
     adj_df = get_adjustment_history()
     cost_df = get_cost_history()
-    df = adj_df.merge(cost_df, on = ["Invoice", "Product Number"], how = "left")
-    return
+    history_df = adj_df.merge(cost_df, on = ["Invoice", "Product Number"], how = "left")
+    filter_df = pd.read_csv(f"{PRODUCT_DIR}/{DocName.product_report}.{DocExt.csv}")
+    history_df = filter_df.merge(history_df, how = "left", on = "Product Number")
+    write_to_csv(f"{PRODUCT_DIR}/{DocName.product_report}.{DocExt.csv}", history_df)
