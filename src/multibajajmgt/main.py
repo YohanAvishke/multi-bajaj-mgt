@@ -82,7 +82,7 @@ sheet_client.configure()
 # product_service.update_barcode_nomenclature()
 
 # Product Data Addon
-app.set_pos_categ(Categ.all)
+# app.set_pos_categ(Categ.all)
 # stock_service.export_products()
-product_reporter.enrich(ProdEnrichCateg.dpmc_stock,
-                        ProdEnrichCateg.yl_stock)
+# product_reporter.enrich(ProdEnrichCateg.dpmc_stock,ProdEnrichCateg.yl_stock)
+product_reporter.generate_latest_adjustment_cost()

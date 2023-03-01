@@ -65,7 +65,7 @@ def get_adjustment_history():
     df.query("name.str.contains('PRI') or name.str.contains('MIN')", inplace = True)
     df.reset_index(drop = True, inplace = True)
     # Formate Invoice Reference column
-    df["name"] = df["name"].str.extract(r"(PRI\w+)")
+    df["name"] = df["name"].str.extract(r"(PRI\w+|MIN\w+)")
     # Formate Accounting Date column
     df["Accounting Date"] = df["Accounting Date"].str.replace("/", "-")
     # Merge all product-number columns into one
@@ -89,7 +89,7 @@ def _extract_product_df(row):
         df = pd.json_normalize(row.Products)
         df = df.assign(**{"Invoice": row.ID, "Date": row.Date})
         # Finalise dataframe
-        df.rename(columns = {"ID": "Product", "Unit Cost": "Cost"}, inplace = True)
+        df.rename(columns = {"ID": "Product Number", "Unit Cost": "Cost"}, inplace = True)
         return df
     except Exception as e:
         log.warning("Failed to extract products of: {}, due to: {}", row.ID, e)
@@ -114,12 +114,14 @@ def get_cost_history():
     df = pd.concat([_extract_product_df(row) for row in df.itertuples()], ignore_index = True)
     # Finalise the dataframe
     df.drop(
-        ["Name", "Quantity", "Total"],
+        ["Name", "Quantity", "Total", "Date"],
         axis = 1, inplace = True)
+    df.drop_duplicates(inplace = True)
     return df
 
 
 def generate_latest_adjustment_cost():
     adj_df = get_adjustment_history()
     cost_df = get_cost_history()
+    df = adj_df.merge(cost_df, on = ["Invoice", "Product Number"], how = "left")
     return
