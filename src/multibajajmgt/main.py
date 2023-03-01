@@ -82,4 +82,5 @@ app = configure_app(Categ.all, QtyAva.all)
 # product_service.update_barcode_nomenclature()
 
 # Reports
+# product_reporter.enrich()
 # product_reporter.get_latest_adjustment_cost_report()
