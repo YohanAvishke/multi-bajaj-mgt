@@ -118,9 +118,10 @@ def merge_historical_data():
         os.remove(merged_file)
     # Read, sort, merge and save the new merge file
     files = sorted(Path(curr_his_dir).glob(f"price_dpmc_all_*.{DocExt.csv}"))
-    log.info("Merge historical price files: {}.", files)
-    df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
-    write_to_csv(merged_file, df)
-    # Remove timed files
-    for f in files:
-        os.remove(f)
+    if len(files) > 0:
+        log.info("Merge historical price files: {}.", files)
+        df = pd.concat((pd.read_csv(f).assign(filename = f.stem) for f in files), ignore_index = True)
+        write_to_csv(merged_file, df)
+        # Remove timed files
+        for f in files:
+            os.remove(f)
