@@ -29,7 +29,7 @@ def enrich(*enrichments: ProdEnrichCateg):
     write_to_csv(f"{PRODUCT_DIR}/{DocName.product_report}.{DocExt.csv}", enriched_df)
 
 
-def get_adjustment_history():
+def _get_adjustment_history():
     invalid_files = [
         "adjustment-21:04:29,30.csv",
         "adjustment-21:05:12.csv",
@@ -96,7 +96,7 @@ def _extract_product_df(row):
         return pd.DataFrame()
 
 
-def get_cost_history():
+def _get_cost_history():
     # Read all invoices
     files = sorted(Path(INVOICE_HISTORY_DIR).rglob("*_dpmc.json"))
     # Create the Dataframe
@@ -121,8 +121,8 @@ def get_cost_history():
 
 
 def get_latest_adjustment_cost_report():
-    adj_df = get_adjustment_history()
-    cost_df = get_cost_history()
+    adj_df = _get_adjustment_history()
+    cost_df = _get_cost_history()
     filter_df = pd.read_csv(f"{PRODUCT_DIR}/{DocName.product_report}.{DocExt.csv}")
     # Merge adjustment history with price history
     report_df = adj_df.merge(cost_df, on = ["Invoice", "Product Number"], how = "left")

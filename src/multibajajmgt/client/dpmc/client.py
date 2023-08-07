@@ -84,7 +84,7 @@ def configure():
         return _authenticate()
 
 
-@retry(retry = retry_if_exception_type(r_exceptions.ConnectionError),
+@retry(retry = retry_if_exception_type(r_exceptions.ConnectionError) | retry_if_exception_type(r_exceptions.HTTPError),
        reraise = True,
        stop = stop_after_attempt(MAX_RETRY_COUNT))
 def _call(url, payload = None):
@@ -103,8 +103,9 @@ def _call(url, payload = None):
         response = requests.post(url = url, headers = headers, data = payload)
         response.raise_for_status()
     except r_exceptions.HTTPError as e:
-        log.error("Invalid Response Status received: {}.", e)
-        sys.exit(0)
+        msg = "Invalid Response Status received: {}."
+        log.error(msg, e)
+        raise r_exceptions.HTTPError(msg, e)
     except r_exceptions.ConnectionError as e:
         raise r_exceptions.ConnectionError("Connection issue occurred: {}.", e)
     except r_exceptions.RequestException as e:
@@ -335,14 +336,14 @@ def inquire_goodreceivenote_by_grn_ref(col, ref_id):
     log.debug("Fetch Invoice using GRN ID: {}.", ref_id)
     try:
         return _inquire_goodreceivenote(
-                {"strFIELD_NAME": ",STR_DEALER_CODE,STR_GRN_NO,STR_ORDER_NO,STR_INVOICE_NO,INT_TOTAL_GRN_VALUE",
-                 "strHIDEN_FIELD_INDEX": ",0",
-                 "strDISPLAY_NAME": ",STR_DEALER_CODE,GRN No,Order No,Invoice No,Total GRN Value",
-                 "strSearch": f"{ref_id}",
-                 "strSEARCH_FIELD_NAME": "STR_GRN_NO",
-                 "strColName": f"{col}",
-                 "strORDERBY": "STR_GRN_NO",
-                 "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/List"})
+            {"strFIELD_NAME": ",STR_DEALER_CODE,STR_GRN_NO,STR_ORDER_NO,STR_INVOICE_NO,INT_TOTAL_GRN_VALUE",
+             "strHIDEN_FIELD_INDEX": ",0",
+             "strDISPLAY_NAME": ",STR_DEALER_CODE,GRN No,Order No,Invoice No,Total GRN Value",
+             "strSearch": f"{ref_id}",
+             "strSEARCH_FIELD_NAME": "STR_GRN_NO",
+             "strColName": f"{col}",
+             "strORDERBY": "STR_GRN_NO",
+             "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/List"})
     except DataNotFoundError as e:
         raise DataNotFoundError(e)
 
@@ -357,14 +358,14 @@ def inquire_goodreceivenote_by_order_ref(col, ref_id):
     log.debug("Fetch Invoice using Order ID: {}.", ref_id)
     try:
         return _inquire_goodreceivenote(
-                {"strFIELD_NAME": ",DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO",
-                 "strHIDEN_FIELD_INDEX": "",
-                 "strDISPLAY_NAME": ",Order No,Invoice No,Mobile Invoice No",
-                 "strSearch": f"{ref_id}",
-                 "strSEARCH_FIELD_NAME": "STR_DLR_ORD_NO",
-                 "strColName": f"{col}",
-                 "strORDERBY": "STR_DLR_ORD_NO",
-                 "strOTHER_WHERE_CONDITION": "",
-                 "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo"})
+            {"strFIELD_NAME": ",DISTINCT STR_DLR_ORD_NO,STR_INVOICE_NO,STR_MOBILE_INVOICE_NO",
+             "strHIDEN_FIELD_INDEX": "",
+             "strDISPLAY_NAME": ",Order No,Invoice No,Mobile Invoice No",
+             "strSearch": f"{ref_id}",
+             "strSEARCH_FIELD_NAME": "STR_DLR_ORD_NO",
+             "strColName": f"{col}",
+             "strORDERBY": "STR_DLR_ORD_NO",
+             "strOTHER_WHERE_CONDITION": "",
+             "strAPI_URL": "api/Modules/Padealer/Padlrgoodreceivenote/DealerPAPendingGRNNo"})
     except DataNotFoundError as e:
         raise DataNotFoundError(e)

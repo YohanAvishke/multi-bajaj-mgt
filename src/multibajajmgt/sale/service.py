@@ -32,7 +32,8 @@ def _fix_time_diff(from_date, to_date):
     :return: tuple,
     """
     log.debug("Fix time difference between local time and Odoo server time.")
-    time_diff = timedelta(hours = 5, minutes = 30)
+    # time_diff = timedelta(hours = 5, minutes = 30) # sri lanka time
+    time_diff = timedelta(hours = 10) # australia/sydney time
     from_date = datetime.strptime(from_date, "%Y-%m-%d %H:%M:%S") - time_diff
     from_date = f"{from_date}"
     if to_date:

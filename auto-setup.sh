@@ -11,6 +11,7 @@ if ! which -s brew; then
 else
   brew update && brew upgrade
 fi
+# Python setup is missing
 
 echo Activate the virtual environment
 has_venv=$([[ $VIRTUAL_ENV == "" ]])
@@ -25,7 +26,7 @@ if [[ $ENV_FLAG == "" ]]; then
   cat .env >>$bash_path
 fi
 
-echo Run the application
+echo Starting the application
 main_path=src/multibajajmgt/main.py
 python $main_path
 ret=$?
@@ -39,5 +40,5 @@ if [ $ret -ne 0 ]; then
   done
 fi
 
-echo Reset changes to the main file
+echo Resetting changes to the main file
 sed -i '' "s/# price_dpmc_service.export_prices()/price_dpmc_service.export_prices()/g" $main_path
